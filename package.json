@@ -2,7 +2,7 @@
   "name": "@lvce-editor/file-search-worker",
   "version": "0.0.0-dev",
   "description": "",
-  "main": "src/testWorkerMain.ts",
+  "main": "src/fileSearchWorkerMain.ts",
   "type": "module",
   "directories": {
     "test": "test"
