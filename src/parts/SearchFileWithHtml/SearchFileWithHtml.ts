@@ -26,7 +26,6 @@ const searchFilesRecursively = async (all: any, parent: any, handle: any) => {
       continue
     }
     const absolutePath = parent + '/' + childHandle.name
-    console.log('visit', absolutePath)
     switch (childHandle.kind) {
       case FileHandleType.Directory:
         promises.push(searchFilesRecursively(all, absolutePath, childHandle))
