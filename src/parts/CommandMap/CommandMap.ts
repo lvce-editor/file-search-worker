@@ -5,5 +5,5 @@ import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts
 export const commandMap = {
   'SearchFile.searchFile': SearchFile.searchFile,
   'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
-  'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFileWithHtml,
+  'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFile,
 }

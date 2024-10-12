@@ -35,7 +35,7 @@ const searchFilesRecursively = async (all: any, parent: any, handle: any) => {
   await Promise.all(promises)
 }
 
-const searchFile = async (uri: string) => {
+export const searchFile = async (uri: string) => {
   const path = uri.slice('html://'.length)
   const handle = await getDirectoryHandle(path)
   if (!handle) {
