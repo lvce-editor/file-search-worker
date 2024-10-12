@@ -21,6 +21,7 @@ const getDb = async () => {
 }
 
 const getDbMemoized = async () => {
+  // @ts-ignore
   state.cachedDb ||= await getDb()
   return state.cachedDb
 }
@@ -50,7 +51,7 @@ export const getValues = async (storeId: any) => {
   }
 }
 
-export const getValuesByIndexName = async (storeId, indexName, only) => {
+export const getValuesByIndexName = async (storeId:any , indexName:any , only:any ) => {
   const db = await getDbMemoized()
   const transaction = db.transaction(storeId)
   const index = transaction.store.index(indexName)
@@ -65,7 +66,7 @@ export const getValuesByIndexName = async (storeId, indexName, only) => {
 const getHandleDb = async () => {
   // @ts-ignore
   const db = await openDB('handle', state.dbVersion, {
-    async upgrade(db, oldVersion) {
+    async upgrade(db:any , oldVersion:any ) {
       if (!db.objectStoreNames.contains('file-handles-store')) {
         // @ts-ignore
         const objectStore = await db.createObjectStore('file-handles-store', {})
@@ -75,12 +76,12 @@ const getHandleDb = async () => {
   return db
 }
 
-export const addHandle = async (uri, handle) => {
+export const addHandle = async (uri:string , handle:any ) => {
   const handleDb = await getHandleDb()
   await handleDb.put('file-handles-store', handle, uri)
 }
 
-export const getHandle = async (uri) => {
+export const getHandle = async (uri:string ) => {
   const handleDb = await getHandleDb()
   const handle = await handleDb.get('file-handles-store', uri)
   return handle
