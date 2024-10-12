@@ -16,10 +16,15 @@ const getDirectoryHandle = async (uri: string) => {
   return getDirectoryHandle(dirname)
 }
 
+const toIgnore = ['.git', 'node_modules', 'dist', 'dist2']
+
 const searchFilesRecursively = async (all: any, parent: any, handle: any) => {
   const childHandles = await FileSystemDirectoryHandle.getChildHandles(handle)
   const promises: any[] = []
   for (const childHandle of childHandles) {
+    if (toIgnore.includes(childHandle.name)) {
+      continue
+    }
     const absolutePath = parent + '/' + childHandle.name
     switch (childHandle.kind) {
       case FileHandleType.Directory:
