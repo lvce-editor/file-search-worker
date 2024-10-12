@@ -18,6 +18,6 @@ export const dirname = (pathSeparator, path) => {
   return path.slice(0, index)
 }
 
-export const getBaseName = (pathSeparator, path) => {
+export const getBaseName = (pathSeparator: string, path: string) => {
   return path.slice(path.lastIndexOf(pathSeparator) + 1)
 }
