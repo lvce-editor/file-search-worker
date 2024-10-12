@@ -128,5 +128,8 @@
     ],
     "ext": "ts,js",
     "exec": "node scripts/build.js"
+  },
+  "dependencies": {
+    "idb": "^8.0.0"
   }
 }
