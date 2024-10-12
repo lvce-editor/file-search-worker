@@ -1,6 +1,3 @@
-import * as GetFileExtension from '../GetFileExtension/GetFileExtension.ts'
-import * as Assert from '../Assert/Assert.ts'
-
 export const dirname = (pathSeparator: string, path: string) => {
   const index = path.lastIndexOf(pathSeparator)
   if (index === -1) {
