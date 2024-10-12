@@ -2,11 +2,11 @@ import * as Command from '../Command/Command.ts'
 import { VError } from '../VError/VError.ts'
 
 // TODO move state into separate file
-export const state = {
+const state = {
   handles: Object.create(null),
 }
 
-export const addHandle = async (uri: string, handle: any) => {
+const addHandle = async (uri: string, handle: any) => {
   try {
     // TODO call indexeddb directly instead of using command
     // TODO save handle in indexeddb
@@ -17,7 +17,7 @@ export const addHandle = async (uri: string, handle: any) => {
   }
 }
 
-export const addHandles = async (parentUri: string, childHandles: any) => {
+const addHandles = async (parentUri: string, childHandles: any) => {
   const promises: any[] = []
   for (const childHandle of childHandles) {
     const childUri = parentUri + '/' + childHandle.name
@@ -30,7 +30,7 @@ export const addHandles = async (parentUri: string, childHandles: any) => {
   await Promise.all(promises)
 }
 
-export const removeHandle = () => {
+const removeHandle = () => {
   // TODO remove handle from state and from indexeddb
 }
 

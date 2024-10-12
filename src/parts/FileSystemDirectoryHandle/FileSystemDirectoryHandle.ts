@@ -13,7 +13,3 @@ export const getChildHandles = async (handle: FileSystemDirectoryHandle): Promis
   const handles = await Arrays.fromAsync(handle.values())
   return handles
 }
-
-export const getFileHandle = (handle: FileSystemDirectoryHandle, name: string) => {
-  return handle.getFileHandle(name)
-}

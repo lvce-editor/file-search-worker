@@ -6,7 +6,7 @@ export const invoke = (method: string, ...params: any[]) => {
   return JsonRpc.invoke(ipc, method, ...params)
 }
 
-export const invokeAndTransfer = (method: string, ...params: any[]) => {
+const invokeAndTransfer = (method: string, ...params: any[]) => {
   const ipc = IpcState.get()
   return JsonRpc.invokeAndTransfer(ipc, method, ...params)
 }

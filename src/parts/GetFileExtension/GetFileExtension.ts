@@ -1,7 +1,7 @@
 import * as Character from '../Character/Character.ts'
 import * as Assert from '../Assert/Assert.ts'
 
-export const getFileExtensionIndex = (file: string) => {
+const getFileExtensionIndex = (file: string) => {
   Assert.string(file)
   return file.lastIndexOf(Character.Dot)
 }
@@ -9,8 +9,4 @@ export const getFileExtensionIndex = (file: string) => {
 export const getFileExtension = (file: string) => {
   const index = getFileExtensionIndex(file)
   return file.slice(index)
-}
-
-export const getNthFileExtension = (file: string, startIndex: number) => {
-  return file.lastIndexOf(Character.Dot, startIndex)
 }
