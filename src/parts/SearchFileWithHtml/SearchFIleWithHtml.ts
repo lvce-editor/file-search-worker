@@ -4,7 +4,7 @@ import * as Path from '../Path/Path.ts'
 import * as PersistentFileHandle from '../PersistentFileHandle/PersistentFileHandle.ts'
 import { VError } from '../VError/VError.ts'
 
-const getDirectoryHandle = async (uri) => {
+const getDirectoryHandle = async (uri: string) => {
   const handle = await PersistentFileHandle.getHandle(uri)
   if (handle) {
     return handle
@@ -16,7 +16,7 @@ const getDirectoryHandle = async (uri) => {
   return getDirectoryHandle(dirname)
 }
 
-const searchFilesRecursively = async (all, parent, handle) => {
+const searchFilesRecursively = async (all: any, parent: any, handle: any) => {
   const childHandles = await FileSystemDirectoryHandle.getChildHandles(handle)
   const promises: any[] = []
   for (const childHandle of childHandles) {
@@ -35,14 +35,14 @@ const searchFilesRecursively = async (all, parent, handle) => {
   await Promise.all(promises)
 }
 
-export const searchFile = async (uri) => {
+export const searchFile = async (uri: string) => {
   const path = uri.slice('html://'.length)
   const handle = await getDirectoryHandle(path)
   if (!handle) {
     // @ts-ignore
     throw new VError(`Folder not found ${uri}`)
   }
-  const all = []
+  const all: any[] = []
   await searchFilesRecursively(all, '', handle)
   return all
 }
