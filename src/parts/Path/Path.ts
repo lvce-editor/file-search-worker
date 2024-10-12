@@ -1,7 +1,7 @@
 import * as GetFileExtension from '../GetFileExtension/GetFileExtension.ts'
 import * as Assert from '../Assert/Assert.ts'
 
-export const fileExtension = (uri) => {
+export const fileExtension = (uri: string) => {
   Assert.string(uri)
   return GetFileExtension.getFileExtension(uri)
 }
