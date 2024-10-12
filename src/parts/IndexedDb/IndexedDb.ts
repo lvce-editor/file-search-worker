@@ -1,9 +1,9 @@
 // TODO high memory usage in idb because of transactionDoneMap
 
 import { openDB } from '../Idb/Idb.js'
-import { VError } from '../VError/VError.js'
-import { state } from '../IndexedDbState/IndexedDbState.js'
-import * as IsDataCloneError from '../IsDataCloneError/IsDataCloneError.js'
+import { VError } from '../VError/VError.ts'
+import { state } from '../IndexedDbState/IndexedDbState.ts'
+import * as IsDataCloneError from '../IsDataCloneError/IsDataCloneError.ts'
 
 const getDb = async () => {
   // @ts-ignore
@@ -85,4 +85,4 @@ export const getHandle = async (uri) => {
   const handle = await handleDb.get('file-handles-store', uri)
   return handle
 }
-export { state } from '../IndexedDbState/IndexedDbState.js'
+export { state } from '../IndexedDbState/IndexedDbState.ts'
