@@ -5,7 +5,7 @@ const removeLeadingSlash = (path: string) => {
   return path.slice(workspacePath.length - FileSystemProtocol.Fetch.length - 2)
 }
 
-export const searchFile = async (path: string, value: string, assetDir: string) => {
+export const searchFile = async (path: string, value: string, prepare: boolean, assetDir: string) => {
   const fetchUri = `${assetDir}/config/fileMap.json`
   const response = await fetch(fetchUri)
   if (!response.ok) {
