@@ -16,4 +16,5 @@ export const commandMap = {
   'FileSystemMemory.getBlobUrl': FileSystemMemory.getBlobUrl,
   'FileSystemMemory.getBlob': FileSystemMemory.getBlob,
   'FileSystemMemory.chmod': FileSystemMemory.chmod,
+  'FileSystemMemory.getFiles': FileSystemMemory.getFiles,
 }
