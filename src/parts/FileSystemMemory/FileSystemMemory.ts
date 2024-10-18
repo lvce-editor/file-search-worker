@@ -1,6 +1,8 @@
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as PathSeparatorType from '../PathSeparatorType/PathSeparatorType.ts'
 
+// TODO move this to an extension?
+
 export const name = 'Memory'
 
 export const state = {
