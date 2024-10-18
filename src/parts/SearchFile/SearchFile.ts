@@ -1,16 +1,20 @@
 import * as FileSystemProtocol from '../FileSystemProtocol/FileSystemProtocol.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
+import * as SearchFileMemfs from '../SearchFileMemfs/SearchFileMemfs.ts'
+import * as SearchFileFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
+import * as SearchFileHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
+import * as SearchFileRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 
 const getModule = (protocol: string) => {
   switch (protocol) {
     case FileSystemProtocol.Memfs:
-      return import('../SearchFileMemfs/SearchFileMemfs.ts')
+      return SearchFileMemfs
     case FileSystemProtocol.Fetch:
-      return import('../SearchFileWithFetch/SearchFileWithFetch.ts')
+      return SearchFileFetch
     case FileSystemProtocol.Html:
-      return import('../SearchFileWithHtml/SearchFileWithHtml.ts')
+      return SearchFileHtml
     default:
-      return import('../SearchFileWithRipGrep/SearchFileWithRipGrep.ts')
+      return SearchFileRipGrep
   }
 }
 
