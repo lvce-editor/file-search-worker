@@ -128,3 +128,7 @@ export const getBlob = (uri: string) => {
 export const chmod = () => {
   throw new Error('[memfs] chmod not implemented')
 }
+
+export const getFiles = () => {
+  return state.files
+}
