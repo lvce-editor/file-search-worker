@@ -5,16 +5,17 @@ import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts
 import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 
 export const commandMap = {
-  'SearchFile.searchFile': SearchFile.searchFile,
-  'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
-  'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFile,
-  'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
-  'FileSystemMemory.readFile': FileSystemMemory.readFile,
-  'FileSystemMemory.writeFile': FileSystemMemory.writeFile,
+  'FileSystemMemory.chmod': FileSystemMemory.chmod,
+  'FileSystemMemory.getBlob': FileSystemMemory.getBlob,
+  'FileSystemMemory.getBlobUrl': FileSystemMemory.getBlobUrl,
+  'FileSystemMemory.getFiles': FileSystemMemory.getFiles,
   'FileSystemMemory.mkdir': FileSystemMemory.mkdir,
   'FileSystemMemory.readDirWithFileTypes': FileSystemMemory.readDirWithFileTypes,
-  'FileSystemMemory.getBlobUrl': FileSystemMemory.getBlobUrl,
-  'FileSystemMemory.getBlob': FileSystemMemory.getBlob,
-  'FileSystemMemory.chmod': FileSystemMemory.chmod,
-  'FileSystemMemory.getFiles': FileSystemMemory.getFiles,
+  'FileSystemMemory.readFile': FileSystemMemory.readFile,
+  'FileSystemMemory.remove': FileSystemMemory.remove,
+  'FileSystemMemory.writeFile': FileSystemMemory.writeFile,
+  'SearchFile.searchFile': SearchFile.searchFile,
+  'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
+  'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFile,
+  'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
 }
