@@ -4,7 +4,7 @@ import * as GetFileSearchRipGrepArgs from '../GetFileSearchRipGrepArgs/GetFileSe
 import * as SearchProcess from '../SearchProcess/SearchProcess.ts'
 import * as SplitLines from '../SplitLines/SplitLines.ts'
 
-export const searchFile = async (path: string, value: string) => {
+export const searchFile = async (path: string, value: string, prepare: boolean) => {
   const ripGrepArgs = GetFileSearchRipGrepArgs.getFileSearchRipGrepArgs()
   const options = {
     ripGrepArgs,
@@ -13,5 +13,9 @@ export const searchFile = async (path: string, value: string) => {
   }
   const stdout = await SearchProcess.invoke('SearchFile.searchFile', options)
   const lines = SplitLines.splitLines(stdout)
+  if (!prepare) {
+    return lines
+  }
+  // TODO create quickpick items from lines
   return lines
 }
