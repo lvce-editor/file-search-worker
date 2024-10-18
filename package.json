@@ -130,6 +130,7 @@
     "exec": "node scripts/build.js"
   },
   "dependencies": {
+    "@lvce-editor/fuzzy-search": "^1.0.0",
     "idb": "^8.0.0"
   }
 }
