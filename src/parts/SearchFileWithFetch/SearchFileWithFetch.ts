@@ -1,8 +1,8 @@
-import * as FileSystemProtocol from '../FileSystemProtocol/FileSystemProtocol.ts'
-
 const removeLeadingSlash = (path: string) => {
-  const workspacePath = '' // TODO ask renderer worker for path
-  return path.slice(workspacePath.length - FileSystemProtocol.Fetch.length - 2)
+  if (path.startsWith('/')) {
+    return path.slice(1)
+  }
+  return path
 }
 
 export const searchFile = async (path: string, value: string, prepare: boolean, assetDir: string) => {
