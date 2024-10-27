@@ -1,4 +1,5 @@
 import * as DirentType from '../DirentType/DirentType.ts'
+import { FileNotFoundError } from '../FileNotFoundError/FileNotFoundError.ts'
 import * as PathSeparatorType from '../PathSeparatorType/PathSeparatorType.ts'
 
 // TODO move this to an extension?
@@ -16,7 +17,7 @@ const getDirent = (uri: string) => {
 export const readFile = (uri: string) => {
   const dirent = getDirent(uri)
   if (!dirent) {
-    throw new Error(`File not found: ${uri}`)
+    throw new FileNotFoundError(uri)
   }
   if (dirent.type !== DirentType.File) {
     throw new Error('file is a directory')
