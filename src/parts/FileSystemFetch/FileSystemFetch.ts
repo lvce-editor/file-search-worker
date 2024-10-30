@@ -1,5 +1,7 @@
 import * as AssetDir from '../AssetDir/AssetDir.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
+import * as FileMapUrl from '../FileMapUrl/FileMapUrl.ts'
+import * as GetJson from '../GetJson/GetJson.ts'
 import * as GetText from '../GetText/GetText.ts'
 import * as PathSeparatorType from '../PathSeparatorType/PathSeparatorType.ts'
 
@@ -36,8 +38,7 @@ export const remove = (uri: string) => {
 }
 
 export const readDirWithFileTypes = async (uri: string) => {
-  const fetchUri = `${AssetDir.assetDir}/config/fileMap.json`
-  const fileList = await GetText.getText(fetchUri)
+  const fileList = await GetJson.getJson(FileMapUrl.fileMapUrl)
   const dirents: any[] = []
   for (const fileUri of fileList) {
     if (fileUri.startsWith(uri)) {
