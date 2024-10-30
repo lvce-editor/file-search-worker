@@ -1,9 +1,4 @@
-const removeLeadingSlash = (path: string) => {
-  if (path.startsWith('/')) {
-    return path.slice(1)
-  }
-  return path
-}
+import * as RemoveLeadingSlash from '../RemoveLeadingSlash/RemoveLeadingSlash.ts'
 
 export const searchFile = async (path: string, value: string, prepare: boolean, assetDir: string) => {
   const fetchUri = `${assetDir}/config/fileMap.json`
@@ -12,6 +7,6 @@ export const searchFile = async (path: string, value: string, prepare: boolean, 
     throw new Error(response.statusText)
   }
   const fileList = await response.json()
-  const result = fileList.map(removeLeadingSlash)
+  const result = fileList.map(RemoveLeadingSlash.removeLeadingSlash)
   return result
 }
