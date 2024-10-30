@@ -18,7 +18,7 @@ const getModule = (protocol: string) => {
   }
 }
 
-export const searchFile = async (path: string, value: string, prepare: boolean, assetDir: string): Promise<string[]> => {
+export const searchFile = async (path: string, value: string, prepare: boolean, assetDir: string): Promise<readonly any[]> => {
   const protocol = GetProtocol.getProtocol(path)
   // TODO call different providers depending on protocol
   const module = await getModule(protocol)
