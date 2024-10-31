@@ -7,33 +7,21 @@ import * as PathSeparatorType from '../PathSeparatorType/PathSeparatorType.ts'
 
 // TODO move all of this to an extension
 
-export const canBeRestored = true
-
-export const name = 'Fetch'
-
-export const state = {
-  files: Object.create(null),
-}
-
 export const readFile = async (uri: string) => {
   const fetchUri = `${AssetDir.assetDir}${uri}`
   const text = await GetText.getText(fetchUri)
   return text
 }
 
-export const writeFile = (uri: string, content: string) => {
+export const writeFile = () => {
   throw new Error('not implemented')
 }
 
-export const mkdir = (uri: string) => {
+export const mkdir = () => {
   throw new Error('not implemented')
 }
 
-export const getPathSeparator = () => {
-  return PathSeparatorType.Slash
-}
-
-export const remove = (uri: string) => {
+export const remove = () => {
   throw new Error('not implemented')
 }
 
@@ -63,7 +51,7 @@ export const readDirWithFileTypes = async (uri: string) => {
   return dirents
 }
 
-export const chmod = (path: string, permissions: any) => {
+export const chmod = () => {
   throw new Error('[memfs] chmod not implemented')
 }
 
