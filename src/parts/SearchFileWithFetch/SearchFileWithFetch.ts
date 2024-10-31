@@ -8,7 +8,7 @@ import * as RemoveLeadingSlash from '../RemoveLeadingSlash/RemoveLeadingSlash.ts
 export const searchFile = async (path: string, value: string, prepare: boolean, assetDir: string): Promise<readonly string[]> => {
   const fileList = await GetJson.getJson(FileMapUrl.fileMapUrl)
   const result = fileList.map(RemoveLeadingSlash.removeLeadingSlash)
-  const prefixLength = path.slice('fetch:///'.length)
+  const prefixLength = path.length - 'file:///'.length
   const final = []
   for (const item of result) {
     final.push(item.slice(prefixLength))
