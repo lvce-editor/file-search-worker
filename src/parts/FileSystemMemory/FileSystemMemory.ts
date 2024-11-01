@@ -1,3 +1,4 @@
+import { Dirent } from '../Dirent/Dirent.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import { FileNotFoundError } from '../FileNotFoundError/FileNotFoundError.ts'
 import * as PathSeparatorType from '../PathSeparatorType/PathSeparatorType.ts'
@@ -12,7 +13,7 @@ const getDirent = (uri: string) => {
   return state.files[uri]
 }
 
-export const readFile = (uri: string) => {
+export const readFile = (uri: string): string => {
   const dirent = getDirent(uri)
   if (!dirent) {
     throw new FileNotFoundError(uri)
@@ -23,7 +24,7 @@ export const readFile = (uri: string) => {
   return dirent.content
 }
 
-const ensureParentDir = (uri: string) => {
+const ensureParentDir = (uri: string): void => {
   const startIndex = 0
   let endIndex = uri.indexOf(PathSeparatorType.Slash)
   while (endIndex >= 0) {
@@ -36,7 +37,7 @@ const ensureParentDir = (uri: string) => {
   }
 }
 
-export const writeFile = (uri: string, content: string) => {
+export const writeFile = (uri: string, content: string): void => {
   const dirent = getDirent(uri)
   if (dirent) {
     dirent.content = content
@@ -49,7 +50,7 @@ export const writeFile = (uri: string, content: string) => {
   }
 }
 
-export const mkdir = (uri: string) => {
+export const mkdir = (uri: string): void => {
   if (!uri.endsWith(PathSeparatorType.Slash)) {
     uri += PathSeparatorType.Slash
   }
@@ -60,11 +61,11 @@ export const mkdir = (uri: string) => {
   }
 }
 
-export const getPathSeparator = () => {
+export const getPathSeparator = (): string => {
   return PathSeparatorType.Slash
 }
 
-export const remove = (uri: string) => {
+export const remove = (uri: string): void => {
   const toDelete = []
   for (const key of Object.keys(state.files)) {
     if (key.startsWith(uri)) {
@@ -76,11 +77,11 @@ export const remove = (uri: string) => {
   }
 }
 
-export const readDirWithFileTypes = (uri: string) => {
+export const readDirWithFileTypes = (uri: string): readonly Dirent[] => {
   if (!uri.endsWith(PathSeparatorType.Slash)) {
     uri += PathSeparatorType.Slash
   }
-  const dirents = []
+  const dirents: Dirent[] = []
   for (const [key, value] of Object.entries(state.files)) {
     if (key.startsWith(uri)) {
       // @ts-ignore
@@ -111,20 +112,20 @@ export const readDirWithFileTypes = (uri: string) => {
   return dirents
 }
 
-export const getBlobUrl = (uri: string) => {
+export const getBlobUrl = (uri: string): string => {
   const content = readFile(uri)
   const blob = new Blob([content])
   const url = URL.createObjectURL(blob)
   return url
 }
 
-export const getBlob = (uri: string) => {
+export const getBlob = (uri: string): Blob => {
   const content = readFile(uri)
   const blob = new Blob([content])
   return blob
 }
 
-export const chmod = () => {
+export const chmod = (): void => {
   throw new Error('[memfs] chmod not implemented')
 }
 
