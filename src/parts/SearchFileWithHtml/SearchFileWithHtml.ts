@@ -18,7 +18,7 @@ const getDirectoryHandle = async (uri: string): Promise<any> => {
 
 const toIgnore = ['.git', 'node_modules', 'dist', 'dist2']
 
-const searchFilesRecursively = async (all: any, parent: any, handle: any) => {
+const searchFilesRecursively = async (all: any, parent: any, handle: any): Promise<void> => {
   const childHandles = await FileSystemDirectoryHandle.getChildHandles(handle)
   const promises: any[] = []
   for (const childHandle of childHandles) {

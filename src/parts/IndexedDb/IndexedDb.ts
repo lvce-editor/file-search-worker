@@ -9,8 +9,7 @@ const getHandleDb = async (): Promise<IDBPDatabase<unknown>> => {
   const db = await openDB('handle', state.dbVersion, {
     async upgrade(db: any): Promise<void> {
       if (!db.objectStoreNames.contains('file-handles-store')) {
-        // @ts-ignore
-        const objectStore = await db.createObjectStore('file-handles-store', {})
+        await db.createObjectStore('file-handles-store', {})
       }
     },
   })
