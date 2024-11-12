@@ -5,7 +5,7 @@ import * as SearchFileFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
 import * as SearchFileHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
 import * as SearchFileRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 
-const getModule = (protocol: string) => {
+const getModule = (protocol: string): any => {
   switch (protocol) {
     case FileSystemProtocol.Memfs:
       return SearchFileMemfs

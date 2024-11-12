@@ -4,7 +4,7 @@ import * as Path from '../Path/Path.ts'
 import * as PersistentFileHandle from '../PersistentFileHandle/PersistentFileHandle.ts'
 import { VError } from '../VError/VError.ts'
 
-const getDirectoryHandle = async (uri: string) => {
+const getDirectoryHandle = async (uri: string): Promise<any> => {
   const handle = await PersistentFileHandle.getHandle(uri)
   if (handle) {
     return handle
