@@ -1,12 +1,10 @@
 import * as Character from '../Character/Character.ts'
-import * as Assert from '../Assert/Assert.ts'
 
-const getFileExtensionIndex = (file: string) => {
-  Assert.string(file)
+const getFileExtensionIndex = (file: string): number => {
   return file.lastIndexOf(Character.Dot)
 }
 
-export const getFileExtension = (file: string) => {
+export const getFileExtension = (file: string): string => {
   const index = getFileExtensionIndex(file)
   return file.slice(index)
 }
