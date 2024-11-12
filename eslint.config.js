@@ -25,6 +25,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/member-delimiter-style': 'off',
+      '@typescript-eslint/only-throw-error': 'off',
     },
   },
 )
