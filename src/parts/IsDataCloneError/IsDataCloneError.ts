@@ -1,3 +1,3 @@
-export const isDataCloneError = (error: any) => {
+export const isDataCloneError = (error: any): boolean => {
   return error && error.name === 'DataCloneError'
 }
