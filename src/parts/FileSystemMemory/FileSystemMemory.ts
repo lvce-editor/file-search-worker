@@ -9,7 +9,7 @@ export const state = {
   files: Object.create(null),
 }
 
-const getDirent = (uri: string) => {
+const getDirent = (uri: string): any => {
   return state.files[uri]
 }
 
