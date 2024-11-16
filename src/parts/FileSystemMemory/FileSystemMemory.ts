@@ -112,9 +112,23 @@ export const readDirWithFileTypes = (uri: string): readonly Dirent[] => {
   return dirents
 }
 
+const getContentType = (uri: string): string => {
+  if (uri.endsWith('.png')) {
+    return 'image/png'
+  }
+  if (uri.endsWith('.svg')) {
+    return 'image/svg+xml'
+  }
+  // TODO support more
+  return ''
+}
+
 export const getBlobUrl = (uri: string): string => {
   const content = readFile(uri)
-  const blob = new Blob([content])
+  const contentType = getContentType(uri)
+  const blob = new Blob([content], {
+    type: contentType,
+  })
   const url = URL.createObjectURL(blob)
   return url
 }
