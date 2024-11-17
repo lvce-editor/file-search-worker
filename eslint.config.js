@@ -13,7 +13,16 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['dist', 'coverage', 'scripts', 'rollup.config.js', 'eslint.config.js', 'src/fileSearchWorkerMain.ts'],
+    ignores: [
+      'dist',
+      'coverage',
+      'scripts',
+      'rollup.config.js',
+      'eslint.config.js',
+      'src/fileSearchWorkerMain.ts',
+      'test/GetJson.test.ts',
+      'test/GetText.test.ts',
+    ],
   },
   {
     rules: {
