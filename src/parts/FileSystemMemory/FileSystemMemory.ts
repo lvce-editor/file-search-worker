@@ -1,6 +1,7 @@
 import { Dirent } from '../Dirent/Dirent.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import { FileNotFoundError } from '../FileNotFoundError/FileNotFoundError.ts'
+import * as GetContentType from '../GetContentType/GetContentType.ts'
 import * as PathSeparatorType from '../PathSeparatorType/PathSeparatorType.ts'
 
 // TODO move this to an extension?
@@ -112,31 +113,19 @@ export const readDirWithFileTypes = (uri: string): readonly Dirent[] => {
   return dirents
 }
 
-const getContentType = (uri: string): string => {
-  if (uri.endsWith('.png')) {
-    return 'image/png'
-  }
-  if (uri.endsWith('.svg')) {
-    return 'image/svg+xml'
-  }
-  // TODO support more
-  return ''
-}
-
-export const getBlobUrl = (uri: string): string => {
+export const getBlob = (uri: string): Blob => {
   const content = readFile(uri)
-  const contentType = getContentType(uri)
+  const contentType = GetContentType.getContentType(uri)
   const blob = new Blob([content], {
     type: contentType,
   })
-  const url = URL.createObjectURL(blob)
-  return url
+  return blob
 }
 
-export const getBlob = (uri: string): Blob => {
-  const content = readFile(uri)
-  const blob = new Blob([content])
-  return blob
+export const getBlobUrl = (uri: string): string => {
+  const blob = getBlob(uri)
+  const url = URL.createObjectURL(blob)
+  return url
 }
 
 export const chmod = (): void => {
