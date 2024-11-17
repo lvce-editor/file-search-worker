@@ -11,7 +11,12 @@ test('svg', () => {
   expect(GetContentType.getContentType(uri)).toBe('image/svg+xml')
 })
 
-test('other', () => {
+test('text', () => {
   const uri = '/test/file.txt'
+  expect(GetContentType.getContentType(uri)).toBe('text/plain')
+})
+
+test('other', () => {
+  const uri = '/test/file'
   expect(GetContentType.getContentType(uri)).toBe('')
 })

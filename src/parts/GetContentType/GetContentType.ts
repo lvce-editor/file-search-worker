@@ -1,10 +1,8 @@
+import * as GetMimeType from '../GetMimeType/GetMimeType.ts'
+import * as Path from '../Path/Path.ts'
+
 export const getContentType = (uri: string): string => {
-  if (uri.endsWith('.png')) {
-    return 'image/png'
-  }
-  if (uri.endsWith('.svg')) {
-    return 'image/svg+xml'
-  }
-  // TODO support more
-  return ''
+  const extension = Path.extname(uri)
+  const mime = GetMimeType.getMimeType(extension)
+  return mime
 }
