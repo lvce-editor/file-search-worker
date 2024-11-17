@@ -1,4 +1,4 @@
-import * as MimeType from '../MimeType/MimeType.js'
+import * as MimeType from '../MimeType/MimeType.ts'
 
 export const getMimeType = (fileExtension: string): string => {
   switch (fileExtension) {

@@ -1,5 +1,5 @@
 import { beforeEach, expect, test } from '@jest/globals'
-import * as DirentType from '../src/parts/DirentType/DirentType.js'
+import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import * as FileSystemMemory from '../src/parts/FileSystemMemory/FileSystemMemory.ts'
 
 beforeEach(() => {

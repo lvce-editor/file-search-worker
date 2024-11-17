@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals'
-import * as GetMimeType from '../src/parts/GetMimeType/GetMimeType.js'
+import * as GetMimeType from '../src/parts/GetMimeType/GetMimeType.ts'
 
 test('html', () => {
   expect(GetMimeType.getMimeType('.html')).toBe('text/html')
