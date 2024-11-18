@@ -1,4 +1,4 @@
-import { Dirent } from '../Dirent/Dirent.ts'
+import type { Dirent } from '../Dirent/Dirent.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import { FileNotFoundError } from '../FileNotFoundError/FileNotFoundError.ts'
 import * as GetContentType from '../GetContentType/GetContentType.ts'
