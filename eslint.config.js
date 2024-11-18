@@ -15,10 +15,10 @@ export default tseslint.config(
   {
     ignores: [
       'dist',
-      'coverage',
-      'scripts',
-      '**/server/**',
+      '.tmp',
       '**/build/**',
+      '**/coverage/**',
+      '**/server/**',
       '**/e2e/**',
       'rollup.config.js',
       'eslint.config.js',
