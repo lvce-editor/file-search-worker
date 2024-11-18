@@ -18,6 +18,7 @@ export default tseslint.config(
       'coverage',
       'scripts',
       '**/build/**',
+      '**/e2e/**',
       'rollup.config.js',
       'eslint.config.js',
       'src/fileSearchWorkerMain.ts',
