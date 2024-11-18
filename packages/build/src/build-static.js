@@ -16,8 +16,8 @@ const { commitHash } = await sharedProcess.exportStatic({
 })
 
 await cp(
-  join(root, '.tmp', 'dist', 'dist', 'textSearchWorkerMain.js'),
-  join(root, 'dist', commitHash, 'packages', 'text-search-worker', 'dist', 'textSearchWorkerMain.js'),
+  join(root, '.tmp', 'dist', 'dist', 'fileSearchWorkerMain.js'),
+  join(root, 'dist', commitHash, 'packages', 'file-search-worker', 'dist', 'fileSearchWorkerMain.js'),
 )
 
 await cp(join(root, 'dist'), join(root, '.tmp', 'static'), { recursive: true })

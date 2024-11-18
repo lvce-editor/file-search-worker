@@ -9,13 +9,13 @@ import { root } from './root.js'
  * @type {import('rollup').RollupOptions}
  */
 const options = {
-  input: join(root, 'packages/text-search-worker/src/textSearchWorkerMain.ts'),
+  input: join(root, 'packages/file-search-worker/src/fileSearchWorkerMain.ts'),
   preserveEntrySignatures: 'strict',
   treeshake: {
     propertyReadSideEffects: false,
   },
   output: {
-    file: join(root, '.tmp/dist/dist/textSearchWorkerMain.js'),
+    file: join(root, '.tmp/dist/dist/fileSearchWorkerMain.js'),
     format: 'es',
     freeze: false,
     generatedCode: {

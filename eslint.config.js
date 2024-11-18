@@ -15,17 +15,26 @@ export default tseslint.config(
   {
     ignores: [
       'dist',
-      'coverage',
-      'scripts',
-      '**/server/**',
+      '.tmp',
+      'scripts/build.js',
+      'scripts/computeNodeModulesCacheKey.js',
       '**/build/**',
+      '**/coverage/**',
+      '**/server/**',
       '**/e2e/**',
       'rollup.config.js',
       'eslint.config.js',
-      'src/fileSearchWorkerMain.ts',
-      'test/GetJson.test.ts',
-      'test/GetText.test.ts',
+      'packages/file-search-worker/src/fileSearchWorkerMain.ts',
+      'packages/file-search-worker/test/GetJson.test.ts',
+      'packages/file-search-worker/test/GetText.test.ts',
     ],
+  },
+  {
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'error',
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
+    },
   },
   {
     rules: {
