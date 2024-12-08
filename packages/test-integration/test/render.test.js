@@ -9,5 +9,5 @@ test.skip('searchFile', async () => {
   const assetDir = ''
 
   const result = await rpc.invoke('SearchFile.searchFile', path, value, prepare, assetDir)
-  expect(result).toEqual([,])
+  expect(result).toEqual([])
 })
