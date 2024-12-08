@@ -26,7 +26,8 @@ export default tseslint.config(
       'eslint.config.js',
       'packages/file-search-worker/src/fileSearchWorkerMain.ts',
       'packages/file-search-worker/test/GetJson.test.ts',
-      'packages/file-search-worker/test/GetText.test.ts',
+      'packages/file-search-worker/test/GetJson.test.ts',
+      '**/test-integration-util/**',
     ],
   },
   {
