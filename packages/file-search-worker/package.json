@@ -85,7 +85,6 @@
     "@lvce-editor/i18n": "^1.1.0",
     "@lvce-editor/rpc": "^1.4.0",
     "@lvce-editor/verror": "^1.6.0",
-    "eslint": "9.15.0",
     "idb": "^8.0.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5"
