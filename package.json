@@ -12,7 +12,8 @@
     "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/text-search-worker/src/textSearchWorkerMain.ts --outfile=.tmp/dist/dist/textSearchWorkerMain.js",
     "build": "node packages/build/src/build.js",
     "build:static": "node packages/build/src/build-static.js",
-    "dev": "node packages/build/src/dev.js"
+    "dev": "node packages/build/src/dev.js",
+    "test-integration": "lerna run test-integration"
   },
   "keywords": [],
   "author": "Lvce Editor",
