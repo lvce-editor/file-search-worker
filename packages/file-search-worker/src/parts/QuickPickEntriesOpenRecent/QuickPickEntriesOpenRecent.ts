@@ -12,19 +12,19 @@ const openWorkspaceFolder = (uri: string): Promise<void> => {
   return Rpc.invoke(/* Workspace.setPath */ 'Workspace.setPath', /* path */ uri)
 }
 
-export const getPlaceholder = () => {
+export const getPlaceholder = (): any => {
   return ViewletQuickPickStrings.selectToOpen()
 }
 
-export const getLabel = () => {
+export const getLabel = (): any => {
   return ViewletQuickPickStrings.openRecent()
 }
 
-export const getHelpEntries = () => {
+export const getHelpEntries = (): any => {
   return []
 }
 
-export const getNoResults = () => {
+export const getNoResults = (): any => {
   return {
     label: ViewletQuickPickStrings.noRecentlyOpenedFoldersFound(),
   }
@@ -65,7 +65,7 @@ export const getPickDescription = (pick: string): string => {
   return Workspace.pathDirName(pick)
 }
 
-export const getPickIcon = () => {
+export const getPickIcon = (): any => {
   return ''
 }
 
