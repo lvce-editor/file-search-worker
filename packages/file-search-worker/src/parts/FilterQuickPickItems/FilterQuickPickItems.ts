@@ -1,26 +1,15 @@
+import * as ConvertToPick from '../ConvertToPick/ConvertToPick.ts'
 import * as FilterQuickPickItem from '../FilterQuickPickItem/FilterQuickPickItem.ts'
+import * as GetBaseName from '../GetBaseName/GetBaseName.ts'
 import type { Pick } from '../Pick/Pick.ts'
-
-const getBaseName = (path: string): string => {
-  return path.slice(path.lastIndexOf('/') + 1)
-}
-
-const emptyMatches: readonly number[] = []
-
-const convertToPick = (item: string): Pick => {
-  return {
-    pick: item,
-    matches: emptyMatches,
-  }
-}
 
 export const filterQuickPickItems = (items: readonly string[], value: string): readonly Pick[] => {
   if (!value) {
-    return items.map(convertToPick)
+    return items.map(ConvertToPick.convertToPick)
   }
   const results: Pick[] = []
   for (const item of items) {
-    const baseName = getBaseName(item)
+    const baseName = GetBaseName.getBaseName(item)
     const matches = FilterQuickPickItem.filterQuickPickItem(value, baseName)
     if (matches.length > 0) {
       results.push({
