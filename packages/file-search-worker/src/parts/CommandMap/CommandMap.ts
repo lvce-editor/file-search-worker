@@ -1,6 +1,7 @@
 import * as FileSystemFetch from '../FileSystemFetch/FileSystemFetch.ts'
 import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
+import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntries.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as SearchFileWithFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
 import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
@@ -28,4 +29,5 @@ export const commandMap = {
   'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
   'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFile,
   'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
+  'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
 }
