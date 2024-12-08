@@ -6,7 +6,7 @@ import * as Arrays from '../Arrays/Arrays.ts'
  * retrieve the child handles
  *
  */
-export const getChildHandles = async (handle: FileSystemDirectoryHandle): Promise<FileSystemHandle[]> => {
+export const getChildHandles = async (handle: FileSystemDirectoryHandle): Promise<readonly FileSystemHandle[]> => {
   // @ts-ignore
   const handles = await Arrays.fromAsync(handle.values())
   return handles
