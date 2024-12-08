@@ -15,8 +15,9 @@ const nodeModulesPath = join(root, 'packages', 'server', 'node_modules')
 
 const textSearchWorkerPath = join(root, 'dist', 'dist', 'textSearchWorkerMain.js')
 
-const serverPath = join(nodeModulesPath, '@lvce-editor', 'server')
-const indexHtmlPath = join(serverPath, 'static', 'index.html')
+const serverPath = join(nodeModulesPath, '@lvce-editor', 'static-server')
+const staticPath = join(serverPath, 'static')
+const indexHtmlPath = join(staticPath, 'index.html')
 
 const indexHtmlContent = await readFile(indexHtmlPath, 'utf8')
 
