@@ -30,7 +30,6 @@ export default tseslint.config(
       'packages/file-search-worker/src/fileSearchWorkerMain.ts',
       'packages/file-search-worker/test/GetJson.test.ts',
       'packages/file-search-worker/test/GetJson.test.ts',
-      '**/test-integration-util/**',
     ],
   },
   {
