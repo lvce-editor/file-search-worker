@@ -1,37 +1,37 @@
-import * as Command from '../Command/Command.js'
-import * as GetColorThemeNames from '../GetColorThemeNames/GetColorThemeNames.js'
-import * as QuickPickColorThemeUiStrings from '../QuickPickColorThemeUiStrings/QuickPickColorThemeUiStrings.js'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.js'
+import * as Command from '../Command/Command.ts'
+import * as GetColorThemeNames from '../GetColorThemeNames/GetColorThemeNames.ts'
+import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
+import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 
-const setColorTheme = (id) => {
+export const setColorTheme = (id: string): Promise<void> => {
   return Command.execute(/* ColorTheme.setColorTheme */ 'ColorTheme.setColorTheme', /* colorThemeId */ id)
 }
 
-export const getPlaceholder = () => {
-  return QuickPickColorThemeUiStrings.selectColorTheme()
+export const getPlaceholder = (): string => {
+  return QuickPickStrings.selectColorTheme()
 }
 
-export const getLabel = () => {
-  return QuickPickColorThemeUiStrings.selectColorTheme()
+export const getLabel = (): string => {
+  return QuickPickStrings.selectColorTheme()
 }
 
-export const getPicks = async (searchValue) => {
+export const getPicks = async (searchValue: any): Promise<any[]> => {
   const colorThemeNames = await GetColorThemeNames.getColorThemeNames()
   return colorThemeNames
 }
 
-export const selectPick = async (pick) => {
+export const selectPick = async (pick: any): Promise<any> => {
   await setColorTheme(/* colorThemeId */ pick)
   return {
     command: QuickPickReturnValue.Hide,
   }
 }
 
-export const focusPick = async (pick) => {
+export const focusPick = async (pick: any): Promise<void> => {
   await setColorTheme(/* colorThemeId */ pick)
 }
 
-export const getFilterValue = (value) => {
+export const getFilterValue = (value: any): any => {
   return value
 }
 
@@ -41,14 +41,14 @@ export const getNoResults = () => {
   }
 }
 
-export const getPickFilterValue = (pick) => {
+export const getPickFilterValue = (pick: any): any => {
   return pick
 }
 
-export const getPickLabel = (pick) => {
+export const getPickLabel = (pick: any): string => {
   return pick
 }
 
-export const getPickIcon = (pick) => {
+export const getPickIcon = (pick: any): string => {
   return ''
 }

@@ -1,9 +1,9 @@
-import * as Command from '../Command/Command.js'
-import * as ErrorHandling from '../ErrorHandling/ErrorHandling.js'
-import * as ExtensionHostCommands from '../ExtensionHost/ExtensionHostCommands.js'
-import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.js'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.js'
-import * as ViewletQuickPickStrings from '../ViewletQuickPick/ViewletQuickPickStrings.js'
+import * as Command from '../Command/Command.ts'
+import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
+import * as ExtensionHostCommands from '../ExtensionHost/ExtensionHostCommands.ts'
+import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
+import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
+import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const name = 'command'
 
@@ -36,7 +36,7 @@ const getBuiltinPicks = () => {
   return builtinPicks
 }
 
-const prefixIdWithExt = (item) => {
+const prefixIdWithExt = (item: any): any => {
   if (!item.label) {
     ErrorHandling.warn('[QuickPick] item has missing label', item)
   }
@@ -73,14 +73,14 @@ export const getPicks = async () => {
   return [...builtinPicks, ...extensionPicks]
 }
 
-const shouldHide = (item) => {
+const shouldHide = (item: any): boolean => {
   if (item.id === 'Viewlet.openWidget' && item.args[0] === 'QuickPick') {
     return false
   }
   return true
 }
 
-const selectPickBuiltin = async (item) => {
+const selectPickBuiltin = async (item: any): Promise<any> => {
   const args = item.args || []
   // TODO ids should be all numbers for efficiency -> also directly can call command
   await Command.execute(item.id, ...args)
@@ -94,7 +94,7 @@ const selectPickBuiltin = async (item) => {
   }
 }
 
-const selectPickExtension = async (item) => {
+const selectPickExtension = async (item: any): Promise<any> => {
   const id = item.id.slice(4) // TODO lots of string allocation with 'ext.' find a better way to separate builtin commands from extension commands
   try {
     await ExtensionHostCommands.executeCommand(id)
@@ -107,22 +107,22 @@ const selectPickExtension = async (item) => {
   }
 }
 
-export const selectPick = (item) => {
+export const selectPick = async (item: any): Promise<any> => {
   if (item.id.startsWith('ext.')) {
     return selectPickExtension(item)
   }
   return selectPickBuiltin(item)
 }
 
-export const getFilterValue = (value) => {
+export const getFilterValue = (value: any): any => {
   return value
 }
 
-export const getPickFilterValue = (pick) => {
+export const getPickFilterValue = (pick: any): any => {
   return pick.label
 }
 
-export const getPickLabel = (pick) => {
+export const getPickLabel = (pick: any): string => {
   return pick.label
 }
 
