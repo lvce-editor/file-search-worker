@@ -51,6 +51,8 @@ export default tseslint.config(
       '@typescript-eslint/member-delimiter-style': 'off',
       '@typescript-eslint/only-throw-error': 'off',
       '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/require-await': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
 )
