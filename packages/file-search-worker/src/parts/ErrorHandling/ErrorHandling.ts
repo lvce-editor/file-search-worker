@@ -1,46 +1,13 @@
-import * as Command from '../Command/Command.ts'
-import * as PrettyError from '../PrettyError/PrettyError.js'
-
-export const state = {
-  /**
-   * @type {string[]}
-   */
-  seenWarnings: [],
-}
-
 export const logError = async (error: any, prefix = '') => {
-  const prettyError = await PrettyError.prepare(error)
-  PrettyError.print(prettyError, prefix)
-  return prettyError
+  console.error(error)
 }
 
 export const handleError = async (error: any, notify = true, prefix = '') => {
-  try {
-    const prettyError = await logError(error, prefix)
-    if (notify) {
-      await Command.execute(/* Notification.create */ 'Notification.create', /* type */ 'error', /* text */ PrettyError.getMessage(prettyError))
-    }
-  } catch (otherError) {
-    console.warn('ErrorHandling error')
-    console.warn(otherError)
-    console.error(error)
-  }
+  console.error(error)
 }
 
-export const showErrorDialog = async (error: any) => {
-  try {
-    const prettyError = await PrettyError.prepare(error)
-    await Command.execute(/* Dialog.showMessage */ 'Dialog.showMessage', /* message */ prettyError)
-  } catch {
-    // ignore
-  }
-}
+export const showErrorDialog = async (error: any) => {}
 
 export const warn = (...args: any[]) => {
-  const stringified = JSON.stringify(args)
-  if (state.seenWarnings.includes(stringified)) {
-    return
-  }
-  state.seenWarnings.push(stringified)
   console.warn(...args)
 }
