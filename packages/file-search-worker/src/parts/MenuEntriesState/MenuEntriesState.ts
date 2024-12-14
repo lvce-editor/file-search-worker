@@ -6,6 +6,6 @@ const state: MenuEntriesState = {
   menuEntries: [],
 }
 
-export const getAll = () => {
+export const getAll = (): readonly any[] => {
   return state.menuEntries
 }
