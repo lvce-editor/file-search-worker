@@ -1,13 +1,13 @@
-import * as Command from '../Command/Command.js'
+import * as Command from '../Command/Command.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.js'
-import * as IconTheme from '../IconTheme/IconTheme.js'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.js'
-import * as SearchFile from '../SearchFile/SearchFile.js'
+import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.js'
+import * as SearchFile from '../SearchFile/SearchFile.js'
 import * as Workspace from '../Workspace/Workspace.js'
 
 const searchFile = async (path: any, value: any) => {
   const prepare = true
+  // @ts-ignore
   const files = await SearchFile.searchFile(/* path */ path, /* searchTerm */ value, prepare)
   return files
 }
@@ -39,7 +39,7 @@ export const getNoResults = (): any => {
 }
 
 export const getPicks = async (searchValue: any) => {
-  const workspace = Workspace.state.workspacePath
+  const workspace = ''
   if (!workspace) {
     return []
   }
@@ -52,7 +52,7 @@ export const selectPick = async (pick: any) => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
-  const workspace = Workspace.state.workspacePath
+  const workspace = ''
   const absolutePath = `${workspace}/${pick}`
   await Command.execute(/* Main.openUri */ 'Main.openUri', /* uri */ absolutePath)
   return {
@@ -95,12 +95,11 @@ export const getPickFileIcon = (pick: any) => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
-  const baseName = Workspace.pathBaseName(pick)
-  return IconTheme.getFileIcon({ name: baseName })
+  return ''
 }
 
 export const isPrepared = (): boolean => {
-  const workspace = Workspace.state.workspacePath
+  const workspace = ''
   // TODO protocol should always be defined. For files it should use file protocol
   const protocol = GetProtocol.getProtocol(workspace)
   return !protocol

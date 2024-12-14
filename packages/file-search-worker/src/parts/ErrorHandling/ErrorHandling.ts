@@ -1,4 +1,4 @@
-import * as Command from '../Command/Command.js'
+import * as Command from '../Command/Command.ts'
 import * as PrettyError from '../PrettyError/PrettyError.js'
 
 export const state = {

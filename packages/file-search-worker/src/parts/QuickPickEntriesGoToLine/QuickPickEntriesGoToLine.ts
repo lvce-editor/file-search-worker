@@ -1,5 +1,5 @@
-import * as Command from '../Command/Command.js'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.js'
+import * as Command from '../Command/Command.ts'
+import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 
 export const name = 'goToLine'
 
