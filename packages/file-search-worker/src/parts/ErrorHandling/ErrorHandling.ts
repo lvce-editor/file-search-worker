@@ -8,13 +8,13 @@ export const state = {
   seenWarnings: [],
 }
 
-export const logError = async (error, prefix = '') => {
+export const logError = async (error: any, prefix = '') => {
   const prettyError = await PrettyError.prepare(error)
   PrettyError.print(prettyError, prefix)
   return prettyError
 }
 
-export const handleError = async (error, notify = true, prefix = '') => {
+export const handleError = async (error: any, notify = true, prefix = '') => {
   try {
     const prettyError = await logError(error, prefix)
     if (notify) {
@@ -27,7 +27,7 @@ export const handleError = async (error, notify = true, prefix = '') => {
   }
 }
 
-export const showErrorDialog = async (error) => {
+export const showErrorDialog = async (error: any) => {
   try {
     const prettyError = await PrettyError.prepare(error)
     await Command.execute(/* Dialog.showMessage */ 'Dialog.showMessage', /* message */ prettyError)
@@ -36,7 +36,7 @@ export const showErrorDialog = async (error) => {
   }
 }
 
-export const warn = (...args) => {
+export const warn = (...args: any[]) => {
   const stringified = JSON.stringify(args)
   if (state.seenWarnings.includes(stringified)) {
     return
