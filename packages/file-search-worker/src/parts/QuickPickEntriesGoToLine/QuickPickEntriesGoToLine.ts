@@ -45,7 +45,7 @@ export const selectPick = async (item: any) => {
     rowIndex,
     columnIndex: 5,
   }
-  await Command.execute(/* EditorSetCursor.editorSetCursor */ 396, /* position */ position)
+  await Command.execute(/* EditorSetCursor.editorSetCursor */ 'TODO', /* position */ position)
   // TODO put cursor onto that line
   return {
     command: QuickPickReturnValue.Hide,
