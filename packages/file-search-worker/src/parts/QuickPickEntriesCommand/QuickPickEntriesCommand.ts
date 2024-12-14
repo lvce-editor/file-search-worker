@@ -6,11 +6,11 @@ import * as Rpc from '../Rpc/Rpc.ts'
 
 export const name = 'command'
 
-export const getPlaceholder = () => {
+export const getPlaceholder = (): string => {
   return ViewletQuickPickStrings.typeNameofCommandToRun()
 }
 
-export const helpEntries = () => {
+export const helpEntries = (): readonly any[] => {
   return [
     {
       description: ViewletQuickPickStrings.showAndRunCommands(),
@@ -19,18 +19,18 @@ export const helpEntries = () => {
   ]
 }
 
-export const getLabel = () => {
+export const getLabel = (): string => {
   return ''
 }
 
-export const getNoResults = () => {
+export const getNoResults = (): any => {
   return {
     label: ViewletQuickPickStrings.noMatchingResults(),
   }
 }
 
 // TODO combine Ajax with cache (specify strategy: cacheFirst, networkFirst)
-const getBuiltinPicks = () => {
+const getBuiltinPicks = (): readonly any[] => {
   const builtinPicks = MenuEntriesState.getAll()
   return builtinPicks
 }
@@ -49,7 +49,7 @@ const prefixIdWithExt = (item: any): any => {
   }
 }
 
-const getExtensionPicks = async () => {
+const getExtensionPicks = async (): Promise<readonly any[]> => {
   try {
     // TODO don't call this every time
     const extensionPicks = await Rpc.invoke('ExtensionHostCommands.getCommands')
@@ -66,7 +66,7 @@ const getExtensionPicks = async () => {
 
 // TODO send strings to renderer process only once for next occurrence send uint16array of ids of strings
 
-export const getPicks = async () => {
+export const getPicks = async (): Promise<readonly any[]> => {
   const builtinPicks = await getBuiltinPicks()
   const extensionPicks = await getExtensionPicks()
   return [...builtinPicks, ...extensionPicks]
