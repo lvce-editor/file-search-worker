@@ -39,7 +39,7 @@ export const getPicks = async () => {
   return picks
 }
 
-export const selectPick = async (item) => {
+export const selectPick = async (item: any) => {
   const rowIndex = Number.parseInt(item.label)
   const position = {
     rowIndex,
@@ -52,6 +52,6 @@ export const selectPick = async (item) => {
   }
 }
 
-export const getFilterValue = (value) => {
+export const getFilterValue = (value: any) => {
   return value
 }
