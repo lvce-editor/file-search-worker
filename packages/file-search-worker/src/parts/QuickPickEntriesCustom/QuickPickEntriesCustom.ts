@@ -1,4 +1,4 @@
-import * as Icon from '../Icon/Icon.js'
+import * as Icon from '../Icon/Icon.ts'
 import * as IconType from '../IconType/IconType.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
