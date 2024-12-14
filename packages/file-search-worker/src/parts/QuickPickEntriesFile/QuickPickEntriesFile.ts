@@ -3,10 +3,10 @@ import * as GetProtocol from '../GetProtocol/GetProtocol.js'
 import * as IconTheme from '../IconTheme/IconTheme.js'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.js'
 import * as SearchFile from '../SearchFile/SearchFile.js'
-import * as ViewletQuickPickStrings from '../ViewletQuickPick/ViewletQuickPickStrings.js'
+import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.js'
 import * as Workspace from '../Workspace/Workspace.js'
 
-const searchFile = async (path, value) => {
+const searchFile = async (path: any, value: any) => {
   const prepare = true
   const files = await SearchFile.searchFile(/* path */ path, /* searchTerm */ value, prepare)
   return files
@@ -14,16 +14,16 @@ const searchFile = async (path, value) => {
 
 export const name = 'file'
 
-export const getPlaceholder = () => {
+export const getPlaceholder = (): string => {
   return ''
 }
 
-export const getLabel = () => {
+export const getLabel = (): string => {
   return ViewletQuickPickStrings.files()
 }
 
 // TODO help entries should not be here
-export const getHelpEntries = () => {
+export const getHelpEntries = (): any[] => {
   return [
     {
       description: ViewletQuickPickStrings.goToFile(),
@@ -32,13 +32,13 @@ export const getHelpEntries = () => {
   ]
 }
 
-export const getNoResults = () => {
+export const getNoResults = (): any => {
   return {
     label: ViewletQuickPickStrings.noMatchingResults(),
   }
 }
 
-export const getPicks = async (searchValue) => {
+export const getPicks = async (searchValue: any) => {
   const workspace = Workspace.state.workspacePath
   if (!workspace) {
     return []
@@ -48,7 +48,7 @@ export const getPicks = async (searchValue) => {
   return files
 }
 
-export const selectPick = async (pick) => {
+export const selectPick = async (pick: any) => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -60,18 +60,18 @@ export const selectPick = async (pick) => {
   }
 }
 
-export const getFilterValue = (value) => {
+export const getFilterValue = (value: any) => {
   return value
 }
 
-export const getPickFilterValue = (pick) => {
+export const getPickFilterValue = (pick: any) => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
   return pick
 }
 
-export const getPickLabel = (pick) => {
+export const getPickLabel = (pick: any) => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -79,7 +79,7 @@ export const getPickLabel = (pick) => {
   return baseName
 }
 
-export const getPickDescription = (pick) => {
+export const getPickDescription = (pick: any) => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -91,7 +91,7 @@ export const getPickIcon = () => {
   return ''
 }
 
-export const getPickFileIcon = (pick) => {
+export const getPickFileIcon = (pick: any) => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -99,7 +99,7 @@ export const getPickFileIcon = (pick) => {
   return IconTheme.getFileIcon({ name: baseName })
 }
 
-export const isPrepared = () => {
+export const isPrepared = (): boolean => {
   const workspace = Workspace.state.workspacePath
   // TODO protocol should always be defined. For files it should use file protocol
   const protocol = GetProtocol.getProtocol(workspace)
