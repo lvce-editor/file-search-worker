@@ -62,7 +62,7 @@ const getPrefix = (value: any): string => {
   return QuickPickPrefix.None
 }
 
-const getQuickPickProvider = (prefix: string) => {
+const getQuickPickProvider = (prefix: string): any => {
   // TODO could use enum for prefix
   // TODO could use regex to extract prefix
   // TODO or could check first letter char code (less comparisons)
@@ -97,7 +97,7 @@ export const getPicks = async (value: any): Promise<any[]> => {
 }
 
 // @ts-ignore
-const getPick = (state, index) => {
+const getPick = (state: any, index: number): any => {
   // if (index < state.recentPicks.length) {
   //   return state.recentPicks[index]
   // }
@@ -113,11 +113,11 @@ export const selectPick = (item: any): Promise<any> => {
   return provider.selectPick(item)
 }
 
-export const openCommandPalette = () => {
+export const openCommandPalette = (): void => {
   // show('>')
 }
 
-export const openView = () => {
+export const openView = (): void => {
   // show('view ')
 }
 
