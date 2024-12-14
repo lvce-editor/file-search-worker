@@ -17,13 +17,13 @@ export const getPicks = async (): Promise<any> => {
   return []
 }
 
-export const selectPick = async (item: any) => {
+export const selectPick = async (item: any): Promise<any> => {
   // Command.execute(/* openView */ 549, /* viewName */ item.label)
   // return {
   //   command: QuickPickReturnValue.Hide,
   // }
 }
 
-export const getFilterValue = (value: any) => {
+export const getFilterValue = (value: any): string => {
   return value
 }
