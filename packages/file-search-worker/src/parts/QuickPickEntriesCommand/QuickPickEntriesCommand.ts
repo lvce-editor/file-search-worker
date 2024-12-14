@@ -1,9 +1,8 @@
-import * as Command from '../Command/Command.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
-import * as ExtensionHostCommands from '../ExtensionHost/ExtensionHostCommands.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
+import * as Rpc from '../Rpc/Rpc.ts'
 
 export const name = 'command'
 
@@ -53,7 +52,7 @@ const prefixIdWithExt = (item: any): any => {
 const getExtensionPicks = async () => {
   try {
     // TODO don't call this every time
-    const extensionPicks = await ExtensionHostCommands.getCommands()
+    const extensionPicks = await Rpc.invoke('ExtensionHostCommands.getCommands')
     if (!extensionPicks) {
       return []
     }
@@ -83,7 +82,7 @@ const shouldHide = (item: any): boolean => {
 const selectPickBuiltin = async (item: any): Promise<any> => {
   const args = item.args || []
   // TODO ids should be all numbers for efficiency -> also directly can call command
-  await Command.execute(item.id, ...args)
+  await Rpc.invoke(item.id, ...args)
   if (shouldHide(item)) {
     return {
       command: QuickPickReturnValue.Hide,
@@ -97,7 +96,7 @@ const selectPickBuiltin = async (item: any): Promise<any> => {
 const selectPickExtension = async (item: any): Promise<any> => {
   const id = item.id.slice(4) // TODO lots of string allocation with 'ext.' find a better way to separate builtin commands from extension commands
   try {
-    await ExtensionHostCommands.executeCommand(id)
+    await Rpc.invoke('ExtensionHostCommands.executeCommand', id)
   } catch (error) {
     await ErrorHandling.handleError(error, false)
     await ErrorHandling.showErrorDialog(error)
