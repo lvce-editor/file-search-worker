@@ -1,5 +1,5 @@
 import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.js'
-import * as QuickPickPrefix from '../QuickPIckPrefix/QuickPickPrefix.js'
+import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.js'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
 // maybe cache by id opening commands -> has all commands cached
@@ -21,23 +21,23 @@ export const state = {
  */
 export const name = 'everything'
 
-export const getPlaceholder = () => {
+export const getPlaceholder = (): string => {
   return state.provider.getPlaceholder()
 }
 
-export const getLabel = () => {
+export const getLabel = (): string => {
   return ''
 }
 
-export const getHelpEntries = () => {
+export const getHelpEntries = (): any[] => {
   return state.provider.getHelpEntries()
 }
 
-export const getNoResults = () => {
+export const getNoResults = (): any => {
   return state.provider.getNoResults()
 }
 
-const getPrefix = (value) => {
+const getPrefix = (value: any): string => {
   if (value.startsWith(QuickPickPrefix.Command)) {
     return QuickPickPrefix.Command
   }
@@ -56,7 +56,7 @@ const getPrefix = (value) => {
   return QuickPickPrefix.None
 }
 
-const getQuickPickProvider = (prefix) => {
+const getQuickPickProvider = (prefix: string) => {
   // TODO could use enum for prefix
   // TODO could use regex to extract prefix
   // TODO or could check first letter char code (less comparisons)
@@ -76,7 +76,7 @@ const getQuickPickProvider = (prefix) => {
   }
 }
 
-export const getPicks = async (value) => {
+export const getPicks = async (value: any): Promise<any[]> => {
   const prefix = getPrefix(value)
   // TODO race condition
   if (state.prefix !== prefix) {
@@ -102,7 +102,7 @@ const getPick = (state, index) => {
   console.warn('no pick matching index', index)
 }
 
-export const selectPick = (item) => {
+export const selectPick = (item: any): Promise<any> => {
   const { provider } = state
   return provider.selectPick(item)
 }
@@ -115,16 +115,16 @@ export const openView = () => {
   // show('view ')
 }
 
-export const getFilterValue = (value) => {
+export const getFilterValue = (value: any): any => {
   return value.slice(state.prefix.length)
 }
 
-export const getPickFilterValue = (pick) => {
+export const getPickFilterValue = (pick: any): any => {
   const { provider } = state
   return provider.getPickFilterValue(pick)
 }
 
-export const getPickDescription = (pick) => {
+export const getPickDescription = (pick: any): any => {
   const { provider } = state
   // @ts-ignore
   if (provider.getPickDescription) {
@@ -134,19 +134,19 @@ export const getPickDescription = (pick) => {
   return ''
 }
 
-export const getPickLabel = (pick) => {
+export const getPickLabel = (pick: any): any => {
   const { provider } = state
   // @ts-ignore
   return provider.getPickLabel(pick)
 }
 
-export const getPickIcon = (pick) => {
+export const getPickIcon = (pick: any): string => {
   const { provider } = state
   // @ts-ignore
   return provider.getPickIcon(pick)
 }
 
-export const getPickFileIcon = (pick) => {
+export const getPickFileIcon = (pick: any): string => {
   const { provider } = state
   // @ts-ignore
   if (provider.getPickFileIcon) {
@@ -156,7 +156,7 @@ export const getPickFileIcon = (pick) => {
   return ''
 }
 
-export const isPrepared = () => {
+export const isPrepared = (): boolean => {
   const { provider } = state
   // @ts-ignore
   if (provider.isPrepared) {

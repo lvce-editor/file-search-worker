@@ -1,23 +1,23 @@
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.js'
-import * as ViewletQuickPickStrings from '../ViewletQuickPick/ViewletQuickPickStrings.js'
+import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
+import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const name = 'number'
 
-export const getPlaceholder = () => {
+export const getPlaceholder = (): string => {
   return ''
 }
 
-export const getHelpEntries = () => {
+export const getHelpEntries = (): any[] => {
   return []
 }
 
-export const getNoResults = () => {
+export const getNoResults = (): any => {
   return {
-    label: ViewletQuickPickStrings.noMatchingResults(),
+    label: QuickPickStrings.noMatchingResults(),
   }
 }
 
-export const getPicks = async () => {
+export const getPicks = async (): Promise<any[]> => {
   const picks = [
     {
       label: '1',
@@ -53,7 +53,7 @@ export const getPicks = async () => {
   return picks
 }
 
-export const selectPick = async (item) => {
+export const selectPick = async (item: any): Promise<any> => {
   return {
     command: QuickPickReturnValue.Hide,
   }
