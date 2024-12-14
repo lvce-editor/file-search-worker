@@ -13,7 +13,7 @@ export const getRemoteUrl = (path) => {
 
 const nodeModulesPath = join(root, 'packages', 'server', 'node_modules')
 
-const textSearchWorkerPath = join(root, 'dist', 'dist', 'textSearchWorkerMain.js')
+const workerPath = join(root, 'dist', 'dist', 'fileSearchWorkerMain.js')
 
 const serverPath = join(nodeModulesPath, '@lvce-editor', 'static-server')
 const staticPath = join(serverPath, 'static')
@@ -21,10 +21,10 @@ const indexHtmlPath = join(staticPath, 'index.html')
 
 const indexHtmlContent = await readFile(indexHtmlPath, 'utf8')
 
-const remoteUrl = getRemoteUrl(textSearchWorkerPath)
+const remoteUrl = getRemoteUrl(workerPath)
 
 const config = {
-  'develop.textSearchWorkerPath': remoteUrl,
+  'develop.fileSearchWorkerPath': remoteUrl,
 }
 const stringifiedConfig = JSON.stringify(config, null, 2)
 const newContent = indexHtmlContent.replace(
