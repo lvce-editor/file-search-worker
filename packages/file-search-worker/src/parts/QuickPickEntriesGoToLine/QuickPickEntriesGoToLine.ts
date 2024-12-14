@@ -3,19 +3,19 @@ import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnVa
 
 export const name = 'goToLine'
 
-export const getPlaceholder = () => {
+export const getPlaceholder = (): string => {
   return ''
 }
 
-export const getHelpEntries = () => {
+export const getHelpEntries = (): any[] => {
   return []
 }
 
-export const getNoResults = () => {
+export const getNoResults = (): any => {
   return undefined
 }
 
-export const getPicks = async () => {
+export const getPicks = async (): Promise<any[]> => {
   const picks = [
     {
       label: '1',
@@ -39,7 +39,7 @@ export const getPicks = async () => {
   return picks
 }
 
-export const selectPick = async (item: any) => {
+export const selectPick = async (item: any): Promise<any> => {
   const rowIndex = Number.parseInt(item.label)
   const position = {
     rowIndex,
@@ -52,6 +52,6 @@ export const selectPick = async (item: any) => {
   }
 }
 
-export const getFilterValue = (value: any) => {
+export const getFilterValue = (value: any): string => {
   return value
 }
