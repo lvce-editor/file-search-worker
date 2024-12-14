@@ -1,9 +1,9 @@
 import * as Command from '../Command/Command.ts'
-import * as GetProtocol from '../GetProtocol/GetProtocol.js'
+import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
-import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.js'
-import * as SearchFile from '../SearchFile/SearchFile.js'
-import * as Workspace from '../Workspace/Workspace.js'
+import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
+import * as SearchFile from '../SearchFile/SearchFile.ts'
+import * as Workspace from '../Workspace/Workspace.ts'
 
 const searchFile = async (path: any, value: any) => {
   const prepare = true

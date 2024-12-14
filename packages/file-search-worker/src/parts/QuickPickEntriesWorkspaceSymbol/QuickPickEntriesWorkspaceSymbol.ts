@@ -1,5 +1,5 @@
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
-import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.js'
+import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const name = 'workspace-symbol'
 

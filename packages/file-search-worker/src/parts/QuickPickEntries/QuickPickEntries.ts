@@ -5,7 +5,7 @@ import * as QuickPickEntriesNumber from '../QuickPickEntriesNumber/QuickPickEntr
 import * as QuickPickEntriesOpenRecent from '../QuickPickEntriesOpenRecent/QuickPickEntriesOpenRecent.ts'
 import * as QuickPickEntriesSymbol from '../QuickPickEntriesSymbol/QuickPickEntriesSymbol.ts'
 import * as QuickPickEntriesView from '../QuickPickEntriesView/QuickPickEntriesView.ts'
-import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.js'
+import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 
 export const load = (moduleId: string): any => {
   switch (moduleId) {

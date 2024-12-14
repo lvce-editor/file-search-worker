@@ -1,6 +1,6 @@
-import * as ExtensionMeta from '../ExtensionMeta/ExtensionMeta.js'
-import * as ExtensionHostCommandType from '../ExtensionHostCommandType/ExtensionHostCommandType.js'
-import * as ExtensionHostShared from './ExtensionHostShared.js'
+import * as ExtensionMeta from '../ExtensionMeta/ExtensionMeta.ts'
+import * as ExtensionHostCommandType from '../ExtensionHostCommandType/ExtensionHostCommandType.ts'
+import * as ExtensionHostShared from './ExtensionHostShared.ts'
 
 const getCommandsFromExtension = (extension) => {
   if (!extension || !extension.commands) {
