@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "test": "lerna run test",
     "type-check": "tsc -b",
-    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/text-search-worker/src/textSearchWorkerMain.ts --outfile=.tmp/dist/dist/textSearchWorkerMain.js",
+    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/file-search-worker/src/fileSearchWorkerMain.ts --outfile=.tmp/dist/dist/fileSearchWorkerMain.js",
     "build": "node packages/build/src/build.js",
     "build:static": "node packages/build/src/build-static.js",
     "dev": "node packages/build/src/dev.js",
@@ -24,10 +24,10 @@
     "@types/eslint__js": "^8.42.3",
     "eslint": "9.15.0",
     "lerna": "^8.1.9",
-    "nodemon": "^3.1.7",
+    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.17.0"
+    "typescript-eslint": "^8.18.0"
   },
   "prettier": {
     "semi": false,
