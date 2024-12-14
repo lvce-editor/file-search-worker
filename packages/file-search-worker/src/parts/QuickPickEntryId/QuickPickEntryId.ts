@@ -4,8 +4,6 @@ export const File = 'quickPick://file'
 
 export const EveryThing = 'quickPick://everything'
 
-export const Noop = 'quickPick://noop'
-
 export const Number = 'quickPick://number'
 
 export const Recent = 'quickPick://recent'
