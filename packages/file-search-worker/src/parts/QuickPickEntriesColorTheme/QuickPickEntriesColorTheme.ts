@@ -1,10 +1,10 @@
-import * as Command from '../Command/Command.ts'
 import * as GetColorThemeNames from '../GetColorThemeNames/GetColorThemeNames.ts'
-import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
+import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
+import * as Rpc from '../Rpc/Rpc.ts'
 
 export const setColorTheme = (id: string): Promise<void> => {
-  return Command.execute(/* ColorTheme.setColorTheme */ 'ColorTheme.setColorTheme', /* colorThemeId */ id)
+  return Rpc.invoke(/* ColorTheme.setColorTheme */ 'ColorTheme.setColorTheme', /* colorThemeId */ id)
 }
 
 export const getPlaceholder = (): string => {
@@ -37,7 +37,7 @@ export const getFilterValue = (value: any): any => {
 
 export const getNoResults = () => {
   return {
-    label: QuickPickColorThemeUiStrings.noMatchingColorThemesFound(),
+    label: QuickPickStrings.noMatchingColorThemesFound(),
   }
 }
 
