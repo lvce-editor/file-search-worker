@@ -126,6 +126,6 @@ export const getPickLabel = (pick: any): string => {
   return pick.label
 }
 
-export const getPickIcon = () => {
+export const getPickIcon = (): string => {
   return ''
 }

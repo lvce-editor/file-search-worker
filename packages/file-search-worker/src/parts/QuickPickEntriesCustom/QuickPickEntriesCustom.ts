@@ -17,7 +17,7 @@ export const getPlaceholder = (): string => {
   return ''
 }
 
-export const getLabel = () => {
+export const getLabel = (): string => {
   return 'Custom'
 }
 
