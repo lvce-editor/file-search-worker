@@ -5,7 +5,7 @@ import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.t
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
-const searchFile = async (path: any, value: any) => {
+const searchFile = async (path: any, value: any): Promise<readonly any[]> => {
   const prepare = true
   // @ts-ignore
   const files = await SearchFile.searchFile(/* path */ path, /* searchTerm */ value, prepare)
@@ -38,7 +38,7 @@ export const getNoResults = (): any => {
   }
 }
 
-export const getPicks = async (searchValue: any) => {
+export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
   const workspace = ''
   if (!workspace) {
     return []
@@ -48,7 +48,7 @@ export const getPicks = async (searchValue: any) => {
   return files
 }
 
-export const selectPick = async (pick: any) => {
+export const selectPick = async (pick: any): Promise<any> => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -60,18 +60,18 @@ export const selectPick = async (pick: any) => {
   }
 }
 
-export const getFilterValue = (value: any) => {
+export const getFilterValue = (value: any): string => {
   return value
 }
 
-export const getPickFilterValue = (pick: any) => {
+export const getPickFilterValue = (pick: any): string => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
   return pick
 }
 
-export const getPickLabel = (pick: any) => {
+export const getPickLabel = (pick: any): string => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -79,7 +79,7 @@ export const getPickLabel = (pick: any) => {
   return baseName
 }
 
-export const getPickDescription = (pick: any) => {
+export const getPickDescription = (pick: any): string => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -87,11 +87,11 @@ export const getPickDescription = (pick: any) => {
   return dirName
 }
 
-export const getPickIcon = () => {
+export const getPickIcon = (): string => {
   return ''
 }
 
-export const getPickFileIcon = (pick: any) => {
+export const getPickFileIcon = (pick: any): string => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
