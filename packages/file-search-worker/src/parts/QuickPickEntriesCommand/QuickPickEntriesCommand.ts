@@ -30,7 +30,7 @@ export const getNoResults = (): any => {
 }
 
 // TODO combine Ajax with cache (specify strategy: cacheFirst, networkFirst)
-const getBuiltinPicks = (): readonly any[] => {
+const getBuiltinPicks = async (): Promise<readonly any[]> => {
   const builtinPicks = MenuEntriesState.getAll()
   return builtinPicks
 }

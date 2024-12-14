@@ -35,7 +35,7 @@ export const getFilterValue = (value: any): any => {
   return value
 }
 
-export const getNoResults = () => {
+export const getNoResults = (): any => {
   return {
     label: QuickPickStrings.noMatchingColorThemesFound(),
   }
