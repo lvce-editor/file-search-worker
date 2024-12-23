@@ -113,17 +113,17 @@ export const readDirWithFileTypes = (uri: string): readonly Dirent[] => {
   return dirents
 }
 
-export const getBlob = (uri: string): Blob => {
+export const getBlob = (uri: string, type?: string): Blob => {
   const content = readFile(uri)
-  const contentType = GetContentType.getContentType(uri)
+  const contentType = type || GetContentType.getContentType(uri)
   const blob = new Blob([content], {
     type: contentType,
   })
   return blob
 }
 
-export const getBlobUrl = (uri: string): string => {
-  const blob = getBlob(uri)
+export const getBlobUrl = (uri: string, type?: string): string => {
+  const blob = getBlob(uri, type)
   const url = URL.createObjectURL(blob)
   return url
 }

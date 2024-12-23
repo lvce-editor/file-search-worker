@@ -56,8 +56,8 @@ export const chmod = (): void => {
   throw new Error('[memfs] chmod not implemented')
 }
 
-export const getBlob = async (uri: string): Promise<Blob> => {
+export const getBlob = async (uri: string, type?: string): Promise<Blob> => {
   const content = await readFile(uri)
-  const blob = new Blob([content])
+  const blob = new Blob([content], { type })
   return blob
 }
