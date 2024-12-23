@@ -1,5 +1,5 @@
-import * as AssetDir from '../AssetDir/AssetDir.ts'
 import type { Dirent } from '../Dirent/Dirent.ts'
+import * as AssetDir from '../AssetDir/AssetDir.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as FileMapUrl from '../FileMapUrl/FileMapUrl.ts'
 import * as GetJson from '../GetJson/GetJson.ts'
@@ -56,8 +56,8 @@ export const chmod = (): void => {
   throw new Error('[memfs] chmod not implemented')
 }
 
-export const getBlob = async (uri: string): Promise<Blob> => {
+export const getBlob = async (uri: string, type?: string): Promise<Blob> => {
   const content = await readFile(uri)
-  const blob = new Blob([content])
+  const blob = new Blob([content], { type })
   return blob
 }

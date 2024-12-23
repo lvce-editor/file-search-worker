@@ -1,11 +1,11 @@
-import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.ts'
-import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 import * as QuickPickEntriesCommand from '../QuickPickEntriesCommand/QuickPickEntriesCommand.ts'
 import * as QuickPickEntriesFile from '../QuickPickEntriesFile/QuickPickEntriesFile.ts'
 import * as QuickPickEntriesGoToLine from '../QuickPickEntriesGoToLine/QuickPickEntriesGoToLine.ts'
+import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.ts'
 import * as QuickPickEntriesSymbol from '../QuickPickEntriesSymbol/QuickPickEntriesSymbol.ts'
 import * as QuickPickEntriesView from '../QuickPickEntriesView/QuickPickEntriesView.ts'
 import * as QuickPickEntriesWorkspaceSymbol from '../QuickPickEntriesWorkspaceSymbol/QuickPickEntriesWorkspaceSymbol.ts'
+import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
 // maybe cache by id opening commands -> has all commands cached
