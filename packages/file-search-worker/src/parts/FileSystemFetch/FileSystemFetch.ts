@@ -2,6 +2,7 @@ import type { Dirent } from '../Dirent/Dirent.ts'
 import * as AssetDir from '../AssetDir/AssetDir.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as FileMapUrl from '../FileMapUrl/FileMapUrl.ts'
+import * as GetBlob from '../GetBlob/GetBlob.ts'
 import * as GetJson from '../GetJson/GetJson.ts'
 import * as GetText from '../GetText/GetText.ts'
 import * as PathSeparatorType from '../PathSeparatorType/PathSeparatorType.ts'
@@ -57,7 +58,7 @@ export const chmod = (): void => {
 }
 
 export const getBlob = async (uri: string, type?: string): Promise<Blob> => {
-  const content = await readFile(uri)
-  const blob = new Blob([content], { type })
+  const fetchUri = `${AssetDir.assetDir}${uri}`
+  const blob = GetBlob.getBlob(fetchUri)
   return blob
 }
