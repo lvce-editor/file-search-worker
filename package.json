@@ -19,27 +19,16 @@
   "author": "Lvce Editor",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "9.15.0",
     "@lerna/legacy-package-management": "^8.1.9",
-    "@types/eslint__js": "^8.42.3",
+    "@lvce-editor/eslint-config": "^1.9.0",
     "eslint": "9.15.0",
-    "eslint-plugin-perfectionist": "^4.4.0",
     "lerna": "^8.1.9",
-    "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.19.0"
+    "typescript": "^5.7.2"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true,
     "printWidth": 150
-  },
-  "nodemonConfig": {
-    "watch": [
-      "src"
-    ],
-    "ext": "ts,js",
-    "exec": "node scripts/build.js"
   }
 }
