@@ -9,7 +9,7 @@ export const state = {
   args: [] as any[],
 }
 
-export const setArgs = (args: any[]): void => {
+export const setArgs = (args: readonly any[]): void => {
   state.args = args
 }
 

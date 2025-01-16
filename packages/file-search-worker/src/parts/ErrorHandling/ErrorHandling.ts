@@ -4,6 +4,6 @@ export const handleError = async (error: any, notify = true, prefix = ''): Promi
 
 export const showErrorDialog = async (): Promise<void> => {}
 
-export const warn = (...args: any[]): void => {
+export const warn = (...args: readonly any[]): void => {
   console.warn(...args)
 }
