@@ -10,6 +10,7 @@ export default [
     ],
   },
   {
+    files: ['**/*.ts'],
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
       'prefer-destructuring': 'off',

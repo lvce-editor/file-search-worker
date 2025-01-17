@@ -2,33 +2,34 @@
   "name": "@lvce-editor/file-search-worker-monorepo",
   "version": "0.0.0-dev",
   "description": "",
-  "main": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Lvce Editor",
   "type": "module",
+  "main": "",
   "scripts": {
-    "postinstall": "lerna bootstrap --ci",
-    "lint": "eslint .",
-    "test": "lerna run test",
-    "type-check": "tsc -b",
-    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/file-search-worker/src/fileSearchWorkerMain.ts --outfile=.tmp/dist/dist/fileSearchWorkerMain.js",
     "build": "node packages/build/src/build.js",
     "build:static": "node packages/build/src/build-static.js",
+    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/file-search-worker/src/fileSearchWorkerMain.ts --outfile=.tmp/dist/dist/fileSearchWorkerMain.js",
     "dev": "node packages/build/src/dev.js",
-    "test-integration": "lerna run test-integration"
-  },
-  "keywords": [],
-  "author": "Lvce Editor",
-  "license": "MIT",
-  "devDependencies": {
-    "@lerna/legacy-package-management": "^8.1.9",
-    "@lvce-editor/eslint-config": "^1.9.0",
-    "eslint": "9.15.0",
-    "lerna": "^8.1.9",
-    "prettier": "^3.4.2",
-    "typescript": "^5.7.3"
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "postinstall": "lerna bootstrap --ci",
+    "test": "lerna run test",
+    "test-integration": "lerna run test-integration",
+    "type-check": "tsc -b"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true,
     "printWidth": 150
+  },
+  "devDependencies": {
+    "@lerna/legacy-package-management": "^8.1.9",
+    "@lvce-editor/eslint-config": "^1.13.0",
+    "eslint": "9.15.0",
+    "lerna": "^8.1.9",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3"
   }
 }
