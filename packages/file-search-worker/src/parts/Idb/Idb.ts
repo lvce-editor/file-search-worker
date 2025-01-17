@@ -1,3 +1,1 @@
-import { openDB } from 'idb'
-
-export { openDB }
+export { openDB } from 'idb'
