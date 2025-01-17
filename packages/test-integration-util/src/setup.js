@@ -1,7 +1,6 @@
 import { createWorker } from './createWorker.js'
 import { workerPath } from './workerPath.js'
 
-
 const getResult = (method, ...params) => {
   return null
 }

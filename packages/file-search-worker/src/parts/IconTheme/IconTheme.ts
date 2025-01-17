@@ -1,4 +1,4 @@
 // TODO support file icons
-export const getFolderIcon = ():string => {
+export const getFolderIcon = (): string => {
   return ''
 }
