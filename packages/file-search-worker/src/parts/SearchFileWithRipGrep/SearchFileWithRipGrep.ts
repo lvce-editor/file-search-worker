@@ -10,7 +10,7 @@ export const searchFile = async (path: string, value: string, prepare: boolean):
   const options = {
     ripGrepArgs,
     searchPath: path,
-    limit: 9999999,
+    limit: 9_999_999,
   }
   const stdout = await SearchProcess.invoke('SearchFile.searchFile', options)
   const lines = SplitLines.splitLines(stdout)

@@ -21,7 +21,7 @@ test('searches files without prepare', async () => {
   expect(mockInvoke).toHaveBeenCalledWith('SearchFile.searchFile', {
     ripGrepArgs: ['--files', '--sort-files'],
     searchPath: '/test',
-    limit: 9999999,
+    limit: 9_999_999,
   })
 })
 
@@ -39,7 +39,7 @@ test('searches files with prepare', async () => {
   expect(mockInvoke).toHaveBeenCalledWith('SearchFile.searchFile', {
     ripGrepArgs: ['--files', '--sort-files'],
     searchPath: '/test',
-    limit: 9999999,
+    limit: 9_999_999,
   })
 })
 

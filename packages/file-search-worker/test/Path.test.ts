@@ -30,5 +30,5 @@ test('dirname - multiple separators', () => {
 })
 
 test('dirname - with different separator', () => {
-  expect(Path.dirname('\\', 'C:\\test\\file.txt')).toBe('C:\\test')
+  expect(Path.dirname('\\', String.raw`C:\test\file.txt`)).toBe(String.raw`C:\test`)
 })
