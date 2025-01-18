@@ -14,7 +14,6 @@ export default [
     rules: {
       '@typescript-eslint/no-unused-vars': 'off',
       'prefer-destructuring': 'off',
-      '@typescript-eslint/prefer-readonly-parameter-types': 'off',
     },
   },
 ]

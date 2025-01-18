@@ -6,10 +6,10 @@ import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 export const name = 'custom'
 
 export const state = {
-  args: [] as any[],
+  args: [] as readonly any[],
 }
 
-export const setArgs = (args: any[]): void => {
+export const setArgs = (args: readonly any[]): void => {
   state.args = args
 }
 
