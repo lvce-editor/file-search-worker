@@ -3,6 +3,7 @@ import * as FileSystemFetch from '../FileSystemFetch/FileSystemFetch.ts'
 import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
+import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntries.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
@@ -29,6 +30,7 @@ export const commandMap = {
   'FileSystemMemory.writeFile': FileSystemMemory.writeFile,
   'QuickPick.create': Create.create,
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
+  'QuickPick.loadContent': LoadContent.loadContent,
   'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
   'QuickPick.loadEntries2': QuickPickEntries.load,
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
