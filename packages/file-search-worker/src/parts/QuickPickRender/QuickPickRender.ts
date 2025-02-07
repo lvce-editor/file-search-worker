@@ -7,27 +7,27 @@ import * as RenderMethod from '../RenderMethod/RenderMethod.ts'
 export const hasFunctionalRender = true
 
 const renderValue = {
-  isEqual(oldState: QuickPickState, newState: QuickPickState) {
+  isEqual(oldState: QuickPickState, newState: QuickPickState): boolean {
     return newState.inputSource === InputSource.User || oldState.value === newState.value
   },
-  apply(oldState: QuickPickState, newState: QuickPickState) {
+  apply(oldState: QuickPickState, newState: QuickPickState): any[] {
     return [/* method */ RenderMethod.SetValue, /* value */ newState.value]
   },
 }
 
 const renderCursorOffset = {
-  isEqual(oldState: QuickPickState, newState: QuickPickState) {
+  isEqual(oldState: QuickPickState, newState: QuickPickState): boolean {
     return (
       newState.inputSource === InputSource.User || oldState.cursorOffset === newState.cursorOffset || newState.cursorOffset === newState.value.length
     )
   },
-  apply(oldState: QuickPickState, newState: QuickPickState) {
+  apply(oldState: QuickPickState, newState: QuickPickState): any[] {
     return [/* method */ RenderMethod.SetCursorOffset, /* cursorOffset */ newState.cursorOffset]
   },
 }
 
 const renderItems = {
-  isEqual(oldState: QuickPickState, newState: QuickPickState) {
+  isEqual(oldState: QuickPickState, newState: QuickPickState): boolean {
     return (
       oldState.items === newState.items &&
       oldState.minLineY === newState.minLineY &&
@@ -35,7 +35,7 @@ const renderItems = {
       oldState.focusedIndex === newState.focusedIndex
     )
   },
-  apply(oldState: QuickPickState, newState: QuickPickState) {
+  apply(oldState: QuickPickState, newState: QuickPickState): any[] {
     const visibleItems = GetVisibleQuickPickItems.getVisible(
       newState.provider,
       newState.items,
@@ -49,10 +49,10 @@ const renderItems = {
 }
 
 const renderFocusedIndex = {
-  isEqual(oldState: QuickPickState, newState: QuickPickState) {
+  isEqual(oldState: QuickPickState, newState: QuickPickState): boolean {
     return oldState.focusedIndex === newState.focusedIndex
   },
-  apply(oldState: QuickPickState, newState: QuickPickState) {
+  apply(oldState: QuickPickState, newState: QuickPickState): any[] {
     const oldFocusedIndex = oldState.focusedIndex - oldState.minLineY
     const newFocusedIndex = newState.focusedIndex - newState.minLineY
     return [/* method */ RenderMethod.SetFocusedIndex, /* oldFocusedIndex */ oldFocusedIndex, /* newFocusedIndex */ newFocusedIndex]
@@ -60,10 +60,10 @@ const renderFocusedIndex = {
 }
 
 const renderHeight = {
-  isEqual(oldState: QuickPickState, newState: QuickPickState) {
+  isEqual(oldState: QuickPickState, newState: QuickPickState): boolean {
     return oldState.items.length === newState.items.length
   },
-  apply(oldState: QuickPickState, newState: QuickPickState) {
+  apply(oldState: QuickPickState, newState: QuickPickState): any[] {
     if (newState.items.length === 0) {
       return [/* method */ RenderMethod.SetItemsHeight, /* height */ newState.itemHeight]
     }
@@ -75,10 +75,10 @@ const renderHeight = {
 }
 
 const renderFocus = {
-  isEqual(oldState: QuickPickState, newState: QuickPickState) {
+  isEqual(oldState: QuickPickState, newState: QuickPickState): boolean {
     return oldState.focused === newState.focused
   },
-  apply(oldState: QuickPickState, newState: QuickPickState) {
+  apply(oldState: QuickPickState, newState: QuickPickState): any[] {
     const selector = newState.focused ? '.InputBox' : ''
     return ['Viewlet.focusSelector', selector]
   },
