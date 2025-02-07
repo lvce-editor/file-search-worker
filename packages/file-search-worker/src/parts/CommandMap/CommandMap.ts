@@ -1,3 +1,4 @@
+import * as Create from '../Create/Create.ts'
 import * as FileSystemFetch from '../FileSystemFetch/FileSystemFetch.ts'
 import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
@@ -26,6 +27,7 @@ export const commandMap = {
   'FileSystemMemory.readFile': FileSystemMemory.readFile,
   'FileSystemMemory.remove': FileSystemMemory.remove,
   'FileSystemMemory.writeFile': FileSystemMemory.writeFile,
+  'QuickPick.create': Create.create,
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
   'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
   'QuickPick.loadEntries2': QuickPickEntries.load,
