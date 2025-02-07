@@ -7,7 +7,7 @@ import * as Arrays from '../Arrays/Arrays.ts'
  *
  */
 
-// eslint-disable-next-line  @typescript-eslint/prefer-readonly-parameter-types
+ 
 export const getChildHandles = async (handle: FileSystemDirectoryHandle): Promise<readonly FileSystemHandle[]> => {
   // @ts-ignore
   const handles = await Arrays.fromAsync(handle.values())
