@@ -2,6 +2,7 @@ const state = {
   rpc: undefined,
 }
 
+// TODO use rpc registry
 export const invoke = (method: string, ...params: readonly any[]): Promise<any> => {
   const rpc = state.rpc
   // @ts-ignore
