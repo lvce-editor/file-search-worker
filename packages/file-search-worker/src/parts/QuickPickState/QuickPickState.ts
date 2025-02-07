@@ -32,4 +32,5 @@ export interface QuickPickState {
   readonly inputSource: number
   readonly args: readonly any[]
   readonly focused: boolean
+  readonly value: string
 }
