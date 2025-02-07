@@ -11,7 +11,7 @@ const quickPickHighlight = {
   childCount: 1,
 }
 
-const addHighlights = (dom: VirtualDomNode[], highlights: any[], label: string): void => {
+const addHighlights = (dom: VirtualDomNode[], highlights: readonly any[], label: string): void => {
   const labelDom = {
     type: VirtualDomElements.Div,
     className: ClassNames.QuickPickItemLabel,
