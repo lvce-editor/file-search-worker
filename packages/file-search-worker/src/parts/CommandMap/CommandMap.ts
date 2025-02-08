@@ -12,6 +12,18 @@ import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts
 import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 
 export const commandMap = {
+  'QuickPick.create': Create.create,
+  'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
+  'QuickPick.loadContent': LoadContent.loadContent,
+  'QuickPick.loadEntries2': QuickPickEntries.load,
+  'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
+  'SearchFile.searchFile': SearchFile.searchFile,
+  'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
+  'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFile,
+  'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
+
+  // deprecated
+  'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
   'FileSystemFetch.chmod': FileSystemFetch.chmod,
   'FileSystemFetch.getBlob': FileSystemFetch.getBlob,
   'FileSystemFetch.mkdir': FileSystemFetch.mkdir,
@@ -28,14 +40,4 @@ export const commandMap = {
   'FileSystemMemory.readFile': FileSystemMemory.readFile,
   'FileSystemMemory.remove': FileSystemMemory.remove,
   'FileSystemMemory.writeFile': FileSystemMemory.writeFile,
-  'QuickPick.create': Create.create,
-  'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
-  'QuickPick.loadContent': LoadContent.loadContent,
-  'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
-  'QuickPick.loadEntries2': QuickPickEntries.load,
-  'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
-  'SearchFile.searchFile': SearchFile.searchFile,
-  'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
-  'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFile,
-  'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
 }
