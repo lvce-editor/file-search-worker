@@ -1,24 +1,5 @@
 import * as I18NString from '../I18NString/I18NString.ts'
-
-/**
- * @enum {string}
- */
-const UiStrings = {
-  Files: 'Files',
-  GoToFile: 'Go to file',
-  NoMatchingColorThemesFound: 'No matching color themes found',
-  NoMatchingResults: 'No matching results',
-  NoRecentlyOpenedFoldersFound: 'No recently opened folders found',
-  NoResults: 'No Results',
-  NoSymbolFound: 'No symbol found',
-  NoWorkspaceSymbolsFound: 'no workspace symbols found',
-  OpenRecent: 'Open Recent',
-  SelectColorTheme: 'Select Color Theme',
-  SelectToOpen: 'Select to open',
-  ShowAndRunCommands: 'Show And Run Commands',
-  TypeNameOfCommandToRun: 'Type the name of a command to run.',
-  TypeTheNameOfAViewToOpen: 'Type the name of a view, output channel or terminal to open.',
-}
+import * as UiStrings from '../UiStrings/UiStrings.ts'
 
 export const noMatchingColorThemesFound = (): string => {
   return I18NString.i18nString(UiStrings.NoMatchingColorThemesFound)
