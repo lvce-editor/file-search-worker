@@ -1,4 +1,5 @@
 import type { IconRequest } from '../IconRequest/IconRequest.ts'
+import * as DirentType from '../DirentType/DirentType.ts'
 
 export const getIconRequests = (items: readonly any[], provider: any): readonly IconRequest[] => {
   const iconRequests: IconRequest[] = []
@@ -8,7 +9,7 @@ export const getIconRequests = (items: readonly any[], provider: any): readonly 
     iconRequests.push({
       name: icon,
       path: '',
-      type: 1,
+      type: DirentType.File,
     })
   }
   return iconRequests
