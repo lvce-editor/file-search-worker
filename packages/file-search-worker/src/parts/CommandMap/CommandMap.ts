@@ -5,6 +5,7 @@ import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as FocusNext from '../FocusNext/FocusNext.ts'
+import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleBlur from '../HandleBlur/HandleBlur.ts'
 import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
@@ -31,6 +32,7 @@ export const commandMap = {
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
   'QuickPick.loadEntries2': QuickPickEntries.load,
   'QuickPick.render': Render.doRender,
+  'QuickPick.getCommandIds': GetCommandIds.getCommandIds,
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
   'SearchFile.searchFile': SearchFile.searchFile,
   'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
