@@ -52,7 +52,7 @@ const prefixIdWithExt = (item: any): any => {
 const getExtensionPicks = async (): Promise<readonly any[]> => {
   try {
     // TODO don't call this every time
-    const extensionPicks = await Rpc.invoke('ExtensionHostCommands.getCommands')
+    const extensionPicks = await Rpc.invoke('ExtensionHost.getCommands')
     if (!extensionPicks) {
       return []
     }
