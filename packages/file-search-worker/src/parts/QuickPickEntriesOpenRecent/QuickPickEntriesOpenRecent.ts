@@ -1,5 +1,4 @@
 import * as DirentType from '../DirentType/DirentType.ts'
-import * as IconTheme from '../IconTheme/IconTheme.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Rpc from '../Rpc/Rpc.ts'
