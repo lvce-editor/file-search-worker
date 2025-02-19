@@ -1,3 +1,6 @@
+import * as GetIconRequests from '../GetIconRequests/GetIconRequests.ts'
+import * as RequestFileIcons from '../RequestFileIcons/RequestFileIcons.ts'
+
 const getPickDescription = (provider: any, pick: any): string => {
   if (provider.getPickDescription) {
     return provider.getPickDescription(pick)
@@ -5,24 +8,27 @@ const getPickDescription = (provider: any, pick: any): string => {
   return ''
 }
 
-const getFileIcon = (provider: any, pick: any): string => {
-  if (provider.getPickFileIcon) {
-    return provider.getPickFileIcon(pick)
-  }
-  return ''
-}
-
-export const getVisible = (provider: any, items: readonly any[], minLineY: number, maxLineY: number, focusedIndex: number): readonly any[] => {
+export const getVisible = async (
+  provider: any,
+  items: readonly any[],
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+): Promise<readonly any[]> => {
   const visibleItems = []
   const setSize = items.length
   const max = Math.min(setSize, maxLineY)
+  const iconsRequests = GetIconRequests.getIconRequests(items.slice(minLineY, maxLineY), provider)
+  console.log({ iconsRequests })
+  const icons = await RequestFileIcons.requestFileIcons(iconsRequests)
+  let iconIndex = 0
   for (let i = minLineY; i < max; i++) {
     const item = items[i]
     const pick = item.pick
     const label = provider.getPickLabel(pick)
     const description = getPickDescription(provider, pick)
     const icon = provider.getPickIcon(pick)
-    const fileIcon = getFileIcon(provider, pick)
+    const fileIcon = icons[iconIndex++]
     visibleItems.push({
       label,
       description,
