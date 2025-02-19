@@ -18,7 +18,7 @@ export const handleInput = async (
   state.inputSource = inputSource
   const newPicks = await state.provider.getPicks(newValue)
   const filterValue = state.provider.getFilterValue(newValue)
-  const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
+  const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, state.provider)
   const focusedIndex = items.length === 0 ? -1 : 0
   return {
     ...state,
