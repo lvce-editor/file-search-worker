@@ -1,4 +1,5 @@
 import * as Command from '../Command/Command.ts'
+import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
@@ -93,7 +94,7 @@ export const getPickIcon = (): string => {
   return ''
 }
 
-export const getPickFileIcon = (pick: any): string => {
+export const getPickFileIcon = (pick: any): any => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -101,7 +102,10 @@ export const getPickFileIcon = (pick: any): string => {
     pick = pick.pick
   }
   const baseName = Workspace.pathBaseName(pick)
-  return baseName
+  return {
+    type: DirentType.File,
+    name: baseName,
+  }
 }
 
 export const isPrepared = (): boolean => {
