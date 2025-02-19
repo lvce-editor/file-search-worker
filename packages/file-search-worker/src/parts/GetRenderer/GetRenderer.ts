@@ -6,11 +6,11 @@ import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibl
 import * as RenderMethod from '../RenderMethod/RenderMethod.ts'
 
 const renderValue = (oldState: QuickPickState, newState: QuickPickState): any => {
-  return [/* method */ RenderMethod.SetValue, /* value */ newState.value]
+  return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetValue, /* value */ newState.value]
 }
 
 const renderCursorOffset = (oldState: QuickPickState, newState: QuickPickState): any => {
-  return [/* method */ RenderMethod.SetCursorOffset, /* cursorOffset */ newState.cursorOffset]
+  return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetCursorOffset, /* cursorOffset */ newState.cursorOffset]
 }
 
 const renderItems = (oldState: QuickPickState, newState: QuickPickState): any => {
@@ -22,23 +22,29 @@ const renderItems = (oldState: QuickPickState, newState: QuickPickState): any =>
     newState.focusedIndex,
   )
   const dom = GetQuickPickItemsVirtualDom.getQuickPickItemsVirtualDom(visibleItems)
-  return [/* method */ 'setItemsDom', dom]
+  return ['Viewlet.send', newState.uid, /* method */ 'setItemsDom', dom]
 }
 
 const renderFocusedIndex = (oldState: QuickPickState, newState: QuickPickState): any => {
   const oldFocusedIndex = oldState.focusedIndex - oldState.minLineY
   const newFocusedIndex = newState.focusedIndex - newState.minLineY
-  return [/* method */ RenderMethod.SetFocusedIndex, /* oldFocusedIndex */ oldFocusedIndex, /* newFocusedIndex */ newFocusedIndex]
+  return [
+    'Viewlet.send',
+    newState.uid,
+    /* method */ RenderMethod.SetFocusedIndex,
+    /* oldFocusedIndex */ oldFocusedIndex,
+    /* newFocusedIndex */ newFocusedIndex,
+  ]
 }
 
 const renderHeight = (oldState: QuickPickState, newState: QuickPickState): any => {
   if (newState.items.length === 0) {
-    return [/* method */ RenderMethod.SetItemsHeight, /* height */ newState.itemHeight]
+    return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetItemsHeight, /* height */ newState.itemHeight]
   }
   const maxLineY = Math.min(newState.maxLineY, newState.items.length)
   const itemCount = maxLineY - newState.minLineY
   const height = itemCount * newState.itemHeight
-  return [/* method */ RenderMethod.SetItemsHeight, /* height */ height]
+  return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetItemsHeight, /* height */ height]
 }
 
 const renderFocus = (oldState: QuickPickState, newState: QuickPickState): any => {
