@@ -1,6 +1,6 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as GetQuickPickItemsVirtualDom from '../GetQuickPickItemsVirtualDom/GetQuickPickItemsVirtualDom.ts'
-import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.js'
+import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as RenderMethod from '../RenderMethod/RenderMethod.ts'
 

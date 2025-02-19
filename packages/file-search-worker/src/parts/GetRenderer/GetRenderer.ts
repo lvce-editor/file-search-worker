@@ -2,7 +2,7 @@ import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import type { Renderer } from '../Renderer/Renderer.ts'
 import * as DiffType from '../DiffType/DiffType.ts'
 import * as GetQuickPickItemsVirtualDom from '../GetQuickPickItemsVirtualDom/GetQuickPickItemsVirtualDom.ts'
-import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.js'
+import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
 import * as RenderMethod from '../RenderMethod/RenderMethod.ts'
 
 const renderValue = (oldState: QuickPickState, newState: QuickPickState): any => {

@@ -7,6 +7,7 @@ import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntries.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
+import * as Render from '../Render/Render.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as SearchFileWithFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
 import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
@@ -18,6 +19,7 @@ export const commandMap = {
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
   'QuickPick.loadContent': LoadContent.loadContent,
   'QuickPick.loadEntries2': QuickPickEntries.load,
+  'QuickPick.render': Render.doRender,
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
   'SearchFile.searchFile': SearchFile.searchFile,
   'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
