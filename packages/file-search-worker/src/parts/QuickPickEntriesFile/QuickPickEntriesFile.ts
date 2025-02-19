@@ -94,6 +94,7 @@ export const getPickIcon = (): string => {
 }
 
 export const getPickFileIcon = (pick: any): string => {
+  console.log({ pick })
   if (typeof pick === 'object') {
     pick = pick.pick
   }
