@@ -2,6 +2,7 @@ import * as Create from '../Create/Create.ts'
 import * as FileSystemFetch from '../FileSystemFetch/FileSystemFetch.ts'
 import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
+import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntries.ts'
@@ -14,6 +15,7 @@ import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithR
 
 export const commandMap = {
   'QuickPick.create': Create.create,
+  'QuickPick.focusIndex': FocusIndex.focusIndex,
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
   'QuickPick.loadContent': LoadContent.loadContent,
   'QuickPick.loadEntries2': QuickPickEntries.load,
