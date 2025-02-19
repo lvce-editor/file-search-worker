@@ -2,6 +2,7 @@ import * as Command from '../Command/Command.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
+import * as Rpc from '../Rpc/Rpc.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
@@ -39,7 +40,8 @@ export const getNoResults = (): any => {
 }
 
 export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
-  const workspace = ''
+  // TODO cache workspace path
+  const workspace = await Rpc.invoke('Workspace.getPath')
   if (!workspace) {
     return []
   }
