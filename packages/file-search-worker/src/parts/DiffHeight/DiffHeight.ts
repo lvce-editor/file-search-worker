@@ -1,5 +1,5 @@
+import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as DiffType from '../DiffType/DiffType.ts'
-import { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 
 export const diffType = DiffType.Height
 

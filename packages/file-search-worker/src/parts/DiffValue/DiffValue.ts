@@ -1,6 +1,6 @@
+import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as DiffType from '../DiffType/DiffType.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
-import { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 
 export const diffType = DiffType.RenderValue
 

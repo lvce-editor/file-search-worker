@@ -1,5 +1,5 @@
+import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as DiffModules from '../DiffModules/DiffModules.ts'
-import { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 
 export const diff = (oldState: QuickPickState, newState: QuickPickState): readonly number[] => {
   const diffResult: number[] = []
