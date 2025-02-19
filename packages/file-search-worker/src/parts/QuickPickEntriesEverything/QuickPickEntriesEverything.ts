@@ -154,7 +154,6 @@ export const getPickIcon = (pick: any): string => {
 
 export const getPickFileIcon = (pick: any): string => {
   const { provider } = state
-  console.log({ provider })
   // @ts-ignore
   if (provider.getPickFileIcon) {
     // @ts-ignore

@@ -19,7 +19,6 @@ export const getVisible = async (
   const setSize = items.length
   const max = Math.min(setSize, maxLineY)
   const iconsRequests = GetIconRequests.getIconRequests(items.slice(minLineY, maxLineY), provider)
-  console.log({ iconsRequests, provider })
   const icons = await RequestFileIcons.requestFileIcons(iconsRequests)
   let iconIndex = 0
   for (let i = minLineY; i < max; i++) {
