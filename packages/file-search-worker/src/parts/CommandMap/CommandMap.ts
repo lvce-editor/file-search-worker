@@ -1,3 +1,4 @@
+import * as Create2 from '../Create2/Create2.ts'
 import * as Create from '../Create/Create.ts'
 import * as FileSystemFetch from '../FileSystemFetch/FileSystemFetch.ts'
 import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
@@ -15,6 +16,7 @@ import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithR
 
 export const commandMap = {
   'QuickPick.create': Create.create,
+  'QuickPick.create2': Create2.create,
   'QuickPick.focusIndex': FocusIndex.focusIndex,
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
   'QuickPick.loadContent': LoadContent.loadContent,
