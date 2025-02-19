@@ -2,7 +2,8 @@ export interface QuickPickViewModel {
   readonly visibleItems: readonly any[]
   readonly value: string
   readonly cursorOffset: number
-  readonly focusedIndex: number
+  readonly oldFocusedIndex: number
+  readonly newFocusedIndex: number
   readonly height: number
   readonly focused: boolean
 }
