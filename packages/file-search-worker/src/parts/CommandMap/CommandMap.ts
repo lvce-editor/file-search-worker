@@ -20,7 +20,6 @@ import * as VirtualList from '../VirtualList/VirtualList.ts'
 import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
 export const commandMap = {
-  'QuickPick.create': Create.create,
   'QuickPick.create2': Create2.create,
   'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'QuickPick.focusNext': WrapCommand.wrapCommand(FocusNext.focusNext),
@@ -38,6 +37,7 @@ export const commandMap = {
   'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
 
   // deprecated
+  'QuickPick.create': Create.create,
   'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
   'FileSystemFetch.chmod': FileSystemFetch.chmod,
   'FileSystemFetch.getBlob': FileSystemFetch.getBlob,
