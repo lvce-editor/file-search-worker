@@ -1,3 +1,4 @@
+import * as Create2 from '../Create2/Create2.ts'
 import * as Create from '../Create/Create.ts'
 import * as FileSystemFetch from '../FileSystemFetch/FileSystemFetch.ts'
 import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
@@ -12,12 +13,14 @@ import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as SearchFileWithFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
 import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
 import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
+import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
 export const commandMap = {
   'QuickPick.create': Create.create,
-  'QuickPick.focusIndex': FocusIndex.focusIndex,
+  'QuickPick.create2': Create2.create,
+  'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
-  'QuickPick.loadContent': LoadContent.loadContent,
+  'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
   'QuickPick.loadEntries2': QuickPickEntries.load,
   'QuickPick.render': Render.doRender,
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
