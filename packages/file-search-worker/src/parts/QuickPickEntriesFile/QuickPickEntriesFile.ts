@@ -97,7 +97,11 @@ export const getPickFileIcon = (pick: any): string => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
-  return ''
+  if (typeof pick === 'object') {
+    pick = pick.pick
+  }
+  const baseName = Workspace.pathBaseName(pick)
+  return baseName
 }
 
 export const isPrepared = (): boolean => {

@@ -3,7 +3,7 @@ import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewMode
 import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
 
 export const createQuickPickViewModel = async (oldState: QuickPickState, newState: QuickPickState): Promise<QuickPickViewModel> => {
-  const visibleItems = GetVisibleQuickPickItems.getVisible(
+  const visibleItems = await GetVisibleQuickPickItems.getVisible(
     newState.provider,
     newState.items,
     newState.minLineY,
