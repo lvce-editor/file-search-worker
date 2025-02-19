@@ -17,6 +17,7 @@ import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntr
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as Render from '../Render/Render.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
+import * as HandleBeforeInput from '../HandleBeforeInput/HandleBeforeInput.ts'
 import * as SearchFileWithFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
 import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
 import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
@@ -28,13 +29,14 @@ import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
 export const commandMap = {
   'QuickPick.create2': Create2.create,
-  'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
-  'QuickPick.focusNext': WrapCommand.wrapCommand(FocusNext.focusNext),
   'QuickPick.focusFirst': WrapCommand.wrapCommand(FocusFirst.focusFirst),
+  'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'QuickPick.focusLast': WrapCommand.wrapCommand(FocusLast.focusLast),
+  'QuickPick.focusNext': WrapCommand.wrapCommand(FocusNext.focusNext),
   'QuickPick.focusPrevious': WrapCommand.wrapCommand(FocusPrevious.focusPrevious),
   'QuickPick.getCommandIds': GetCommandIds.getCommandIds,
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
+  'QuickPick.handleBeforeInput': WrapCommand.wrapCommand(HandleBeforeInput.handleBeforeInput),
   'QuickPick.handleBlur': WrapCommand.wrapCommand(HandleBlur.handleBlur),
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
