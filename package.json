@@ -9,7 +9,7 @@
   "scripts": {
     "build": "node packages/build/src/build.js",
     "build:static": "node packages/build/src/build-static.js",
-    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --watch packages/file-search-worker/src/fileSearchWorkerMain.ts --outfile=.tmp/dist/dist/fileSearchWorkerMain.js",
+    "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --external:node:buffer --external:electron --external:ws --external:node:worker_threads --watch packages/file-search-worker/src/fileSearchWorkerMain.ts --outfile=.tmp/dist/dist/fileSearchWorkerMain.js",
     "dev": "node packages/build/src/dev.js",
     "format": "prettier --write .",
     "lint": "eslint .",
