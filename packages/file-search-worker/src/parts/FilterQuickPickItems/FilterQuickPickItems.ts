@@ -1,6 +1,6 @@
+import type { Pick } from '../Pick/Pick.ts'
 import * as ConvertToPick from '../ConvertToPick/ConvertToPick.ts'
 import * as FilterQuickPickItem from '../FilterQuickPickItem/FilterQuickPickItem.ts'
-import type { Pick } from '../Pick/Pick.ts'
 import { pathBaseName } from '../Workspace/Workspace.ts'
 
 export const filterQuickPickItems = (items: readonly string[], value: string, provider?: any): readonly Pick[] => {
