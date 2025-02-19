@@ -8,6 +8,7 @@ import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as FocusLast from '../FocusLast/FocusLast.ts'
 import * as FocusNext from '../FocusNext/FocusNext.ts'
 import * as FocusPrevious from '../FocusPrevious/FocusPrevious.ts'
+import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleBlur from '../HandleBlur/HandleBlur.ts'
 import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
@@ -32,6 +33,7 @@ export const commandMap = {
   'QuickPick.focusFirst': WrapCommand.wrapCommand(FocusFirst.focusFirst),
   'QuickPick.focusLast': WrapCommand.wrapCommand(FocusLast.focusLast),
   'QuickPick.focusPrevious': WrapCommand.wrapCommand(FocusPrevious.focusPrevious),
+  'QuickPick.getCommandIds': GetCommandIds.getCommandIds,
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
   'QuickPick.handleBlur': WrapCommand.wrapCommand(HandleBlur.handleBlur),
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
