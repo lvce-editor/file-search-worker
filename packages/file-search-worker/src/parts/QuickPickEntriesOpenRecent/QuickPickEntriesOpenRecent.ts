@@ -69,7 +69,13 @@ export const getPickIcon = (): any => {
   return ''
 }
 
-export const getPickFileIcon = (pick: string): any => {
+export const getPickFileIcon = (pick: any): any => {
+  if (typeof pick === 'object') {
+    pick = pick.pick
+  }
+  if (typeof pick === 'object') {
+    pick = pick.pick
+  }
   return {
     type: DirentType.Directory,
     name: pick,
