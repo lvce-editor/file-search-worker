@@ -1,3 +1,4 @@
+import * as DirentType from '../DirentType/DirentType.ts'
 import * as IconTheme from '../IconTheme/IconTheme.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
@@ -69,6 +70,9 @@ export const getPickIcon = (): any => {
   return ''
 }
 
-export const getPickFileIcon = (): any => {
-  return IconTheme.getFolderIcon()
+export const getPickFileIcon = (pick: string): any => {
+  return {
+    type: DirentType.Directory,
+    name: pick,
+  }
 }
