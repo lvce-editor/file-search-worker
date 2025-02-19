@@ -3,10 +3,13 @@ import * as DirentType from '../DirentType/DirentType.ts'
 import * as Rpc from '../Rpc/Rpc.ts'
 
 export const requestFileIcons = async (requests: readonly IconRequest[]): Promise<readonly string[]> => {
-  const promises = requests.map((request) =>
-    request.type === DirentType.File
+  const promises = requests.map((request) => {
+    if (!request.name) {
+      return ''
+    }
+    return request.type === DirentType.File
       ? Rpc.invoke('IconTheme.getFileIcon', { name: request.name })
-      : Rpc.invoke('IconTheme.getFolderIcon', { name: request.name }),
-  )
+      : Rpc.invoke('IconTheme.getFolderIcon', { name: request.name })
+  })
   return Promise.all(promises)
 }
