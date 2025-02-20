@@ -12,6 +12,7 @@ import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleBeforeInput from '../HandleBeforeInput/HandleBeforeInput.ts'
 import * as HandleBlur from '../HandleBlur/HandleBlur.ts'
+import * as HandleInput from '../HandleInput/HandleInput.ts'
 import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntries.ts'
@@ -30,6 +31,7 @@ import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
 export const commandMap = {
   'QuickPick.create2': Create2.create,
+  'QuickPick.handleInput': HandleInput.handleInput,
   'QuickPick.focusFirst': WrapCommand.wrapCommand(FocusFirst.focusFirst),
   'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'QuickPick.focusLast': WrapCommand.wrapCommand(FocusLast.focusLast),
