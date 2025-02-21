@@ -2,8 +2,7 @@ import { beforeEach, expect, test } from '@jest/globals'
 import * as MenuEntriesState from '../src/parts/MenuEntriesState/MenuEntriesState.ts'
 
 beforeEach(() => {
-  // Reset the state before each test
-  MenuEntriesState.add([])
+  MenuEntriesState.clear()
 })
 
 test('getAll - returns empty array by default', () => {

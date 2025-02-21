@@ -13,3 +13,7 @@ export const getAll = (): readonly any[] => {
 export const add = (menuEntries: readonly any[]): void => {
   state.menuEntries = [...state.menuEntries, ...menuEntries]
 }
+
+export const clear = (): void => {
+  state.menuEntries = []
+}
