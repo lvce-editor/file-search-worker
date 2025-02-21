@@ -61,8 +61,8 @@ test('deletes selected text forward', () => {
 test('deletes word backward', () => {
   const result = BeforeInput.getNewValue('hello world', InputEventType.DeleteWordBackward, '', 11, 11)
   expect(result).toEqual({
-    newValue: 'hello ',
-    cursorOffset: 6,
+    newValue: 'hello',
+    cursorOffset: 5,
   })
 })
 
