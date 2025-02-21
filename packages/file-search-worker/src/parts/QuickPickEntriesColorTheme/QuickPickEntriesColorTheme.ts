@@ -15,7 +15,7 @@ export const getLabel = (): string => {
   return QuickPickStrings.selectColorTheme()
 }
 
-export const getPicks = async (searchValue: any): Promise<any[]> => {
+export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
   const colorThemeNames = await GetColorThemeNames.getColorThemeNames()
   return colorThemeNames
 }
