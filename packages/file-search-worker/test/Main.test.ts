@@ -18,6 +18,7 @@ test('main calls listen', async () => {
 })
 
 test('handles listen error', async () => {
+  // @ts-ignore
   mockListen.mockRejectedValue(new Error('Failed to listen'))
   await expect(Main.main()).rejects.toThrow('Failed to listen')
 })
