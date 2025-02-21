@@ -21,7 +21,7 @@ test('converts async iterable with single value', async () => {
 
 test('converts async iterable with multiple values', async () => {
   const asyncIterable = {
-    async *[Symbol.asyncIterator]() {
+    async *[Symbol.asyncIterator](): AsyncGenerator<number> {
       yield 1
       yield 2
       yield 3
