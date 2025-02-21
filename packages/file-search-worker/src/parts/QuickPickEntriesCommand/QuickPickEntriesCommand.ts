@@ -96,7 +96,7 @@ const selectPickBuiltin = async (item: any): Promise<any> => {
 const selectPickExtension = async (item: any): Promise<any> => {
   const id = item.id.slice(4) // TODO lots of string allocation with 'ext.' find a better way to separate builtin commands from extension commands
   try {
-    await Rpc.invoke('ExtensionHostCommands.executeCommand', id)
+    await Rpc.invoke('ExtensionHost.executeCommand', id)
   } catch (error) {
     await ErrorHandling.handleError(error, false)
     // @ts-ignore
