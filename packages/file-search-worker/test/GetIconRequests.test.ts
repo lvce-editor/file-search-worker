@@ -14,7 +14,7 @@ test('gets icon requests for items with file icons', () => {
     getPickFileIcon(pick: any) {
       return {
         type: DirentType.File,
-        name: pick,
+        name: pick.pick,
       }
     },
   }
@@ -57,7 +57,7 @@ test('gets icon requests for items with mixed icon types', () => {
   const items = [{ pick: '/test/file.txt' }, { pick: '/test/folder' }]
   const provider = {
     getPickFileIcon(pick: any) {
-      if (pick.endsWith('.txt')) {
+      if (pick && pick.endsWith('.txt')) {
         return {
           type: DirentType.File,
           name: pick,
