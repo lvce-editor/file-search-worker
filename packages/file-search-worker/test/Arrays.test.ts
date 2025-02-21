@@ -3,7 +3,7 @@ import * as Arrays from '../src/parts/Arrays/Arrays.ts'
 
 test('converts empty async iterable to empty array', async () => {
   const asyncIterable = {
-    async *[Symbol.asyncIterator]() {
+    async *[Symbol.asyncIterator](): AsyncIterator<any> {
       // Empty iterator
     },
   }
@@ -12,7 +12,7 @@ test('converts empty async iterable to empty array', async () => {
 
 test('converts async iterable with single value', async () => {
   const asyncIterable = {
-    async *[Symbol.asyncIterator]() {
+    async *[Symbol.asyncIterator](): AsyncGenerator<string> {
       yield 'test'
     },
   }
@@ -32,7 +32,7 @@ test('converts async iterable with multiple values', async () => {
 
 test('converts async iterable with mixed value types', async () => {
   const asyncIterable = {
-    async *[Symbol.asyncIterator]() {
+    async *[Symbol.asyncIterator](): AsyncGenerator<any> {
       yield 'string'
       yield 42
       yield { key: 'value' }
@@ -44,7 +44,7 @@ test('converts async iterable with mixed value types', async () => {
 
 test('handles async iterable that throws error', async () => {
   const asyncIterable = {
-    async *[Symbol.asyncIterator]() {
+    async *[Symbol.asyncIterator](): AsyncGenerator<number> {
       yield 1
       throw new Error('Iterator error')
     },
