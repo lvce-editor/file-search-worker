@@ -1,14 +1,21 @@
-const state = {
-  rpc: undefined,
-}
+import type { RendererWorkerApi } from '../RendererWorkerApi/RendererWorkerApi.ts'
+import * as RpcId from '../RpcId/RpcId.ts'
+import * as RpcRegistry from '../RpcRegistry/RpcRegistry.ts'
 
-// TODO use rpc registry
-export const invoke = (method: string, ...params: readonly any[]): Promise<any> => {
-  const rpc = state.rpc
+export const invoke = <T extends keyof RendererWorkerApi>(
+  method: T,
+  ...params: Parameters<RendererWorkerApi[T]>
+): ReturnType<RendererWorkerApi[T]> => {
+  const rpc = RpcRegistry.get(RpcId.RendererWorker)
   // @ts-ignore
   return rpc.invoke(method, ...params)
 }
 
-export const setRpc = (rpc: any): void => {
-  state.rpc = rpc
+export const invokeAndTransfer = <T extends keyof RendererWorkerApi>(
+  method: T,
+  ...params: Parameters<RendererWorkerApi[T]>
+): ReturnType<RendererWorkerApi[T]> => {
+  const rpc = RpcRegistry.get(RpcId.RendererWorker)
+  // @ts-ignore
+  return rpc.invokeAndTransfer(method, ...params)
 }
