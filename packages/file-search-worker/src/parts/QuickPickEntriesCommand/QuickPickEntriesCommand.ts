@@ -99,7 +99,6 @@ const selectPickExtension = async (item: any): Promise<any> => {
     await Rpc.invoke('ExtensionHost.executeCommand', id)
   } catch (error) {
     await ErrorHandling.handleError(error, false)
-    // @ts-ignore
     await ErrorHandling.showErrorDialog(error)
   }
   return {

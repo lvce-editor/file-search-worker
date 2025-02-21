@@ -3,6 +3,7 @@ export interface RendererWorkerApi {
   readonly 'ColorTheme.getColorThemeNames': () => Promise<readonly string[]>
   readonly 'ColorTheme.setColorTheme': (id: string) => Promise<void>
   readonly 'ContextMenu.show': (x: number, y: number, id: any, ...args: readonly any[]) => Promise<void>
+  readonly 'ErrorHandling.showErrorDialog': (errorInfo: any) => Promise<void>
   readonly 'ExtensionHost.executeCommand': (id: string) => Promise<void>
   readonly 'ExtensionHost.getCommands': () => Promise<readonly any[]>
   readonly 'Focus.setFocus': (focusKey: number) => Promise<void>
