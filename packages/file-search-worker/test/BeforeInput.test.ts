@@ -93,3 +93,35 @@ test('handles line break', () => {
 test('throws error for unsupported input type', () => {
   expect(() => BeforeInput.getNewValue('hello', 'unsupported', '', 0, 0)).toThrow('unsupported input type unsupported')
 })
+
+test('handles empty input value', () => {
+  const result = BeforeInput.getNewValue('', InputEventType.InsertText, 'hello', 0, 0)
+  expect(result).toEqual({
+    newValue: 'hello',
+    cursorOffset: 5,
+  })
+})
+
+test('handles empty data', () => {
+  const result = BeforeInput.getNewValue('hello', InputEventType.InsertText, '', 5, 5)
+  expect(result).toEqual({
+    newValue: 'hello',
+    cursorOffset: 5,
+  })
+})
+
+test('deletes multiple characters backward', () => {
+  const result = BeforeInput.getNewValue('hello world', InputEventType.DeleteContentBackward, '', 5, 8)
+  expect(result).toEqual({
+    newValue: 'hellorld',
+    cursorOffset: 5,
+  })
+})
+
+test('deletes multiple characters forward', () => {
+  const result = BeforeInput.getNewValue('hello world', InputEventType.DeleteContentForward, '', 5, 8)
+  expect(result).toEqual({
+    newValue: 'hellorld',
+    cursorOffset: 5,
+  })
+})
