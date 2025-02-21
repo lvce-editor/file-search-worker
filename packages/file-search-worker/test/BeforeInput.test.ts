@@ -14,7 +14,7 @@ test('inserts text in middle of value', () => {
   const result = BeforeInput.getNewValue('hello world', InputEventType.InsertText, 'beautiful ', 6, 6)
   expect(result).toEqual({
     newValue: 'hello beautiful world',
-    cursorOffset: 15,
+    cursorOffset: 16,
   })
 })
 
