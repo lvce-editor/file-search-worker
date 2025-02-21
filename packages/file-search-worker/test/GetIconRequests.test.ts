@@ -1,6 +1,6 @@
 import { expect, test } from '@jest/globals'
-import * as GetIconRequests from '../src/parts/GetIconRequests/GetIconRequests.ts'
 import * as DirentType from '../src/parts/DirentType/DirentType.ts'
+import * as GetIconRequests from '../src/parts/GetIconRequests/GetIconRequests.ts'
 
 test('gets icon requests for empty array', () => {
   const items: any[] = []
@@ -11,7 +11,7 @@ test('gets icon requests for empty array', () => {
 test('gets icon requests for items with file icons', () => {
   const items = [{ pick: '/test/file.txt' }, { pick: '/test/other.txt' }]
   const provider = {
-    getPickFileIcon(pick: any) {
+    getPickFileIcon(pick: any): any {
       return {
         type: DirentType.File,
         name: pick.pick,
@@ -35,7 +35,7 @@ test('gets icon requests for items with file icons', () => {
 test('gets icon requests for items without file icons', () => {
   const items = [{ pick: '/test/file.txt' }, { pick: '/test/other.txt' }]
   const provider = {
-    getPickFileIcon() {
+    getPickFileIcon(): any {
       return undefined
     },
   }
@@ -56,7 +56,7 @@ test('gets icon requests for items without file icons', () => {
 test.skip('gets icon requests for items with mixed icon types', () => {
   const items = [{ pick: '/test/file.txt' }, { pick: '/test/folder' }]
   const provider = {
-    getPickFileIcon(pick: any) {
+    getPickFileIcon(pick: any): any {
       if (pick && pick.endsWith('.txt')) {
         return {
           type: DirentType.File,
