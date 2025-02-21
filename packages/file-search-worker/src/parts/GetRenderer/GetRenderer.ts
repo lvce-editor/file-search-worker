@@ -1,58 +1,26 @@
-import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewModel.ts'
 import type { Renderer } from '../Renderer/Renderer.ts'
 import * as DiffType from '../DiffType/DiffType.ts'
-import * as GetQuickPickItemsVirtualDom from '../GetQuickPickItemsVirtualDom/GetQuickPickItemsVirtualDom.ts'
-import * as RenderMethod from '../RenderMethod/RenderMethod.ts'
-
-const renderValue = (newState: QuickPickViewModel): any => {
-  return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetValue, /* value */ newState.value]
-}
-
-const renderCursorOffset = (newState: QuickPickViewModel): any => {
-  return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetCursorOffset, /* cursorOffset */ newState.cursorOffset]
-}
-
-const renderItems = (newState: QuickPickViewModel): any => {
-  const dom = GetQuickPickItemsVirtualDom.getQuickPickItemsVirtualDom(newState.visibleItems)
-  return ['Viewlet.send', newState.uid, /* method */ 'setItemsDom', dom]
-}
-
-const renderFocusedIndex = (newState: QuickPickViewModel): any => {
-  return [
-    'Viewlet.send',
-    newState.uid,
-    /* method */ RenderMethod.SetFocusedIndex,
-    /* oldFocusedIndex */ newState.oldFocusedIndex,
-    /* newFocusedIndex */ newState.newFocusedIndex,
-  ]
-}
-
-const renderHeight = (newState: QuickPickViewModel): any => {
-  if (newState.height === 0) {
-    return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetItemsHeight, /* height */ 20]
-  }
-  return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetItemsHeight, /* height */ newState.height]
-}
-
-const renderFocus = (newState: QuickPickViewModel): any => {
-  const selector = newState.focused ? '.InputBox' : ''
-  return ['Viewlet.focusSelector', selector]
-}
+import * as RenderCursorOffset from '../RenderCursorOffset/RenderCursorOffset.ts'
+import * as RenderFocus from '../RenderFocus/RenderFocus.ts'
+import * as RenderFocusedIndex from '../RenderFocusedIndex/RenderFocusedIndex.ts'
+import * as RenderHeight from '../RenderHeight/RenderHeight.ts'
+import * as RenderItems from '../RenderItems/RenderItems.ts'
+import * as RenderValue from '../RenderValue/RenderValue.ts'
 
 export const getRenderer = (diffType: number): Renderer => {
   switch (diffType) {
     case DiffType.RenderValue:
-      return renderValue
+      return RenderValue.renderValue
     case DiffType.RenderCursorOffset:
-      return renderCursorOffset
+      return RenderCursorOffset.renderCursorOffset
     case DiffType.RenderItems:
-      return renderItems
+      return RenderItems.renderItems
     case DiffType.RenderFocusedIndex:
-      return renderFocusedIndex
+      return RenderFocusedIndex.renderFocusedIndex
     case DiffType.Height:
-      return renderHeight
+      return RenderHeight.renderHeight
     case DiffType.RenderFocus:
-      return renderFocus
+      return RenderFocus.renderFocus
     default:
       throw new Error('unknown renderer')
   }
