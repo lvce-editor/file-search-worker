@@ -79,8 +79,9 @@ test('adds description when specified', () => {
     childCount: 1,
   })
   expect(dom[dom.length - 1]).toEqual({
-    type: 'text',
+    type: 12,
     text: 'test-description',
+    childCount: 0,
   })
 })
 
