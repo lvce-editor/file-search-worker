@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals'
 import type { QuickPickViewModel } from '../src/parts/QuickPickViewModel/QuickPickViewModel.ts'
-import * as RenderValue from '../src/parts/RenderValue/RenderValue.ts'
 import * as RenderMethod from '../src/parts/RenderMethod/RenderMethod.ts'
+import * as RenderValue from '../src/parts/RenderValue/RenderValue.ts'
 
 test('renders value', () => {
   const state: QuickPickViewModel = {
