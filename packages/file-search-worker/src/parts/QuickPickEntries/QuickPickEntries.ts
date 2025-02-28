@@ -10,6 +10,7 @@ import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 export const load = (moduleId: string): any => {
   switch (moduleId) {
     case QuickPickEntryId.CommandPalette:
+    case QuickPickEntryId.Commands:
     case QuickPickEntryId.File:
     case QuickPickEntryId.EveryThing:
     case QuickPickEntryId.WorkspaceSymbol:
