@@ -1,5 +1,7 @@
 export const CommandPalette = 'quickPick://commandPalette'
 
+export const Commands = 'quickPick://commands'
+
 export const File = 'quickPick://file'
 
 export const EveryThing = 'quickPick://everything'
