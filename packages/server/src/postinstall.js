@@ -29,8 +29,8 @@ const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'r
 const content = await readFile(rendererWorkerMainPath, 'utf-8')
 const remoteUrl = getRemoteUrl(fileSearchWorkerPath)
 if (!content.includes('// const fileSearchWorkerUrl = ')) {
-  const occurrence = `const fileSearchWorkerUrl = \`\${assetDir}/packages/text-search-worker/dist/textSearchWorkerMain.js\``
-  const replacement = `// const fileSearchWorkerUrl = \`\${assetDir}/packages/text-search-worker/dist/textSearchWorkerMain.js\`
+  const occurrence = `const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\``
+  const replacement = `// const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\`
   const fileSearchWorkerUrl = \`${remoteUrl}\``
 
   const newContent = content.replace(occurrence, replacement)
