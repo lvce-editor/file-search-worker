@@ -10,6 +10,7 @@ const commandIds = [
   'focusLast',
   'focusNext',
   'focusPrevious',
+  'setValue',
   'handleInput',
   'handleBeforeInput',
 ]
