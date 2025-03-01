@@ -6,6 +6,7 @@ import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.t
 import * as Rpc from '../Rpc/Rpc.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
+import * as OpenUri from '../OpenUri/OpenUri.ts'
 
 const searchFile = async (path: any, value: any): Promise<readonly any[]> => {
   const prepare = true
@@ -57,7 +58,7 @@ export const selectPick = async (pick: any): Promise<any> => {
   }
   const workspace = ''
   const absolutePath = `${workspace}/${pick}`
-  await Command.execute(/* Main.openUri */ 'Main.openUri', /* uri */ absolutePath)
+  await OpenUri.openUri(absolutePath)
   return {
     command: QuickPickReturnValue.Hide,
   }
