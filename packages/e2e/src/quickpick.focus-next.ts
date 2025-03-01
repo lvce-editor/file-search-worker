@@ -7,7 +7,7 @@ export const skip = 1
 export const test: Test = async ({ Locator, expect, QuickPick, Command }) => {
   // arrange
   await QuickPick.open()
-  await QuickPick.setValue('Layout')
+  await QuickPick.setValue('> Layout')
 
   // act
   // await Command.execute('QuickPick.selectIndex', 0)
