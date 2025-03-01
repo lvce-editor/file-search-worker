@@ -1,6 +1,6 @@
-import * as Command from '../Command/Command.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
+import * as OpenUri from '../OpenUri/OpenUri.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Rpc from '../Rpc/Rpc.ts'
@@ -57,7 +57,7 @@ export const selectPick = async (pick: any): Promise<any> => {
   }
   const workspace = ''
   const absolutePath = `${workspace}/${pick}`
-  await Command.execute(/* Main.openUri */ 'Main.openUri', /* uri */ absolutePath)
+  await OpenUri.openUri(absolutePath)
   return {
     command: QuickPickReturnValue.Hide,
   }
