@@ -5,6 +5,8 @@ export const name = 'quickpick.open-about'
 export const skip = 1
 
 export const test: Test = async ({ Locator, expect, QuickPick }) => {
+  // arrange
+
   // act
   await QuickPick.executeCommand('About.show')
 
