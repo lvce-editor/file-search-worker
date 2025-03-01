@@ -1,12 +1,11 @@
-import * as Command from '../Command/Command.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
+import * as OpenUri from '../OpenUri/OpenUri.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Rpc from '../Rpc/Rpc.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
-import * as OpenUri from '../OpenUri/OpenUri.ts'
 
 const searchFile = async (path: any, value: any): Promise<readonly any[]> => {
   const prepare = true
