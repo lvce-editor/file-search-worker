@@ -27,6 +27,7 @@ import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithR
 import * as SelectCurrentIndex from '../SelectCurrentIndex/SelectCurrentIndex.ts'
 import * as SelectIndex from '../SelectIndex/SelectIndex.ts'
 import * as SelectItem from '../SelectItem/SelectItem.ts'
+import * as SetValue from '../SetValue/SetValue.ts'
 import * as VirtualList from '../VirtualList/VirtualList.ts'
 import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
@@ -52,6 +53,7 @@ export const commandMap = {
   'QuickPick.selectIndex': WrapCommand.wrapCommand(SelectIndex.selectIndex),
   'QuickPick.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'QuickPick.setDeltaY': WrapCommand.wrapCommand(VirtualList.setDeltaY),
+  'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
   'SearchFile.searchFile': SearchFile.searchFile,
   'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
