@@ -55,7 +55,7 @@ export const selectPick = async (pick: any): Promise<any> => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
-  const workspace = ''
+  const workspace = await Rpc.invoke('Workspace.getPath')
   const absolutePath = `${workspace}/${pick}`
   await OpenUri.openUri(absolutePath)
   return {
