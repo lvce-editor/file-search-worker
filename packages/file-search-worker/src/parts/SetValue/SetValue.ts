@@ -17,5 +17,6 @@ export const setValue = async (state: QuickPickState, newValue: string): Promise
     items,
     focusedIndex,
     inputSource: InputSource.Script,
+    value: newValue,
   }
 }
