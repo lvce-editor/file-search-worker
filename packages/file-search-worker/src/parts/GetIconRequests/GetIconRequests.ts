@@ -4,7 +4,7 @@ export const getIconRequests = (items: readonly any[], provider: any): readonly 
   const iconRequests: IconRequest[] = []
   for (let i = 0; i < items.length; i++) {
     const pick = items[i]
-    const iconObject = provider.getPickFileIcon(pick)
+    const iconObject = provider?.getPickFileIcon?.(pick) || {}
     iconRequests.push({
       name: iconObject?.name,
       path: '',
