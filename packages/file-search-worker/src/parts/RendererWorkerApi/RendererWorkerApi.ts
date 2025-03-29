@@ -1,5 +1,6 @@
 export interface RendererWorkerApi {
   readonly 'ClipBoard.writeText': (text: string) => Promise<void>
+  readonly 'ExtensionHost.searchFileWithMemory': (uri: string) => Promise<readonly string[]>
   readonly 'ColorTheme.getColorThemeNames': () => Promise<readonly string[]>
   readonly 'ColorTheme.setColorTheme': (id: string) => Promise<void>
   readonly 'ContextMenu.show': (x: number, y: number, id: any, ...args: readonly any[]) => Promise<void>

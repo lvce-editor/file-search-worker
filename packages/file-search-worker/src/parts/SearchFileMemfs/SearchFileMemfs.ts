@@ -1,7 +1,5 @@
-import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
+import * as Rpc from '../Rpc/Rpc.ts'
 
-export const searchFile = async (): Promise<readonly string[]> => {
-  const files = await FileSystemMemory.getFiles()
-  const keys = Object.keys(files)
-  return keys
+export const searchFile = async (uri: string): Promise<readonly string[]> => {
+  return Rpc.invoke('ExtensionHost.searchFileWithMemory', uri)
 }
