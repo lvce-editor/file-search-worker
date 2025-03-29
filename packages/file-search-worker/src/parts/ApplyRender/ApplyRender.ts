@@ -1,7 +1,7 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as CreateQuickPickViewModel from '../CreateQuickPickViewModel/CreateQuickPickViewModel.ts'
-import * as GetRenderer from '../GetRenderer/GetRenderer.ts'
 import * as DiffType from '../DiffType/DiffType.ts'
+import * as GetRenderer from '../GetRenderer/GetRenderer.ts'
 
 export const applyRender = async (oldState: QuickPickState, newState: QuickPickState, diffResult: readonly number[]): Promise<readonly any[]> => {
   const commands = []
