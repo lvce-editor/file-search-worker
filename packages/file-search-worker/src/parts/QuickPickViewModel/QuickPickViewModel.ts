@@ -7,5 +7,4 @@ export interface QuickPickViewModel {
   readonly height: number
   readonly focused: boolean
   readonly uid: number
-  readonly renderAllItems?: boolean
 }

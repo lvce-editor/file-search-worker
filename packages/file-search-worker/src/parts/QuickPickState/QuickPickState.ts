@@ -33,5 +33,4 @@ export interface QuickPickState {
   readonly args: readonly any[]
   readonly focused: boolean
   readonly value: string
-  readonly renderAllItems: boolean
 }

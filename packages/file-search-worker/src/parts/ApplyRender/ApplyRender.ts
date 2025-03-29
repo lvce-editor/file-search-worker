@@ -7,10 +7,10 @@ export const applyRender = async (oldState: QuickPickState, newState: QuickPickS
   const commands = []
   const viewModel = await CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   for (const item of diffResult) {
-    if (viewModel.renderAllItems && item === DiffType.Height) {
+    if (item === DiffType.Height) {
       continue
     }
-    if (viewModel.renderAllItems && item === DiffType.RenderFocusedIndex) {
+    if (item === DiffType.RenderFocusedIndex) {
       continue
     }
     const fn = GetRenderer.getRenderer(item)
