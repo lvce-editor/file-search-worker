@@ -24,5 +24,6 @@ export const getQuickPickInputVirtualDom = (): VirtualDomNode => {
     ariaLabel: ariaLabel,
     ariaAutoComplete: 'list',
     ariaExpanded: true,
+    autocomplete: 'off',
   }
 }
