@@ -1,11 +1,18 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as CreateQuickPickViewModel from '../CreateQuickPickViewModel/CreateQuickPickViewModel.ts'
 import * as GetRenderer from '../GetRenderer/GetRenderer.ts'
+import * as DiffType from '../DiffType/DiffType.ts'
 
 export const applyRender = async (oldState: QuickPickState, newState: QuickPickState, diffResult: readonly number[]): Promise<readonly any[]> => {
   const commands = []
   const viewModel = await CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   for (const item of diffResult) {
+    if (viewModel.renderAllItems && item === DiffType.Height) {
+      continue
+    }
+    if (viewModel.renderAllItems && item === DiffType.RenderFocusedIndex) {
+      continue
+    }
     const fn = GetRenderer.getRenderer(item)
     commands.push(fn(viewModel))
   }
