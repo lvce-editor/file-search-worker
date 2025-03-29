@@ -25,7 +25,7 @@ export const getQuickPickVirtualDom = (visibleItems: readonly any[]): readonly V
       className: ClassNames.QuickPickItems,
       id: DomId.QuickPickItems,
       role: AriaRoles.ListBox,
-      ariaActiveDescendant: DomId.QuickPickItemActive,
+      ariaActivedescendant: DomId.QuickPickItemActive,
       onWheel: DomEventListenerFunctions.HandleWheel,
       childCount: visibleItems.length,
     },
