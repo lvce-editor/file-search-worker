@@ -6,5 +6,5 @@ export interface VisibleItem {
   readonly posInSet: number
   readonly setSize: number
   readonly isActive: boolean
-  readonly matches: readonly string[]
+  readonly matches: readonly number[]
 }
