@@ -16,6 +16,7 @@ export const create = (
   height: number,
   platform: number,
   args: any,
+  renderAllItems: boolean,
 ): void => {
   const state: QuickPickState = {
     uid,
@@ -43,6 +44,7 @@ export const create = (
     focused: false,
     platform,
     value: '',
+    renderAllItems,
   }
   QuickPickStates.set(uid, state, state)
 }
