@@ -1,18 +1,11 @@
-import * as FileSystemProtocol from '../FileSystemProtocol/FileSystemProtocol.ts'
-import * as SearchFileMemfs from '../SearchFileMemfs/SearchFileMemfs.ts'
-import * as SearchFileFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
-import * as SearchFileHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
-import * as SearchFileRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
+import type { SearchFileHandler } from '../SearchFileHandler/SearchFileHandler.ts'
 
-export const getModule = (protocol: string): any => {
-  switch (protocol) {
-    case FileSystemProtocol.Memfs:
-      return SearchFileMemfs.searchFile
-    case FileSystemProtocol.Fetch:
-      return SearchFileFetch.searchFile
-    case FileSystemProtocol.Html:
-      return SearchFileHtml.searchFile
-    default:
-      return SearchFileRipGrep.searchFile
-  }
+const state: Record<any, SearchFileHandler> = Object.create(null)
+
+export const register = (modules: Record<any, SearchFileHandler>): void => {
+  Object.assign(state, modules)
+}
+
+export const getModule = (protocol: string): SearchFileHandler => {
+  return state[protocol]
 }
