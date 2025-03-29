@@ -78,3 +78,7 @@ const convertIcon = (icon: any): string => {
 export const getPickIcon = (pick: any): string => {
   return convertIcon(pick.icon)
 }
+
+export const isPrepared = (): boolean => {
+  return true
+}
