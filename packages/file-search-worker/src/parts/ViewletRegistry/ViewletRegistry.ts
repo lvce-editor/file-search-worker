@@ -11,5 +11,8 @@ export const create = <T>(): IViewletRegistry<T> => {
     set(uid, oldState: T, newState: T): void {
       states[uid] = { oldState, newState }
     },
+    remove(uid: number): void {
+      delete states[uid]
+    },
   }
 }

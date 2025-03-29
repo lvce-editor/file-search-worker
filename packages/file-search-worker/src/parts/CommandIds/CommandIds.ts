@@ -9,6 +9,7 @@ export const commandIds = [
   'handleClickAt',
   'handleInput',
   'handleWheel',
+  'dispose',
   'renderEventListeners',
   'selectCurrentIndex',
   'selectIndex',
