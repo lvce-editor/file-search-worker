@@ -82,7 +82,7 @@ const getQuickPickProvider = (prefix: string): any => {
   }
 }
 
-export const getPicks = async (value: any): Promise<any[]> => {
+export const getPicks = async (value: any): Promise<readonly any[]> => {
   const prefix = getPrefix(value)
 
   // TODO race condition
