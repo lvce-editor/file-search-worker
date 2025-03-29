@@ -18,6 +18,7 @@ import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntr
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as Render from '../Render/Render.ts'
+import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as SelectCurrentIndex from '../SelectCurrentIndex/SelectCurrentIndex.ts'
 import * as SelectIndex from '../SelectIndex/SelectIndex.ts'
@@ -49,6 +50,7 @@ export const commandMap = {
   'QuickPick.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'QuickPick.setDeltaY': WrapCommand.wrapCommand(VirtualList.setDeltaY),
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
+  'QuickPick.renderEventListeners': RenderEventListeners.renderEventListeners,
 
   // deprecated
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
