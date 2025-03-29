@@ -1,14 +1,16 @@
+import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as GetIconRequests from '../GetIconRequests/GetIconRequests.ts'
 import * as GetPickDescription from '../GetPickDescription/GetPickDescription.ts'
 import * as RequestFileIcons from '../RequestFileIcons/RequestFileIcons.ts'
 
 export const getVisible = async (
-  provider: any,
+  provider: QuickPickEntriesModule,
   items: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
-): Promise<readonly any[]> => {
+): Promise<readonly VisibleItem[]> => {
   const visibleItems = []
   const setSize = items.length
   const max = Math.min(setSize, maxLineY)
