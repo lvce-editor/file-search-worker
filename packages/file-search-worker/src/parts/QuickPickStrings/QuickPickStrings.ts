@@ -60,3 +60,7 @@ export const typeTheNameOfAViewToOpen = (): string => {
 export const quickOpen = (): string => {
   return I18NString.i18nString(UiStrings.QuickOpen)
 }
+
+export const typeTheNameOfACommandToRun = (): string => {
+  return I18NString.i18nString(UiStrings.TypeNameOfCommandToRun)
+}
