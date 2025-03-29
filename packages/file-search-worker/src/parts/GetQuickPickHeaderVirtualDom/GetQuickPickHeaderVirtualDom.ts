@@ -3,9 +3,11 @@ import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 import * as InputName from '../InputName/InputName.ts'
+import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
 export const getQuickPickHeaderVirtualDom = (): readonly VirtualDomNode[] => {
+  const ariaLabel = QuickPickStrings.typeNameofCommandToRun()
   return [
     {
       type: VirtualDomElements.Div,
@@ -22,7 +24,8 @@ export const getQuickPickHeaderVirtualDom = (): readonly VirtualDomNode[] => {
       role: AriaRoles.ComboBox,
       name: InputName.QuickPickInput,
       onBeforeInput: DomEventListenerFunctions.HandleBeforeInput,
-      ariaLabel: 'Type the name of a command to run.',
+      onBlur: DomEventListenerFunctions.HandleBlur,
+      ariaLabel: ariaLabel,
     },
   ]
 }
