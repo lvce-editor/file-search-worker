@@ -24,5 +24,9 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
       name: DomEventListenersFunctions.HandleInput,
       params: ['handleInput', 'event.target.value'],
     },
+    {
+      name: DomEventListenersFunctions.HandleFocus,
+      params: ['handleFocus'],
+    },
   ]
 }
