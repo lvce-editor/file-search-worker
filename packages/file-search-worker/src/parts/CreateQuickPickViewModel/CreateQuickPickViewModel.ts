@@ -24,5 +24,6 @@ export const createQuickPickViewModel = async (oldState: QuickPickState, newStat
     oldFocusedIndex,
     newFocusedIndex,
     uid: newState.uid,
+    renderAllItems: newState.renderAllItems,
   }
 }
