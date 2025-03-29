@@ -25,6 +25,7 @@ export const getQuickPickHeaderVirtualDom = (): readonly VirtualDomNode[] => {
       name: InputName.QuickPickInput,
       onBeforeInput: DomEventListenerFunctions.HandleBeforeInput,
       onBlur: DomEventListenerFunctions.HandleBlur,
+      onInput: DomEventListenerFunctions.HandleInput,
       ariaLabel: ariaLabel,
     },
   ]
