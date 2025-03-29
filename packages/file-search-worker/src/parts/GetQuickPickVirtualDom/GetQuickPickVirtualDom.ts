@@ -1,6 +1,7 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
+import * as DomId from '../DomId/DomId.ts'
 import * as GetQuickPickHeaderVirtualDom from '../GetQuickPickHeaderVirtualDom/GetQuickPickHeaderVirtualDom.ts'
 import * as GetQuickPickItemsVirtualDom from '../GetQuickPickItemsVirtualDom/GetQuickPickItemsVirtualDom.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
@@ -14,15 +15,16 @@ export const getQuickPickVirtualDom = (visibleItems: readonly any[]): readonly V
       type: VirtualDomElements.Div,
       className: MergeClassNames.mergeClassNames(ClassNames.Viewlet, ClassNames.QuickPick),
       childCount: 2,
-      id: 'QuickPick',
+      id: DomId.QuickPick,
       ariaLabel: quickOpen,
     },
     ...GetQuickPickHeaderVirtualDom.getQuickPickHeaderVirtualDom(),
     {
       type: VirtualDomElements.Div,
       className: ClassNames.QuickPickItems,
-      id: 'QuickPickItems',
+      id: DomId.QuickPickItems,
       role: AriaRoles.ListBox,
+      childCount: visibleItems.length,
     },
     ...GetQuickPickItemsVirtualDom.getQuickPickItemsVirtualDom(visibleItems),
   ]
