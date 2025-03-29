@@ -20,6 +20,7 @@ export const getQuickPickInputVirtualDom = (): VirtualDomNode => {
     onBeforeInput: DomEventListenerFunctions.HandleBeforeInput,
     onBlur: DomEventListenerFunctions.HandleBlur,
     onInput: DomEventListenerFunctions.HandleInput,
+    onFocus: DomEventListenerFunctions.HandleFocus,
     ariaLabel: ariaLabel,
     ariaAutoComplete: 'list',
     ariaExpanded: true,
