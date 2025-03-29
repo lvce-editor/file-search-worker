@@ -11,6 +11,7 @@ import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleBeforeInput from '../HandleBeforeInput/HandleBeforeInput.ts'
 import * as HandleBlur from '../HandleBlur/HandleBlur.ts'
 import * as HandleClickAt from '../HandleClickAt/HandleClickAt.ts'
+import * as HandleFocus from '../HandleFocus/HandleFocus.ts'
 import * as HandleInput from '../HandleInput/HandleInput.ts'
 import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
@@ -30,6 +31,7 @@ import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 export const commandMap = {
   'QuickPick.addMenuEntries': MenuEntriesState.add,
   'QuickPick.create2': Create2.create,
+  'QuickPick.dispose': Dispose.dispose,
   'QuickPick.focusFirst': WrapCommand.wrapCommand(FocusFirst.focusFirst),
   'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'QuickPick.focusLast': WrapCommand.wrapCommand(FocusLast.focusLast),
@@ -39,19 +41,19 @@ export const commandMap = {
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
   'QuickPick.handleBeforeInput': WrapCommand.wrapCommand(HandleBeforeInput.handleBeforeInput),
   'QuickPick.handleBlur': WrapCommand.wrapCommand(HandleBlur.handleBlur),
-  'QuickPick.dispose': Dispose.dispose,
   'QuickPick.handleClickAt': WrapCommand.wrapCommand(HandleClickAt.handleClickAt),
+  'QuickPick.handleFocus': WrapCommand.wrapCommand(HandleFocus.handleBlur),
   'QuickPick.handleInput': WrapCommand.wrapCommand(HandleInput.handleInput),
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
   'QuickPick.loadEntries2': QuickPickEntries.load,
   'QuickPick.render': Render.doRender,
+  'QuickPick.renderEventListeners': RenderEventListeners.renderEventListeners,
   'QuickPick.selectCurrentIndex': WrapCommand.wrapCommand(SelectCurrentIndex.selectCurrentIndex),
   'QuickPick.selectIndex': WrapCommand.wrapCommand(SelectIndex.selectIndex),
   'QuickPick.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'QuickPick.setDeltaY': WrapCommand.wrapCommand(VirtualList.setDeltaY),
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
-  'QuickPick.renderEventListeners': RenderEventListeners.renderEventListeners,
 
   // deprecated
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
