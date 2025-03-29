@@ -1,11 +1,9 @@
+import type { InputHandler } from '../InputHandler/InputHandler.ts'
+import type { InputResult } from '../InputResult/InputResult.ts'
 import * as InputEventType from '../InputEventType/InputEventType.ts'
+import { isAlphaNumeric } from '../IsAlphaNumeric/IsAlphaNumeric.ts'
 
-interface Result {
-  readonly newValue: string
-  readonly cursorOffset: number
-}
-
-const getNewValueInsertText = (value: string, selectionStart: number, selectionEnd: number, data: string): Result => {
+const getNewValueInsertText = (value: string, selectionStart: number, selectionEnd: number, data: string): InputResult => {
   if (selectionStart === value.length) {
     const newValue = value + data
     return {
@@ -22,7 +20,7 @@ const getNewValueInsertText = (value: string, selectionStart: number, selectionE
   }
 }
 
-const getNewValueDeleteContentBackward = (value: string, selectionStart: number, selectionEnd: number, data: string): Result => {
+const getNewValueDeleteContentBackward = (value: string, selectionStart: number, selectionEnd: number, data: string): InputResult => {
   const after = value.slice(selectionEnd)
   if (selectionStart === selectionEnd) {
     const before = value.slice(0, selectionStart - 1)
@@ -40,13 +38,7 @@ const getNewValueDeleteContentBackward = (value: string, selectionStart: number,
   }
 }
 
-const RE_ALPHA_NUMERIC = /[a-z\d]/i
-
-const isAlphaNumeric = (character: string): boolean => {
-  return RE_ALPHA_NUMERIC.test(character)
-}
-
-const getNewValueDeleteWordBackward = (value: string, selectionStart: number, selectionEnd: number, data: string): Result => {
+const getNewValueDeleteWordBackward = (value: string, selectionStart: number, selectionEnd: number, data: string): InputResult => {
   const after = value.slice(selectionEnd)
   if (selectionStart === selectionEnd) {
     let startIndex = Math.max(selectionStart - 1, 0)
@@ -68,7 +60,7 @@ const getNewValueDeleteWordBackward = (value: string, selectionStart: number, se
   }
 }
 
-const getNewValueDeleteContentForward = (value: string, selectionStart: number, selectionEnd: number, data: string): Result => {
+const getNewValueDeleteContentForward = (value: string, selectionStart: number, selectionEnd: number, data: string): InputResult => {
   const before = value.slice(0, selectionStart)
   if (selectionStart === selectionEnd) {
     const after = value.slice(selectionEnd + 1)
@@ -86,7 +78,7 @@ const getNewValueDeleteContentForward = (value: string, selectionStart: number, 
   }
 }
 
-const getNewValueDeleteWordForward = (value: string, selectionStart: number, selectionEnd: number, data: string): Result => {
+const getNewValueDeleteWordForward = (value: string, selectionStart: number, selectionEnd: number, data: string): InputResult => {
   const before = value.slice(0, selectionStart)
   if (selectionStart === selectionEnd) {
     let startIndex = Math.min(selectionStart + 1, value.length - 1)
@@ -108,18 +100,18 @@ const getNewValueDeleteWordForward = (value: string, selectionStart: number, sel
   }
 }
 
-const getNewValueInsertCompositionText = (value: string, selectionStart: number, selectionEnd: number, data: string): Result => {
+const getNewValueInsertCompositionText = (value: string, selectionStart: number, selectionEnd: number, data: string): InputResult => {
   return getNewValueInsertText(value, selectionStart, selectionEnd, data)
 }
 
-const getNewValueInsertLineBreak = (value: string, selectionStart: number, selectionEnd: number, data: string): Result => {
+const getNewValueInsertLineBreak = (value: string, selectionStart: number, selectionEnd: number, data: string): InputResult => {
   return {
     newValue: value,
     cursorOffset: selectionEnd,
   }
 }
 
-export const getNewValueFunction = (inputType: string): any => {
+export const getNewValueFunction = (inputType: string): InputHandler => {
   switch (inputType) {
     case InputEventType.InsertFromPaste:
     case InputEventType.InsertText:
