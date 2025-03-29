@@ -56,3 +56,7 @@ export const noWorkspaceSymbolsFound = (): string => {
 export const typeTheNameOfAViewToOpen = (): string => {
   return I18NString.i18nString(UiStrings.TypeTheNameOfAViewToOpen)
 }
+
+export const quickOpen = (): string => {
+  return I18NString.i18nString(UiStrings.QuickOpen)
+}
