@@ -27,6 +27,8 @@ export const getQuickPickHeaderVirtualDom = (): readonly VirtualDomNode[] => {
       onBlur: DomEventListenerFunctions.HandleBlur,
       onInput: DomEventListenerFunctions.HandleInput,
       ariaLabel: ariaLabel,
+      ariaAutoComplete: 'list',
+      ariaExpanded: true,
     },
   ]
 }
