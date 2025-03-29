@@ -1,0 +1,17 @@
+export const commandIds = [
+  'focusFirst',
+  'focusIndex',
+  'focusLast',
+  'focusNext',
+  'focusPrevious',
+  'handleBeforeInput',
+  'handleBlur',
+  'handleClickAt',
+  'handleInput',
+  'handleWheel',
+  'renderEventListeners',
+  'selectCurrentIndex',
+  'selectIndex',
+  'selectItem',
+  'setValue',
+]

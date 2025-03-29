@@ -1,19 +1,4 @@
-const commandIds = [
-  'handleBlur',
-  'handleClickAt',
-  'handleWheel',
-  'selectCurrentIndex',
-  'selectIndex',
-  'selectItem',
-  'focusFirst',
-  'focusIndex',
-  'focusLast',
-  'focusNext',
-  'focusPrevious',
-  'setValue',
-  'handleInput',
-  'handleBeforeInput',
-]
+import { commandIds } from '../CommandIds/CommandIds.ts'
 
 export const getCommandIds = (): readonly string[] => {
   return commandIds
