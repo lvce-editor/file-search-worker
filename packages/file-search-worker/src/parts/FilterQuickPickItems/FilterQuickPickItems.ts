@@ -1,9 +1,10 @@
 import type { Pick } from '../Pick/Pick.ts'
+import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 import * as ConvertToPick from '../ConvertToPick/ConvertToPick.ts'
 import * as FilterQuickPickItem from '../FilterQuickPickItem/FilterQuickPickItem.ts'
 import { pathBaseName } from '../Workspace/Workspace.ts'
 
-export const filterQuickPickItems = (items: readonly string[], value: string, provider?: any): readonly Pick[] => {
+export const filterQuickPickItems = (items: readonly string[], value: string, provider?: QuickPickEntriesModule): readonly Pick[] => {
   if (!value) {
     return items.map(ConvertToPick.convertToPick)
   }
