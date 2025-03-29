@@ -1,7 +1,5 @@
 import * as Create2 from '../Create2/Create2.ts'
 import * as Create from '../Create/Create.ts'
-import * as FileSystemFetch from '../FileSystemFetch/FileSystemFetch.ts'
-import * as FileSystemMemory from '../FileSystemMemory/FileSystemMemory.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as FocusFirst from '../FocusFirst/FocusFirst.ts'
 import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
@@ -21,9 +19,6 @@ import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as Render from '../Render/Render.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
-import * as SearchFileWithFetch from '../SearchFileWithFetch/SearchFileWithFetch.ts'
-import * as SearchFileWithHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
-import * as SearchFileWithRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 import * as SelectCurrentIndex from '../SelectCurrentIndex/SelectCurrentIndex.ts'
 import * as SelectIndex from '../SelectIndex/SelectIndex.ts'
 import * as SelectItem from '../SelectItem/SelectItem.ts'
@@ -54,29 +49,10 @@ export const commandMap = {
   'QuickPick.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'QuickPick.setDeltaY': WrapCommand.wrapCommand(VirtualList.setDeltaY),
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
-  'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
-  'SearchFile.searchFile': SearchFile.searchFile,
-  'SearchFile.searchFileWithFetch': SearchFileWithFetch.searchFile,
-  'SearchFile.searchFileWithHtml': SearchFileWithHtml.searchFile,
-  'SearchFile.searchFileWithRipGrep': SearchFileWithRipGrep.searchFile,
 
   // deprecated
+  'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
+  'SearchFile.searchFile': SearchFile.searchFile,
   'QuickPick.create': Create.create,
   'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
-  'FileSystemFetch.chmod': FileSystemFetch.chmod,
-  'FileSystemFetch.getBlob': FileSystemFetch.getBlob,
-  'FileSystemFetch.mkdir': FileSystemFetch.mkdir,
-  'FileSystemFetch.readDirWithFileTypes': FileSystemFetch.readDirWithFileTypes,
-  'FileSystemFetch.readFile': FileSystemFetch.readFile,
-  'FileSystemFetch.remove': FileSystemFetch.remove,
-  'FileSystemFetch.writeFile': FileSystemFetch.writeFile,
-  'FileSystemMemory.chmod': FileSystemMemory.chmod,
-  'FileSystemMemory.getBlob': FileSystemMemory.getBlob,
-  'FileSystemMemory.getBlobUrl': FileSystemMemory.getBlobUrl,
-  'FileSystemMemory.getFiles': FileSystemMemory.getFiles,
-  'FileSystemMemory.mkdir': FileSystemMemory.mkdir,
-  'FileSystemMemory.readDirWithFileTypes': FileSystemMemory.readDirWithFileTypes,
-  'FileSystemMemory.readFile': FileSystemMemory.readFile,
-  'FileSystemMemory.remove': FileSystemMemory.remove,
-  'FileSystemMemory.writeFile': FileSystemMemory.writeFile,
 }
