@@ -58,3 +58,29 @@ export const selectPick = async (item: any): Promise<any> => {
     command: QuickPickReturnValue.Hide,
   }
 }
+
+export const state = {}
+
+export const getPickFilterValue = (value: string): string => {
+  return value
+}
+
+export const getFilterValue = (value: string): string => {
+  return value
+}
+
+export const getPickDescription = (value: any): string => {
+  return ''
+}
+
+export const getPickLabel = (value: string): string => {
+  return value
+}
+
+export const getPickIcon = (value: string): string => {
+  return ''
+}
+
+export const isPrepared = (): boolean => {
+  return false
+}

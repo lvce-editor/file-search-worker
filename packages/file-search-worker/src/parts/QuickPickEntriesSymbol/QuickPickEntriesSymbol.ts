@@ -31,3 +31,25 @@ export const selectPick = async (item: any): Promise<any> => {
 export const getFilterValue = (value: any): any => {
   return value
 }
+
+export const state = {}
+
+export const getPickDescription = (value: any): string => {
+  return ''
+}
+
+export const isPrepared = (): boolean => {
+  return false
+}
+
+export const getPickFilterValue = (value: string): string => {
+  return value
+}
+
+export const getPickLabel = (value: string): string => {
+  return value
+}
+
+export const getPickIcon = (value: string): string => {
+  return ''
+}
