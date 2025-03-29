@@ -4,25 +4,21 @@ import * as DomEventListenersFunctions from '../DomEventListenerFunctions/DomEve
 export const renderEventListeners = (): readonly DomEventListener[] => {
   return [
     {
-      name: DomEventListenersFunctions.HandleClickOk,
-      params: ['handleClickOk'],
-    },
-    {
-      name: DomEventListenersFunctions.HandleClickClose,
-      params: ['handleClickClose'],
-    },
-    {
-      name: DomEventListenersFunctions.HandleClickCopy,
-      params: ['handleClickCopy'],
-    },
-    {
-      name: DomEventListenersFunctions.HandleFocusIn,
-      params: ['handleFocusIn'],
-    },
-    {
-      name: DomEventListenersFunctions.HandleContextMenu,
-      params: [],
+      name: DomEventListenersFunctions.HandlePointerDown,
+      params: ['handlePointerDown', 'event.clientX', 'event.clientY'],
       preventDefault: true,
+    },
+    {
+      name: DomEventListenersFunctions.HandleWheel,
+      params: ['handleWheel'],
+    },
+    {
+      name: DomEventListenersFunctions.HandleBlur,
+      params: ['handleBlur'],
+    },
+    {
+      name: DomEventListenersFunctions.HandleBeforeInput,
+      params: ['handleBeforeInput'],
     },
   ]
 }
