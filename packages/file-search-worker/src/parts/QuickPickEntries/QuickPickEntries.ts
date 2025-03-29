@@ -1,33 +1,15 @@
-import * as QuickPickEntriesColorTheme from '../QuickPickEntriesColorTheme/QuickPickEntriesColorTheme.ts'
-import * as QuickPickEntriesCustom from '../QuickPickEntriesCustom/QuickPickEntriesCustom.ts'
-import * as QuickPickEntriesEverything from '../QuickPickEntriesEverything/QuickPickEntriesEverything.ts'
-import * as QuickPickEntriesNumber from '../QuickPickEntriesNumber/QuickPickEntriesNumber.ts'
-import * as QuickPickEntriesOpenRecent from '../QuickPickEntriesOpenRecent/QuickPickEntriesOpenRecent.ts'
-import * as QuickPickEntriesSymbol from '../QuickPickEntriesSymbol/QuickPickEntriesSymbol.ts'
-import * as QuickPickEntriesView from '../QuickPickEntriesView/QuickPickEntriesView.ts'
-import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
+import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 
-export const load = (moduleId: string): any => {
-  switch (moduleId) {
-    case QuickPickEntryId.CommandPalette:
-    case QuickPickEntryId.Commands:
-    case QuickPickEntryId.File:
-    case QuickPickEntryId.EveryThing:
-    case QuickPickEntryId.WorkspaceSymbol:
-      return QuickPickEntriesEverything
-    case QuickPickEntryId.Number:
-      return QuickPickEntriesNumber
-    case QuickPickEntryId.Recent:
-      return QuickPickEntriesOpenRecent
-    case QuickPickEntryId.ColorTheme:
-      return QuickPickEntriesColorTheme
-    case QuickPickEntryId.Symbol:
-      return QuickPickEntriesSymbol
-    case QuickPickEntryId.View:
-      return QuickPickEntriesView
-    case QuickPickEntryId.Custom:
-      return QuickPickEntriesCustom
-    default:
-      throw new Error(`unknown module "${moduleId}"`)
+const state: Record<string, QuickPickEntriesModule> = Object.create(null)
+
+export const register = (modules: Record<string, QuickPickEntriesModule>): void => {
+  Object.assign(state, modules)
+}
+
+export const load = (moduleId: string): QuickPickEntriesModule => {
+  const module = state[moduleId]
+  if (!module) {
+    throw new Error(`unknown module "${moduleId}"`)
   }
+  return module
 }
