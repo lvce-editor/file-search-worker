@@ -7,12 +7,12 @@ import * as SearchFileRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGr
 export const getModule = (protocol: string): any => {
   switch (protocol) {
     case FileSystemProtocol.Memfs:
-      return SearchFileMemfs
+      return SearchFileMemfs.searchFile
     case FileSystemProtocol.Fetch:
-      return SearchFileFetch
+      return SearchFileFetch.searchFile
     case FileSystemProtocol.Html:
-      return SearchFileHtml
+      return SearchFileHtml.searchFile
     default:
-      return SearchFileRipGrep
+      return SearchFileRipGrep.searchFile
   }
 }
