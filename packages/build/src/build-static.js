@@ -26,7 +26,7 @@ const content = await readFile(rendererWorkerPath, 'utf8')
 const workerPath = join(root, '.tmp/dist/dist/fileSearchWorkerMain.js')
 const remoteUrl = getRemoteUrl(workerPath)
 
-if (!content.includes('// const fileSearchWorkerUrl = ')) {
+if (content.includes('// const fileSearchWorkerUrl = ')) {
   const occurrence = `// const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\`
   const fileSearchWorkerUrl = \`${remoteUrl}\``
   const replacement = `const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\``
