@@ -11,5 +11,6 @@ export interface QuickPickEntriesModule {
   readonly getPickDescription: (item: any) => string
   readonly getPickLabel: (item: any) => string
   readonly getPickIcon: (item: any) => string
+  readonly getPickFileIcon?: (item: any) => any
   readonly isPrepared: () => boolean
 }

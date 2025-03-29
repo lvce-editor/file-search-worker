@@ -4,7 +4,7 @@ import * as GetIconRequests from '../src/parts/GetIconRequests/GetIconRequests.t
 
 test('gets icon requests for empty array', () => {
   const items: any[] = []
-  const provider = {}
+  const provider = {} as any
   expect(GetIconRequests.getIconRequests(items, provider)).toEqual([])
 })
 
@@ -17,7 +17,7 @@ test('gets icon requests for items with file icons', () => {
         name: pick.pick,
       }
     },
-  }
+  } as any
   expect(GetIconRequests.getIconRequests(items, provider)).toEqual([
     {
       type: DirentType.File,
@@ -38,7 +38,7 @@ test('gets icon requests for items without file icons', () => {
     getPickFileIcon(): any {
       return undefined
     },
-  }
+  } as any
   expect(GetIconRequests.getIconRequests(items, provider)).toEqual([
     {
       type: undefined,
@@ -68,7 +68,7 @@ test.skip('gets icon requests for items with mixed icon types', () => {
         name: pick,
       }
     },
-  }
+  } as any
   expect(GetIconRequests.getIconRequests(items, provider)).toEqual([
     {
       type: DirentType.File,
@@ -85,7 +85,8 @@ test.skip('gets icon requests for items with mixed icon types', () => {
 
 test.skip('handles null/undefined provider', () => {
   const items = [{ pick: '/test/file.txt' }]
-  expect(GetIconRequests.getIconRequests(items, null)).toEqual([
+  const provider = null as any
+  expect(GetIconRequests.getIconRequests(items, provider)).toEqual([
     {
       type: undefined,
       name: undefined,
