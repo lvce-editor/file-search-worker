@@ -22,6 +22,7 @@ export const getQuickPickHeaderVirtualDom = (): readonly VirtualDomNode[] => {
       role: AriaRoles.ComboBox,
       name: InputName.QuickPickInput,
       onBeforeInput: DomEventListenerFunctions.HandleBeforeInput,
+      ariaLabel: 'Type the name of a command to run.',
     },
   ]
 }
