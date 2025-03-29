@@ -1,12 +1,6 @@
 import * as GetIconRequests from '../GetIconRequests/GetIconRequests.ts'
+import * as GetPickDescription from '../GetPickDescription/GetPickDescription.ts'
 import * as RequestFileIcons from '../RequestFileIcons/RequestFileIcons.ts'
-
-const getPickDescription = (provider: any, pick: any): string => {
-  if (provider.getPickDescription) {
-    return provider.getPickDescription(pick)
-  }
-  return ''
-}
 
 export const getVisible = async (
   provider: any,
@@ -25,7 +19,7 @@ export const getVisible = async (
     const item = items[i]
     const pick = item.pick
     const label = provider.getPickLabel(pick)
-    const description = getPickDescription(provider, pick)
+    const description = GetPickDescription.getPickDescription(provider, pick)
     const icon = provider.getPickIcon(pick)
     const fileIcon = icons[iconIndex++]
     visibleItems.push({
