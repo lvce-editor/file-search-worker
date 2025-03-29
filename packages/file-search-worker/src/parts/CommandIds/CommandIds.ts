@@ -1,4 +1,5 @@
 export const commandIds = [
+  'dispose',
   'focusFirst',
   'focusIndex',
   'focusLast',
@@ -7,9 +8,9 @@ export const commandIds = [
   'handleBeforeInput',
   'handleBlur',
   'handleClickAt',
+  'handleFocus',
   'handleInput',
   'handleWheel',
-  'dispose',
   'renderEventListeners',
   'selectCurrentIndex',
   'selectIndex',
