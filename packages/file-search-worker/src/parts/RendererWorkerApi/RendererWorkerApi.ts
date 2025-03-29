@@ -6,6 +6,7 @@ export interface RendererWorkerApi {
   readonly 'ErrorHandling.showErrorDialog': (errorInfo: any) => Promise<void>
   readonly 'ExtensionHost.executeCommand': (id: string) => Promise<void>
   readonly 'ExtensionHost.getCommands': () => Promise<readonly any[]>
+  readonly 'ExtensionHost.searchFileWithFetch': (uri: string) => Promise<readonly string[]>
   readonly 'Focus.setFocus': (focusKey: number) => Promise<void>
   readonly 'IconTheme.getFileIcon': (options: any) => Promise<string>
   readonly 'IconTheme.getFolderIcon': (options: any) => Promise<string>
