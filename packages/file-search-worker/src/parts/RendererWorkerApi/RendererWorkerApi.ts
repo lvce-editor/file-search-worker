@@ -16,4 +16,5 @@ export interface RendererWorkerApi {
   readonly 'Viewlet.openWidget': (id: string) => Promise<void>
   readonly 'Workspace.getPath': () => Promise<string>
   readonly 'Workspace.setPath': (uri: string) => Promise<void>
+  readonly 'ExtensionHost.searchFileWithHtml': (uri: string) => Promise<readonly string[]>
 }
