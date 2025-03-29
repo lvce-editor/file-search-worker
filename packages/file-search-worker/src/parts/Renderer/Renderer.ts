@@ -1,5 +1,5 @@
 import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewModel.ts'
 
 export interface Renderer {
-  (model: QuickPickViewModel): any
+  (model: QuickPickViewModel): readonly any[]
 }
