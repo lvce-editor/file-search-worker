@@ -52,3 +52,19 @@ export const getPickLabel = (pick: any): string => {
 export const getPickIcon = (pick: any): string => {
   return ''
 }
+
+export const state = {}
+
+export const getPickDescription = (value: any): string => {
+  return ''
+}
+
+export const isPrepared = (): boolean => {
+  return false
+}
+
+export const name = ''
+
+export const getHelpEntries = (): readonly any[] => {
+  return []
+}

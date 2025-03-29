@@ -81,3 +81,11 @@ export const getPickFileIcon = (pick: any): any => {
     name: pick,
   }
 }
+
+export const state = {}
+
+export const isPrepared = (): boolean => {
+  return false
+}
+
+export const name = ''
