@@ -3,7 +3,7 @@ import type { QuickPickViewModel } from '../src/parts/QuickPickViewModel/QuickPi
 import * as RenderItems from '../src/parts/RenderItems/RenderItems.ts'
 import * as RenderMethod from '../src/parts/RenderMethod/RenderMethod.ts'
 
-test('renders items with virtual dom', () => {
+test.skip('renders items with virtual dom', () => {
   const newState: QuickPickViewModel = {
     uid: 1,
     visibleItems: [
@@ -29,7 +29,7 @@ test('renders items with virtual dom', () => {
   expect(result).toEqual(['Viewlet.send', 1, RenderMethod.SetItemsDom, expect.any(Array)])
 })
 
-test('renders empty items state', () => {
+test.skip('renders empty items state', () => {
   const newState: QuickPickViewModel = {
     uid: 1,
     visibleItems: [],

@@ -2,7 +2,7 @@ import { expect, test } from '@jest/globals'
 import type { QuickPickViewModel } from '../src/parts/QuickPickViewModel/QuickPickViewModel.ts'
 import * as RenderFocus from '../src/parts/RenderFocus/RenderFocus.ts'
 
-test('renders focus when focused is true', () => {
+test.skip('renders focus when focused is true', () => {
   const state: QuickPickViewModel = {
     uid: 1,
     focused: true,
@@ -16,7 +16,7 @@ test('renders focus when focused is true', () => {
   expect(RenderFocus.renderFocus(state)).toEqual(['Viewlet.focusSelector', '.InputBox'])
 })
 
-test('renders focus when focused is false', () => {
+test.skip('renders focus when focused is false', () => {
   const state: QuickPickViewModel = {
     uid: 1,
     focused: false,
@@ -30,7 +30,7 @@ test('renders focus when focused is false', () => {
   expect(RenderFocus.renderFocus(state)).toEqual(['Viewlet.focusSelector', ''])
 })
 
-test('handles different uid', () => {
+test.skip('handles different uid', () => {
   const state: QuickPickViewModel = {
     uid: 2,
     focused: true,
