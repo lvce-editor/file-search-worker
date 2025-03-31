@@ -10,15 +10,6 @@ export const getPlaceholder = (): string => {
   return ViewletQuickPickStrings.typeNameofCommandToRun()
 }
 
-export const helpEntries = (): readonly any[] => {
-  return [
-    {
-      description: ViewletQuickPickStrings.showAndRunCommands(),
-      category: 'global commands',
-    },
-  ]
-}
-
 export const getLabel = (): string => {
   return ''
 }

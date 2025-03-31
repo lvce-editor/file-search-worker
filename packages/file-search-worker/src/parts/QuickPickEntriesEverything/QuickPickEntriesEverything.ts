@@ -30,10 +30,6 @@ export const getLabel = (): string => {
   return ''
 }
 
-export const getHelpEntries = (): any[] => {
-  return state.provider.getHelpEntries()
-}
-
 export const getNoResults = (): any => {
   return state.provider.getNoResults()
 }
