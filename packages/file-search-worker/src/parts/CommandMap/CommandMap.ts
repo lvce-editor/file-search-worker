@@ -1,5 +1,6 @@
 import * as Close from '../Close/Close.ts'
 import * as Create2 from '../Create2/Create2.ts'
+import * as Diff2 from '../Diff2/Diff2.ts'
 import * as Dispose from '../Dispose/Dispose.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as FocusFirst from '../FocusFirst/FocusFirst.ts'
@@ -27,7 +28,6 @@ import * as SelectIndex from '../SelectIndex/SelectIndex.ts'
 import * as SelectItem from '../SelectItem/SelectItem.ts'
 import * as SetValue from '../SetValue/SetValue.ts'
 import * as VirtualList from '../VirtualList/VirtualList.ts'
-import * as Diff2 from '../Diff2/Diff2.ts'
 import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
 export const commandMap = {
