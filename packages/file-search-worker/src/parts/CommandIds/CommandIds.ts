@@ -1,4 +1,5 @@
 export const commandIds = [
+  'close',
   'dispose',
   'focusFirst',
   'focusIndex',
