@@ -69,7 +69,8 @@ const getExtensionPicks = async (): Promise<readonly any[]> => {
 export const getPicks = async (): Promise<readonly any[]> => {
   const builtinPicks = await getBuiltinPicks()
   const extensionPicks = await getExtensionPicks()
-  return [...builtinPicks, ...extensionPicks]
+  const allPicks = [...builtinPicks, ...extensionPicks]
+  return allPicks
 }
 
 const shouldHide = (item: any): boolean => {
