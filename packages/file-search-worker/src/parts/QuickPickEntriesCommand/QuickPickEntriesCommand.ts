@@ -114,8 +114,8 @@ export const selectPick = async (item: any): Promise<any> => {
   return selectPickBuiltin(item)
 }
 
-export const getFilterValue = (value: any): any => {
-  return value
+export const getFilterValue = (value: string): string => {
+  return value.trim()
 }
 
 export const getPickFilterValue = (pick: any): any => {
