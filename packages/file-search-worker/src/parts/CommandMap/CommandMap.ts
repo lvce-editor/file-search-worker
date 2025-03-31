@@ -19,6 +19,7 @@ import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntries.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
+import * as Render2 from '../Render2/Render2.ts'
 import * as Render from '../Render/Render.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
@@ -49,7 +50,7 @@ export const commandMap = {
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
   'QuickPick.loadEntries2': QuickPickEntries.load,
-  'QuickPick.render': Render.doRender,
+  'QuickPick.render2': Render2.render2,
   'QuickPick.renderEventListeners': RenderEventListeners.renderEventListeners,
   'QuickPick.selectCurrentIndex': WrapCommand.wrapCommand(SelectCurrentIndex.selectCurrentIndex),
   'QuickPick.selectIndex': WrapCommand.wrapCommand(SelectIndex.selectIndex),
@@ -58,6 +59,7 @@ export const commandMap = {
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
 
   // deprecated
+  'QuickPick.render': Render.doRender,
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
   'SearchFile.searchFile': SearchFile.searchFile,
   'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
