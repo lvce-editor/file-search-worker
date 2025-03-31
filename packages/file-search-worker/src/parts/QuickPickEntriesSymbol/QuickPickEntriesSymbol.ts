@@ -7,10 +7,6 @@ export const getPlaceholder = (): string => {
   return ''
 }
 
-export const getHelpEntries = (): any[] => {
-  return []
-}
-
 export const getNoResults = (): any => {
   return {
     label: QuickPickStrings.noSymbolFound(),
