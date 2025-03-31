@@ -1,4 +1,6 @@
-export interface QuickPickState {
+import type { List } from '@lvce-editor/list'
+
+export interface QuickPickState extends List<any> {
   readonly uid: number
   readonly state: number
   readonly picks: readonly any[]
@@ -14,10 +16,6 @@ export interface QuickPickState {
   readonly height: number
   readonly top: number
   readonly width: number
-  readonly deltaY: number
-  readonly minLineY: number
-  readonly maxLineY: number
-  readonly finalDeltaY: number
   readonly headerHeight: number
   readonly itemHeight: number
   readonly items: readonly any[]
