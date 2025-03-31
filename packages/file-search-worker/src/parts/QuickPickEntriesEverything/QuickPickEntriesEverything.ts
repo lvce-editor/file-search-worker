@@ -1,11 +1,6 @@
-import * as QuickPickEntriesCommand from '../QuickPickEntriesCommand/QuickPickEntriesCommand.ts'
-import * as QuickPickEntriesFile from '../QuickPickEntriesFile/QuickPickEntriesFile.ts'
-import * as QuickPickEntriesGoToLine from '../QuickPickEntriesGoToLine/QuickPickEntriesGoToLine.ts'
+import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
+import * as GetQuickPickProvider from '../GetQuickPickProvider/GetQuickPickProvider.ts'
 import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.ts'
-import * as QuickPickEntriesSymbol from '../QuickPickEntriesSymbol/QuickPickEntriesSymbol.ts'
-import * as QuickPickEntriesView from '../QuickPickEntriesView/QuickPickEntriesView.ts'
-import * as QuickPickEntriesWorkspaceSymbol from '../QuickPickEntriesWorkspaceSymbol/QuickPickEntriesWorkspaceSymbol.ts'
-import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
 // maybe cache by id opening commands -> has all commands cached
@@ -43,53 +38,13 @@ export const getNoResults = (): any => {
   return state.provider.getNoResults()
 }
 
-const getPrefix = (value: any): string => {
-  if (value.startsWith(QuickPickPrefix.Command)) {
-    return QuickPickPrefix.Command
-  }
-  if (value.startsWith(QuickPickPrefix.Symbol)) {
-    return QuickPickPrefix.Symbol
-  }
-  if (value.startsWith(QuickPickPrefix.WorkspaceSymbol)) {
-    return QuickPickPrefix.WorkspaceSymbol
-  }
-  if (value.startsWith(QuickPickPrefix.GoToLine)) {
-    return QuickPickPrefix.GoToLine
-  }
-  if (value.startsWith(QuickPickPrefix.View)) {
-    return QuickPickPrefix.View
-  }
-  return QuickPickPrefix.None
-}
-
-const getQuickPickProvider = (prefix: string): any => {
-  // TODO could use enum for prefix
-  // TODO could use regex to extract prefix
-  // TODO or could check first letter char code (less comparisons)
-  switch (prefix) {
-    case QuickPickPrefix.Command:
-      return QuickPickEntriesCommand
-    case QuickPickPrefix.Symbol:
-      return QuickPickEntriesSymbol
-    case QuickPickPrefix.WorkspaceSymbol:
-      return QuickPickEntriesWorkspaceSymbol
-    case QuickPickPrefix.GoToLine:
-      return QuickPickEntriesGoToLine
-    case QuickPickPrefix.View:
-      return QuickPickEntriesView
-    default:
-      return QuickPickEntriesFile
-  }
-}
-
 export const getPicks = async (value: any): Promise<readonly any[]> => {
-  const prefix = getPrefix(value)
+  const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
 
   // TODO race condition
   if (state.prefix !== prefix) {
     state.prefix = prefix
-    // @ts-ignore
-    state.provider = await getQuickPickProvider(prefix)
+    state.provider = await GetQuickPickProvider.getQuickPickProvider(prefix)
   }
   // TODO this line is a bit duplicated with getFilterValue
   const slicedValue = value.slice(prefix.length).trimStart()
