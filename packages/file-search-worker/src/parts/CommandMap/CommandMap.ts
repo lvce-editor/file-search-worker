@@ -1,5 +1,6 @@
 import * as Close from '../Close/Close.ts'
 import * as Create2 from '../Create2/Create2.ts'
+import * as Diff2 from '../Diff2/Diff2.ts'
 import * as Dispose from '../Dispose/Dispose.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as FocusFirst from '../FocusFirst/FocusFirst.ts'
@@ -34,6 +35,7 @@ export const commandMap = {
   'QuickPick.addMenuEntries': MenuEntriesState.add,
   'QuickPick.close': Close.close,
   'QuickPick.create2': Create2.create,
+  'QuickPick.diff2': Diff2.diff2,
   'QuickPick.dispose': Dispose.dispose,
   'QuickPick.focusFirst': WrapCommand.wrapCommand(FocusFirst.focusFirst),
   'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),

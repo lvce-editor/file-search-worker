@@ -9,6 +9,7 @@ export const commandIds = [
   'handleBeforeInput',
   'handleBlur',
   'handleClickAt',
+  'diff2',
   'handleFocus',
   'handleInput',
   'handleWheel',
