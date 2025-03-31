@@ -6,13 +6,12 @@ export const test: Test = async ({ Locator, expect, QuickPick, Command }) => {
   // arrange
   await QuickPick.open()
   await QuickPick.setValue('> Layout')
+  await QuickPick.focusIndex(0)
 
   // act
-  // await Command.execute('QuickPick.selectIndex', 0)
+  await QuickPick.focusNext()
 
   // assert
-  // const dialogContent = Locator('.DialogContent')
-  // await expect(dialogContent).toBeVisible()
-  // const infoIcon = dialogContent.locator('.DialogInfoIcon')
-  // await expect(infoIcon).toBeVisible()
+  const activeItem = Locator('.QuickPickItemActive')
+  await expect(activeItem).toHaveText('Layout: Toggle Panel')
 }
