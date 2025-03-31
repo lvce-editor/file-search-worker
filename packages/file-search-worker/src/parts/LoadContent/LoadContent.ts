@@ -17,7 +17,6 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   }
   const newPicks = await provider.getPicks(value)
   Assert.array(newPicks)
-  // @ts-ignore
   const filterValue = provider.getFilterValue(value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, provider)
   // @ts-ignore
