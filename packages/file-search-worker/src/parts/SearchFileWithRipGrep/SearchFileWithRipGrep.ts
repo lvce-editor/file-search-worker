@@ -5,7 +5,7 @@ import * as GetFileSearchRipGrepArgs from '../GetFileSearchRipGrepArgs/GetFileSe
 import * as SearchProcess from '../SearchProcess/SearchProcess.ts'
 import * as SplitLines from '../SplitLines/SplitLines.ts'
 
-export const searchFile = async (path: string, value: string, prepare: boolean): Promise<any> => {
+export const searchFile = async (path: string, value: string, prepare: boolean): Promise<readonly any[]> => {
   const ripGrepArgs = GetFileSearchRipGrepArgs.getFileSearchRipGrepArgs()
   const options = {
     ripGrepArgs,
