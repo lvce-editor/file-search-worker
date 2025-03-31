@@ -27,12 +27,14 @@ import * as SelectIndex from '../SelectIndex/SelectIndex.ts'
 import * as SelectItem from '../SelectItem/SelectItem.ts'
 import * as SetValue from '../SetValue/SetValue.ts'
 import * as VirtualList from '../VirtualList/VirtualList.ts'
+import * as Diff2 from '../Diff2/Diff2.ts'
 import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
 
 export const commandMap = {
   'QuickPick.addMenuEntries': MenuEntriesState.add,
   'QuickPick.close': Close.close,
   'QuickPick.create2': Create2.create,
+  'QuickPick.diff2': Diff2.diff2,
   'QuickPick.dispose': Dispose.dispose,
   'QuickPick.focusFirst': WrapCommand.wrapCommand(FocusFirst.focusFirst),
   'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
@@ -44,7 +46,7 @@ export const commandMap = {
   'QuickPick.handleBeforeInput': WrapCommand.wrapCommand(HandleBeforeInput.handleBeforeInput),
   'QuickPick.handleBlur': WrapCommand.wrapCommand(HandleBlur.handleBlur),
   'QuickPick.handleClickAt': WrapCommand.wrapCommand(HandleClickAt.handleClickAt),
-  'QuickPick.handleFocus': WrapCommand.wrapCommand(HandleFocus.handleBlur),
+  'QuickPick.handleFocus': WrapCommand.wrapCommand(HandleFocus.handleFocus),
   'QuickPick.handleInput': WrapCommand.wrapCommand(HandleInput.handleInput),
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
