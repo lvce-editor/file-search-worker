@@ -77,8 +77,8 @@ export const openView = (): void => {
   // show('view ')
 }
 
-export const getFilterValue = (value: any): any => {
-  return value.slice(state.prefix.length)
+export const getFilterValue = (value: string): string => {
+  return value.slice(state.prefix.length).trim()
 }
 
 export const getPickFilterValue = (pick: any): any => {
