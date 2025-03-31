@@ -50,8 +50,7 @@ export const commandMap = {
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
   'QuickPick.loadEntries2': QuickPickEntries.load,
-  'QuickPick.render': Render.doRender,
-  'QuickPick.render2': Render2.doRender,
+  'QuickPick.render2': Render2.render2,
   'QuickPick.renderEventListeners': RenderEventListeners.renderEventListeners,
   'QuickPick.selectCurrentIndex': WrapCommand.wrapCommand(SelectCurrentIndex.selectCurrentIndex),
   'QuickPick.selectIndex': WrapCommand.wrapCommand(SelectIndex.selectIndex),
@@ -60,6 +59,7 @@ export const commandMap = {
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
 
   // deprecated
+  'QuickPick.render': Render.doRender,
   'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
   'SearchFile.searchFile': SearchFile.searchFile,
   'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
