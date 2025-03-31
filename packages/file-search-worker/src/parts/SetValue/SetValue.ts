@@ -4,12 +4,13 @@ import * as InputSource from '../InputSource/InputSource.ts'
 
 // TODO when user types letters -> no need to query provider again -> just filter existing results
 export const setValue = async (state: QuickPickState, newValue: string): Promise<QuickPickState> => {
-  if (state.value === newValue) {
+  const { value, provider } = state
+  if (value === newValue) {
     return state
   }
-  const newPicks = await state.provider.getPicks(newValue)
-  const filterValue = state.provider.getFilterValue(newValue)
-  const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, state.provider)
+  const newPicks = await provider.getPicks(newValue)
+  const filterValue = provider.getFilterValue(newValue)
+  const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, provider)
   const focusedIndex = items.length === 0 ? -1 : 0
   return {
     ...state,
