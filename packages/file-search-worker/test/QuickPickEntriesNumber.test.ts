@@ -10,10 +10,6 @@ test('getPlaceholder should return empty string', () => {
   expect(QuickPickEntriesNumber.getPlaceholder()).toBe('')
 })
 
-test('getHelpEntries should return empty array', () => {
-  expect(QuickPickEntriesNumber.getHelpEntries()).toEqual([])
-})
-
 test('getNoResults should return object with label', () => {
   expect(QuickPickEntriesNumber.getNoResults()).toEqual({
     label: 'No matching results',

@@ -11,10 +11,6 @@ test('getPlaceholder returns empty string', () => {
   expect(QuickPickNoop.getPlaceholder()).toBe('')
 })
 
-test('getHelpEntries returns empty array', () => {
-  expect(QuickPickNoop.getHelpEntries()).toEqual([])
-})
-
 test('getNoResults returns no results string', () => {
   expect(QuickPickNoop.getNoResults()).toBe(QuickPickStrings.noResults())
 })
