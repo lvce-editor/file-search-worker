@@ -24,16 +24,6 @@ export const getLabel = (): string => {
   return ViewletQuickPickStrings.files()
 }
 
-// TODO help entries should not be here
-export const getHelpEntries = (): any[] => {
-  return [
-    {
-      description: ViewletQuickPickStrings.goToFile(),
-      category: 'global commands',
-    },
-  ]
-}
-
 export const getNoResults = (): any => {
   return {
     label: ViewletQuickPickStrings.noMatchingResults(),

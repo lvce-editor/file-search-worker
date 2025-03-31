@@ -20,10 +20,6 @@ export const getLabel = (): any => {
   return ViewletQuickPickStrings.openRecent()
 }
 
-export const getHelpEntries = (): any => {
-  return []
-}
-
 export const getNoResults = (): any => {
   return {
     label: ViewletQuickPickStrings.noRecentlyOpenedFoldersFound(),

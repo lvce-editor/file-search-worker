@@ -2,7 +2,6 @@ export interface QuickPickEntriesModule {
   readonly state: any
   readonly name: string
   readonly getPlaceholder: () => string
-  readonly getHelpEntries: () => readonly any[]
   readonly getNoResults: () => string
   readonly getPicks: (value: any) => Promise<readonly any[]>
   readonly selectPick: (item: any) => Promise<any>
