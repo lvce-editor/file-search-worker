@@ -2,7 +2,6 @@ import * as Close from '../Close/Close.ts'
 import * as Create2 from '../Create2/Create2.ts'
 import * as Diff2 from '../Diff2/Diff2.ts'
 import * as Dispose from '../Dispose/Dispose.ts'
-import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as FocusFirst from '../FocusFirst/FocusFirst.ts'
 import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as FocusLast from '../FocusLast/FocusLast.ts'
@@ -17,13 +16,10 @@ import * as HandleFocus from '../HandleFocus/HandleFocus.ts'
 import * as HandleInput from '../HandleInput/HandleInput.ts'
 import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
-import * as LoadQuickPickEntries from '../LoadQuickPickEntries/LoadQuickPickEntries.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as Render2 from '../Render2/Render2.ts'
-import * as Render from '../Render/Render.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
-import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as SelectCurrentIndex from '../SelectCurrentIndex/SelectCurrentIndex.ts'
 import * as SelectIndex from '../SelectIndex/SelectIndex.ts'
 import * as SelectItem from '../SelectItem/SelectItem.ts'
@@ -59,10 +55,4 @@ export const commandMap = {
   'QuickPick.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'QuickPick.setDeltaY': WrapCommand.wrapCommand(VirtualList.setDeltaY),
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
-
-  // deprecated
-  'QuickPick.render': Render.doRender,
-  'SearchFile.filter': FilterQuickPickItems.filterQuickPickItems,
-  'SearchFile.searchFile': SearchFile.searchFile,
-  'QuickPick.loadEntries': LoadQuickPickEntries.loadQuickPickEntries,
 }
