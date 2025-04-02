@@ -1,16 +1,9 @@
 import * as DirentType from '../DirentType/DirentType.ts'
+import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
+import * as OpenWorkspaceFolder from '../OpenWorkspaceFolder/OpenWorkspaceFolder.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
-import * as Rpc from '../Rpc/Rpc.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
-
-const getRecentlyOpened = (): Promise<any> => {
-  return Rpc.invoke(/* RecentlyOpened.getRecentlyOpened */ 'RecentlyOpened.getRecentlyOpened')
-}
-
-const openWorkspaceFolder = (uri: string): Promise<void> => {
-  return Rpc.invoke(/* Workspace.setPath */ 'Workspace.setPath', /* path */ uri)
-}
 
 export const getPlaceholder = (): any => {
   return ViewletQuickPickStrings.selectToOpen()
@@ -32,14 +25,14 @@ export const getNoResults = (): any => {
 // would be more independent of the specific data format of the quickpick provider
 
 export const getPicks = async (): Promise<any> => {
-  const recentlyOpened = await getRecentlyOpened()
+  const recentlyOpened = await GetRecentlyOpened.getRecentlyOpened()
   return recentlyOpened
 }
 
 // TODO selectPick should be independent of show/hide
 export const selectPick = async (pick: string): Promise<any> => {
   const path = pick
-  await openWorkspaceFolder(path)
+  await OpenWorkspaceFolder.openWorkspaceFolder(path)
   return {
     command: QuickPickReturnValue.Hide,
   }
