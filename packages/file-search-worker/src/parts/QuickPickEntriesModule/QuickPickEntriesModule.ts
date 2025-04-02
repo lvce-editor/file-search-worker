@@ -1,3 +1,5 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+
 export interface QuickPickEntriesModule {
   readonly state: any
   readonly name: string
@@ -12,4 +14,5 @@ export interface QuickPickEntriesModule {
   readonly getPickIcon: (item: any) => string
   readonly getPickFileIcon?: (item: any) => any
   readonly isPrepared: () => boolean
+  readonly getVisibleItems?: (minLineY: number, maxLineY: number, focusedIndex: number, searchValue: string) => Promise<readonly VisibleItem[]>
 }
