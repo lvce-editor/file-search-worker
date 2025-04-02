@@ -1,10 +1,10 @@
 export interface VisibleItem {
-  readonly label: string
   readonly description: string
-  readonly icon: string
   readonly fileIcon: string
+  readonly icon: string
+  readonly isActive: boolean
+  readonly label: string
+  readonly matches: readonly number[]
   readonly posInSet: number
   readonly setSize: number
-  readonly isActive: boolean
-  readonly matches: readonly number[]
 }
