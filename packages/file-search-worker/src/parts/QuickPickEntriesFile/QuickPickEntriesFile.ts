@@ -1,3 +1,4 @@
+import type { Dirent } from '../Dirent/Dirent.ts'
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
@@ -85,7 +86,7 @@ export const getPickIcon = (): string => {
   return ''
 }
 
-export const getPickFileIcon = (pick: any): any => {
+export const getPickFileIcon = (pick: any): Dirent => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
@@ -96,6 +97,7 @@ export const getPickFileIcon = (pick: any): any => {
   return {
     type: DirentType.File,
     name: baseName,
+    path: pick,
   }
 }
 
@@ -106,33 +108,26 @@ export const isPrepared = (): boolean => {
   return !protocol
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
   files: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
-): Promise<readonly VisibleItem[]> => {
-  const itemsToProcess = files.map((item) => item.pick)
-  const iconRequests = itemsToProcess.map((item) => ({
-    name: Workspace.pathBaseName(item),
-    path: '',
-    type: DirentType.File,
-  }))
-  const icons = await RequestFileIcons.requestFileIcons(iconRequests)
-  let iconIndex = 0
+  icons: readonly string[],
+): readonly VisibleItem[] => {
   const visibleItems = files.map((item, i) => {
     const pick = item.pick
     const label = getPickLabel(pick)
     const description = getPickDescription(pick)
     const icon = getPickIcon()
-    const fileIcon = icons[iconIndex++]
+    const fileIcon = icons[i]
     return {
       label,
       description,
       icon,
       fileIcon,
-      posInSet: i + 1,
+      posInSet: minLineY + i + 1,
       setSize,
       isActive: i === focusedIndex,
       matches: item.matches,
