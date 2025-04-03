@@ -14,7 +14,7 @@ const state = {
   items: [] as readonly any[],
 }
 
-const searchFile = async (path: any, value: any): Promise<readonly any[]> => {
+const searchFile = async (path: string, value: string): Promise<readonly any[]> => {
   const prepare = true
   // @ts-ignore
   const files = await SearchFile.searchFile(/* path */ path, /* searchTerm */ value, prepare)
@@ -37,7 +37,7 @@ export const getNoResults = (): any => {
   }
 }
 
-export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
+export const getPicks = async (searchValue: string): Promise<readonly any[]> => {
   // TODO cache workspace path
   const workspace = await GetWorkspacePath.getWorkspacePath()
   if (!workspace) {
