@@ -1,3 +1,4 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
 import * as GetQuickPickProvider from '../GetQuickPickProvider/GetQuickPickProvider.ts'
 import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.ts'
@@ -122,4 +123,28 @@ export const isPrepared = (): boolean => {
     return provider.isPrepared()
   }
   return false
+}
+
+export const getVisibleItems = async (
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+  searchValue: string,
+): Promise<readonly VisibleItem[]> => {
+  const filterValue = getFilterValue(searchValue)
+  if (!filterValue) {
+    return []
+  }
+  const picks = await getPicks(searchValue)
+  const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
+    description: getPickDescription(pick),
+    fileIcon: getPickFileIcon(pick),
+    icon: getPickIcon(pick),
+    isActive: index + minLineY === focusedIndex,
+    label: getPickLabel(pick),
+    matches: [],
+    posInSet: index + minLineY + 1,
+    setSize: picks.length,
+  }))
+  return visibleItems
 }
