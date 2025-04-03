@@ -70,6 +70,7 @@ export const getVisibleItems = async (
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
+  setSize: number,
 ): Promise<readonly VisibleItem[]> => {
   const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick, index) => ({
     description: pick.description || '',
@@ -79,7 +80,7 @@ export const getVisibleItems = async (
     label: getPickLabel(pick),
     matches: [],
     posInSet: index + minLineY + 1,
-    setSize: picks.length,
+    setSize,
   }))
   return visibleItems
 }

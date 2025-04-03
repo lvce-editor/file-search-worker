@@ -14,5 +14,11 @@ export interface QuickPickEntriesModule<T = any> {
   readonly getPickIcon: (item: T) => string
   readonly getPickFileIcon?: (item: T) => string
   readonly isPrepared: () => boolean
-  readonly getVisibleItems: (items: readonly T[], minLineY: number, maxLineY: number, focusedIndex: number) => Promise<readonly VisibleItem[]>
+  readonly getVisibleItems: (
+    items: readonly T[],
+    minLineY: number,
+    maxLineY: number,
+    focusedIndex: number,
+    setSize: number,
+  ) => Promise<readonly VisibleItem[]>
 }

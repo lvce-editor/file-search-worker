@@ -24,6 +24,7 @@ export const getVisibleItems = async (
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
+  setSize: number,
 ): Promise<readonly VisibleItem[]> => {
   return []
 }
