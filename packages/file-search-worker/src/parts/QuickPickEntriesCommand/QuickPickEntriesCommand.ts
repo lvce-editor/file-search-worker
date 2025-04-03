@@ -71,6 +71,7 @@ export const getVisibleItems = async (
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
+  icons: readonly string[],
 ): Promise<readonly VisibleItem[]> => {
   const visibleItems = picks.map((pick, index) => ({
     description: pick.description || '',

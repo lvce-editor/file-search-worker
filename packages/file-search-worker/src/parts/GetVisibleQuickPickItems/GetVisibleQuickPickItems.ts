@@ -7,9 +7,10 @@ export const getVisible = async (
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
+  icons: readonly string[],
 ): Promise<readonly VisibleItem[]> => {
   const setSize = items.length
   const range = items.slice(minLineY, maxLineY)
-  const visibleItems = await provider.getVisibleItems(range, minLineY, maxLineY, focusedIndex, setSize)
+  const visibleItems = await provider.getVisibleItems(range, minLineY, maxLineY, focusedIndex, setSize, icons)
   return visibleItems
 }

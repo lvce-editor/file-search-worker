@@ -30,13 +30,13 @@ export const getPicks = async (): Promise<any> => {
   return recentlyOpened
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
   picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
-): Promise<readonly VisibleItem[]> => {
+): readonly VisibleItem[] => {
   const visibleItems = picks.map((pick: string, index: number) => ({
     description: getPickDescription(pick),
     fileIcon: getPickFileIcon(pick),

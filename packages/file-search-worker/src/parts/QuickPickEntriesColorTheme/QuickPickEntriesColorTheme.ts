@@ -21,13 +21,14 @@ export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
   return colorThemeNames
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
   picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
-): Promise<readonly VisibleItem[]> => {
+  icons: readonly string[],
+): readonly VisibleItem[] => {
   const visibleItems = picks.map((pick, index) => ({
     description: getPickDescription(pick),
     fileIcon: '',

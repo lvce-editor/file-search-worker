@@ -29,13 +29,13 @@ export const getFilterValue = (value: any): string => {
   return value
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
   picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
-): Promise<readonly VisibleItem[]> => {
+): readonly VisibleItem[] => {
   const visibleItems = picks.map((pick: any, index: number) => ({
     description: '',
     fileIcon: '',
