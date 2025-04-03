@@ -6,7 +6,7 @@ export const register = (modules: Record<string, QuickPickEntriesModule>): void 
   Object.assign(state, modules)
 }
 
-export const load = (moduleId: string): QuickPickEntriesModule => {
+export const get = (moduleId: string): QuickPickEntriesModule => {
   const module = state[moduleId]
   if (!module) {
     throw new Error(`unknown module "${moduleId}"`)
