@@ -9,7 +9,7 @@ import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
   const { uri, args } = state
   const value = GetDefaultValue.getDefaultValue(uri)
-  const provider = QuickPickEntries.load(uri)
+  const provider = QuickPickEntries.get(uri)
   // @ts-ignore
   if (provider.setArgs) {
     // @ts-ignore
