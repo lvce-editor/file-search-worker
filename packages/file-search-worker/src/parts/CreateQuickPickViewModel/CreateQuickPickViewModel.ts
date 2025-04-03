@@ -9,6 +9,7 @@ export const createQuickPickViewModel = async (oldState: QuickPickState, newStat
     newState.minLineY,
     newState.maxLineY,
     newState.focusedIndex,
+    newState.icons,
   )
   const oldFocusedIndex = oldState.focusedIndex - oldState.minLineY
   const newFocusedIndex = newState.focusedIndex - newState.minLineY

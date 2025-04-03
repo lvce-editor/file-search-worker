@@ -14,7 +14,7 @@ const RECENT_PICKS_MAX_SIZE = 3
 
 export const state = {
   // providerId: PROVIDER_NOOP,
-  provider: QuickPickNoop,
+  provider: QuickPickNoop as any,
   prefix: 'string-that-should-never-match-another-string',
 }
 
@@ -131,9 +131,10 @@ export const getVisibleItems = async (
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
+  icons: readonly string[],
 ): Promise<readonly VisibleItem[]> => {
   const items = picks.map((pick) => pick.pick)
-  const visibleItems = await state.provider.getVisibleItems(items, minLineY, maxLineY, focusedIndex, setSize)
+  const visibleItems = await state.provider.getVisibleItems(items, minLineY, maxLineY, focusedIndex, setSize, icons)
   return visibleItems
 }
 
