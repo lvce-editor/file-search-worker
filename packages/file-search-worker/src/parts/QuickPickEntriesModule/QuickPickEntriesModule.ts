@@ -1,6 +1,6 @@
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 
-export interface QuickPickEntriesModule<T> {
+export interface QuickPickEntriesModule<T = any> {
   readonly state: any
   readonly name: string
   readonly getPlaceholder: () => string
