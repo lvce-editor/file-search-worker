@@ -2,11 +2,11 @@ import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as FilterQuickPickItem from '../FilterQuickPickItem/FilterQuickPickItem.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
+import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
 import * as OpenUri from '../OpenUri/OpenUri.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as RequestFileIcons from '../RequestFileIcons/RequestFileIcons.ts'
-import * as Rpc from '../Rpc/Rpc.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
@@ -39,7 +39,7 @@ export const getNoResults = (): any => {
 
 export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
   // TODO cache workspace path
-  const workspace = await Rpc.invoke('Workspace.getPath')
+  const workspace = await GetWorkspacePath.getWorkspacePath()
   if (!workspace) {
     return []
   }
@@ -51,7 +51,7 @@ export const selectPick = async (pick: any): Promise<any> => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
-  const workspace = await Rpc.invoke('Workspace.getPath')
+  const workspace = await GetWorkspacePath.getWorkspacePath()
   const absolutePath = `${workspace}/${pick}`
   await OpenUri.openUri(absolutePath)
   return {
@@ -118,7 +118,7 @@ export const getVisibleItems = async (
   searchValue: string,
 ): Promise<readonly VisibleItem[]> => {
   // Query items using searchValue
-  const workspace = await Rpc.invoke('Workspace.getPath')
+  const workspace = await GetWorkspacePath.getWorkspacePath()
   if (!workspace) {
     return []
   }
