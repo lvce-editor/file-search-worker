@@ -1,7 +1,7 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewModel.ts'
 
-export const createQuickPickViewModel = async (oldState: QuickPickState, newState: QuickPickState): Promise<QuickPickViewModel> => {
+export const createQuickPickViewModel = (oldState: QuickPickState, newState: QuickPickState): QuickPickViewModel => {
   const visibleItems = newState.items
   const oldFocusedIndex = oldState.focusedIndex - oldState.minLineY
   const newFocusedIndex = newState.focusedIndex - newState.minLineY

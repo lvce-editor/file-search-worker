@@ -1,6 +1,6 @@
 import type { List } from '@lvce-editor/list'
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 
 export interface QuickPickState extends List<VisibleItem> {
   readonly uid: number
