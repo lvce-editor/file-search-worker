@@ -6,7 +6,6 @@ import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
 import * as OpenUri from '../OpenUri/OpenUri.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
-import * as RequestFileIcons from '../RequestFileIcons/RequestFileIcons.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
