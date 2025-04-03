@@ -19,6 +19,7 @@ export const create = (
 ): void => {
   const state: QuickPickState = {
     uid,
+    icons: [],
     state: QuickPickOpenState.Default,
     picks: [],
     recentPicks: [],
