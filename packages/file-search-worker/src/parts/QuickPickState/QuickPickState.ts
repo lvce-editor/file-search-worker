@@ -1,4 +1,5 @@
 import type { List } from '@lvce-editor/list'
+import type { FileIconCache } from '../FileIconCache/FileIconCache.ts'
 import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 
 export interface QuickPickState extends List<any> {
@@ -31,4 +32,5 @@ export interface QuickPickState extends List<any> {
   readonly args: readonly any[]
   readonly focused: boolean
   readonly value: string
+  readonly fileIconCache: FileIconCache
 }
