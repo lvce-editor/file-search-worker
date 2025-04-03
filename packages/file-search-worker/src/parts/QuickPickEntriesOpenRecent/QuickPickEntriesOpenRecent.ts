@@ -1,3 +1,4 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
 import * as OpenWorkspaceFolder from '../OpenWorkspaceFolder/OpenWorkspaceFolder.ts'
@@ -27,6 +28,30 @@ export const getNoResults = (): any => {
 export const getPicks = async (): Promise<any> => {
   const recentlyOpened = await GetRecentlyOpened.getRecentlyOpened()
   return recentlyOpened
+}
+
+export const getVisibleItems = async (
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+  searchValue: string,
+): Promise<readonly VisibleItem[]> => {
+  const filterValue = getFilterValue(searchValue)
+  if (!filterValue) {
+    return []
+  }
+  const picks = await getPicks()
+  const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: string, index: number) => ({
+    description: getPickDescription(pick),
+    fileIcon: getPickFileIcon(pick),
+    icon: getPickIcon(),
+    isActive: index + minLineY === focusedIndex,
+    label: getPickLabel(pick),
+    matches: [],
+    posInSet: index + minLineY + 1,
+    setSize: picks.length,
+  }))
+  return visibleItems
 }
 
 // TODO selectPick should be independent of show/hide
