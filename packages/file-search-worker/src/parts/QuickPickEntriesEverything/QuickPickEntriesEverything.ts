@@ -125,16 +125,16 @@ export const isPrepared = (): boolean => {
   return false
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
   picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
   icons: readonly string[],
-): Promise<readonly VisibleItem[]> => {
+): readonly VisibleItem[] => {
   const items = picks.map((pick) => pick.pick)
-  const visibleItems = await state.provider.getVisibleItems(items, minLineY, maxLineY, focusedIndex, setSize, icons)
+  const visibleItems = state.provider.getVisibleItems(items, minLineY, maxLineY, focusedIndex, setSize, icons)
   return visibleItems
 }
 
