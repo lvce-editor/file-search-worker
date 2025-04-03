@@ -9,10 +9,6 @@ import * as RequestFileIcons from '../RequestFileIcons/RequestFileIcons.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
-const state = {
-  items: [] as readonly any[],
-}
-
 const searchFile = async (path: string, value: string): Promise<readonly any[]> => {
   const prepare = true
   // @ts-ignore
