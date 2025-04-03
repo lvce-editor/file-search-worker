@@ -1,3 +1,4 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
@@ -62,6 +63,30 @@ export const getPicks = async (): Promise<readonly any[]> => {
   const extensionPicks = await getExtensionPicks()
   const allPicks = [...builtinPicks, ...extensionPicks]
   return allPicks
+}
+
+export const getVisibleItems = async (
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+  searchValue: string,
+): Promise<readonly VisibleItem[]> => {
+  const filterValue = getFilterValue(searchValue)
+  if (!filterValue) {
+    return []
+  }
+  const picks = await getPicks()
+  const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick, index) => ({
+    description: pick.description || '',
+    fileIcon: '',
+    icon: getPickIcon(),
+    isActive: index + minLineY === focusedIndex,
+    label: getPickLabel(pick),
+    matches: [],
+    posInSet: index + minLineY + 1,
+    setSize: picks.length,
+  }))
+  return visibleItems
 }
 
 const shouldHide = (item: any): boolean => {
