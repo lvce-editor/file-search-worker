@@ -1,3 +1,4 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 // TODO probably not needed
@@ -54,4 +55,28 @@ export const isPrepared = (): boolean => {
 
 export const getPickDescription = (): string => {
   return ''
+}
+
+export const getVisibleItems = async (
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+  searchValue: string,
+): Promise<readonly VisibleItem[]> => {
+  const filterValue = getFilterValue(searchValue)
+  if (!filterValue) {
+    return []
+  }
+  const picks = await getPicks()
+  const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
+    description: getPickDescription(),
+    fileIcon: '',
+    icon: getPickIcon(pick),
+    isActive: index + minLineY === focusedIndex,
+    label: getPickLabel(pick),
+    matches: [],
+    posInSet: index + minLineY + 1,
+    setSize: picks.length,
+  }))
+  return visibleItems
 }
