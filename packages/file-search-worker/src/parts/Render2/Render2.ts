@@ -3,7 +3,7 @@ import * as QuickPickStates from '../QuickPickStates/QuickPickStates.ts'
 
 export const render2 = async (uid: number, diffResult: readonly number[]): Promise<readonly any[]> => {
   const { oldState, newState } = QuickPickStates.get(uid)
-  QuickPickStates.set(uid, oldState, newState)
+  QuickPickStates.set(uid, newState, newState)
   const commands = ApplyRender.applyRender(oldState, newState, diffResult)
   return commands
 }
