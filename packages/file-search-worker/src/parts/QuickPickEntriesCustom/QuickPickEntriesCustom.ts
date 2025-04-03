@@ -1,3 +1,4 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as Icon from '../Icon/Icon.ts'
 import * as IconType from '../IconType/IconType.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
@@ -81,4 +82,28 @@ export const getPickIcon = (pick: any): string => {
 
 export const isPrepared = (): boolean => {
   return true
+}
+
+export const getVisibleItems = async (
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+  searchValue: string,
+): Promise<readonly VisibleItem[]> => {
+  const filterValue = getFilterValue(searchValue)
+  if (!filterValue) {
+    return []
+  }
+  const picks = await getPicks(searchValue)
+  const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
+    description: getPickDescription(pick),
+    fileIcon: '',
+    icon: getPickIcon(pick),
+    isActive: index + minLineY === focusedIndex,
+    label: getPickLabel(pick),
+    matches: [],
+    posInSet: index + minLineY + 1,
+    setSize: picks.length,
+  }))
+  return visibleItems
 }
