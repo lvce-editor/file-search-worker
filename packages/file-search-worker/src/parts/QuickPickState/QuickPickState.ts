@@ -1,4 +1,5 @@
 import type { List } from '@lvce-editor/list'
+import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 
 export interface QuickPickState extends List<any> {
   readonly uid: number
@@ -7,7 +8,7 @@ export interface QuickPickState extends List<any> {
   readonly recentPicks: readonly any[]
   readonly recentPickIds: Map<any, any>
   readonly versionId: number
-  readonly provider: any
+  readonly provider: QuickPickEntriesModule
   readonly warned: any[]
   readonly visiblePicks: readonly any[]
   readonly maxVisibleItems: number
