@@ -1,6 +1,5 @@
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
-import * as FilterQuickPickItem from '../FilterQuickPickItem/FilterQuickPickItem.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
 import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
 import * as OpenUri from '../OpenUri/OpenUri.ts'
