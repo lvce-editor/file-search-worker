@@ -30,11 +30,13 @@ export const getPickFilterValue = (pick: any): any => {
   return pick
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
+  picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
-  searchValue: string,
-): Promise<readonly VisibleItem[]> => {
+  setSize: number,
+  icons: readonly string[],
+): readonly VisibleItem[] => {
   return []
 }

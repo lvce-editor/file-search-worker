@@ -1,6 +1,6 @@
 import type { Test } from '@lvce-editor/test-with-playwright'
 
-export const name = 'quickpick.focus-next'
+export const name = 'quickpick.focus-first'
 
 export const test: Test = async ({ Locator, expect, QuickPick, Command }) => {
   // arrange

@@ -14,7 +14,7 @@ const RECENT_PICKS_MAX_SIZE = 3
 
 export const state = {
   // providerId: PROVIDER_NOOP,
-  provider: QuickPickNoop,
+  provider: QuickPickNoop as any,
   prefix: 'string-that-should-never-match-another-string',
 }
 
@@ -105,14 +105,14 @@ export const getPickIcon = (pick: any): string => {
   return provider.getPickIcon(pick)
 }
 
-export const getPickFileIcon = (pick: any): string => {
+export const getPickFileIcon = (pick: any): any => {
   const { provider } = state
   // @ts-ignore
   if (provider.getPickFileIcon) {
     // @ts-ignore
     return provider.getPickFileIcon(pick)
   }
-  return ''
+  return undefined
 }
 
 export const isPrepared = (): boolean => {
@@ -126,25 +126,22 @@ export const isPrepared = (): boolean => {
 }
 
 export const getVisibleItems = async (
+  picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
-  searchValue: string,
+  setSize: number,
+  icons: readonly string[],
 ): Promise<readonly VisibleItem[]> => {
-  const filterValue = getFilterValue(searchValue)
-  if (!filterValue) {
-    return []
-  }
-  const picks = await getPicks(searchValue)
-  const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
-    description: getPickDescription(pick),
-    fileIcon: getPickFileIcon(pick),
-    icon: getPickIcon(pick),
-    isActive: index + minLineY === focusedIndex,
-    label: getPickLabel(pick),
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize: picks.length,
-  }))
+  const items = picks.map((pick) => pick.pick)
+  const visibleItems = await state.provider.getVisibleItems(items, minLineY, maxLineY, focusedIndex, setSize, icons)
   return visibleItems
 }
+
+// provider
+// - create
+// - loadcontent
+// - filter
+// - getVisible
+
+// matches could be in loadcontent or getVisible

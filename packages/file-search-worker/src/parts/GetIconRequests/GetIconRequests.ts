@@ -7,8 +7,10 @@ export const getIconRequests = (items: readonly any[], provider: QuickPickEntrie
     const pick = items[i]
     const iconObject = provider?.getPickFileIcon?.(pick) || {}
     iconRequests.push({
+      // @ts-ignore
       name: iconObject?.name,
       path: '',
+      // @ts-ignore
       type: iconObject?.type,
     })
   }

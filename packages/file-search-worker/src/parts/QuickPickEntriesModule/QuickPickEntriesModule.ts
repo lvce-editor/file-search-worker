@@ -1,18 +1,26 @@
+import type { Dirent } from '../Dirent/Dirent.ts'
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 
-export interface QuickPickEntriesModule {
+export interface QuickPickEntriesModule<T = any> {
   readonly state: any
   readonly name: string
   readonly getPlaceholder: () => string
   readonly getNoResults: () => string
-  readonly getPicks: (value: any) => Promise<readonly any[]>
-  readonly selectPick: (item: any) => Promise<any>
-  readonly getFilterValue: (item: any) => string
-  readonly getPickFilterValue: (item: any) => string
-  readonly getPickDescription: (item: any) => string
-  readonly getPickLabel: (item: any) => string
-  readonly getPickIcon: (item: any) => string
-  readonly getPickFileIcon?: (item: any) => any
+  readonly getPicks: (value: string) => Promise<readonly T[]>
+  readonly selectPick: (item: T) => Promise<any>
+  readonly getFilterValue: (item: T) => string
+  readonly getPickFilterValue: (item: T) => string
+  readonly getPickDescription: (item: T) => string
+  readonly getPickLabel: (item: T) => string
+  readonly getPickIcon: (item: T) => string
+  readonly getPickFileIcon?: (item: T) => Dirent
   readonly isPrepared: () => boolean
-  readonly getVisibleItems: (minLineY: number, maxLineY: number, focusedIndex: number, searchValue: string) => Promise<readonly VisibleItem[]>
+  readonly getVisibleItems: (
+    items: readonly T[],
+    minLineY: number,
+    maxLineY: number,
+    focusedIndex: number,
+    setSize: number,
+    icons: readonly string[],
+  ) => readonly VisibleItem[] | Promise<readonly VisibleItem[]>
 }

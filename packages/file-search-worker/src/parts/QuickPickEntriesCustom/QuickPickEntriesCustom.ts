@@ -84,17 +84,14 @@ export const isPrepared = (): boolean => {
   return true
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
+  picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
-  searchValue: string,
-): Promise<readonly VisibleItem[]> => {
-  const filterValue = getFilterValue(searchValue)
-  if (!filterValue) {
-    return []
-  }
-  const picks = await getPicks(searchValue)
+  setSize: number,
+  icons: readonly string[],
+): readonly VisibleItem[] => {
   const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
     description: getPickDescription(pick),
     fileIcon: '',
@@ -103,7 +100,7 @@ export const getVisibleItems = async (
     label: getPickLabel(pick),
     matches: [],
     posInSet: index + minLineY + 1,
-    setSize: picks.length,
+    setSize,
   }))
   return visibleItems
 }

@@ -19,6 +19,7 @@ export const create = (
 ): void => {
   const state: QuickPickState = {
     uid,
+    icons: [],
     state: QuickPickOpenState.Default,
     picks: [],
     recentPicks: [],
@@ -42,6 +43,7 @@ export const create = (
     focused: false,
     platform,
     value: '',
+    fileIconCache: Object.create(null),
   }
   QuickPickStates.set(uid, state, state)
 }
