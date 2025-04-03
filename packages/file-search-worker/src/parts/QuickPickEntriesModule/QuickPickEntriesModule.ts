@@ -1,3 +1,4 @@
+import type { Dirent } from '../Dirent/Dirent.ts'
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 
 export interface QuickPickEntriesModule<T = any> {
@@ -12,7 +13,7 @@ export interface QuickPickEntriesModule<T = any> {
   readonly getPickDescription: (item: T) => string
   readonly getPickLabel: (item: T) => string
   readonly getPickIcon: (item: T) => string
-  readonly getPickFileIcon?: (item: T) => string
+  readonly getPickFileIcon?: (item: T) => Dirent
   readonly isPrepared: () => boolean
   readonly getVisibleItems: (
     items: readonly T[],

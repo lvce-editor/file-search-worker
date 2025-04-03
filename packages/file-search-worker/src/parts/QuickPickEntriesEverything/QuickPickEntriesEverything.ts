@@ -105,14 +105,14 @@ export const getPickIcon = (pick: any): string => {
   return provider.getPickIcon(pick)
 }
 
-export const getPickFileIcon = (pick: any): string => {
+export const getPickFileIcon = (pick: any): any => {
   const { provider } = state
   // @ts-ignore
   if (provider.getPickFileIcon) {
     // @ts-ignore
     return provider.getPickFileIcon(pick)
   }
-  return ''
+  return undefined
 }
 
 export const isPrepared = (): boolean => {
