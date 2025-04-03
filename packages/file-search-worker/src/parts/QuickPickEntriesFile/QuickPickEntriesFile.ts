@@ -111,15 +111,13 @@ export const isPrepared = (): boolean => {
 }
 
 export const getVisibleItems = async (
-  files: readonly string[],
+  files: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
+  setSize: number,
 ): Promise<readonly VisibleItem[]> => {
-  const visibleItems = []
-  const setSize = state.items.length
-  const max = Math.min(setSize, maxLineY)
-  const itemsToProcess = files.slice(minLineY, maxLineY)
+  const itemsToProcess = files.map((item) => item.pick)
   const iconRequests = itemsToProcess.map((item) => ({
     name: Workspace.pathBaseName(item),
     path: '',
@@ -127,14 +125,13 @@ export const getVisibleItems = async (
   }))
   const icons = await RequestFileIcons.requestFileIcons(iconRequests)
   let iconIndex = 0
-  for (let i = minLineY; i < max; i++) {
-    const item = state.items[i]
+  const visibleItems = files.map((item, i) => {
     const pick = item.pick
     const label = getPickLabel(pick)
     const description = getPickDescription(pick)
     const icon = getPickIcon()
     const fileIcon = icons[iconIndex++]
-    visibleItems.push({
+    return {
       label,
       description,
       icon,
@@ -143,7 +140,7 @@ export const getVisibleItems = async (
       setSize,
       isActive: i === focusedIndex,
       matches: item.matches,
-    })
-  }
+    }
+  })
   return visibleItems
 }
