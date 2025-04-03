@@ -20,10 +20,10 @@ export const getPicks = async (): Promise<any[]> => {
 }
 
 export const getVisibleItems = async (
+  picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
-  searchValue: string,
 ): Promise<readonly VisibleItem[]> => {
   return []
 }

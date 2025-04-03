@@ -85,16 +85,11 @@ export const isPrepared = (): boolean => {
 }
 
 export const getVisibleItems = async (
+  picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
-  searchValue: string,
 ): Promise<readonly VisibleItem[]> => {
-  const filterValue = getFilterValue(searchValue)
-  if (!filterValue) {
-    return []
-  }
-  const picks = await getPicks(searchValue)
   const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
     description: getPickDescription(pick),
     fileIcon: '',
