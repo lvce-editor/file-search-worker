@@ -1,3 +1,4 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
@@ -27,4 +28,13 @@ export const getFilterValue = (value: any): any => {
 
 export const getPickFilterValue = (pick: any): any => {
   return pick
+}
+
+export const getVisibleItems = async (
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+  searchValue: string,
+): Promise<readonly VisibleItem[]> => {
+  return []
 }
