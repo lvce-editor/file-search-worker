@@ -14,15 +14,22 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     // @ts-ignore
     provider.setArgs(args)
   }
-  const newPicks = await provider.getVisibleItems(0, state.maxVisibleItems, 0, value)
-  Assert.array(newPicks)
+
+  // Get raw picks first
+  const picks = await provider.getPicks(value)
+  Assert.array(picks)
+
+  // Then get visible items
+  const items = await provider.getVisiblePicks(picks, 0, state.maxVisibleItems, 0, value)
+  Assert.array(items)
+
   const minLineY = 0
-  const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)
+  const maxLineY = Math.min(minLineY + state.maxVisibleItems, picks.length)
 
   return {
     ...state,
-    picks: newPicks,
-    items: newPicks,
+    picks,
+    items,
     focusedIndex: 0,
     state: QuickPickOpenState.Finished,
     minLineY,

@@ -23,16 +23,12 @@ export const state = {
  */
 export const name = 'everything'
 
-export const getPlaceholder = (): string => {
-  return state.provider.getPlaceholder()
+export const getPlaceholder = () => {
+  return 'Type to search'
 }
 
-export const getLabel = (): string => {
-  return ''
-}
-
-export const getNoResults = (): any => {
-  return state.provider.getNoResults()
+export const getNoResults = () => {
+  return 'No results found'
 }
 
 export const getPicks = async (value: any): Promise<readonly any[]> => {
@@ -49,33 +45,41 @@ export const getPicks = async (value: any): Promise<readonly any[]> => {
   return picks
 }
 
-// @ts-ignore
-const getPick = (state: any, index: number): any => {
-  // if (index < state.recentPicks.length) {
-  //   return state.recentPicks[index]
-  // }
-  // index -= state.recentPicks.length
-  if (index < state.filteredPicks.length) {
-    return state.filteredPicks[index]
+export const getVisibleItems = async (
+  items: readonly any[],
+  minLineY: number,
+  maxLineY: number,
+  focusedIndex: number,
+  searchValue: string,
+): Promise<readonly VisibleItem[]> => {
+  const filterValue = getFilterValue(searchValue)
+  if (!filterValue) {
+    return []
   }
-  console.warn('no pick matching index', index)
+  const visibleItems = items.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
+    description: getPickDescription(pick),
+    fileIcon: getPickFileIcon(pick),
+    icon: getPickIcon(pick),
+    isActive: index + minLineY === focusedIndex,
+    label: getPickLabel(pick),
+    matches: [],
+    posInSet: index + minLineY + 1,
+    setSize: items.length,
+  }))
+  return visibleItems
 }
 
-export const selectPick = (item: any): Promise<any> => {
+export const selectPick = async (pick: any) => {
   const { provider } = state
-  return provider.selectPick(item)
+  return provider.selectPick(pick)
 }
 
-export const openCommandPalette = (): void => {
-  // show('>')
-}
-
-export const openView = (): void => {
-  // show('view ')
-}
-
-export const getFilterValue = (value: string): string => {
-  return value.slice(state.prefix.length).trim()
+export const getFilterValue = (value: any): string => {
+  const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
+  if (state.prefix !== prefix) {
+    return ''
+  }
+  return value.slice(prefix.length).trimStart()
 }
 
 export const getPickFilterValue = (pick: any): any => {
@@ -105,7 +109,7 @@ export const getPickIcon = (pick: any): string => {
   return provider.getPickIcon(pick)
 }
 
-export const getPickFileIcon = (pick: any): string => {
+export const getPickFileIcon = (pick: any): any => {
   const { provider } = state
   // @ts-ignore
   if (provider.getPickFileIcon) {
@@ -115,36 +119,6 @@ export const getPickFileIcon = (pick: any): string => {
   return ''
 }
 
-export const isPrepared = (): boolean => {
-  const { provider } = state
-  // @ts-ignore
-  if (provider.isPrepared) {
-    // @ts-ignore
-    return provider.isPrepared()
-  }
-  return false
-}
-
-export const getVisibleItems = async (
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  searchValue: string,
-): Promise<readonly VisibleItem[]> => {
-  const filterValue = getFilterValue(searchValue)
-  if (!filterValue) {
-    return []
-  }
-  const picks = await getPicks(searchValue)
-  const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
-    description: getPickDescription(pick),
-    fileIcon: getPickFileIcon(pick),
-    icon: getPickIcon(pick),
-    isActive: index + minLineY === focusedIndex,
-    label: getPickLabel(pick),
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize: picks.length,
-  }))
-  return visibleItems
+export const isPrepared = () => {
+  return true
 }
