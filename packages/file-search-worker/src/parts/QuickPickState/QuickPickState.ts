@@ -13,6 +13,7 @@ export interface QuickPickState extends List<any> {
   readonly warned: any[]
   readonly maxVisibleItems: number
   readonly uri: string
+  readonly icons: readonly string[]
   readonly cursorOffset: number
   readonly height: number
   readonly top: number
