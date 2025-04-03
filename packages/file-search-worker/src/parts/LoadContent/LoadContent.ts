@@ -19,8 +19,6 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   Assert.array(newPicks)
   const filterValue = provider.getFilterValue(value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, provider)
-  // @ts-ignore
-  const label = provider.getLabel()
   const minLineY = 0
   const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)
 
