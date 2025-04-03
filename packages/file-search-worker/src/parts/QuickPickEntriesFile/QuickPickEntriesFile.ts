@@ -112,38 +112,17 @@ export const isPrepared = (): boolean => {
 }
 
 export const getVisibleItems = async (
+  files: readonly string[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
-  searchValue: string,
 ): Promise<readonly VisibleItem[]> => {
-  // Query items using searchValue
-  const workspace = await GetWorkspacePath.getWorkspacePath()
-  if (!workspace) {
-    return []
-  }
-  const files = await searchFile(workspace, searchValue)
-
-  // Filter items and store in state
-  const filteredItems = []
-  for (const file of files) {
-    const filterValue = getPickFilterValue(file)
-    const matches = FilterQuickPickItem.filterQuickPickItem(searchValue, filterValue)
-    if (matches.length > 0) {
-      filteredItems.push({
-        pick: file,
-        matches,
-      })
-    }
-  }
-  state.items = filteredItems
-
   const visibleItems = []
   const setSize = state.items.length
   const max = Math.min(setSize, maxLineY)
-  const itemsToProcess = state.items.slice(minLineY, maxLineY)
+  const itemsToProcess = files.slice(minLineY, maxLineY)
   const iconRequests = itemsToProcess.map((item) => ({
-    name: Workspace.pathBaseName(item.pick),
+    name: Workspace.pathBaseName(item),
     path: '',
     type: DirentType.File,
   }))
