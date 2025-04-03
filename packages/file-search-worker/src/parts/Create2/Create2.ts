@@ -42,6 +42,7 @@ export const create = (
     focused: false,
     platform,
     value: '',
+    fileIconCache: Object.create(null),
   }
   QuickPickStates.set(uid, state, state)
 }
