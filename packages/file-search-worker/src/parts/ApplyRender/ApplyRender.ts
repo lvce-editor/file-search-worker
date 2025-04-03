@@ -3,9 +3,9 @@ import * as CreateQuickPickViewModel from '../CreateQuickPickViewModel/CreateQui
 import * as DiffType from '../DiffType/DiffType.ts'
 import * as GetRenderer from '../GetRenderer/GetRenderer.ts'
 
-export const applyRender = async (oldState: QuickPickState, newState: QuickPickState, diffResult: readonly number[]): Promise<readonly any[]> => {
+export const applyRender = (oldState: QuickPickState, newState: QuickPickState, diffResult: readonly number[]): readonly any[] => {
   const commands = []
-  const viewModel = await CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
+  const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   for (const item of diffResult) {
     if (item === DiffType.Height) {
       continue
