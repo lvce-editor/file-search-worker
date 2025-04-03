@@ -1,6 +1,5 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as Assert from '../Assert/Assert.ts'
-import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as GetDefaultValue from '../GetDefaultValue/GetDefaultValue.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
@@ -15,19 +14,15 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     // @ts-ignore
     provider.setArgs(args)
   }
-  const newPicks = await provider.getPicks(value)
+  const newPicks = await provider.getVisibleItems(0, state.maxVisibleItems, 0, value)
   Assert.array(newPicks)
-  const filterValue = provider.getFilterValue(value)
-  const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, provider)
-  // @ts-ignore
-  const label = provider.getLabel()
   const minLineY = 0
   const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)
 
   return {
     ...state,
     picks: newPicks,
-    items,
+    items: newPicks,
     focusedIndex: 0,
     state: QuickPickOpenState.Finished,
     minLineY,

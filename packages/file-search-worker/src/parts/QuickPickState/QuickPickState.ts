@@ -1,15 +1,14 @@
 import type { List } from '@lvce-editor/list'
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 
-export interface QuickPickState extends List<any> {
+export interface QuickPickState extends List<VisibleItem> {
   readonly uid: number
   readonly state: number
-  readonly picks: readonly any[]
   readonly recentPicks: readonly any[]
   readonly recentPickIds: Map<any, any>
   readonly versionId: number
   readonly provider: any
   readonly warned: any[]
-  readonly visiblePicks: readonly any[]
   readonly maxVisibleItems: number
   readonly uri: string
   readonly cursorOffset: number
@@ -18,7 +17,7 @@ export interface QuickPickState extends List<any> {
   readonly width: number
   readonly headerHeight: number
   readonly itemHeight: number
-  readonly items: readonly any[]
+  readonly items: readonly VisibleItem[]
   readonly minimumSliderSize: number
   readonly focusedIndex: number
   readonly touchOffsetY: number

@@ -26,7 +26,6 @@ export const create = (
     versionId: 0,
     provider: QuickPickEveryThing, // TODO make this dynamic again
     warned: [],
-    visiblePicks: [],
     maxVisibleItems: 10,
     uri,
     cursorOffset: 0,

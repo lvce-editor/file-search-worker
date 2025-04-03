@@ -8,7 +8,7 @@ export const setValue = async (state: QuickPickState, newValue: string): Promise
   if (value === newValue) {
     return state
   }
-  const newPicks = await provider.getPicks(newValue)
+  const newPicks = await provider.getVisibleItems(newValue)
   const filterValue = provider.getFilterValue(newValue)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, provider)
   const focusedIndex = items.length === 0 ? -1 : 0
