@@ -7,7 +7,7 @@ import * as QuickPickEntriesSymbol from '../QuickPickEntriesSymbol/QuickPickEntr
 import * as QuickPickEntriesView from '../QuickPickEntriesView/QuickPickEntriesView.ts'
 import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 
-export const quickPickEntriesModules: Record<string, QuickPickEntriesModule> = {
+export const quickPickEntriesModules: Record<string, QuickPickEntriesModule<any>> = {
   [QuickPickEntryId.CommandPalette]: QuickPickEntriesEverything,
   [QuickPickEntryId.Commands]: QuickPickEntriesEverything,
   [QuickPickEntryId.File]: QuickPickEntriesEverything,
