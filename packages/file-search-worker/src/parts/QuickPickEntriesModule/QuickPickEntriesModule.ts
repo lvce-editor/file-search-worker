@@ -9,12 +9,7 @@ export interface QuickPickEntriesModule<T = any> {
   readonly getPicks: (value: string) => Promise<readonly T[]>
   readonly selectPick: (item: T) => Promise<any>
   readonly getFilterValue: (item: T) => string
-  readonly getPickFilterValue: (item: T) => string
-  readonly getPickDescription: (item: T) => string
-  readonly getPickLabel: (item: T) => string
-  readonly getPickIcon: (item: T) => string
   readonly getPickFileIcon?: (item: T) => Dirent
-  readonly isPrepared: () => boolean
   readonly getVisibleItems: (
     items: readonly T[],
     minLineY: number,

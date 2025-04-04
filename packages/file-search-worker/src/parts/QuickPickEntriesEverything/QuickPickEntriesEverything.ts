@@ -13,6 +13,8 @@ const RECENT_PICKS_MAX_SIZE = 3
 
 // TODO avoid global variable
 
+// TODO don't store provider in state, only serialized value like provider-id
+
 export const state = {
   // providerId: PROVIDER_NOOP,
   provider: QuickPickNoop as any,
