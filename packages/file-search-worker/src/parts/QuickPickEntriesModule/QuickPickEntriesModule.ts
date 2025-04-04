@@ -22,5 +22,5 @@ export interface QuickPickEntriesModule<T = any> {
     focusedIndex: number,
     setSize: number,
     icons: readonly string[],
-  ) => readonly VisibleItem[] | Promise<readonly VisibleItem[]>
+  ) => readonly VisibleItem[]
 }
