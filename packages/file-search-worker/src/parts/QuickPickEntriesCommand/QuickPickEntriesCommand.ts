@@ -7,6 +7,16 @@ import * as Rpc from '../Rpc/Rpc.ts'
 
 export const name = 'command'
 
+export const state = {}
+
+export const isPrepared = (): boolean => {
+  return false
+}
+
+export const getPickDescription = (): string => {
+  return ''
+}
+
 export const getPlaceholder = (): string => {
   return ViewletQuickPickStrings.typeNameofCommandToRun()
 }
@@ -65,14 +75,14 @@ export const getPicks = async (): Promise<readonly any[]> => {
   return allPicks
 }
 
-export const getVisibleItems = async (
+export const getVisibleItems = (
   picks: readonly any[],
   minLineY: number,
   maxLineY: number,
   focusedIndex: number,
   setSize: number,
   icons: readonly string[],
-): Promise<readonly VisibleItem[]> => {
+): readonly VisibleItem[] => {
   const visibleItems = picks.map((pick, index) => ({
     description: pick.description || '',
     fileIcon: '',
