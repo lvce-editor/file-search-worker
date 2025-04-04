@@ -1,4 +1,3 @@
-import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as QuickPickStates from '../QuickPickStates/QuickPickStates.ts'
 
 export const wrapCommand = (fn: any): any => {
@@ -9,11 +8,7 @@ export const wrapCommand = (fn: any): any => {
       return
     }
     const latest = QuickPickStates.get(uid)
-    const merged: QuickPickState = {
-      ...latest.newState,
-      ...newerState,
-    }
-    QuickPickStates.set(uid, latest.newState, merged)
+    QuickPickStates.set(uid, latest.oldState, newerState)
   }
   return wrapped
 }
