@@ -9,7 +9,7 @@ export const test: Test = async ({ Locator, expect, QuickPick, Command }) => {
   await QuickPick.focusIndex(1)
 
   // act
-  await Command.execute('QuickPick.focusLast')
+  await QuickPick.focusLast()
 
   // assert
   const activeItem = Locator('.QuickPickItemActive')

@@ -8,7 +8,7 @@ export const test: Test = async ({ Locator, expect, QuickPick, Command }) => {
   await QuickPick.setValue('> About')
 
   // act
-  await Command.execute('QuickPick.handleClickAt', 0, 80)
+  await QuickPick.handleClickAt(0, 80)
 
   // assert
   const dialogContent = Locator('.DialogContent')
