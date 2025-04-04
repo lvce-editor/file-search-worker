@@ -1,6 +1,8 @@
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
 import * as GetQuickPickProvider from '../GetQuickPickProvider/GetQuickPickProvider.ts'
+import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
+import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
@@ -41,7 +43,9 @@ export const getPicks = async (value: any): Promise<readonly any[]> => {
   // TODO race condition
   if (state.prefix !== prefix) {
     state.prefix = prefix
-    state.provider = await GetQuickPickProvider.getQuickPickProvider(prefix)
+    const providerId = GetQuickPickProviderId.getQuickPickProviderId(prefix)
+    const provider = QuickPickEntries.get(providerId)
+    state.provider = provider
   }
   // TODO this line is a bit duplicated with getFilterValue
   const slicedValue = value.slice(prefix.length).trimStart()
