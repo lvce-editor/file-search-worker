@@ -47,7 +47,6 @@ export const commandMap = {
   'QuickPick.handleInput': WrapCommand.wrapCommand(HandleInput.handleInput),
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
-  'QuickPick.loadEntries2': QuickPickEntries.get,
   'QuickPick.render2': Render2.render2,
   'QuickPick.renderEventListeners': RenderEventListeners.renderEventListeners,
   'QuickPick.selectCurrentIndex': WrapCommand.wrapCommand(SelectCurrentIndex.selectCurrentIndex),
@@ -55,4 +54,7 @@ export const commandMap = {
   'QuickPick.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'QuickPick.setDeltaY': WrapCommand.wrapCommand(VirtualList.setDeltaY),
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
+
+  // deprecated
+  'QuickPick.loadEntries2': QuickPickEntries.get,
 }
