@@ -1,4 +1,3 @@
-import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as QuickPickStates from '../QuickPickStates/QuickPickStates.ts'
 
 export const wrapCommand = (fn: any): any => {
