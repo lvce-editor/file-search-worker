@@ -9,6 +9,8 @@ import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.t
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
+export const state = {}
+
 const searchFile = async (path: string, value: string): Promise<readonly any[]> => {
   const prepare = true
   // @ts-ignore
