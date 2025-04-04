@@ -1,5 +1,7 @@
+import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+
 export interface QuickPickViewModel {
-  readonly visibleItems: readonly any[]
+  readonly visibleItems: readonly VisibleItem[]
   readonly value: string
   readonly cursorOffset: number
   readonly oldFocusedIndex: number

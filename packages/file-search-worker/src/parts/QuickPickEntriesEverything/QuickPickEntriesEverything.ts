@@ -41,7 +41,7 @@ export const getPicks = async (value: any): Promise<readonly any[]> => {
   // TODO race condition
   if (state.prefix !== prefix) {
     state.prefix = prefix
-    state.provider = await GetQuickPickProvider.getQuickPickProvider(prefix)
+    state.provider = GetQuickPickProvider.getQuickPickProvider(prefix)
   }
   // TODO this line is a bit duplicated with getFilterValue
   const slicedValue = value.slice(prefix.length).trimStart()
