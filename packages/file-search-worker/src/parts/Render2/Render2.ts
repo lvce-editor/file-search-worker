@@ -3,6 +3,9 @@ import * as QuickPickStates from '../QuickPickStates/QuickPickStates.ts'
 
 export const render2 = (uid: number, diffResult: readonly number[]): readonly any[] => {
   const { oldState, newState } = QuickPickStates.get(uid)
+  if (oldState === newState) {
+    return []
+  }
   QuickPickStates.set(uid, newState, newState)
   const commands = ApplyRender.applyRender(oldState, newState, diffResult)
   return commands
