@@ -19,3 +19,5 @@ export const View = 'quickPick://view'
 export const WorkspaceSymbol = 'quickPick://workspace-symbol'
 
 export const Custom = 'quickPick://custom'
+
+export const GoToLine = 'quickPick://go-to-line'
