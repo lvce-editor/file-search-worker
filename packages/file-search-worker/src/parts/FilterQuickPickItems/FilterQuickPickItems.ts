@@ -12,6 +12,7 @@ export const filterQuickPickItems = (items: readonly string[], value: string, pr
   for (const item of items) {
     let filterValue = ''
     if (provider) {
+      // @ts-ignore
       filterValue = provider.getPickLabel(item)
     } else {
       filterValue = pathBaseName(item)
