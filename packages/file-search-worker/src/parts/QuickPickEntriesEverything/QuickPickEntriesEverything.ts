@@ -1,6 +1,5 @@
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
-import * as GetQuickPickProvider from '../GetQuickPickProvider/GetQuickPickProvider.ts'
 import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.ts'
