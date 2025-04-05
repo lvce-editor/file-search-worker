@@ -1,4 +1,3 @@
-import * as GetColorThemeNames from '../GetColorThemeNames/GetColorThemeNames.ts'
 import * as GetVisibleItemsQuickPickEntriesColorTheme from '../GetVisibleItemsQuickPickEntriesColorTheme/GetVisibleItemsQuickPickEntriesColorTheme.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
@@ -14,11 +13,6 @@ export const getPlaceholder = (): string => {
 
 export const getLabel = (): string => {
   return QuickPickStrings.selectColorTheme()
-}
-
-export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
-  const colorThemeNames = await GetColorThemeNames.getColorThemeNames()
-  return colorThemeNames
 }
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesColorTheme.getVisibleItems
@@ -71,3 +65,5 @@ export const name = ''
 export const getHelpEntries = (): readonly any[] => {
   return []
 }
+
+export { getPicks } from '../GetPicksColorTheme/GetPicksColorTheme.ts'
