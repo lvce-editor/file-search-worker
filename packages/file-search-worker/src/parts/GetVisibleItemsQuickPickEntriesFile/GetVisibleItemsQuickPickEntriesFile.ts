@@ -1,14 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
-export const getVisibleItems = (
-  files: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-  icons: readonly string[],
-): readonly ProtoVisibleItem[] => {
+export const getVisibleItems = (files: readonly any[], icons: readonly string[]): readonly ProtoVisibleItem[] => {
   const visibleItems = files.map((item, i) => {
     const pick = item.pick
     const label = getPickLabel(pick)
