@@ -1,6 +1,6 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
+import * as GetVisibleItemsQuickPickEntriesOpenRecent from '../GetVisibleItemsQuickPickEntriesOpenRecent/GetVisibleItemsQuickPickEntriesOpenRecent.ts'
 import * as OpenWorkspaceFolder from '../OpenWorkspaceFolder/OpenWorkspaceFolder.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
@@ -30,25 +30,7 @@ export const getPicks = async (): Promise<any> => {
   return recentlyOpened
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-): readonly VisibleItem[] => {
-  const visibleItems = picks.map((pick: string, index: number) => ({
-    description: getPickDescription(pick),
-    fileIcon: getPickFileIcon(pick),
-    icon: getPickIcon(),
-    isActive: index + minLineY === focusedIndex,
-    label: getPickLabel(pick),
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize,
-  }))
-  return visibleItems
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesOpenRecent.getVisibleItems
 
 // TODO selectPick should be independent of show/hide
 export const selectPick = async (pick: string): Promise<any> => {
