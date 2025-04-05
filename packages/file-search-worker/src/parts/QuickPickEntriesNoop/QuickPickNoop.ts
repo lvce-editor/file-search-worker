@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import * as GetVisibleItemsQuickPickEntriesNoop from '../GetVisibleItemsQuickPickEntriesNoop/GetVisibleItemsQuickPickEntriesNoop.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
@@ -30,13 +30,4 @@ export const getPickFilterValue = (pick: any): any => {
   return pick
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-  icons: readonly string[],
-): readonly VisibleItem[] => {
-  return []
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesNoop.getVisibleItems
