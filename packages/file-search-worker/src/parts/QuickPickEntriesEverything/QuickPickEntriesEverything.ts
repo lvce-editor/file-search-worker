@@ -1,8 +1,7 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
 import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
+import { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
-import * as QuickPickNoop from '../QuickPickEntriesNoop/QuickPickNoop.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
 // maybe cache by id opening commands -> has all commands cached
@@ -14,12 +13,6 @@ const RECENT_PICKS_MAX_SIZE = 3
 // TODO avoid global variable
 
 // TODO don't store provider in state, only serialized value like provider-id
-
-export const state = {
-  // providerId: PROVIDER_NOOP,
-  provider: QuickPickNoop as any,
-  prefix: 'string-that-should-never-match-another-string',
-}
 
 /**
  * @type {string}
@@ -130,19 +123,6 @@ export const isPrepared = (): boolean => {
   return false
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-  icons: readonly string[],
-): readonly VisibleItem[] => {
-  const items = picks.map((pick) => pick.pick)
-  const visibleItems = state.provider.getVisibleItems(items, minLineY, maxLineY, focusedIndex, setSize, icons)
-  return visibleItems
-}
-
 // provider
 // - create
 // - loadcontent
@@ -150,3 +130,5 @@ export const getVisibleItems = (
 // - getVisible
 
 // matches could be in loadcontent or getVisible
+
+export { getVisibleItems } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
