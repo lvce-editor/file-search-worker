@@ -1,5 +1,5 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as GetColorThemeNames from '../GetColorThemeNames/GetColorThemeNames.ts'
+import * as GetVisibleItemsQuickPickEntriesColorTheme from '../GetVisibleItemsQuickPickEntriesColorTheme/GetVisibleItemsQuickPickEntriesColorTheme.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Rpc from '../Rpc/Rpc.ts'
@@ -21,26 +21,7 @@ export const getPicks = async (searchValue: any): Promise<readonly any[]> => {
   return colorThemeNames
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-  icons: readonly string[],
-): readonly VisibleItem[] => {
-  const visibleItems = picks.map((pick, index) => ({
-    description: getPickDescription(pick),
-    fileIcon: '',
-    icon: getPickIcon(pick),
-    isActive: index + minLineY === focusedIndex,
-    label: getPickLabel(pick),
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize,
-  }))
-  return visibleItems
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesColorTheme.getVisibleItems
 
 export const selectPick = async (pick: any): Promise<any> => {
   await setColorTheme(/* colorThemeId */ pick)
