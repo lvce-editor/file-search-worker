@@ -1,5 +1,5 @@
 import type { Dirent } from '../Dirent/Dirent.ts'
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
 export interface QuickPickEntriesModule<T = any> {
   readonly state: any
@@ -17,5 +17,5 @@ export interface QuickPickEntriesModule<T = any> {
     focusedIndex: number,
     setSize: number,
     icons: readonly string[],
-  ) => readonly VisibleItem[]
+  ) => readonly ProtoVisibleItem[]
 }

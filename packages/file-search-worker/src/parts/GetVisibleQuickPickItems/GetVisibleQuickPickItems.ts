@@ -11,6 +11,14 @@ export const getVisible = (
 ): readonly VisibleItem[] => {
   const setSize = items.length
   const range = items.slice(minLineY, maxLineY)
-  const visibleItems = provider.getVisibleItems(range, minLineY, maxLineY, focusedIndex, setSize, icons)
+  const protoVisibleItems = provider.getVisibleItems(range, minLineY, maxLineY, focusedIndex, setSize, icons)
+  const visibleItems = protoVisibleItems.map((visibleItem, i) => {
+    return {
+      ...visibleItem,
+      posInSet: minLineY + i + 1,
+      setSize,
+      isActive: i === focusedIndex,
+    }
+  })
   return visibleItems
 }
