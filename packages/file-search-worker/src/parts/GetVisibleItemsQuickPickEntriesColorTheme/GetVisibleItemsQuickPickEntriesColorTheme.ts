@@ -20,15 +20,19 @@ export const getVisibleItems = (
   setSize: number,
   icons: readonly string[],
 ): readonly VisibleItem[] => {
-  const visibleItems = picks.map((pick, index) => ({
-    description: getPickDescription(pick),
-    fileIcon: '',
-    icon: getPickIcon(pick),
-    isActive: index + minLineY === focusedIndex,
-    label: getPickLabel(pick),
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize,
-  }))
+  console.log({ picks })
+  const visibleItems = picks.map((item, index) => {
+    const pick = item.pick
+    return {
+      description: getPickDescription(pick),
+      fileIcon: '',
+      icon: getPickIcon(pick),
+      isActive: index + minLineY === focusedIndex,
+      label: getPickLabel(pick),
+      matches: [],
+      posInSet: index + minLineY + 1,
+      setSize,
+    }
+  })
   return visibleItems
 }
