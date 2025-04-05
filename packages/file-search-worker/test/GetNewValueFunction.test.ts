@@ -1,13 +1,13 @@
 import { test, expect } from '@jest/globals'
-import { getNewValueFunction } from '../src/parts/GetNewValueFunction/GetNewValueFunction.ts'
-import * as InputEventType from '../src/parts/InputEventType/InputEventType.ts'
-import { getNewValueInsertText } from '../src/parts/GetNewValueInsertText/GetNewValueInsertText.ts'
 import { getNewValueDeleteContentBackward } from '../src/parts/GetNewValueDeleteContentBackward/GetNewValueDeleteContentBackward.ts'
 import { getNewValueDeleteContentForward } from '../src/parts/GetNewValueDeleteContentForward/GetNewValueDeleteContentForward.ts'
-import { getNewValueDeleteWordForward } from '../src/parts/GetNewValueDeleteWordForward/GetNewValueDeleteWordForward.ts'
 import { getNewValueDeleteWordBackward } from '../src/parts/GetNewValueDeleteWordBackward/GetNewValueDeleteWordBackward.ts'
-import { getNewValueInsertLineBreak } from '../src/parts/GetNewValueInsertLineBreak/GetNewValueInsertLineBreak.ts'
+import { getNewValueDeleteWordForward } from '../src/parts/GetNewValueDeleteWordForward/GetNewValueDeleteWordForward.ts'
+import { getNewValueFunction } from '../src/parts/GetNewValueFunction/GetNewValueFunction.ts'
 import { getNewValueInsertCompositionText } from '../src/parts/GetNewValueInsertCompositionText/GetNewValueInsertCompositionText.ts'
+import { getNewValueInsertLineBreak } from '../src/parts/GetNewValueInsertLineBreak/GetNewValueInsertLineBreak.ts'
+import { getNewValueInsertText } from '../src/parts/GetNewValueInsertText/GetNewValueInsertText.ts'
+import * as InputEventType from '../src/parts/InputEventType/InputEventType.ts'
 
 test('returns insert text handler for InsertText', () => {
   const handler = getNewValueFunction(InputEventType.InsertText)
