@@ -29,7 +29,7 @@ export const getVisibleItems = (
       fileIcon,
       icon: getPickIcon(),
       label: getPickLabel(pick),
-      matches: pick.matches,
+      matches: pick.matches || [],
     }
   })
   return visibleItems
