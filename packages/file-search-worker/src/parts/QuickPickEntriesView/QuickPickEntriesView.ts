@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import * as GetVisibleItemsQuickPickEntriesView from '../GetVisibleItemsQuickPickEntriesView/GetVisibleItemsQuickPickEntriesView.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 // TODO probably not needed
@@ -57,22 +57,4 @@ export const getPickDescription = (): string => {
   return ''
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-): readonly VisibleItem[] => {
-  const visibleItems = picks.map((pick: any, index: number) => ({
-    description: getPickDescription(),
-    fileIcon: '',
-    icon: getPickIcon(pick),
-    isActive: index + minLineY === focusedIndex,
-    label: getPickLabel(pick),
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize,
-  }))
-  return visibleItems
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesView.getVisibleItems
