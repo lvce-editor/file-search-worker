@@ -1,11 +1,7 @@
 import * as GetVisibleItemsQuickPickEntriesColorTheme from '../GetVisibleItemsQuickPickEntriesColorTheme/GetVisibleItemsQuickPickEntriesColorTheme.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
-import * as Rpc from '../Rpc/Rpc.ts'
-
-export const setColorTheme = (id: string): Promise<void> => {
-  return Rpc.invoke(/* ColorTheme.setColorTheme */ 'ColorTheme.setColorTheme', /* colorThemeId */ id)
-}
+import * as SetColorTheme from '../SetColorTheme/SetColorTheme.ts'
 
 export const getPlaceholder = (): string => {
   return QuickPickStrings.selectColorTheme()
@@ -18,14 +14,14 @@ export const getLabel = (): string => {
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesColorTheme.getVisibleItems
 
 export const selectPick = async (pick: any): Promise<any> => {
-  await setColorTheme(/* colorThemeId */ pick)
+  await SetColorTheme.setColorTheme(/* colorThemeId */ pick)
   return {
     command: QuickPickReturnValue.Hide,
   }
 }
 
 export const focusPick = async (pick: any): Promise<void> => {
-  await setColorTheme(/* colorThemeId */ pick)
+  await SetColorTheme.setColorTheme(/* colorThemeId */ pick)
 }
 
 export const getFilterValue = (value: any): any => {
