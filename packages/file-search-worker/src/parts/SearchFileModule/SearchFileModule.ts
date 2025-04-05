@@ -1,8 +1,8 @@
 import type { SearchFileHandler } from '../SearchFileHandler/SearchFileHandler.ts'
 
-const state: Record<any, SearchFileHandler> = Object.create(null)
+const state: Record<string, SearchFileHandler> = Object.create(null)
 
-export const register = (modules: Record<any, SearchFileHandler>): void => {
+export const register = (modules: Record<string, SearchFileHandler>): void => {
   Object.assign(state, modules)
 }
 
