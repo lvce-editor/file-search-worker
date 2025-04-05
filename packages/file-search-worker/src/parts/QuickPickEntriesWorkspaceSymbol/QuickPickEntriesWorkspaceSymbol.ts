@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import * as GetVisibleItemsQuickPickEntriesWorkspaceSymbol from '../GetVisibleItemsQuickPickEntriesWorkspaceSymbol/GetVisibleItemsQuickPickEntriesWorkspaceSymbol.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
@@ -51,22 +51,4 @@ export const getFilterValue = (value: any): string => {
   return value
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-): readonly VisibleItem[] => {
-  const visibleItems = picks.map((pick: any, index: number) => ({
-    description: '',
-    fileIcon: '',
-    icon: '',
-    isActive: index + minLineY === focusedIndex,
-    label: pick.label || '',
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize,
-  }))
-  return visibleItems
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesWorkspaceSymbol.getVisibleItems
