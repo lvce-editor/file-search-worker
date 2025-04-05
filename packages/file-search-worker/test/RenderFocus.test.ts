@@ -1,45 +1,72 @@
-import { expect, test } from '@jest/globals'
+import { test, expect } from '@jest/globals'
 import type { QuickPickViewModel } from '../src/parts/QuickPickViewModel/QuickPickViewModel.ts'
+import * as InputName from '../src/parts/InputName/InputName.ts'
 import * as RenderFocus from '../src/parts/RenderFocus/RenderFocus.ts'
 
-test.skip('renders focus when focused is true', () => {
-  const state: QuickPickViewModel = {
-    uid: 1,
-    focused: true,
+test('renderFocus', () => {
+  const viewModel: QuickPickViewModel = {
     visibleItems: [],
     value: '',
     cursorOffset: 0,
     oldFocusedIndex: 0,
     newFocusedIndex: 0,
-    height: 0,
+    height: 300,
+    focused: true,
+    uid: 1,
   }
-  expect(RenderFocus.renderFocus(state)).toEqual(['Viewlet.focusSelector', '.InputBox'])
+
+  const result = RenderFocus.renderFocus(viewModel)
+
+  expect(result).toEqual(['Viewlet.focusElementByName', InputName.QuickPickInput])
 })
 
-test.skip('renders focus when focused is false', () => {
-  const state: QuickPickViewModel = {
+test('renders focus when focused is true', () => {
+  const viewModel: QuickPickViewModel = {
+    visibleItems: [],
+    value: '',
+    cursorOffset: 0,
+    oldFocusedIndex: 0,
+    newFocusedIndex: 0,
+    height: 300,
+    focused: true,
     uid: 1,
+  }
+
+  const result = RenderFocus.renderFocus(viewModel)
+
+  expect(result).toEqual(['Viewlet.focusElementByName', InputName.QuickPickInput])
+})
+
+test('renders focus when focused is false', () => {
+  const viewModel: QuickPickViewModel = {
+    visibleItems: [],
+    value: '',
+    cursorOffset: 0,
+    oldFocusedIndex: 0,
+    newFocusedIndex: 0,
+    height: 300,
     focused: false,
-    visibleItems: [],
-    value: '',
-    cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 0,
+    uid: 1,
   }
-  expect(RenderFocus.renderFocus(state)).toEqual(['Viewlet.focusSelector', ''])
+
+  const result = RenderFocus.renderFocus(viewModel)
+
+  expect(result).toEqual(['Viewlet.focusElementByName', InputName.QuickPickInput])
 })
 
-test.skip('handles different uid', () => {
-  const state: QuickPickViewModel = {
-    uid: 2,
-    focused: true,
+test('handles different uid', () => {
+  const viewModel: QuickPickViewModel = {
     visibleItems: [],
     value: '',
     cursorOffset: 0,
     oldFocusedIndex: 0,
     newFocusedIndex: 0,
-    height: 0,
+    height: 300,
+    focused: true,
+    uid: 2,
   }
-  expect(RenderFocus.renderFocus(state)).toEqual(['Viewlet.focusSelector', '.InputBox'])
+
+  const result = RenderFocus.renderFocus(viewModel)
+
+  expect(result).toEqual(['Viewlet.focusElementByName', InputName.QuickPickInput])
 })
