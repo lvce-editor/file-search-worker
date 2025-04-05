@@ -1,4 +1,4 @@
-import { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 
 export const getVisible = (
