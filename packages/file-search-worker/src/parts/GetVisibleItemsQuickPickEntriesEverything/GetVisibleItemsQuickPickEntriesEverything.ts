@@ -6,15 +6,8 @@ export const state = {
   prefix: 'string-that-should-never-match-another-string',
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-  icons: readonly string[],
-): readonly ProtoVisibleItem[] => {
+export const getVisibleItems = (picks: readonly any[], icons: readonly string[]): readonly ProtoVisibleItem[] => {
   const items = picks.map((pick) => pick.pick)
-  const visibleItems = state.provider.getVisibleItems(items, minLineY, maxLineY, focusedIndex, setSize, icons)
+  const visibleItems = state.provider.getVisibleItems(items, icons)
   return visibleItems
 }
