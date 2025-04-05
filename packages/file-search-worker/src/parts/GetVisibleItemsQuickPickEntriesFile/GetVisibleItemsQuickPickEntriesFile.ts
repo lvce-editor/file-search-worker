@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
 export const getVisibleItems = (
@@ -8,7 +8,7 @@ export const getVisibleItems = (
   focusedIndex: number,
   setSize: number,
   icons: readonly string[],
-): readonly VisibleItem[] => {
+): readonly ProtoVisibleItem[] => {
   const visibleItems = files.map((item, i) => {
     const pick = item.pick
     const label = getPickLabel(pick)
@@ -20,9 +20,6 @@ export const getVisibleItems = (
       description,
       icon,
       fileIcon,
-      posInSet: minLineY + i + 1,
-      setSize,
-      isActive: i === focusedIndex,
       matches: item.matches,
     }
   })
