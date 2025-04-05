@@ -1,3 +1,4 @@
+import type { Dirent } from '../Dirent/Dirent.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
 import * as GetVisibleItemsQuickPickEntriesOpenRecent from '../GetVisibleItemsQuickPickEntriesOpenRecent/GetVisibleItemsQuickPickEntriesOpenRecent.ts'
@@ -6,11 +7,11 @@ import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnVa
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
-export const getPlaceholder = (): any => {
+export const getPlaceholder = (): string => {
   return ViewletQuickPickStrings.selectToOpen()
 }
 
-export const getLabel = (): any => {
+export const getLabel = (): string => {
   return ViewletQuickPickStrings.openRecent()
 }
 
@@ -61,16 +62,18 @@ export const getPickIcon = (): any => {
   return ''
 }
 
-export const getPickFileIcon = (pick: any): any => {
+export const getPickFileIcon = (pick: any): Dirent => {
   if (typeof pick === 'object') {
     pick = pick.pick
   }
   if (typeof pick === 'object') {
     pick = pick.pick
   }
+  const baseName = Workspace.pathBaseName(pick)
   return {
-    type: DirentType.Directory,
-    name: pick,
+    type: DirentType.File,
+    name: baseName,
+    path: pick,
   }
 }
 
