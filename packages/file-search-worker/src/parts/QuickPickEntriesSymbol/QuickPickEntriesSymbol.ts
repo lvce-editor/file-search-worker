@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import * as GetVisibleItemsQuickPickEntriesSymbol from '../GetVisibleItemsQuickPickEntriesSymbol/GetVisibleItemsQuickPickEntriesSymbol.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
@@ -19,15 +19,7 @@ export const getPicks = async (): Promise<any[]> => {
   return picks
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-): readonly VisibleItem[] => {
-  return []
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesSymbol.getVisibleItems
 
 export const selectPick = async (item: any): Promise<any> => {
   return {
