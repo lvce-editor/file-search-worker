@@ -1,7 +1,7 @@
 import type { Dirent } from '../Dirent/Dirent.ts'
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
+import * as GetVisibleItemsQuickPickEntriesFile from '../GetVisibleItemsQuickPickEntriesFile/GetVisibleItemsQuickPickEntriesFile.ts'
 import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
 import * as OpenUri from '../OpenUri/OpenUri.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
@@ -109,30 +109,4 @@ export const isPrepared = (): boolean => {
   return !protocol
 }
 
-export const getVisibleItems = (
-  files: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-  icons: readonly string[],
-): readonly VisibleItem[] => {
-  const visibleItems = files.map((item, i) => {
-    const pick = item.pick
-    const label = getPickLabel(pick)
-    const description = getPickDescription(pick)
-    const icon = getPickIcon()
-    const fileIcon = icons[i]
-    return {
-      label,
-      description,
-      icon,
-      fileIcon,
-      posInSet: minLineY + i + 1,
-      setSize,
-      isActive: i === focusedIndex,
-      matches: item.matches,
-    }
-  })
-  return visibleItems
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesFile.getVisibleItems
