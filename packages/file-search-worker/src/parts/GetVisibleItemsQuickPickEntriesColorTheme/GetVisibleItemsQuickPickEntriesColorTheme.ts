@@ -20,7 +20,6 @@ export const getVisibleItems = (
   setSize: number,
   icons: readonly string[],
 ): readonly VisibleItem[] => {
-  console.log({ picks })
   const visibleItems = picks.map((item, index) => {
     const pick = item.pick
     return {
