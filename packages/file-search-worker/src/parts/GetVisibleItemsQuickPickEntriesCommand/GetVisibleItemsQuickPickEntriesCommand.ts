@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
 const getPickIcon = (): string => {
   return ''
@@ -15,18 +15,15 @@ export const getVisibleItems = (
   focusedIndex: number,
   setSize: number,
   icons: readonly string[],
-): readonly VisibleItem[] => {
+): readonly ProtoVisibleItem[] => {
   const visibleItems = picks.map((item, index) => {
     const pick = item
     return {
       description: pick.description || '',
       fileIcon: '',
       icon: getPickIcon(),
-      isActive: index + minLineY === focusedIndex,
       label: getPickLabel(pick),
       matches: [],
-      posInSet: index + minLineY + 1,
-      setSize,
     }
   })
   return visibleItems

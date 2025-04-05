@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
 export const getVisibleItems = (
   picks: readonly any[],
@@ -7,6 +7,6 @@ export const getVisibleItems = (
   focusedIndex: number,
   setSize: number,
   icons: readonly string[],
-): readonly VisibleItem[] => {
+): readonly ProtoVisibleItem[] => {
   return []
 }

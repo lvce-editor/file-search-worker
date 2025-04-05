@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
 const getPickDescription = (pick: string): string => {
@@ -20,7 +20,7 @@ export const getVisibleItems = (
   focusedIndex: number,
   setSize: number,
   icons: readonly string[],
-): readonly VisibleItem[] => {
+): readonly ProtoVisibleItem[] => {
   const visibleItems = picks.map((item: any, index: number) => {
     const pick = item.pick
     const fileIcon = icons[index]
@@ -28,11 +28,8 @@ export const getVisibleItems = (
       description: getPickDescription(pick),
       fileIcon,
       icon: getPickIcon(),
-      isActive: index + minLineY === focusedIndex,
       label: getPickLabel(pick),
       matches: pick.matches,
-      posInSet: index + minLineY + 1,
-      setSize,
     }
   })
   return visibleItems

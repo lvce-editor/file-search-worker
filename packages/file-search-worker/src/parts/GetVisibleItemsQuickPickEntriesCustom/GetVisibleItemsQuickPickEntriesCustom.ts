@@ -1,4 +1,4 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as Icon from '../Icon/Icon.ts'
 import * as IconType from '../IconType/IconType.ts'
 
@@ -34,16 +34,13 @@ export const getVisibleItems = (
   focusedIndex: number,
   setSize: number,
   icons: readonly string[],
-): readonly VisibleItem[] => {
+): readonly ProtoVisibleItem[] => {
   const visibleItems = picks.slice(minLineY, maxLineY + 1).map((pick: any, index: number) => ({
     description: getPickDescription(pick),
     fileIcon: '',
     icon: getPickIcon(pick),
-    isActive: index + minLineY === focusedIndex,
     label: getPickLabel(pick),
     matches: [],
-    posInSet: index + minLineY + 1,
-    setSize,
   }))
   return visibleItems
 }
