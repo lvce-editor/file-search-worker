@@ -25,11 +25,11 @@ export const getVisibleItems = (
     const pick = item.pick
     const fileIcon = icons[index]
     return {
-      description: getPickDescription(pick.pick),
+      description: getPickDescription(pick),
       fileIcon,
       icon: getPickIcon(),
       isActive: index + minLineY === focusedIndex,
-      label: getPickLabel(pick.pick),
+      label: getPickLabel(pick),
       matches: pick.matches,
       posInSet: index + minLineY + 1,
       setSize,
