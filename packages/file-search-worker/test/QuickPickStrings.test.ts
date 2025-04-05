@@ -1,5 +1,6 @@
 import { expect, test } from '@jest/globals'
 import * as QuickPickStrings from '../src/parts/QuickPickStrings/QuickPickStrings.ts'
+import * as UiStrings from '../src/parts/UiStrings/UiStrings.ts'
 
 test('files returns string', () => {
   expect(QuickPickStrings.files()).toBe('Files')
@@ -55,4 +56,12 @@ test('typeNameofCommandToRun returns string', () => {
 
 test('typeTheNameOfAViewToOpen returns string', () => {
   expect(QuickPickStrings.typeTheNameOfAViewToOpen()).toBe('Type the name of a view, output channel or terminal to open.')
+})
+
+test('quickOpen', () => {
+  expect(QuickPickStrings.quickOpen()).toBe(UiStrings.QuickOpen)
+})
+
+test('typeTheNameOfACommandToRun', () => {
+  expect(QuickPickStrings.typeTheNameOfACommandToRun()).toBe(UiStrings.TypeNameOfCommandToRun)
 })
