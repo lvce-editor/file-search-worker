@@ -1,5 +1,5 @@
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
+import * as GetVisibleItemsQuickPickEntriesCommand from '../GetVisibleItemsQuickPickEntriesCommand/GetVisibleItemsQuickPickEntriesCommand.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
@@ -75,26 +75,7 @@ export const getPicks = async (): Promise<readonly any[]> => {
   return allPicks
 }
 
-export const getVisibleItems = (
-  picks: readonly any[],
-  minLineY: number,
-  maxLineY: number,
-  focusedIndex: number,
-  setSize: number,
-  icons: readonly string[],
-): readonly VisibleItem[] => {
-  const visibleItems = picks.map((pick, index) => ({
-    description: pick.description || '',
-    fileIcon: '',
-    icon: getPickIcon(),
-    isActive: index + minLineY === focusedIndex,
-    label: getPickLabel(pick),
-    matches: [],
-    posInSet: index + minLineY + 1,
-    setSize,
-  }))
-  return visibleItems
-}
+export const getVisibleItems = GetVisibleItemsQuickPickEntriesCommand.getVisibleItems
 
 const shouldHide = (item: any): boolean => {
   if (item.id === 'Viewlet.openWidget' && item.args[0] === 'QuickPick') {
