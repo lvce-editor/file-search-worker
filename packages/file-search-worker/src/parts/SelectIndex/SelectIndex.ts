@@ -8,6 +8,9 @@ export const selectIndex = async (state: QuickPickState, index: number, button =
   const { minLineY, provider, items } = state
   const actualIndex = index + minLineY
   const pick = GetPick.getPick(items, actualIndex)
+  if (!pick) {
+    return state
+  }
   // @ts-ignore
   const selectPickResult = await provider.selectPick(pick, actualIndex, button)
   Assert.object(selectPickResult)
