@@ -1,7 +1,5 @@
 import * as GetVisibleItemsQuickPickEntriesColorTheme from '../GetVisibleItemsQuickPickEntriesColorTheme/GetVisibleItemsQuickPickEntriesColorTheme.ts'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
-import * as SetColorTheme from '../SetColorTheme/SetColorTheme.ts'
 
 export const getPlaceholder = (): string => {
   return QuickPickStrings.selectColorTheme()
@@ -12,17 +10,6 @@ export const getLabel = (): string => {
 }
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesColorTheme.getVisibleItems
-
-export const selectPick = async (pick: any): Promise<any> => {
-  await SetColorTheme.setColorTheme(/* colorThemeId */ pick)
-  return {
-    command: QuickPickReturnValue.Hide,
-  }
-}
-
-export const focusPick = async (pick: any): Promise<void> => {
-  await SetColorTheme.setColorTheme(/* colorThemeId */ pick)
-}
 
 export const getFilterValue = (value: any): any => {
   return value
@@ -63,3 +50,7 @@ export const getHelpEntries = (): readonly any[] => {
 }
 
 export { getPicks } from '../GetPicksColorTheme/GetPicksColorTheme.ts'
+
+export { selectPick } from '../SelectPickColorTheme/SelectPickColorTheme.ts'
+
+export { focusPick } from '../FocusPickColorTheme/FocusPickColorTheme.ts'
