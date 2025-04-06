@@ -6,17 +6,9 @@ import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
 import * as OpenUri from '../OpenUri/OpenUri.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
-import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
 export const state = {}
-
-const searchFile = async (path: string, value: string): Promise<readonly any[]> => {
-  const prepare = true
-  // @ts-ignore
-  const files = await SearchFile.searchFile(/* path */ path, /* searchTerm */ value, prepare)
-  return files
-}
 
 export const name = 'file'
 
@@ -32,16 +24,6 @@ export const getNoResults = (): any => {
   return {
     label: ViewletQuickPickStrings.noMatchingResults(),
   }
-}
-
-export const getPicks = async (searchValue: string): Promise<readonly any[]> => {
-  // TODO cache workspace path
-  const workspace = await GetWorkspacePath.getWorkspacePath()
-  if (!workspace) {
-    return []
-  }
-  const files = await searchFile(workspace, searchValue)
-  return files
 }
 
 export const selectPick = async (pick: any): Promise<any> => {
@@ -110,3 +92,5 @@ export const isPrepared = (): boolean => {
 }
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesFile.getVisibleItems
+
+export { getPicks } from '../GetPicksFile/GetPicksFile.ts'
