@@ -1,3 +1,4 @@
+import type { GetPicks } from '../GetPicks/GetPicks.ts'
 import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 import * as GetPicksColorTheme from '../GetPicksColorTheme/GetPicksColorTheme.ts'
 import * as GetPicksCommand from '../GetPicksCommand/GetPicksCommand.ts'
@@ -52,7 +53,7 @@ export const selectPicks: Record<string, QuickPickEntriesModule['selectPick']> =
   [QuickPickEntryId.WorkspaceSymbol]: SelectPickWorkspaceSymbol.selectPick,
 }
 
-export const getPicks: Record<string, QuickPickEntriesModule['getPicks']> = {
+export const getPicks: Record<string, GetPicks> = {
   [QuickPickEntryId.ColorTheme]: GetPicksColorTheme.getPicks,
   [QuickPickEntryId.CommandPalette]: GetPicksEverything.getPicks,
   [QuickPickEntryId.Commands]: GetPicksCommand.getPicks,

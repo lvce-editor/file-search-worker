@@ -1,10 +1,11 @@
+import type { GetPicks } from '../GetPicks/GetPicks.ts'
 import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 
 const state: Record<string, QuickPickEntriesModule> = Object.create(null)
 
 const select: Record<string, QuickPickEntriesModule['selectPick']> = Object.create(null)
 
-const getPick: Record<string, QuickPickEntriesModule['getPicks']> = Object.create(null)
+const getPick: Record<string, GetPicks> = Object.create(null)
 
 export const register = (modules: Record<string, QuickPickEntriesModule>): void => {
   Object.assign(state, modules)
@@ -14,7 +15,7 @@ export const registerSelect = (modules: Record<string, QuickPickEntriesModule['s
   Object.assign(select, modules)
 }
 
-export const registerGetPick = (modules: Record<string, QuickPickEntriesModule['getPicks']>): void => {
+export const registerGetPick = (modules: Record<string, GetPicks>): void => {
   Object.assign(getPick, modules)
 }
 
@@ -27,20 +28,10 @@ export const get = (moduleId: string): QuickPickEntriesModule => {
   return module
 }
 
-const getProperty = <T extends keyof QuickPickEntriesModule>(moduleId: string, property: T): QuickPickEntriesModule[T] => {
-  const m = get(moduleId)
-  const fn = m[property]
+export const getPicks = (id: string): GetPicks => {
+  const fn = getPick[id]
   return fn
 }
-
-export const getPicks = (id: string): QuickPickEntriesModule['getPicks'] => {
-  return getProperty(id, 'getPicks')
-}
-
-// export const getPicks = (id: string): QuickPickEntriesModule['getPicks'] => {
-//   const fn = getPick[id]
-//   return fn
-// }
 
 export const getSelect = (id: string): QuickPickEntriesModule['selectPick'] => {
   const fn = select[id]
