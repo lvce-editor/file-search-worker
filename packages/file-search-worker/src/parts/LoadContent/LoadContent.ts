@@ -7,16 +7,13 @@ import * as GetQuickPickFileIcons from '../GetQuickPickFileIcons/GetQuickPickFil
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
+import * as SetArgs from '../SetArgs/SetArgs.ts'
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
   const { uri, args, fileIconCache } = state
   const value = GetDefaultValue.getDefaultValue(uri)
   const provider = QuickPickEntries.get(uri)
-  // @ts-ignore
-  if (provider.setArgs) {
-    // @ts-ignore
-    provider.setArgs(args)
-  }
+  SetArgs.setArgs(uri, args)
   const newPicks = await GetPicks.getPicks(uri, value)
   Assert.array(newPicks)
   // @ts-ignore
