@@ -17,6 +17,7 @@ import * as SelectPickEverything from '../SelectPickEverything/SelectPickEveryth
 import * as SelectPickFile from '../SelectPickFile/SelectPickFile.ts'
 import * as SelectPickRecent from '../SelectPickRecent/SelectPickRecent.ts'
 import * as SelectPickSymbol from '../SelectPickSymbol/SelectPickSymbol.ts'
+import * as SelectPickView from '../SelectPickView/SelectPickView.ts'
 import * as SelectPickWorkspaceSymbol from '../SelectPickWorkspaceSymbol/SelectPickWorkspaceSymbol.ts'
 
 export const selectPicks: Record<string, SelectPick> = {
@@ -28,6 +29,7 @@ export const selectPicks: Record<string, SelectPick> = {
   [QuickPickEntryId.File]: SelectPickFile.selectPick,
   [QuickPickEntryId.Recent]: SelectPickRecent.selectPick,
   [QuickPickEntryId.Symbol]: SelectPickSymbol.selectPick,
+  [QuickPickEntryId.View]: SelectPickView.selectPick,
   [QuickPickEntryId.WorkspaceSymbol]: SelectPickWorkspaceSymbol.selectPick,
 }
 
