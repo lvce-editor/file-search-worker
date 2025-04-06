@@ -17,7 +17,6 @@ import * as HandleInput from '../HandleInput/HandleInput.ts'
 import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
-import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as Render2 from '../Render2/Render2.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
 import * as SelectCurrentIndex from '../SelectCurrentIndex/SelectCurrentIndex.ts'
@@ -54,7 +53,4 @@ export const commandMap = {
   'QuickPick.selectItem': WrapCommand.wrapCommand(SelectItem.selectItem),
   'QuickPick.setDeltaY': WrapCommand.wrapCommand(VirtualList.setDeltaY),
   'QuickPick.setValue': WrapCommand.wrapCommand(SetValue.setValue),
-
-  // deprecated
-  'QuickPick.loadEntries2': QuickPickEntries.get,
 }
