@@ -2,9 +2,6 @@ import type { Dirent } from '../Dirent/Dirent.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
 import * as GetVisibleItemsQuickPickEntriesFile from '../GetVisibleItemsQuickPickEntriesFile/GetVisibleItemsQuickPickEntriesFile.ts'
-import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
-import * as OpenUri from '../OpenUri/OpenUri.ts'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
@@ -23,18 +20,6 @@ export const getLabel = (): string => {
 export const getNoResults = (): any => {
   return {
     label: ViewletQuickPickStrings.noMatchingResults(),
-  }
-}
-
-export const selectPick = async (pick: any): Promise<any> => {
-  if (typeof pick === 'object') {
-    pick = pick.pick
-  }
-  const workspace = await GetWorkspacePath.getWorkspacePath()
-  const absolutePath = `${workspace}/${pick}`
-  await OpenUri.openUri(absolutePath)
-  return {
-    command: QuickPickReturnValue.Hide,
   }
 }
 
@@ -94,3 +79,5 @@ export const isPrepared = (): boolean => {
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesFile.getVisibleItems
 
 export { getPicks } from '../GetPicksFile/GetPicksFile.ts'
+
+export { selectPick } from '../SelectPickFile/SelectPickFile.ts'
