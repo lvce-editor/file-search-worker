@@ -4,7 +4,6 @@ import type { SelectPickResult } from '../SelectPickRresult/SelectPickResult.ts'
 
 export interface QuickPickEntriesModule {
   readonly state: any
-  readonly getPicks: (value: string) => Promise<readonly ProtoVisibleItem[]>
   readonly selectPick: (item: ProtoVisibleItem) => Promise<SelectPickResult>
   readonly getPickFileIcon?: (item: ProtoVisibleItem) => Dirent
 }
