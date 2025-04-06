@@ -3,7 +3,6 @@ import type { SelectPick } from '../SelectPick/SelectPick.ts'
 import * as GetPicksColorTheme from '../GetPicksColorTheme/GetPicksColorTheme.ts'
 import * as GetPicksCommand from '../GetPicksCommand/GetPicksCommand.ts'
 import * as GetPicksCustom from '../GetPicksCustom/GetPicksCustom.ts'
-import * as GetPicksEverything from '../GetPicksEverything/GetPicksEverything.ts'
 import * as GetPicksFile from '../GetPicksFile/GetPicksFile.ts'
 import * as GetPicksGoToLine from '../GetPicksGoToLine/GetPicksGoToLine.ts'
 import * as GetPicksHelp from '../GetPicksHelp/GetPicksHelp.ts'
@@ -14,7 +13,6 @@ import * as GetPicksWorkspaceSymbol from '../GetPicksWorkspaceSymbol/GetPicksWor
 import * as SelectPickColorTheme from '../SelectPickColorTheme/SelectPickColorTheme.ts'
 import * as SelectPickCommand from '../SelectPickCommand/SelectPickCommand.ts'
 import * as SelectPickCustom from '../SelectPickCustom/SelectPickCustom.ts'
-import * as SelectPickEverything from '../SelectPickEverything/SelectPickEverything.ts'
 import * as SelectPickFile from '../SelectPickFile/SelectPickFile.ts'
 import * as SelectPickGoToLine from '../SelectPickGoToLine/SelectPickGoToLine.ts'
 import * as SelectPickHelp from '../SelectPickHelp/SelectPickHelp.ts'
@@ -25,10 +23,8 @@ import * as SelectPickWorkspaceSymbol from '../SelectPickWorkspaceSymbol/SelectP
 
 export const selectPicks: readonly SelectPick[] = [
   SelectPickColorTheme.selectPick,
-  SelectPickEverything.selectPick,
   SelectPickCommand.selectPick,
   SelectPickCustom.selectPick,
-  SelectPickEverything.selectPick,
   SelectPickFile.selectPick,
   SelectPickGoToLine.selectPick,
   SelectPickHelp.selectPick,
@@ -40,10 +36,8 @@ export const selectPicks: readonly SelectPick[] = [
 
 export const getPicks: readonly GetPicks[] = [
   GetPicksColorTheme.getPicks,
-  GetPicksEverything.getPicks,
   GetPicksCommand.getPicks,
   GetPicksCustom.getPicks,
-  GetPicksEverything.getPicks,
   GetPicksFile.getPicks,
   GetPicksGoToLine.getPicks,
   GetPicksHelp.getPicks,
