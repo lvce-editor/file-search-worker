@@ -1,4 +1,3 @@
-import * as GetVisibleItemsQuickPickEntriesView from '../GetVisibleItemsQuickPickEntriesView/GetVisibleItemsQuickPickEntriesView.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 // TODO probably not needed
@@ -49,7 +48,5 @@ export const isPrepared = (): boolean => {
 export const getPickDescription = (): string => {
   return ''
 }
-
-export const getVisibleItems = GetVisibleItemsQuickPickEntriesView.getVisibleItems
 
 export { selectPick } from '../SelectPickView/SelectPickView.ts'

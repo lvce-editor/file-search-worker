@@ -1,5 +1,4 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
-import * as GetVisibleItemsQuickPickEntriesNoop from '../GetVisibleItemsQuickPickEntriesNoop/GetVisibleItemsQuickPickEntriesNoop.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
@@ -30,5 +29,3 @@ export const getFilterValue = (value: any): any => {
 export const getPickFilterValue = (pick: any): any => {
   return pick
 }
-
-export const getVisibleItems = GetVisibleItemsQuickPickEntriesNoop.getVisibleItems

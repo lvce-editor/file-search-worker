@@ -73,5 +73,3 @@ export const isPrepared = (): boolean => {
 export { getPicks } from '../GetPicksFile/GetPicksFile.ts'
 
 export { selectPick } from '../SelectPickFile/SelectPickFile.ts'
-
-export { getVisibleItems } from '../GetVisibleItemsQuickPickEntriesFile/GetVisibleItemsQuickPickEntriesFile.ts'
