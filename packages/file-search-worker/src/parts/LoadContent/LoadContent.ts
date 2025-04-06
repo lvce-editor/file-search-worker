@@ -5,17 +5,19 @@ import * as GetDefaultValue from '../GetDefaultValue/GetDefaultValue.ts'
 import * as GetFilterValue from '../GetFilterValue/GetFilterValue.ts'
 import * as GetPicks from '../GetPicks/GetPicks.ts'
 import * as GetQuickPickFileIcons from '../GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
+import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
 import * as SetArgs from '../SetArgs/SetArgs.ts'
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
   const { uri, args, fileIconCache } = state
-  const value = GetDefaultValue.getDefaultValue(uri)
-  SetArgs.setArgs(uri, args)
-  const newPicks = await GetPicks.getPicks(uri, value)
+  const id = GetQuickPickProviderId.getQuickPickProviderId(uri)
+  const value = GetDefaultValue.getDefaultValue(id)
+  SetArgs.setArgs(id, args)
+  const newPicks = await GetPicks.getPicks(id, value)
   Assert.array(newPicks)
-  const filterValue = GetFilterValue.getFilterValue(uri, value)
+  const filterValue = GetFilterValue.getFilterValue(id, value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
   const minLineY = 0
   const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)
@@ -35,5 +37,6 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     focused: true,
     fileIconCache: newFileIconCache,
     icons,
+    providerId: id,
   }
 }

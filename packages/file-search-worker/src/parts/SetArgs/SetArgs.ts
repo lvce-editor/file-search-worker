@@ -11,7 +11,7 @@ const setArgsCustom = (args: readonly any[]): void => {
   state.args = args
 }
 
-const getFn = (id: string): Fn => {
+const getFn = (id: number): Fn => {
   switch (id) {
     case QuickPickEntryId.Custom:
       return setArgsCustom
@@ -20,7 +20,7 @@ const getFn = (id: string): Fn => {
   }
 }
 
-export const setArgs = (id: string, args: readonly any[]): void => {
+export const setArgs = (id: number, args: readonly any[]): void => {
   const fn = getFn(id)
   return fn(args)
 }

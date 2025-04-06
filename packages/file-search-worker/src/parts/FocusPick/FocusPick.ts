@@ -8,7 +8,7 @@ interface Fn {
 
 const noop: Fn = async () => {}
 
-const getFn = (id: string): Fn => {
+const getFn = (id: number): Fn => {
   switch (id) {
     case QuickPickEntryId.ColorTheme:
       return FocusPickColorTheme.focusPick
@@ -17,7 +17,7 @@ const getFn = (id: string): Fn => {
   }
 }
 
-export const focusPick = (id: string, pick: ProtoVisibleItem): Promise<void> => {
+export const focusPick = (id: number, pick: ProtoVisibleItem): Promise<void> => {
   const fn = getFn(id)
   return fn(pick)
 }

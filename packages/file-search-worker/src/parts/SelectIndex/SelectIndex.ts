@@ -6,13 +6,13 @@ import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 
 export const selectIndex = async (state: QuickPickState, index: number, button = /* left */ 0): Promise<QuickPickState> => {
-  const { minLineY, uri, items } = state
+  const { minLineY, providerId, items } = state
   const actualIndex = index + minLineY
   const pick = GetPick.getPick(items, actualIndex)
   if (!pick) {
     return state
   }
-  const fn = QuickPickEntries.getSelect(uri)
+  const fn = QuickPickEntries.getSelect(providerId)
   const selectPickResult = await fn(pick)
   Assert.object(selectPickResult)
   Assert.string(selectPickResult.command)

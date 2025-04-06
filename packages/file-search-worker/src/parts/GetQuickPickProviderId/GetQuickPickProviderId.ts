@@ -1,9 +1,17 @@
 import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
+import * as QuickPickEntryUri from '../QuickPickEntryUri/QuickPickEntryUri.ts'
 import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 
-// TODO use numeric enum for quickpick entry id
-export const getQuickPickProviderId = (prefix: string): string => {
+export const getQuickPickProviderId = (prefix: string): number => {
   switch (prefix) {
+    case QuickPickEntryUri.Commands:
+    case QuickPickEntryUri.Symbol:
+    case QuickPickEntryUri.WorkspaceSymbol:
+    case QuickPickEntryUri.EveryThing:
+    case QuickPickEntryUri.GoToLine:
+    case QuickPickEntryUri.View:
+    case QuickPickEntryUri.Help:
+      return QuickPickEntryId.EveryThing
     case QuickPickPrefix.Command:
       return QuickPickEntryId.Commands
     case QuickPickPrefix.Symbol:
