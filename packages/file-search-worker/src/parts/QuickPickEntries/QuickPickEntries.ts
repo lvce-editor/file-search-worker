@@ -13,3 +13,13 @@ export const get = (moduleId: string): QuickPickEntriesModule => {
   }
   return module
 }
+
+const getProperty = <T extends keyof QuickPickEntriesModule>(moduleId: string, property: T): QuickPickEntriesModule[T] => {
+  const m = get(moduleId)
+  const fn = m[property]
+  return fn
+}
+
+export const getPicks = (id: string): QuickPickEntriesModule['getPicks'] => {
+  return getProperty(id, 'getPicks')
+}
