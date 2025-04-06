@@ -1,8 +1,5 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
-import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
-import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
 import { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
-import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
 // maybe cache by id opening commands -> has all commands cached
@@ -32,22 +29,6 @@ export const getLabel = (): string => {
 export const getNoResults = (): any => {
   // @ts-ignore
   return state.provider.getNoResults()
-}
-
-export const getPicks = async (value: any): Promise<readonly any[]> => {
-  const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
-
-  // TODO race condition
-  if (state.prefix !== prefix) {
-    state.prefix = prefix
-    const providerId = GetQuickPickProviderId.getQuickPickProviderId(prefix)
-    const provider = QuickPickEntries.get(providerId)
-    state.provider = provider
-  }
-  // TODO this line is a bit duplicated with getFilterValue
-  const slicedValue = value.slice(prefix.length).trimStart()
-  const picks = await state.provider.getPicks(slicedValue)
-  return picks
 }
 
 // @ts-ignore
@@ -136,3 +117,5 @@ export const isPrepared = (): boolean => {
 // matches could be in loadcontent or getVisible
 
 export { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
+
+export { getPicks } from '../GetPicksEverything/GetPicksEverything.ts'
