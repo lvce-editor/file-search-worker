@@ -7,7 +7,7 @@ export const focusIndex = async (state: QuickPickState, index: number): Promise<
   // @ts-ignore
   if (provider.focusPick) {
     // @ts-ignore
-    await provider.focusPick(items[index].pick)
+    await provider.focusPick(items[index])
   }
   if (index < minLineY + 1) {
     const minLineY = index

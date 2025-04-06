@@ -1,7 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
-export const getVisibleItems = (picks: readonly any[]): readonly ProtoVisibleItem[] => {
-  const visibleItems = picks.map((pick: any, index: number) => ({
+export const getVisibleItems = (picks: readonly ProtoVisibleItem[]): readonly ProtoVisibleItem[] => {
+  const visibleItems = picks.map((pick: ProtoVisibleItem, index: number) => ({
     description: '',
     fileIcon: '',
     icon: '',

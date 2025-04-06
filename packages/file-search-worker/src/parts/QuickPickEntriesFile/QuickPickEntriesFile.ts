@@ -1,7 +1,7 @@
 import type { Dirent } from '../Dirent/Dirent.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
-import * as GetVisibleItemsQuickPickEntriesFile from '../GetVisibleItemsQuickPickEntriesFile/GetVisibleItemsQuickPickEntriesFile.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
@@ -54,18 +54,12 @@ export const getPickIcon = (): string => {
   return ''
 }
 
-export const getPickFileIcon = (pick: any): Dirent => {
-  if (typeof pick === 'object') {
-    pick = pick.pick
-  }
-  if (typeof pick === 'object') {
-    pick = pick.pick
-  }
-  const baseName = Workspace.pathBaseName(pick)
+export const getPickFileIcon = (pick: ProtoVisibleItem): Dirent => {
+  const path = `${pick.description}/${pick.label}`
   return {
     type: DirentType.File,
-    name: baseName,
-    path: pick,
+    name: pick.label,
+    path,
   }
 }
 
@@ -76,8 +70,8 @@ export const isPrepared = (): boolean => {
   return !protocol
 }
 
-export const getVisibleItems = GetVisibleItemsQuickPickEntriesFile.getVisibleItems
-
 export { getPicks } from '../GetPicksFile/GetPicksFile.ts'
 
 export { selectPick } from '../SelectPickFile/SelectPickFile.ts'
+
+export { getVisibleItems } from '../GetVisibleItemsQuickPickEntriesFile/GetVisibleItemsQuickPickEntriesFile.ts'

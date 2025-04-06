@@ -1,3 +1,4 @@
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetVisibleItemsQuickPickEntriesCustom from '../GetVisibleItemsQuickPickEntriesCustom/GetVisibleItemsQuickPickEntriesCustom.ts'
 import * as Icon from '../Icon/Icon.ts'
 import * as IconType from '../IconType/IconType.ts'
@@ -38,7 +39,7 @@ export const getPicks = async (searchValue: any): Promise<any[]> => {
   return items
 }
 
-export const selectPick = async (pick: any): Promise<any> => {
+export const selectPick = async (pick: ProtoVisibleItem): Promise<any> => {
   const { args } = state
   const resolve = args[2]
   resolve(pick)

@@ -10,8 +10,9 @@ export const setValue = async (state: QuickPickState, newValue: string): Promise
     return state
   }
   const newPicks = await provider.getPicks(newValue)
+  // @ts-ignore
   const filterValue = provider.getFilterValue(newValue)
-  const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue, provider)
+  const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
   const focusedIndex = items.length === 0 ? -1 : 0
   const sliced = newPicks.slice(minLineY, maxLineY)
   const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(provider, sliced, fileIconCache)

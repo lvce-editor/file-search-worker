@@ -1,3 +1,4 @@
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
 import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
 import { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
@@ -20,6 +21,7 @@ const RECENT_PICKS_MAX_SIZE = 3
 export const name = 'everything'
 
 export const getPlaceholder = (): string => {
+  // @ts-ignore
   return state.provider.getPlaceholder()
 }
 
@@ -28,6 +30,7 @@ export const getLabel = (): string => {
 }
 
 export const getNoResults = (): any => {
+  // @ts-ignore
   return state.provider.getNoResults()
 }
 
@@ -59,7 +62,7 @@ const getPick = (state: any, index: number): any => {
   console.warn('no pick matching index', index)
 }
 
-export const selectPick = (item: any): Promise<any> => {
+export const selectPick = (item: ProtoVisibleItem): Promise<any> => {
   const { provider } = state
   return provider.selectPick(item)
 }
@@ -78,6 +81,7 @@ export const getFilterValue = (value: string): string => {
 
 export const getPickFilterValue = (pick: any): any => {
   const { provider } = state
+  // @ts-ignore
   return provider.getPickFilterValue(pick)
 }
 
@@ -132,5 +136,3 @@ export const isPrepared = (): boolean => {
 // matches could be in loadcontent or getVisible
 
 export { getVisibleItems, state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
-
-

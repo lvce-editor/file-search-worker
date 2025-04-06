@@ -10,7 +10,7 @@ import * as QuickPickEntriesView from '../QuickPickEntriesView/QuickPickEntriesV
 import * as QuickPickEntriesWorkspaceSymbol from '../QuickPickEntriesWorkspaceSymbol/QuickPickEntriesWorkspaceSymbol.ts'
 import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 
-export const quickPickEntriesModules: Record<string, QuickPickEntriesModule<any>> = {
+export const quickPickEntriesModules: Record<string, QuickPickEntriesModule> = {
   [QuickPickEntryId.ColorTheme]: QuickPickEntriesColorTheme,
   [QuickPickEntryId.CommandPalette]: QuickPickEntriesEverything,
   [QuickPickEntryId.Commands]: QuickPickEntriesCommand,

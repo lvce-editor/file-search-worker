@@ -1,4 +1,5 @@
 import type { Dirent } from '../Dirent/Dirent.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
 import * as GetVisibleItemsQuickPickEntriesOpenRecent from '../GetVisibleItemsQuickPickEntriesOpenRecent/GetVisibleItemsQuickPickEntriesOpenRecent.ts'
@@ -51,18 +52,13 @@ export const getPickIcon = (): any => {
   return ''
 }
 
-export const getPickFileIcon = (pick: any): Dirent => {
-  if (typeof pick === 'object') {
-    pick = pick.pick
-  }
-  if (typeof pick === 'object') {
-    pick = pick.pick
-  }
-  const baseName = Workspace.pathBaseName(pick)
+export const getPickFileIcon = (pick: ProtoVisibleItem): Dirent => {
+  const baseName = pick.label
+  const path = `${pick.description}/${pick.label}`
   return {
     type: DirentType.File,
     name: baseName,
-    path: pick,
+    path,
   }
 }
 

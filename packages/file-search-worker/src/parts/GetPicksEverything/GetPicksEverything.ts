@@ -1,9 +1,10 @@
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
 import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
 import { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
-export const getPicks = async (value: any): Promise<readonly any[]> => {
+export const getPicks = async (value: string): Promise<readonly ProtoVisibleItem[]> => {
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
 
   // TODO race condition

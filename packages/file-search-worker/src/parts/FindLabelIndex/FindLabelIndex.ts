@@ -1,6 +1,8 @@
-export const findLabelIndex = (items: readonly any[], label: string): number => {
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
+
+export const findLabelIndex = (items: readonly ProtoVisibleItem[], label: string): number => {
   for (let i = 0; i < items.length; i++) {
-    if (items[i].pick.label === label) {
+    if (items[i].label === label) {
       return i
     }
   }

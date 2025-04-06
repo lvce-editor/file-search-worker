@@ -20,6 +20,7 @@ test('getPicks returns empty array', async () => {
 })
 
 test('selectPick returns hide command', async () => {
+  // @ts-ignore
   expect(await QuickPickNoop.selectPick({})).toEqual({
     command: QuickPickReturnValue.Hide,
   })
