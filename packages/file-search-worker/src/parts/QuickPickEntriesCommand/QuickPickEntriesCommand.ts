@@ -1,4 +1,3 @@
-import * as GetVisibleItemsQuickPickEntriesCommand from '../GetVisibleItemsQuickPickEntriesCommand/GetVisibleItemsQuickPickEntriesCommand.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const name = 'command'
@@ -26,8 +25,6 @@ export const getNoResults = (): any => {
     label: ViewletQuickPickStrings.noMatchingResults(),
   }
 }
-
-export const getVisibleItems = GetVisibleItemsQuickPickEntriesCommand.getVisibleItems
 
 export const getFilterValue = (value: string): string => {
   return value.trim()

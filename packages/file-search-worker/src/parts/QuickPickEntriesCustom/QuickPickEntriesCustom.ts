@@ -1,5 +1,4 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
-import * as GetVisibleItemsQuickPickEntriesCustom from '../GetVisibleItemsQuickPickEntriesCustom/GetVisibleItemsQuickPickEntriesCustom.ts'
 import * as Icon from '../Icon/Icon.ts'
 import * as IconType from '../IconType/IconType.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
@@ -84,5 +83,3 @@ export const getPickIcon = (pick: any): string => {
 export const isPrepared = (): boolean => {
   return true
 }
-
-export const getVisibleItems = GetVisibleItemsQuickPickEntriesCustom.getVisibleItems

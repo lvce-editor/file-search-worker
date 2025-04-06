@@ -1,5 +1,3 @@
-import * as GetVisibleItemsQuickPickEntriesGoToLine from '../GetVisibleItemsQuickPickEntriesGoToLine/GetVisibleItemsQuickPickEntriesGoToLine.ts'
-
 export const name = 'goToLine'
 
 export const state = {}
@@ -63,7 +61,5 @@ export const getPicks = async (): Promise<any[]> => {
 export const getFilterValue = (value: any): string => {
   return value
 }
-
-export const getVisibleItems = GetVisibleItemsQuickPickEntriesGoToLine.getVisibleItems
 
 export { selectPick } from '../SelectPickGoToLine/SelectPickGoToLine.ts'

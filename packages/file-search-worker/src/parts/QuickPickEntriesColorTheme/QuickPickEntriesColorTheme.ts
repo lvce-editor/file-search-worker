@@ -1,4 +1,3 @@
-import * as GetVisibleItemsQuickPickEntriesColorTheme from '../GetVisibleItemsQuickPickEntriesColorTheme/GetVisibleItemsQuickPickEntriesColorTheme.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const getPlaceholder = (): string => {
@@ -8,8 +7,6 @@ export const getPlaceholder = (): string => {
 export const getLabel = (): string => {
   return QuickPickStrings.selectColorTheme()
 }
-
-export const getVisibleItems = GetVisibleItemsQuickPickEntriesColorTheme.getVisibleItems
 
 export const getFilterValue = (value: any): any => {
   return value

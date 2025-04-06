@@ -6,5 +6,4 @@ export interface QuickPickEntriesModule {
   readonly getPicks: (value: string) => Promise<readonly ProtoVisibleItem[]>
   readonly selectPick: (item: ProtoVisibleItem) => Promise<any>
   readonly getPickFileIcon?: (item: ProtoVisibleItem) => Dirent
-  readonly getVisibleItems: (items: readonly ProtoVisibleItem[], icons: readonly string[]) => readonly ProtoVisibleItem[]
 }
