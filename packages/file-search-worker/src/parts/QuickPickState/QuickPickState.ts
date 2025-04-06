@@ -9,7 +9,7 @@ export interface QuickPickState extends List<any> {
   readonly recentPicks: readonly any[]
   readonly recentPickIds: Map<any, any>
   readonly versionId: number
-  readonly providerId: string // TODO use number
+  readonly providerId: number
   readonly warned: any[]
   readonly maxVisibleItems: number
   readonly uri: string

@@ -20,5 +20,5 @@ test('getPlaceholderValue returns view placeholder for view provider', () => {
 })
 
 test('getPlaceholderValue returns empty string for unknown provider', () => {
-  expect(GetPlaceholderValue.getPlaceholderValue('')).toBe('')
+  expect(GetPlaceholderValue.getPlaceholderValue(999)).toBe('')
 })

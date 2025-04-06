@@ -1,25 +1,25 @@
-export const CommandPalette = 'quickPick://commandPalette'
+export const CommandPalette = 0
 
-export const Commands = 'quickPick://commands'
+export const Commands = 1
 
-export const File = 'quickPick://file'
+export const File = 2
 
-export const EveryThing = 'quickPick://everything'
+export const EveryThing = 3
 
-export const Recent = 'quickPick://recent'
+export const Recent = 4
 
-export const ColorTheme = 'quickPick://color-theme'
+export const ColorTheme = 5
 
-export const Symbol = 'quickPick://symbol'
+export const Symbol = 6
 
-export const View = 'quickPick://view'
+export const View = 7
 
-export const Help = 'quickPick://help'
+export const Help = 8
 
-export const WorkspaceSymbol = 'quickPick://workspace-symbol'
+export const WorkspaceSymbol = 9
 
-export const Custom = 'quickPick://custom'
+export const Custom = 10
 
-export const GoToLine = 'quickPick://go-to-line'
+export const GoToLine = 11
 
-export const Noop = 'quickPick://noop'
+export const Noop = 12

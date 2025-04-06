@@ -15,7 +15,7 @@ const getFilterValueEverything = (value: string): string => {
   return value.slice(prefixLength).trim()
 }
 
-const getFn = (id: string): Fn => {
+const getFn = (id: number): Fn => {
   switch (id) {
     case QuickPickEntryId.EveryThing:
       return getFilterValueEverything
@@ -24,7 +24,7 @@ const getFn = (id: string): Fn => {
   }
 }
 
-export const getFilterValue = (id: string, value: string): string => {
+export const getFilterValue = (id: number, value: string): string => {
   const fn = getFn(id)
   const filterValue = fn(value)
   return filterValue

@@ -1,7 +1,7 @@
 import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
-export const getPlaceholderValue = (providerId: string): string => {
+export const getPlaceholderValue = (providerId: number): string => {
   switch (providerId) {
     case QuickPickEntryId.Commands:
       return QuickPickStrings.typeNameofCommandToRun()
