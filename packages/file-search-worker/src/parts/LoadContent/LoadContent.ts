@@ -25,7 +25,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const minLineY = 0
   const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)
   const sliced = newPicks.slice(minLineY, maxLineY)
-  const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(provider, sliced, fileIconCache)
+  const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
   return {
     ...state,
     picks: newPicks,
