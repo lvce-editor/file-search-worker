@@ -65,8 +65,4 @@ export const isPrepared = (): boolean => {
   return true
 }
 
-export { selectPick } from '../SelectPickCustom/SelectPickCustom.ts'
-
 export { state } from './QuickPickEntriesCustomState.ts'
-
-export { getPicks } from '../GetPicksCustom/GetPicksCustom.ts'

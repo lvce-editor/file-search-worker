@@ -34,13 +34,6 @@ export const getNoResults = (): any => {
   }
 }
 
-export const getPicks = async (): Promise<any[]> => {
-  const picks: any[] = []
-  return picks
-}
-
 export const getFilterValue = (value: any): string => {
   return value
 }
-
-export { selectPick } from '../SelectPickWorkspaceSymbol/SelectPickWorkspaceSymbol.ts'

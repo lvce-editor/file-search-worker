@@ -116,7 +116,3 @@ export const isPrepared = (): boolean => {
 // matches could be in loadcontent or getVisible
 
 export { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
-
-export { getPicks } from '../GetPicksEverything/GetPicksEverything.ts'
-
-export { selectPick } from '../SelectPickEverything/SelectPickEverything.ts'

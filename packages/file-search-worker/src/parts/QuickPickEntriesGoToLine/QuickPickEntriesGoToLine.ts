@@ -34,32 +34,6 @@ export const getNoResults = (): any => {
   return undefined
 }
 
-export const getPicks = async (): Promise<any[]> => {
-  const picks = [
-    {
-      label: '1',
-    },
-    {
-      label: '2',
-    },
-    {
-      label: '3',
-    },
-    {
-      label: '4',
-    },
-    {
-      label: '5',
-    },
-    {
-      label: '6',
-    },
-  ]
-  return picks
-}
-
 export const getFilterValue = (value: any): string => {
   return value
 }
-
-export { selectPick } from '../SelectPickGoToLine/SelectPickGoToLine.ts'

@@ -69,7 +69,3 @@ export const isPrepared = (): boolean => {
   const protocol = GetProtocol.getProtocol(workspace)
   return !protocol
 }
-
-export { getPicks } from '../GetPicksFile/GetPicksFile.ts'
-
-export { selectPick } from '../SelectPickFile/SelectPickFile.ts'

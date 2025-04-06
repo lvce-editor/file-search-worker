@@ -1,6 +1,5 @@
 import { expect, test } from '@jest/globals'
 import * as QuickPickNoop from '../src/parts/QuickPickEntriesNoop/QuickPickNoop.ts'
-import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../src/parts/QuickPickStrings/QuickPickStrings.ts'
 
 test('name is noop', () => {
@@ -13,17 +12,6 @@ test('getPlaceholder returns empty string', () => {
 
 test('getNoResults returns no results string', () => {
   expect(QuickPickNoop.getNoResults()).toBe(QuickPickStrings.noResults())
-})
-
-test('getPicks returns empty array', async () => {
-  expect(await QuickPickNoop.getPicks('')).toEqual([])
-})
-
-test('selectPick returns hide command', async () => {
-  // @ts-ignore
-  expect(await QuickPickNoop.selectPick({})).toEqual({
-    command: QuickPickReturnValue.Hide,
-  })
 })
 
 test('getFilterValue returns input value', () => {

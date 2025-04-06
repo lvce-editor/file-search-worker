@@ -46,8 +46,4 @@ export const getHelpEntries = (): readonly any[] => {
   return []
 }
 
-export { getPicks } from '../GetPicksColorTheme/GetPicksColorTheme.ts'
-
-export { selectPick } from '../SelectPickColorTheme/SelectPickColorTheme.ts'
-
 export { focusPick } from '../FocusPickColorTheme/FocusPickColorTheme.ts'
