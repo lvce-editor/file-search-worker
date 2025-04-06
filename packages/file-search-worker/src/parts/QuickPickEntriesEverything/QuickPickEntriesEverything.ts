@@ -34,22 +34,6 @@ export const getNoResults = (): any => {
   return state.provider.getNoResults()
 }
 
-export const getPicks = async (value: any): Promise<readonly any[]> => {
-  const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
-
-  // TODO race condition
-  if (state.prefix !== prefix) {
-    state.prefix = prefix
-    const providerId = GetQuickPickProviderId.getQuickPickProviderId(prefix)
-    const provider = QuickPickEntries.get(providerId)
-    state.provider = provider
-  }
-  // TODO this line is a bit duplicated with getFilterValue
-  const slicedValue = value.slice(prefix.length).trimStart()
-  const picks = await state.provider.getPicks(slicedValue)
-  return picks
-}
-
 // @ts-ignore
 const getPick = (state: any, index: number): any => {
   // if (index < state.recentPicks.length) {
@@ -136,3 +120,5 @@ export const isPrepared = (): boolean => {
 // matches could be in loadcontent or getVisible
 
 export { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
+
+export { getPicks } from '../GetPicksEverything/GetPicksEverything.ts'
