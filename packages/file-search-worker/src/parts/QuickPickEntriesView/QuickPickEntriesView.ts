@@ -18,13 +18,6 @@ export const getPicks = async (): Promise<any> => {
   return []
 }
 
-export const selectPick = async (item: any): Promise<any> => {
-  // Command.execute(/* openView */ 549, /* viewName */ item.label)
-  // return {
-  //   command: QuickPickReturnValue.Hide,
-  // }
-}
-
 export const getFilterValue = (value: any): string => {
   return value
 }
@@ -58,3 +51,5 @@ export const getPickDescription = (): string => {
 }
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesView.getVisibleItems
+
+export { selectPick } from '../SelectPickView/SelectPickView.ts'
