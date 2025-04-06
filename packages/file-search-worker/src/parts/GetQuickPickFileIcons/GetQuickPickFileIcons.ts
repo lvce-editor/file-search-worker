@@ -6,6 +6,10 @@ import * as GetMissingIconRequests from '../GetMissingIconRequests/GetMissingIco
 import * as RequestFileIcons from '../RequestFileIcons/RequestFileIcons.ts'
 import * as UpdateIconCache from '../UpdateIconCache/UpdateIconCache.ts'
 
+const getPath = (dirent: Dirent): string => {
+  return dirent.path
+}
+
 export const getQuickPickFileIcons = async (
   items: readonly ProtoVisibleItem[],
   fileIconCache: FileIconCache,
@@ -24,7 +28,7 @@ export const getQuickPickFileIcons = async (
   const missingRequests = GetMissingIconRequests.getMissingIconRequests(dirents, fileIconCache)
   const newIcons = await RequestFileIcons.requestFileIcons(missingRequests)
   const newFileIconCache = UpdateIconCache.updateIconCache(fileIconCache, missingRequests, newIcons)
-  const paths = dirents.map((file) => file.path)
+  const paths = dirents.map(getPath)
   const icons = GetFileIconsCached.getIconsCached(paths, newFileIconCache)
   return {
     icons,
