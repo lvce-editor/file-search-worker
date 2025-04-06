@@ -27,10 +27,20 @@ export const get = (moduleId: string): QuickPickEntriesModule => {
   return module
 }
 
-export const getPicks = (id: string): QuickPickEntriesModule['getPicks'] => {
-  const fn = getPick[id]
+const getProperty = <T extends keyof QuickPickEntriesModule>(moduleId: string, property: T): QuickPickEntriesModule[T] => {
+  const m = get(moduleId)
+  const fn = m[property]
   return fn
 }
+
+export const getPicks = (id: string): QuickPickEntriesModule['getPicks'] => {
+  return getProperty(id, 'getPicks')
+}
+
+// export const getPicks = (id: string): QuickPickEntriesModule['getPicks'] => {
+//   const fn = getPick[id]
+//   return fn
+// }
 
 export const getSelect = (id: string): QuickPickEntriesModule['selectPick'] => {
   const fn = select[id]
