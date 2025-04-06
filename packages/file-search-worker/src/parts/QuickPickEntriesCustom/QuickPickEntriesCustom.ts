@@ -69,4 +69,4 @@ export { selectPick } from '../SelectPickCustom/SelectPickCustom.ts'
 
 export { state } from './QuickPickEntriesCustomState.ts'
 
-export { getPicks } from '../GetPicks/GetPicks.ts'
+export { getPicks } from '../GetPicksCustom/GetPicksCustom.ts'
