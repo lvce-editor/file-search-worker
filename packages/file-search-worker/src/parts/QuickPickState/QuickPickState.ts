@@ -34,4 +34,5 @@ export interface QuickPickState extends List<any> {
   readonly focused: boolean
   readonly value: string
   readonly fileIconCache: FileIconCache
+  readonly workspaceUri: string
 }

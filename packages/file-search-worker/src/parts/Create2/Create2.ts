@@ -15,8 +15,10 @@ export const create = (
   height: number,
   platform: number,
   args: any,
+  workspaceUri: string,
 ): void => {
   const state: QuickPickState = {
+    workspaceUri,
     uid,
     icons: [],
     state: QuickPickOpenState.Default,
