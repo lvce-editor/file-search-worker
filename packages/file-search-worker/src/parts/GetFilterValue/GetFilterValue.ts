@@ -27,6 +27,5 @@ const getFn = (id: string): Fn => {
 export const getFilterValue = (id: string, value: string): string => {
   const fn = getFn(id)
   const filterValue = fn(value)
-  console.log({ filterValue })
   return filterValue
 }
