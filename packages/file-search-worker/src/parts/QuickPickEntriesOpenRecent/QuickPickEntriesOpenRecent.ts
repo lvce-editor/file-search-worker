@@ -2,8 +2,6 @@ import type { Dirent } from '../Dirent/Dirent.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
 import * as GetVisibleItemsQuickPickEntriesOpenRecent from '../GetVisibleItemsQuickPickEntriesOpenRecent/GetVisibleItemsQuickPickEntriesOpenRecent.ts'
-import * as OpenWorkspaceFolder from '../OpenWorkspaceFolder/OpenWorkspaceFolder.ts'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
@@ -32,15 +30,6 @@ export const getPicks = async (): Promise<any> => {
 }
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesOpenRecent.getVisibleItems
-
-// TODO selectPick should be independent of show/hide
-export const selectPick = async (pick: string): Promise<any> => {
-  const path = pick
-  await OpenWorkspaceFolder.openWorkspaceFolder(path)
-  return {
-    command: QuickPickReturnValue.Hide,
-  }
-}
 
 export const getFilterValue = (value: string): string => {
   return Workspace.pathBaseName(value)
@@ -84,3 +73,5 @@ export const isPrepared = (): boolean => {
 }
 
 export const name = ''
+
+export { selectPick } from '../SelectPickRecent/SelectPickRecent.ts'
