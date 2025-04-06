@@ -9,7 +9,6 @@ import * as SearchModules from '../SearchModules/SearchModules.ts'
 
 export const listen = async (): Promise<void> => {
   SearchFileModule.register(SearchModules.searchModules)
-  QuickPickEntries.register(QuickPickEntriesModules.quickPickEntriesModules)
   QuickPickEntries.registerSelect(QuickPickEntriesModules.selectPicks)
   QuickPickEntries.registerGetPick(QuickPickEntriesModules.getPicks)
   const rpc = await WebWorkerRpcClient.create({
