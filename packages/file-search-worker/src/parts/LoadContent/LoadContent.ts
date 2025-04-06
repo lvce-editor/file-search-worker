@@ -2,6 +2,7 @@ import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as Assert from '../Assert/Assert.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as GetDefaultValue from '../GetDefaultValue/GetDefaultValue.ts'
+import * as GetPicks from '../GetPicks/GetPicks.ts'
 import * as GetQuickPickFileIcons from '../GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
@@ -16,7 +17,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     // @ts-ignore
     provider.setArgs(args)
   }
-  const newPicks = await provider.getPicks(value)
+  const newPicks = await GetPicks.getPicks(uri, value)
   Assert.array(newPicks)
   // @ts-ignore
   const filterValue = provider.getFilterValue(value)
