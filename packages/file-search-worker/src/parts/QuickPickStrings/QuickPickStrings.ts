@@ -64,3 +64,19 @@ export const quickOpen = (): string => {
 export const typeTheNameOfACommandToRun = (): string => {
   return I18NString.i18nString(UiStrings.TypeNameOfCommandToRun)
 }
+
+export const goToLineColumn = (): string => {
+  return I18NString.i18nString(UiStrings.GoToLineColumn)
+}
+
+export const goToSymbolInEditor = (): string => {
+  return I18NString.i18nString(UiStrings.GoToSymbolInEditor)
+}
+
+export const goToSymbolInWorkspace = (): string => {
+  return I18NString.i18nString(UiStrings.GoToSymbolInWorkspace)
+}
+
+export const searchForText = (): string => {
+  return I18NString.i18nString(UiStrings.SearchForText)
+}
