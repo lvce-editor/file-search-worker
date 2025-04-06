@@ -15,7 +15,7 @@ test.skip('renders items with virtual dom', () => {
         posInSet: 1,
         setSize: 2,
         isActive: true,
-        matches: [],
+        highlights: [],
       },
     ],
     value: '',
