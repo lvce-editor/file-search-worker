@@ -1,7 +1,6 @@
 import type { Dirent } from '../Dirent/Dirent.ts'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
-import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
 
@@ -23,11 +22,6 @@ export const getNoResults = (): any => {
 // and the transformPick gets the label for each pick
 // This would make the code more module since the code for getting the picks
 // would be more independent of the specific data format of the quickpick provider
-
-export const getPicks = async (): Promise<any> => {
-  const recentlyOpened = await GetRecentlyOpened.getRecentlyOpened()
-  return recentlyOpened
-}
 
 export const getFilterValue = (value: string): string => {
   return Workspace.pathBaseName(value)
@@ -66,5 +60,3 @@ export const isPrepared = (): boolean => {
 }
 
 export const name = ''
-
-export { selectPick } from '../SelectPickRecent/SelectPickRecent.ts'

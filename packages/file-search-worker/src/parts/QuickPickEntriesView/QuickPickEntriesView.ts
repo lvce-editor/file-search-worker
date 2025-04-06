@@ -10,13 +10,6 @@ export const getHelpEntries = (): any => {
   return undefined
 }
 
-export const getPicks = async (): Promise<any> => {
-  // const views = ViewService.getViews()
-  // const picks = views.map(toPick)
-  // return picks
-  return []
-}
-
 export const getFilterValue = (value: any): string => {
   return value
 }
@@ -48,5 +41,3 @@ export const isPrepared = (): boolean => {
 export const getPickDescription = (): string => {
   return ''
 }
-
-export { selectPick } from '../SelectPickView/SelectPickView.ts'

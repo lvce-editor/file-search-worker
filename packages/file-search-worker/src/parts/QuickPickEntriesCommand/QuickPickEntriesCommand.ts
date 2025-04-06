@@ -41,7 +41,3 @@ export const getPickLabel = (pick: any): string => {
 export const getPickIcon = (): string => {
   return ''
 }
-
-export { getPicks } from '../GetPicksCommand/GetPicksCommand.ts'
-
-export { selectPick } from '../SelectPickCommand/SelectPickCommand.ts'
