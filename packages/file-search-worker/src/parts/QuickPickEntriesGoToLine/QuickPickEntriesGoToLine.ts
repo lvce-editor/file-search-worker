@@ -1,6 +1,4 @@
-import * as Command from '../Command/Command.ts'
 import * as GetVisibleItemsQuickPickEntriesGoToLine from '../GetVisibleItemsQuickPickEntriesGoToLine/GetVisibleItemsQuickPickEntriesGoToLine.ts'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 
 export const name = 'goToLine'
 
