@@ -1,5 +1,4 @@
 import * as GetVisibleItemsQuickPickEntriesSymbol from '../GetVisibleItemsQuickPickEntriesSymbol/GetVisibleItemsQuickPickEntriesSymbol.ts'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const name = 'symbol'
@@ -20,12 +19,6 @@ export const getPicks = async (): Promise<any[]> => {
 }
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesSymbol.getVisibleItems
-
-export const selectPick = async (item: any): Promise<any> => {
-  return {
-    command: QuickPickReturnValue.Hide,
-  }
-}
 
 export const getFilterValue = (value: any): any => {
   return value
@@ -52,3 +45,5 @@ export const getPickLabel = (value: string): string => {
 export const getPickIcon = (value: string): string => {
   return ''
 }
+
+export { selectPick } from '../SelectPickSymbol/SelectPickSymbol.ts'
