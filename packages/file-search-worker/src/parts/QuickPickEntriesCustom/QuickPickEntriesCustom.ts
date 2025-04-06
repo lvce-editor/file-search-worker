@@ -28,11 +28,6 @@ export const getNoResults = (): any => {
   }
 }
 
-export const getPicks = async (searchValue: any): Promise<any[]> => {
-  const items = state.args[1] || []
-  return items
-}
-
 export const getFilterValue = (value: any): any => {
   return value
 }
@@ -72,6 +67,6 @@ export const isPrepared = (): boolean => {
 
 export { selectPick } from '../SelectPickCustom/SelectPickCustom.ts'
 
+export { state } from './QuickPickEntriesCustomState.ts'
 
-
-export {state} from './QuickPickEntriesCustomState.ts'
+export { getPicks } from '../GetPicksCustom/GetPicksCustom.ts'
