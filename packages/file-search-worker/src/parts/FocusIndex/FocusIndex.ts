@@ -1,8 +1,11 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as GetQuickPickFileIcons from '../GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
+import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
 export const focusIndex = async (state: QuickPickState, index: number): Promise<QuickPickState> => {
-  const { provider, maxVisibleItems, items, minLineY, maxLineY, fileIconCache } = state
+  const { uri, maxVisibleItems, items, minLineY, maxLineY, fileIconCache } = state
+  const provider = QuickPickEntries.get(uri)
+
   // TODO get types working
   // @ts-ignore
   if (provider.focusPick) {

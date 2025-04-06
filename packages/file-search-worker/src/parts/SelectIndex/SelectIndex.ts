@@ -2,10 +2,12 @@ import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as Assert from '../Assert/Assert.ts'
 import * as CloseWidget from '../CloseWidget/CloseWidget.ts'
 import * as GetPick from '../GetPick/GetPick.ts'
+import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 
 export const selectIndex = async (state: QuickPickState, index: number, button = /* left */ 0): Promise<QuickPickState> => {
-  const { minLineY, provider, items } = state
+  const { minLineY, uri, items } = state
+  const provider = QuickPickEntries.get(uri)
   const actualIndex = index + minLineY
   const pick = GetPick.getPick(items, actualIndex)
   if (!pick) {

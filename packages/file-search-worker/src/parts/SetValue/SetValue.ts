@@ -2,13 +2,15 @@ import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as GetQuickPickFileIcons from '../GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
+import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
 // TODO when user types letters -> no need to query provider again -> just filter existing results
 export const setValue = async (state: QuickPickState, newValue: string): Promise<QuickPickState> => {
-  const { value, provider, minLineY, maxLineY, fileIconCache } = state
+  const { value, uri, minLineY, maxLineY, fileIconCache } = state
   if (value === newValue) {
     return state
   }
+  const provider = QuickPickEntries.get(uri)
   const newPicks = await provider.getPicks(newValue)
   // @ts-ignore
   const filterValue = provider.getFilterValue(newValue)

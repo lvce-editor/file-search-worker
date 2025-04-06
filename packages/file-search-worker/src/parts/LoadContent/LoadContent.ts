@@ -35,7 +35,6 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     maxLineY,
     value,
     cursorOffset: value.length,
-    provider,
     inputSource: InputSource.Script,
     focused: true,
     fileIconCache: newFileIconCache,
