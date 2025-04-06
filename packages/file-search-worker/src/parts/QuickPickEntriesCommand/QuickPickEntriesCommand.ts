@@ -29,13 +29,6 @@ export const getNoResults = (): any => {
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesCommand.getVisibleItems
 
-const shouldHide = (item: any): boolean => {
-  if (item.id === 'Viewlet.openWidget' && item.args[0] === 'QuickPick') {
-    return false
-  }
-  return true
-}
-
 export const getFilterValue = (value: string): string => {
   return value.trim()
 }
