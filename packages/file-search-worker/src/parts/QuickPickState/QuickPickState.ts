@@ -1,7 +1,6 @@
 import type { List } from '@lvce-editor/list'
 import type { FileIconCache } from '../FileIconCache/FileIconCache.ts'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
-import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 
 export interface QuickPickState extends List<any> {
   readonly uid: number
@@ -10,7 +9,7 @@ export interface QuickPickState extends List<any> {
   readonly recentPicks: readonly any[]
   readonly recentPickIds: Map<any, any>
   readonly versionId: number
-  readonly provider: QuickPickEntriesModule
+  readonly providerId: string // TODO use number
   readonly warned: any[]
   readonly maxVisibleItems: number
   readonly uri: string
