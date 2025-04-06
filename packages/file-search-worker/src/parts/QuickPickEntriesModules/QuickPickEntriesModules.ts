@@ -1,6 +1,13 @@
 import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
 import * as GetPicksColorTheme from '../GetPicksColorTheme/GetPicksColorTheme.ts'
+import * as GetPicksCommand from '../GetPicksCommand/GetPicksCommand.ts'
+import * as GetPicksCustom from '../GetPicksCustom/GetPicksCustom.ts'
+import * as GetPicksEverything from '../GetPicksEverything/GetPicksEverything.ts'
 import * as GetPicksFile from '../GetPicksFile/GetPicksFile.ts'
+import * as GetPicksOpenRecent from '../GetPicksOpenRecent/GetPicksOpenRecent.ts'
+import * as GetPicksSymbol from '../GetPicksSymbol/GetPicksSymbol.ts'
+import * as GetPicksView from '../GetPicksView/GetPicksView.ts'
+import * as GetPicksWorkspaceSymbol from '../GetPicksWorkspaceSymbol/GetPicksWorkspaceSymbol.ts'
 import * as QuickPickEntriesColorTheme from '../QuickPickEntriesColorTheme/QuickPickEntriesColorTheme.ts'
 import * as QuickPickEntriesCommand from '../QuickPickEntriesCommand/QuickPickEntriesCommand.ts'
 import * as QuickPickEntriesCustom from '../QuickPickEntriesCustom/QuickPickEntriesCustom.ts'
@@ -47,5 +54,13 @@ export const selectPicks: Record<string, QuickPickEntriesModule['selectPick']> =
 
 export const getPicks: Record<string, QuickPickEntriesModule['getPicks']> = {
   [QuickPickEntryId.ColorTheme]: GetPicksColorTheme.getPicks,
+  [QuickPickEntryId.CommandPalette]: GetPicksEverything.getPicks,
+  [QuickPickEntryId.Commands]: GetPicksCommand.getPicks,
+  [QuickPickEntryId.Custom]: GetPicksCustom.getPicks,
+  [QuickPickEntryId.EveryThing]: GetPicksEverything.getPicks,
   [QuickPickEntryId.File]: GetPicksFile.getPicks,
+  [QuickPickEntryId.Recent]: GetPicksOpenRecent.getPicks,
+  [QuickPickEntryId.Symbol]: GetPicksSymbol.getPicks,
+  [QuickPickEntryId.View]: GetPicksView.getPicks,
+  [QuickPickEntryId.WorkspaceSymbol]: GetPicksWorkspaceSymbol.getPicks,
 }
