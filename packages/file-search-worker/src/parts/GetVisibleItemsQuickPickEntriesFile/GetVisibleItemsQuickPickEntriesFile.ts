@@ -13,6 +13,8 @@ export const getVisibleItems = (files: readonly ProtoVisibleItem[], icons: reado
       icon,
       fileIcon,
       matches: item.matches,
+      uri: item.uri,
+      direntType: item.direntType,
     }
   })
   return visibleItems

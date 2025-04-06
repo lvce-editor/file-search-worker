@@ -1,4 +1,5 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
+import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetRecentlyOpened from '../GetRecentlyOpened/GetRecentlyOpened.ts'
 
 const toProtoVisibleItem = (uri: string): ProtoVisibleItem => {
@@ -8,6 +9,8 @@ const toProtoVisibleItem = (uri: string): ProtoVisibleItem => {
     fileIcon: '',
     icon: '',
     matches: [],
+    direntType: DirentType.Directory,
+    uri: uri,
   }
 }
 

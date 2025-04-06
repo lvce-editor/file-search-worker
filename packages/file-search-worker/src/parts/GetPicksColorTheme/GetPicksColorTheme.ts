@@ -8,6 +8,8 @@ const toProtoVisibleItem = (name: string): ProtoVisibleItem => {
     fileIcon: '',
     icon: '',
     matches: [],
+    direntType: 0,
+    uri: '',
   }
   return pick
 }

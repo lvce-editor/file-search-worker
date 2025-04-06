@@ -7,6 +7,8 @@ export const getVisibleItems = (picks: readonly any[], icons: readonly string[])
     icon: '',
     label: pick.label,
     matches: [],
+    uri: '',
+    direntType: 0,
   }))
   return visibleItems
 }

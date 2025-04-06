@@ -10,6 +10,8 @@ export const getVisibleItems = (picks: readonly ProtoVisibleItem[], icons: reado
       icon: pick.icon,
       label: pick.label,
       matches: pick.matches || [],
+      direntType: pick.direntType,
+      uri: pick.uri,
     }
   })
   return visibleItems
