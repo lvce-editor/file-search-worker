@@ -12,7 +12,7 @@ const noop = (value: string): string => {
 const getFilterValueEverything = (value: string): string => {
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
   const prefixLength = prefix.length
-  return value.slice(prefixLength)
+  return value.slice(prefixLength).trim()
 }
 
 const getFn = (id: string): Fn => {
@@ -26,5 +26,7 @@ const getFn = (id: string): Fn => {
 
 export const getFilterValue = (id: string, value: string): string => {
   const fn = getFn(id)
-  return fn(value)
+  const filterValue = fn(value)
+  console.log({ filterValue })
+  return filterValue
 }
