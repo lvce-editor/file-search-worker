@@ -80,3 +80,7 @@ export const goToSymbolInWorkspace = (): string => {
 export const searchForText = (): string => {
   return I18NString.i18nString(UiStrings.SearchForText)
 }
+
+export const openView = (): string => {
+  return I18NString.i18nString(UiStrings.OpenView)
+}

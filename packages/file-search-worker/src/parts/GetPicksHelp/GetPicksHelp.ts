@@ -1,4 +1,5 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
+import * as Character from '../Character/Character.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
@@ -9,7 +10,7 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       direntType: DirentType.None,
       fileIcon: '',
       icon: '',
-      label: '...',
+      label: Character.DotDotDot,
       matches: [],
       uri: '',
     },
@@ -27,7 +28,7 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       direntType: DirentType.None,
       fileIcon: '',
       icon: '',
-      label: ':',
+      label: Character.Colon,
       matches: [],
       uri: '',
     },
@@ -36,7 +37,7 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       direntType: DirentType.None,
       fileIcon: '',
       icon: '',
-      label: '%',
+      label: Character.Percent,
       matches: [],
       uri: '',
     },
@@ -45,7 +46,16 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       direntType: DirentType.None,
       fileIcon: '',
       icon: '',
-      label: '>',
+      label: Character.AngleBracket,
+      matches: [],
+      uri: '',
+    },
+    {
+      description: QuickPickStrings.openView(),
+      direntType: DirentType.None,
+      fileIcon: '',
+      icon: '',
+      label: Character.View,
       matches: [],
       uri: '',
     },

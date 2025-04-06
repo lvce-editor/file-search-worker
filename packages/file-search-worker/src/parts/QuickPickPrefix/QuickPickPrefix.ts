@@ -9,3 +9,5 @@ export const GoToLine = ':'
 export const View = 'view '
 
 export const None = ''
+
+export const Help = '?'
