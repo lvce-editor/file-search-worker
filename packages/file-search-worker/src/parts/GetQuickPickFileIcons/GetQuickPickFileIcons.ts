@@ -10,6 +10,15 @@ const getPath = (dirent: Dirent): string => {
   return dirent.path
 }
 
+const toDirent = (pick: ProtoVisibleItem): Dirent => {
+  const dirent: Dirent = {
+    type: pick.direntType,
+    name: pick.label,
+    path: pick.uri,
+  }
+  return dirent
+}
+
 export const getQuickPickFileIcons = async (
   items: readonly ProtoVisibleItem[],
   fileIconCache: FileIconCache,
@@ -17,14 +26,7 @@ export const getQuickPickFileIcons = async (
   icons: readonly string[]
   newFileIconCache: FileIconCache
 }> => {
-  const dirents = items.map((item) => {
-    const dirent: Dirent = {
-      type: item.direntType,
-      name: item.label,
-      path: item.uri,
-    }
-    return dirent
-  })
+  const dirents = items.map(toDirent)
   const missingRequests = GetMissingIconRequests.getMissingIconRequests(dirents, fileIconCache)
   const newIcons = await RequestFileIcons.requestFileIcons(missingRequests)
   const newFileIconCache = UpdateIconCache.updateIconCache(fileIconCache, missingRequests, newIcons)
