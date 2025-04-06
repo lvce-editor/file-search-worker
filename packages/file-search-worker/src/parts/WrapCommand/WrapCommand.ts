@@ -1,6 +1,15 @@
+import { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as QuickPickStates from '../QuickPickStates/QuickPickStates.ts'
 
-export const wrapCommand = (fn: any): any => {
+export interface WrappedFn {
+  (uid: number, ...args: readonly any[]): Promise<void>
+}
+
+interface Fn {
+  (state: QuickPickState, ...args: readonly any[]): Promise<QuickPickState>
+}
+
+export const wrapCommand = (fn: Fn): WrappedFn => {
   const wrapped = async (uid: number, ...args: readonly any[]): Promise<void> => {
     const { newState } = QuickPickStates.get(uid)
     const newerState = await fn(newState, ...args)
