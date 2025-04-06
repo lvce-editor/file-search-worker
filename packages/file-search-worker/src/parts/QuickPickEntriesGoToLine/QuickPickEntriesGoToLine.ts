@@ -62,21 +62,10 @@ export const getPicks = async (): Promise<any[]> => {
   return picks
 }
 
-export const selectPick = async (item: any): Promise<any> => {
-  const rowIndex = Number.parseInt(item.label)
-  const position = {
-    rowIndex,
-    columnIndex: 5,
-  }
-  await Command.execute(/* EditorSetCursor.editorSetCursor */ 'TODO', /* position */ position)
-  // TODO put cursor onto that line
-  return {
-    command: QuickPickReturnValue.Hide,
-  }
-}
-
 export const getFilterValue = (value: any): string => {
   return value
 }
 
 export const getVisibleItems = GetVisibleItemsQuickPickEntriesGoToLine.getVisibleItems
+
+export { selectPick } from '../SelectPickGoToLine/SelectPickGoToLine.ts'
