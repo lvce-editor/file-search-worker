@@ -1,8 +1,5 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
-import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
-import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
 import { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
-import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
 // maybe cache by id opening commands -> has all commands cached
