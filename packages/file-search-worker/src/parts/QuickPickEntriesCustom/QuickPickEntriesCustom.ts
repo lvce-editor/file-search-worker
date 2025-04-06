@@ -1,14 +1,9 @@
-import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as Icon from '../Icon/Icon.ts'
 import * as IconType from '../IconType/IconType.ts'
-import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
+import { state } from './QuickPickEntriesCustomState.ts'
 
 export const name = 'custom'
-
-export const state = {
-  args: [] as readonly any[],
-}
 
 export const setArgs = (args: readonly any[]): void => {
   state.args = args
@@ -36,15 +31,6 @@ export const getNoResults = (): any => {
 export const getPicks = async (searchValue: any): Promise<any[]> => {
   const items = state.args[1] || []
   return items
-}
-
-export const selectPick = async (pick: ProtoVisibleItem): Promise<any> => {
-  const { args } = state
-  const resolve = args[2]
-  resolve(pick)
-  return {
-    command: QuickPickReturnValue.Hide,
-  }
 }
 
 export const getFilterValue = (value: any): any => {
@@ -83,3 +69,5 @@ export const getPickIcon = (pick: any): string => {
 export const isPrepared = (): boolean => {
   return true
 }
+
+export { selectPick } from '../SelectPickCustom/SelectPickCustom.ts'
