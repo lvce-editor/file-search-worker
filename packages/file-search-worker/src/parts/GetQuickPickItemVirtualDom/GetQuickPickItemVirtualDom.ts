@@ -3,6 +3,7 @@ import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as AddHighlights from '../AddHighlights/AddHighlights.ts'
 import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
+import * as DomId from '../DomId/DomId.ts'
 import * as GetFileIconVirtualDom from '../GetFileIconVirtualDom/GetFileIconVirtualDom.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
@@ -23,7 +24,7 @@ export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly V
   const parent = dom[0]
   if (isActive) {
     // @ts-ignore
-    parent.id = 'QuickPickItemActive'
+    parent.id = DomId.QuickPickItemActive
     parent.className += ' ' + ClassNames.QuickPickItemActive
   }
   if (fileIcon) {
@@ -33,7 +34,7 @@ export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly V
     parent.childCount++
     dom.push({
       type: VirtualDomElements.Div,
-      className: MergeClassNames.mergeClassNames(`QuickPickMaskIcon`, 'MaskIcon', `MaskIcon${icon}`),
+      className: MergeClassNames.mergeClassNames(ClassNames.QuickPickMaskIcon, ClassNames.MaskIcon, `MaskIcon${icon}`),
       childCount: 0,
     })
   }
