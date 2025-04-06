@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals'
-import { getHighlightSections } from '../src/parts/GetHighlightSections/GetHighlightSections.ts'
 import { emptyHighlightSections } from '../src/parts/EmptyHighlightSections/EmptyHighlightSections.ts'
+import { getHighlightSections } from '../src/parts/GetHighlightSections/GetHighlightSections.ts'
 
 test('returns empty sections when no highlights', () => {
   expect(getHighlightSections([], 'test')).toBe(emptyHighlightSections)
