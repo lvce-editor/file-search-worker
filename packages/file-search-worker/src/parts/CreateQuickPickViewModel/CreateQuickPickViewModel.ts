@@ -1,7 +1,7 @@
-import * as GetProtoVisibleQuickPickItems from '../GetProtoVisibleQuickPickItems/GetProtoVisibleQuickPickItems.ts'
-import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewModel.ts'
+import * as GetProtoVisibleQuickPickItems from '../GetProtoVisibleQuickPickItems/GetProtoVisibleQuickPickItems.ts'
+import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
 
 export const createQuickPickViewModel = (oldState: QuickPickState, newState: QuickPickState): QuickPickViewModel => {
   const protoVisibleItems = GetProtoVisibleQuickPickItems.getVisible(newState.items, newState.minLineY, newState.maxLineY, newState.icons)
