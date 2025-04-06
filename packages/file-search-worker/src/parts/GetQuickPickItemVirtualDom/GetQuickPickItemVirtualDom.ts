@@ -10,8 +10,7 @@ import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly VirtualDomNode[] => {
-  const { posInSet, label, setSize, isActive, description, icon, matches, fileIcon } = visibleItem
-  const highlights = matches.slice(1)
+  const { posInSet, label, setSize, isActive, description, icon, highlights, fileIcon } = visibleItem
   const dom: any[] = []
   dom.push({
     type: VirtualDomElements.Div,
