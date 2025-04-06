@@ -1,7 +1,8 @@
+import type { SelectPickResult } from '../SelectPickRresult/SelectPickResult.ts'
 import * as Command from '../Command/Command.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 
-export const selectPick = async (item: any): Promise<any> => {
+export const selectPick = async (item: any): Promise<SelectPickResult> => {
   const rowIndex = Number.parseInt(item.label)
   const position = {
     rowIndex,
