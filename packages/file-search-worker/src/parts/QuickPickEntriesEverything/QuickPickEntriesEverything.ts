@@ -1,4 +1,3 @@
-import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
@@ -41,11 +40,6 @@ const getPick = (state: any, index: number): any => {
     return state.filteredPicks[index]
   }
   console.warn('no pick matching index', index)
-}
-
-export const selectPick = (item: ProtoVisibleItem): Promise<any> => {
-  const { provider } = state
-  return provider.selectPick(item)
 }
 
 export const openCommandPalette = (): void => {
@@ -119,3 +113,5 @@ export const isPrepared = (): boolean => {
 export { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
 
 export { getPicks } from '../GetPicksEverything/GetPicksEverything.ts'
+
+export { selectPick } from '../SelectPickEverything/SelectPickEverything.ts'
