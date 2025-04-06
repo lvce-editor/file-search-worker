@@ -6,7 +6,7 @@ interface Fn {
 }
 
 const noop = (value: string): string => {
-  return structuredClone(value)
+  return value
 }
 
 const getFilterValueEverything = (value: string): string => {
