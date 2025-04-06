@@ -1,5 +1,6 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
+import * as GetPicks from '../GetPicks/GetPicks.ts'
 import * as GetQuickPickFileIcons from '../GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
@@ -11,7 +12,7 @@ export const setValue = async (state: QuickPickState, newValue: string): Promise
     return state
   }
   const provider = QuickPickEntries.get(uri)
-  const newPicks = await provider.getPicks(newValue)
+  const newPicks = await GetPicks.getPicks(uri, newValue)
   // @ts-ignore
   const filterValue = provider.getFilterValue(newValue)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
