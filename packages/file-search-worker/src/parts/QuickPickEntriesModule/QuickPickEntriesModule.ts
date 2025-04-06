@@ -1,14 +1,10 @@
 import type { Dirent } from '../Dirent/Dirent.ts'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
-export interface QuickPickEntriesModule<T = any> {
+export interface QuickPickEntriesModule {
   readonly state: any
-  readonly name: string
-  readonly getPlaceholder: () => string
-  readonly getNoResults: () => string
-  readonly getPicks: (value: string) => Promise<readonly T[]>
-  readonly selectPick: (item: T) => Promise<any>
-  readonly getFilterValue: (item: T) => string
-  readonly getPickFileIcon?: (item: T) => Dirent
-  readonly getVisibleItems: (items: readonly T[], icons: readonly string[]) => readonly ProtoVisibleItem[]
+  readonly getPicks: (value: string) => Promise<readonly ProtoVisibleItem[]>
+  readonly selectPick: (item: ProtoVisibleItem) => Promise<any>
+  readonly getPickFileIcon?: (item: ProtoVisibleItem) => Dirent
+  readonly getVisibleItems: (items: readonly ProtoVisibleItem[], icons: readonly string[]) => readonly ProtoVisibleItem[]
 }

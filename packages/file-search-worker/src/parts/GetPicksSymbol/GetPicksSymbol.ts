@@ -1,6 +1,6 @@
-import type { Pick } from '../Pick/Pick.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
-export const getPicks = async (): Promise<readonly Pick[]> => {
-  const picks: readonly Pick[] = []
+export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
+  const picks: readonly ProtoVisibleItem[] = []
   return picks
 }

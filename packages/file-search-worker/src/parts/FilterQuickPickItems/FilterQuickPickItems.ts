@@ -1,26 +1,17 @@
-import type { Pick } from '../Pick/Pick.ts'
-import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
-import * as ConvertToPick from '../ConvertToPick/ConvertToPick.ts'
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as FilterQuickPickItem from '../FilterQuickPickItem/FilterQuickPickItem.ts'
-import { pathBaseName } from '../Workspace/Workspace.ts'
 
-export const filterQuickPickItems = (items: readonly string[], value: string, provider?: QuickPickEntriesModule): readonly Pick[] => {
+export const filterQuickPickItems = (items: readonly ProtoVisibleItem[], value: string): readonly ProtoVisibleItem[] => {
   if (!value) {
-    return items.map(ConvertToPick.convertToPick)
+    return items
   }
-  const results: Pick[] = []
+  const results: ProtoVisibleItem[] = []
   for (const item of items) {
-    let filterValue = ''
-    if (provider) {
-      // @ts-ignore
-      filterValue = provider.getPickLabel(item)
-    } else {
-      filterValue = pathBaseName(item)
-    }
+    const filterValue = item.label
     const matches = FilterQuickPickItem.filterQuickPickItem(value, filterValue)
     if (matches.length > 0) {
       results.push({
-        pick: item,
+        ...item,
         matches,
       })
     }

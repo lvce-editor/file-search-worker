@@ -1,27 +1,14 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
-import * as Workspace from '../Workspace/Workspace.ts'
 
-const getPickDescription = (pick: string): string => {
-  return Workspace.pathDirName(pick)
-}
-
-const getPickIcon = (): any => {
-  return ''
-}
-
-const getPickLabel = (pick: string): string => {
-  return Workspace.pathBaseName(pick)
-}
-
-export const getVisibleItems = (picks: readonly any[], icons: readonly string[]): readonly ProtoVisibleItem[] => {
-  const visibleItems = picks.map((item: any, index: number) => {
-    const pick = item.pick
+export const getVisibleItems = (picks: readonly ProtoVisibleItem[], icons: readonly string[]): readonly ProtoVisibleItem[] => {
+  const visibleItems = picks.map((item: ProtoVisibleItem, index: number) => {
+    const pick = item
     const fileIcon = icons[index]
     return {
-      description: getPickDescription(pick),
+      description: pick.description,
       fileIcon,
-      icon: getPickIcon(),
-      label: getPickLabel(pick),
+      icon: pick.icon,
+      label: pick.label,
       matches: pick.matches || [],
     }
   })

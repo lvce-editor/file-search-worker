@@ -1,3 +1,4 @@
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as Rpc from '../Rpc/Rpc.ts'
@@ -37,9 +38,24 @@ const getExtensionPicks = async (): Promise<readonly any[]> => {
   }
 }
 
-export const getPicks = async (): Promise<readonly any[]> => {
+const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
+  const pick: ProtoVisibleItem = {
+    // @ts-ignore
+    id: item.id,
+    label: item.label,
+    description: '',
+    fileIcon: '',
+    icon: '',
+    matches: [],
+  }
+  return pick
+}
+
+export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
+  // TODO get picks in parallel
   const builtinPicks = await getBuiltinPicks()
   const extensionPicks = await getExtensionPicks()
   const allPicks = [...builtinPicks, ...extensionPicks]
-  return allPicks
+  const converted = allPicks.map(toProtoVisibleItem)
+  return converted
 }

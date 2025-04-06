@@ -1,3 +1,4 @@
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetVisibleItemsQuickPickEntriesNoop from '../GetVisibleItemsQuickPickEntriesNoop/GetVisibleItemsQuickPickEntriesNoop.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
@@ -16,7 +17,7 @@ export const getPicks = async (value: any): Promise<any[]> => {
   return []
 }
 
-export const selectPick = async (item: any): Promise<any> => {
+export const selectPick = async (item: ProtoVisibleItem): Promise<any> => {
   return {
     command: QuickPickReturnValue.Hide,
   }

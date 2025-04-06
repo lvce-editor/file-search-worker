@@ -1,3 +1,4 @@
+import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as Rpc from '../Rpc/Rpc.ts'
@@ -36,8 +37,10 @@ const selectPickExtension = async (item: any): Promise<any> => {
   }
 }
 
-export const selectPick = async (item: any): Promise<any> => {
-  if (item.id.startsWith('ext.')) {
+export const selectPick = async (item: ProtoVisibleItem): Promise<any> => {
+  // @ts-ignore
+  const id = item.id
+  if (id.startsWith('ext.')) {
     return selectPickExtension(item)
   }
   return selectPickBuiltin(item)

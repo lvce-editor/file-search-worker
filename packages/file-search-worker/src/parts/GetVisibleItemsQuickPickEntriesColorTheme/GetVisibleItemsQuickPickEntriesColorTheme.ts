@@ -1,25 +1,13 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
-const getPickDescription = (value: any): string => {
-  return ''
-}
-
-const getPickIcon = (pick: any): string => {
-  return ''
-}
-
-const getPickLabel = (pick: any): string => {
-  return pick
-}
-
-export const getVisibleItems = (picks: readonly any[], icons: readonly string[]): readonly ProtoVisibleItem[] => {
-  const visibleItems = picks.map((item, index) => {
-    const pick = item.pick
+export const getVisibleItems = (picks: readonly ProtoVisibleItem[]): readonly ProtoVisibleItem[] => {
+  const visibleItems = picks.map((item) => {
+    const pick = item
     return {
-      description: getPickDescription(pick),
+      description: pick.description,
       fileIcon: '',
-      icon: getPickIcon(pick),
-      label: getPickLabel(pick),
+      icon: pick.icon,
+      label: pick.label,
       matches: [],
     }
   })
