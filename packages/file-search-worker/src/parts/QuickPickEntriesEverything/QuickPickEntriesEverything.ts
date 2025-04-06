@@ -1,4 +1,5 @@
 import { state } from '../GetVisibleItemsQuickPickEntriesEverything/GetVisibleItemsQuickPickEntriesEverything.ts'
+import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
 // TODO cache quick pick items -> don't send every time from renderer worker to renderer process
 // maybe cache by id opening commands -> has all commands cached
@@ -17,8 +18,9 @@ const RECENT_PICKS_MAX_SIZE = 3
 export const name = 'everything'
 
 export const getPlaceholder = (): string => {
+  const module = QuickPickEntries.get(state.provider)
   // @ts-ignore
-  return state.provider.getPlaceholder()
+  return module.getPlaceholder()
 }
 
 export const getLabel = (): string => {
@@ -26,8 +28,9 @@ export const getLabel = (): string => {
 }
 
 export const getNoResults = (): any => {
+  const module = QuickPickEntries.get(state.provider)
   // @ts-ignore
-  return state.provider.getNoResults()
+  return module.getNoResults()
 }
 
 // @ts-ignore
@@ -55,49 +58,51 @@ export const getFilterValue = (value: string): string => {
 }
 
 export const getPickFilterValue = (pick: any): any => {
-  const { provider } = state
+  const module = QuickPickEntries.get(state.provider)
+
   // @ts-ignore
-  return provider.getPickFilterValue(pick)
+  return module.getPickFilterValue(pick)
 }
 
 export const getPickDescription = (pick: any): any => {
-  const { provider } = state
+  const module = QuickPickEntries.get(state.provider)
+
   // @ts-ignore
-  if (provider.getPickDescription) {
+  if (module.getPickDescription) {
     // @ts-ignore
-    return provider.getPickDescription(pick)
+    return module.getPickDescription(pick)
   }
   return ''
 }
 
 export const getPickLabel = (pick: any): any => {
-  const { provider } = state
+  const module = QuickPickEntries.get(state.provider)
   // @ts-ignore
-  return provider.getPickLabel(pick)
+  return module.getPickLabel(pick)
 }
 
 export const getPickIcon = (pick: any): string => {
-  const { provider } = state
+  const module = QuickPickEntries.get(state.provider)
   // @ts-ignore
-  return provider.getPickIcon(pick)
+  return module.getPickIcon(pick)
 }
 
 export const getPickFileIcon = (pick: any): any => {
-  const { provider } = state
+  const module = QuickPickEntries.get(state.provider)
   // @ts-ignore
-  if (provider.getPickFileIcon) {
+  if (module.getPickFileIcon) {
     // @ts-ignore
-    return provider.getPickFileIcon(pick)
+    return module.getPickFileIcon(pick)
   }
   return undefined
 }
 
 export const isPrepared = (): boolean => {
-  const { provider } = state
+  const module = QuickPickEntries.get(state.provider)
   // @ts-ignore
-  if (provider.isPrepared) {
+  if (module.isPrepared) {
     // @ts-ignore
-    return provider.isPrepared()
+    return module.isPrepared()
   }
   return false
 }
