@@ -2,17 +2,21 @@ import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as Assert from '../Assert/Assert.ts'
 import * as CloseWidget from '../CloseWidget/CloseWidget.ts'
 import * as GetPick from '../GetPick/GetPick.ts'
+import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
+import * as GetQuickPickSubProviderId from '../GetQuickPickSubProviderId/GetQuickPickSubProviderId.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 
 export const selectIndex = async (state: QuickPickState, index: number, button = /* left */ 0): Promise<QuickPickState> => {
-  const { minLineY, providerId, items } = state
+  const { minLineY, items, value } = state
   const actualIndex = index + minLineY
   const pick = GetPick.getPick(items, actualIndex)
   if (!pick) {
     return state
   }
-  const fn = QuickPickEntries.getSelect(providerId)
+  const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
+  const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(prefix)
+  const fn = QuickPickEntries.getSelect(subId)
   const selectPickResult = await fn(pick)
   Assert.object(selectPickResult)
   Assert.string(selectPickResult.command)
