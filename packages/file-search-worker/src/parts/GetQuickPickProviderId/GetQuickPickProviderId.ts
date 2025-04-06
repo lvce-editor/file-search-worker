@@ -14,6 +14,8 @@ export const getQuickPickProviderId = (prefix: string): string => {
       return QuickPickEntryId.GoToLine
     case QuickPickPrefix.View:
       return QuickPickEntryId.View
+    case QuickPickPrefix.Help:
+      return QuickPickEntryId.Help
     default:
       return QuickPickEntryId.File
   }
