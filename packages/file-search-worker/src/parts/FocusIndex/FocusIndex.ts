@@ -16,7 +16,7 @@ export const focusIndex = async (state: QuickPickState, index: number): Promise<
     const minLineY = index
     const maxLineY = Math.min(index + maxVisibleItems, items.length - 1)
     const sliced = items.slice(minLineY, maxLineY)
-    const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(provider, sliced, fileIconCache)
+    const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
 
     // TODO need to scroll up
     return {
@@ -33,7 +33,7 @@ export const focusIndex = async (state: QuickPickState, index: number): Promise<
     const maxLineY = index + 1
     const minLineY = Math.max(maxLineY - maxVisibleItems, 0)
     const sliced = items.slice(minLineY, maxLineY)
-    const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(provider, sliced, fileIconCache)
+    const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
 
     return {
       ...state,
@@ -46,7 +46,7 @@ export const focusIndex = async (state: QuickPickState, index: number): Promise<
   }
 
   const sliced = items.slice(minLineY, maxLineY)
-  const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(provider, sliced, fileIconCache)
+  const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
 
   return {
     ...state,
