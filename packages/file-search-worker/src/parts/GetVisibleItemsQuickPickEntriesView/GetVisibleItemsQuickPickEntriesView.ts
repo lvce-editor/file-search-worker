@@ -19,6 +19,8 @@ export const getVisibleItems = (picks: readonly any[]): readonly ProtoVisibleIte
     icon: getPickIcon(pick),
     label: getPickLabel(pick),
     matches: [],
+    direntType: 0,
+    uri: '',
   }))
   return visibleItems
 }

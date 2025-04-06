@@ -1,4 +1,5 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
+import * as DirentType from '../DirentType/DirentType.ts'
 import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
@@ -14,11 +15,13 @@ const convertToPick = (uri: string): ProtoVisibleItem => {
   const dirName = Workspace.pathDirName(uri)
 
   return {
-    label: baseName,
     description: dirName,
-    icon: '',
+    direntType: DirentType.File,
     fileIcon: '',
+    icon: '',
+    label: baseName,
     matches: [],
+    uri,
   }
 }
 

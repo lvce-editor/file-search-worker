@@ -27,13 +27,15 @@ const getPickIcon = (pick: any): string => {
   return convertIcon(pick.icon)
 }
 
-export const getVisibleItems = (picks: readonly any[], icons: readonly string[]): readonly ProtoVisibleItem[] => {
-  const visibleItems = picks.map((pick: any, index: number) => ({
+export const getVisibleItems = (picks: readonly ProtoVisibleItem[], icons: readonly string[]): readonly ProtoVisibleItem[] => {
+  const visibleItems = picks.map((pick: ProtoVisibleItem, index: number) => ({
     description: getPickDescription(pick),
     fileIcon: '',
     icon: getPickIcon(pick),
     label: getPickLabel(pick),
     matches: [],
+    uri: pick.uri,
+    direntType: 0,
   }))
   return visibleItems
 }

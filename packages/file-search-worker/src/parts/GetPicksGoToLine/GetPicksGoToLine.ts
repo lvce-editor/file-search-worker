@@ -1,4 +1,5 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
+import * as DirentType from '../DirentType/DirentType.ts'
 
 export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
   const picks: readonly ProtoVisibleItem[] = [
@@ -8,6 +9,8 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       icon: '',
       fileIcon: '',
       matches: [],
+      direntType: DirentType.None,
+      uri: '',
     },
     {
       label: '2',
@@ -15,6 +18,8 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       icon: '',
       fileIcon: '',
       matches: [],
+      direntType: DirentType.None,
+      uri: '',
     },
     {
       label: '3',
@@ -22,6 +27,8 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       icon: '',
       fileIcon: '',
       matches: [],
+      direntType: DirentType.None,
+      uri: '',
     },
     {
       label: '4',
@@ -29,6 +36,8 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       icon: '',
       fileIcon: '',
       matches: [],
+      direntType: DirentType.None,
+      uri: '',
     },
     {
       label: '5',
@@ -36,6 +45,8 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       icon: '',
       fileIcon: '',
       matches: [],
+      direntType: DirentType.None,
+      uri: '',
     },
     {
       label: '6',
@@ -43,6 +54,8 @@ export const getPicks = async (): Promise<readonly ProtoVisibleItem[]> => {
       icon: '',
       fileIcon: '',
       matches: [],
+      direntType: DirentType.None,
+      uri: '',
     },
   ]
   return picks

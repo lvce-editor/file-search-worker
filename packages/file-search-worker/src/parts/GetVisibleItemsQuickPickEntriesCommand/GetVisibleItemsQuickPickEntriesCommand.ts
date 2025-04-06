@@ -9,6 +9,8 @@ export const getVisibleItems = (picks: readonly ProtoVisibleItem[]): readonly Pr
       icon: '',
       label: pick.label,
       matches: [],
+      uri: pick.uri,
+      direntType: pick.direntType,
     }
   })
   return visibleItems
