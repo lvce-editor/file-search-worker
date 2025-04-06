@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
+import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as GetHighlights from '../src/parts/GetHighlights/GetHighlights.ts'
 import * as VirtualDomElements from '../src/parts/VirtualDomElements/VirtualDomElements.ts'
-import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 
 test('getHighlights - empty highlights', () => {
   const result = GetHighlights.getHighlights([], 'test')
