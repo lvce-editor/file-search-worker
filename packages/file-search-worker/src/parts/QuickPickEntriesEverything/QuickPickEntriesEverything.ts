@@ -97,16 +97,6 @@ export const getPickFileIcon = (pick: any): any => {
   return undefined
 }
 
-export const isPrepared = (): boolean => {
-  const module = QuickPickEntries.get(state.provider)
-  // @ts-ignore
-  if (module.isPrepared) {
-    // @ts-ignore
-    return module.isPrepared()
-  }
-  return false
-}
-
 // provider
 // - create
 // - loadcontent
