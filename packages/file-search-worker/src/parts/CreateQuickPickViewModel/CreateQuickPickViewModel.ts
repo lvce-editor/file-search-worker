@@ -2,9 +2,12 @@ import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewModel.ts'
 import * as GetProtoVisibleQuickPickItems from '../GetProtoVisibleQuickPickItems/GetProtoVisibleQuickPickItems.ts'
 import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
+import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
 export const createQuickPickViewModel = (oldState: QuickPickState, newState: QuickPickState): QuickPickViewModel => {
-  const protoVisibleItems = GetProtoVisibleQuickPickItems.getVisible(newState.items, newState.minLineY, newState.maxLineY, newState.icons)
+  const provider = QuickPickEntries.get(newState.uri)
+
+  const protoVisibleItems = GetProtoVisibleQuickPickItems.getVisible(provider, newState.items, newState.minLineY, newState.maxLineY, newState.icons)
   const visibleItems = GetVisibleQuickPickItems.getVisible(newState.items.length, protoVisibleItems, newState.minLineY, newState.focusedIndex)
   const oldFocusedIndex = oldState.focusedIndex - oldState.minLineY
   const newFocusedIndex = newState.focusedIndex - newState.minLineY
