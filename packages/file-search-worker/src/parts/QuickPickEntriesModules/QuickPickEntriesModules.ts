@@ -1,5 +1,6 @@
 import type { GetPicks } from '../GetPicks/GetPicks.ts'
 import type { QuickPickEntriesModule } from '../QuickPickEntriesModule/QuickPickEntriesModule.ts'
+import type { SelectPick } from '../SelectPick/SelectPick.ts'
 import * as GetPicksColorTheme from '../GetPicksColorTheme/GetPicksColorTheme.ts'
 import * as GetPicksCommand from '../GetPicksCommand/GetPicksCommand.ts'
 import * as GetPicksCustom from '../GetPicksCustom/GetPicksCustom.ts'
@@ -28,6 +29,9 @@ import * as SelectPickRecent from '../SelectPickRecent/SelectPickRecent.ts'
 import * as SelectPickSymbol from '../SelectPickSymbol/SelectPickSymbol.ts'
 import * as SelectPickWorkspaceSymbol from '../SelectPickWorkspaceSymbol/SelectPickWorkspaceSymbol.ts'
 
+/**
+ * deprecated
+ */
 export const quickPickEntriesModules: Record<string, QuickPickEntriesModule> = {
   [QuickPickEntryId.ColorTheme]: QuickPickEntriesColorTheme,
   [QuickPickEntryId.CommandPalette]: QuickPickEntriesEverything,
@@ -41,7 +45,7 @@ export const quickPickEntriesModules: Record<string, QuickPickEntriesModule> = {
   [QuickPickEntryId.WorkspaceSymbol]: QuickPickEntriesWorkspaceSymbol,
 }
 
-export const selectPicks: Record<string, QuickPickEntriesModule['selectPick']> = {
+export const selectPicks: Record<string, SelectPick> = {
   [QuickPickEntryId.ColorTheme]: SelectPickColorTheme.selectPick,
   [QuickPickEntryId.CommandPalette]: SelectPickEverything.selectPick,
   [QuickPickEntryId.Commands]: SelectPickCommand.selectPick,
