@@ -1,5 +1,6 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
+import { emptyMatches } from '../EmptyMatches/EmptyMatches.ts'
 import * as GetWorkspacePath from '../GetWorkspacePath/GetWorkspacePath.ts'
 import * as SearchFile from '../SearchFile/SearchFile.ts'
 import * as Workspace from '../Workspace/Workspace.ts'
@@ -20,7 +21,7 @@ const convertToPick = (uri: string): ProtoVisibleItem => {
     fileIcon: '',
     icon: '',
     label: baseName,
-    matches: [],
+    matches: emptyMatches,
     uri,
   }
 }
