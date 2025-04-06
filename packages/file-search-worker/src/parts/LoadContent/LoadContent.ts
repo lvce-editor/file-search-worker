@@ -5,7 +5,9 @@ import * as GetDefaultValue from '../GetDefaultValue/GetDefaultValue.ts'
 import * as GetFilterValue from '../GetFilterValue/GetFilterValue.ts'
 import * as GetPicks from '../GetPicks/GetPicks.ts'
 import * as GetQuickPickFileIcons from '../GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
+import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
 import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
+import * as GetQuickPickSubProviderId from '../GetQuickPickSubProviderId/GetQuickPickSubProviderId.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
 import * as SetArgs from '../SetArgs/SetArgs.ts'
@@ -14,8 +16,10 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const { uri, args, fileIconCache } = state
   const id = GetQuickPickProviderId.getQuickPickProviderId(uri)
   const value = GetDefaultValue.getDefaultValue(id)
-  SetArgs.setArgs(id, args)
-  const newPicks = await GetPicks.getPicks(id, value)
+  const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
+  const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(prefix)
+  SetArgs.setArgs(subId, args)
+  const newPicks = await GetPicks.getPicks(subId, value)
   Assert.array(newPicks)
   const filterValue = GetFilterValue.getFilterValue(id, value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)

@@ -11,7 +11,6 @@ import * as GetPicksOpenRecent from '../GetPicksOpenRecent/GetPicksOpenRecent.ts
 import * as GetPicksSymbol from '../GetPicksSymbol/GetPicksSymbol.ts'
 import * as GetPicksView from '../GetPicksView/GetPicksView.ts'
 import * as GetPicksWorkspaceSymbol from '../GetPicksWorkspaceSymbol/GetPicksWorkspaceSymbol.ts'
-import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 import * as SelectPickColorTheme from '../SelectPickColorTheme/SelectPickColorTheme.ts'
 import * as SelectPickCommand from '../SelectPickCommand/SelectPickCommand.ts'
 import * as SelectPickCustom from '../SelectPickCustom/SelectPickCustom.ts'
@@ -24,32 +23,32 @@ import * as SelectPickSymbol from '../SelectPickSymbol/SelectPickSymbol.ts'
 import * as SelectPickView from '../SelectPickView/SelectPickView.ts'
 import * as SelectPickWorkspaceSymbol from '../SelectPickWorkspaceSymbol/SelectPickWorkspaceSymbol.ts'
 
-export const selectPicks: Record<string, SelectPick> = {
-  [QuickPickEntryId.ColorTheme]: SelectPickColorTheme.selectPick,
-  [QuickPickEntryId.CommandPalette]: SelectPickEverything.selectPick,
-  [QuickPickEntryId.Commands]: SelectPickCommand.selectPick,
-  [QuickPickEntryId.Custom]: SelectPickCustom.selectPick,
-  [QuickPickEntryId.EveryThing]: SelectPickEverything.selectPick,
-  [QuickPickEntryId.File]: SelectPickFile.selectPick,
-  [QuickPickEntryId.GoToLine]: SelectPickGoToLine.selectPick,
-  [QuickPickEntryId.Help]: SelectPickHelp.selectPick,
-  [QuickPickEntryId.Recent]: SelectPickRecent.selectPick,
-  [QuickPickEntryId.Symbol]: SelectPickSymbol.selectPick,
-  [QuickPickEntryId.View]: SelectPickView.selectPick,
-  [QuickPickEntryId.WorkspaceSymbol]: SelectPickWorkspaceSymbol.selectPick,
-}
+export const selectPicks: readonly SelectPick[] = [
+  SelectPickColorTheme.selectPick,
+  SelectPickEverything.selectPick,
+  SelectPickCommand.selectPick,
+  SelectPickCustom.selectPick,
+  SelectPickEverything.selectPick,
+  SelectPickFile.selectPick,
+  SelectPickGoToLine.selectPick,
+  SelectPickHelp.selectPick,
+  SelectPickRecent.selectPick,
+  SelectPickSymbol.selectPick,
+  SelectPickView.selectPick,
+  SelectPickWorkspaceSymbol.selectPick,
+]
 
-export const getPicks: Record<string, GetPicks> = {
-  [QuickPickEntryId.ColorTheme]: GetPicksColorTheme.getPicks,
-  [QuickPickEntryId.CommandPalette]: GetPicksEverything.getPicks,
-  [QuickPickEntryId.Commands]: GetPicksCommand.getPicks,
-  [QuickPickEntryId.Custom]: GetPicksCustom.getPicks,
-  [QuickPickEntryId.EveryThing]: GetPicksEverything.getPicks,
-  [QuickPickEntryId.File]: GetPicksFile.getPicks,
-  [QuickPickEntryId.GoToLine]: GetPicksGoToLine.getPicks,
-  [QuickPickEntryId.Help]: GetPicksHelp.getPicks,
-  [QuickPickEntryId.Recent]: GetPicksOpenRecent.getPicks,
-  [QuickPickEntryId.Symbol]: GetPicksSymbol.getPicks,
-  [QuickPickEntryId.View]: GetPicksView.getPicks,
-  [QuickPickEntryId.WorkspaceSymbol]: GetPicksWorkspaceSymbol.getPicks,
-}
+export const getPicks: readonly GetPicks[] = [
+  GetPicksColorTheme.getPicks,
+  GetPicksEverything.getPicks,
+  GetPicksCommand.getPicks,
+  GetPicksCustom.getPicks,
+  GetPicksEverything.getPicks,
+  GetPicksFile.getPicks,
+  GetPicksGoToLine.getPicks,
+  GetPicksHelp.getPicks,
+  GetPicksOpenRecent.getPicks,
+  GetPicksSymbol.getPicks,
+  GetPicksView.getPicks,
+  GetPicksWorkspaceSymbol.getPicks,
+]
