@@ -11,6 +11,7 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
     {
       name: DomEventListenersFunctions.HandleWheel,
       params: ['handleWheel', 'event.deltaMode', 'event.deltaY'],
+      passive: true,
     },
     {
       name: DomEventListenersFunctions.HandleBlur,
