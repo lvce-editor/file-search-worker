@@ -6,6 +6,6 @@ export const register = (modules: Record<string, SearchFileHandler>): void => {
   Object.assign(state, modules)
 }
 
-export const getModule = (protocol: string): SearchFileHandler => {
+export const getFn = (protocol: string): SearchFileHandler => {
   return state[protocol]
 }

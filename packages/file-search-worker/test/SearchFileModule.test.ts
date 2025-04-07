@@ -1,6 +1,6 @@
 import { test, expect } from '@jest/globals'
 import type { SearchFileHandler } from '../src/parts/SearchFileHandler/SearchFileHandler.ts'
-import { register, getModule } from '../src/parts/SearchFileModule/SearchFileModule.ts'
+import { register, getFn } from '../src/parts/SearchFileModule/SearchFileModule.ts'
 
 const mockHandler: SearchFileHandler = async (path, value, prepare, assetDir) => {
   return []
@@ -11,11 +11,11 @@ test('register and getModule', () => {
     file: mockHandler,
   }
   register(modules)
-  expect(getModule('file')).toBe(mockHandler)
+  expect(getFn('file')).toBe(mockHandler)
 })
 
 test('getModule returns undefined for unregistered protocol', () => {
-  expect(getModule('unknown')).toBeUndefined()
+  expect(getFn('unknown')).toBeUndefined()
 })
 
 const firstHandler: SearchFileHandler = async (path, value, prepare, assetDir) => {
@@ -29,5 +29,5 @@ const secondHandler: SearchFileHandler = async (path, value, prepare, assetDir) 
 test('register overwrites existing modules', () => {
   register({ file: firstHandler })
   register({ file: secondHandler })
-  expect(getModule('file')).toBe(secondHandler)
+  expect(getFn('file')).toBe(secondHandler)
 })
