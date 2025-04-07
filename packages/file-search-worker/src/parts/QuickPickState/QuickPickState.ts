@@ -20,7 +20,7 @@ export interface QuickPickState extends List<any> {
   readonly width: number
   readonly headerHeight: number
   readonly itemHeight: number
-  readonly items: readonly any[]
+  readonly items: readonly ProtoVisibleItem[]
   readonly minimumSliderSize: number
   readonly focusedIndex: number
   readonly touchOffsetY: number
