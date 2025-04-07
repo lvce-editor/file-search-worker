@@ -5,7 +5,7 @@ export const renderEventListeners = (): readonly DomEventListener[] => {
   return [
     {
       name: DomEventListenersFunctions.HandlePointerDown,
-      params: ['handlePointerDown', 'event.clientX', 'event.clientY'],
+      params: ['handleClickAt', 'event.clientX', 'event.clientY'],
       preventDefault: true,
     },
     {
