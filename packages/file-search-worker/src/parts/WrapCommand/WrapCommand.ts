@@ -6,7 +6,7 @@ export interface WrappedFn {
 }
 
 interface Fn {
-  (state: QuickPickState, ...args: readonly any[]): Promise<QuickPickState>
+  (state: QuickPickState, ...args: readonly any[]): QuickPickState | Promise<QuickPickState>
 }
 
 export const wrapCommand = (fn: Fn): WrappedFn => {
