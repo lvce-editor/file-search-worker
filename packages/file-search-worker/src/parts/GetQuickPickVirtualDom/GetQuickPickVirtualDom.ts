@@ -11,10 +11,13 @@ import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
-export const getQuickPickVirtualDom = (visibleItems: readonly VisibleItem[], totalItems: number = 0): readonly VirtualDomNode[] => {
+export const getQuickPickVirtualDom = (
+  visibleItems: readonly VisibleItem[],
+  scrollBarHeight: number,
+  scrollBarTop: number,
+): readonly VirtualDomNode[] => {
   const quickOpen = QuickPickStrings.quickOpen()
-  const maxVisibleItems = 10
-  const shouldShowScrollbar = totalItems > maxVisibleItems
+  const shouldShowScrollbar = scrollBarHeight > 0
   return [
     {
       type: VirtualDomElements.Div,
@@ -40,6 +43,6 @@ export const getQuickPickVirtualDom = (visibleItems: readonly VisibleItem[], tot
       childCount: visibleItems.length,
     },
     ...GetQuickPickItemsVirtualDom.getQuickPickItemsVirtualDom(visibleItems),
-    ...GetScrollBarVirtualDom.getScrollBarVirtualDom(visibleItems, totalItems),
+    ...GetScrollBarVirtualDom.getScrollBarVirtualDom(scrollBarHeight, scrollBarTop),
   ]
 }
