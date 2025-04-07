@@ -30,6 +30,7 @@ test('getQuickPickVirtualDom with empty items', () => {
       className: 'QuickPickItems',
       id: 'QuickPickItems',
       onWheel: 'handleWheel',
+      onPointerDown: 'handlePointerDown',
       role: 'listbox',
       type: 4,
     },
