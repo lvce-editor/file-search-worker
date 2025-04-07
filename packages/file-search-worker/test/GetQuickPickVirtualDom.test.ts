@@ -2,7 +2,9 @@ import { expect, test } from '@jest/globals'
 import * as GetQuickPickVirtualDom from '../src/parts/GetQuickPickVirtualDom/GetQuickPickVirtualDom.ts'
 
 test('getQuickPickVirtualDom with empty items', () => {
-  const result = GetQuickPickVirtualDom.getQuickPickVirtualDom([], 0)
+  const scrollBarHeight = 15
+  const scrollBarTop = 0
+  const result = GetQuickPickVirtualDom.getQuickPickVirtualDom([], scrollBarHeight, scrollBarTop)
   expect(result).toEqual([
     { ariaLabel: 'Quick open', childCount: 2, className: 'Viewlet QuickPick', id: 'QuickPick', type: 4 },
     { childCount: 1, className: 'QuickPickHeader', type: 4 },
@@ -58,6 +60,8 @@ test('getQuickPickVirtualDom with scrollbar', () => {
       highlights: [],
     },
   ]
-  const result = GetQuickPickVirtualDom.getQuickPickVirtualDom(visibleItems, 15)
+  const scrollBarHeight = 15
+  const scrollBarTop = 0
+  const result = GetQuickPickVirtualDom.getQuickPickVirtualDom(visibleItems, scrollBarHeight, scrollBarTop)
   expect(result).toBeDefined()
 })

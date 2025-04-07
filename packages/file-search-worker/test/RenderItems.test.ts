@@ -24,7 +24,8 @@ test.skip('renders items with virtual dom', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
-    totalItems: 1,
+    scrollBarHeight: 0,
+    scrollBarTop: 0,
   }
   const result = RenderItems.renderItems(newState)
   expect(result).toEqual(['Viewlet.send', 1, RenderMethod.SetItemsDom, expect.any(Array)])
@@ -40,7 +41,8 @@ test.skip('renders empty items state', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
-    totalItems: 0,
+    scrollBarHeight: 0,
+    scrollBarTop: 0,
   }
   const result = RenderItems.renderItems(newState)
   expect(result).toEqual(['Viewlet.send', 1, RenderMethod.SetItemsDom, expect.any(Array)])
