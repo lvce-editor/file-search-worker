@@ -1,3 +1,4 @@
+import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as Assert from '../Assert/Assert.ts'
 
 export const create = ({
@@ -34,7 +35,7 @@ const getListHeight = (height: number, headerHeight: number): number => {
   return headerHeight
 }
 
-export const setDeltaY = (state: any, deltaY: number): any => {
+export const setDeltaY = (state: QuickPickState, deltaY: number): QuickPickState => {
   Assert.object(state)
   Assert.number(deltaY)
   const { itemHeight, items, height, headerHeight } = state
@@ -61,7 +62,7 @@ export const setDeltaY = (state: any, deltaY: number): any => {
   }
 }
 
-export const handleWheel = (state: any, deltaMode: number, deltaY: number): any => {
+export const handleWheel = (state: QuickPickState, deltaMode: number, deltaY: number): QuickPickState => {
   Assert.object(state)
   Assert.number(deltaMode)
   Assert.number(deltaY)
