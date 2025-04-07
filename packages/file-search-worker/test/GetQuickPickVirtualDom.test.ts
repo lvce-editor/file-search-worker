@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as GetQuickPickVirtualDom from '../src/parts/GetQuickPickVirtualDom/GetQuickPickVirtualDom.ts'
 
 test('getQuickPickVirtualDom with empty items', () => {
