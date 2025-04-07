@@ -20,5 +20,6 @@ export const createQuickPickViewModel = (oldState: QuickPickState, newState: Qui
     oldFocusedIndex,
     newFocusedIndex,
     uid: newState.uid,
+    totalItems: newState.items.length,
   }
 }
