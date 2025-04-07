@@ -2,7 +2,7 @@ import { expect, test } from '@jest/globals'
 import * as GetQuickPickVirtualDom from '../src/parts/GetQuickPickVirtualDom/GetQuickPickVirtualDom.ts'
 
 test('getQuickPickVirtualDom with empty items', () => {
-  const scrollBarHeight = 15
+  const scrollBarHeight = 0
   const scrollBarTop = 0
   const result = GetQuickPickVirtualDom.getQuickPickVirtualDom([], scrollBarHeight, scrollBarTop)
   expect(result).toEqual([
