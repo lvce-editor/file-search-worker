@@ -1,6 +1,7 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
+import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
 export const getScrollBarVirtualDom = (visibleItems: readonly VisibleItem[], totalItems: number): readonly VirtualDomNode[] => {
@@ -17,15 +18,15 @@ export const getScrollBarVirtualDom = (visibleItems: readonly VisibleItem[], tot
   return [
     {
       type: VirtualDomElements.Div,
-      className: ClassNames.QuickPickScrollbar,
+      className: MergeClassNames.mergeClassNames(ClassNames.ScrollBar, ClassNames.ScrollBarSmall),
       childCount: 1,
-      style: `height: ${scrollbarHeight}px;`,
     },
     {
       type: VirtualDomElements.Div,
-      className: ClassNames.QuickPickScrollbarSlider,
+      className: ClassNames.ScrollBarThumb,
       childCount: 0,
-      style: `height: ${sliderHeight}px; top: ${sliderTop}px;`,
+      height: `${sliderHeight}px`,
+      top: `${sliderTop}px`,
     },
   ]
 }
