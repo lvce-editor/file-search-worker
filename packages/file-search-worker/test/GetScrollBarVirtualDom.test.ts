@@ -1,29 +1,19 @@
-import { test, expect } from '@jest/globals'
-import type { VisibleItem } from '../src/parts/VisibleItem/VisibleItem.ts'
+import { expect, test } from '@jest/globals'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as GetScrollBarVirtualDom from '../src/parts/GetScrollBarVirtualDom/GetScrollBarVirtualDom.ts'
 import * as VirtualDomElements from '../src/parts/VirtualDomElements/VirtualDomElements.ts'
 
 test.skip('getScrollBarVirtualDom with no scrollbar needed', () => {
-  const visibleItems: VisibleItem[] = []
-  const result = GetScrollBarVirtualDom.getScrollBarVirtualDom(visibleItems, 5)
+  const scrollBarHeight = 0
+  const scrollBarTop = 20
+  const result = GetScrollBarVirtualDom.getScrollBarVirtualDom(scrollBarHeight, scrollBarTop)
   expect(result).toEqual([])
 })
 
 test.skip('getScrollBarVirtualDom with scrollbar', () => {
-  const visibleItems: VisibleItem[] = [
-    {
-      posInSet: 0,
-      setSize: 20,
-      label: 'test',
-      isActive: false,
-      highlights: [],
-      description: '',
-      icon: '',
-      fileIcon: '',
-    },
-  ]
-  const result = GetScrollBarVirtualDom.getScrollBarVirtualDom(visibleItems, 20)
+  const scrollBarHeight = 100
+  const scrollBarTop = 20
+  const result = GetScrollBarVirtualDom.getScrollBarVirtualDom(scrollBarHeight, scrollBarTop)
   expect(result.length).toBe(2)
   expect(result[0]).toEqual({
     type: VirtualDomElements.Div,

@@ -13,7 +13,8 @@ test.skip('renders value', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
-    totalItems: 0,
+    scrollBarHeight: 0,
+    scrollBarTop: 0,
   }
 
   expect(RenderValue.renderValue(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetValue, 'test value'])
@@ -29,7 +30,8 @@ test.skip('renders empty value', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
-    totalItems: 0,
+    scrollBarHeight: 0,
+    scrollBarTop: 0,
   }
 
   expect(RenderValue.renderValue(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetValue, ''])
@@ -45,7 +47,8 @@ test.skip('handles different uid', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
-    totalItems: 0,
+    scrollBarHeight: 0,
+    scrollBarTop: 0,
   }
 
   expect(RenderValue.renderValue(state)).toEqual(['Viewlet.send', 2, RenderMethod.SetValue, 'another value'])

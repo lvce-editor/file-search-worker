@@ -1,20 +1,16 @@
 import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
-import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
+import * as Px from '../Px/Px.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
-export const getScrollBarVirtualDom = (visibleItems: readonly VisibleItem[], totalItems: number): readonly VirtualDomNode[] => {
-  const maxVisibleItems = 10
-  const shouldShowScrollbar = totalItems > maxVisibleItems
+export const getScrollBarVirtualDom = (scrollBarHeight: number, scrollBarTop: number): readonly VirtualDomNode[] => {
+  const shouldShowScrollbar = scrollBarHeight > 0
   if (!shouldShowScrollbar) {
     return []
   }
-
-  const scrollbarHeight = 100
-  const sliderHeight = Math.max((maxVisibleItems / totalItems) * scrollbarHeight, 20)
-  const sliderTop = ((visibleItems[0]?.posInSet || 0) / totalItems) * (scrollbarHeight - sliderHeight)
-
+  const heightString = Px.px(scrollBarHeight)
+  const translateString = Px.position(0, scrollBarTop)
   return [
     {
       type: VirtualDomElements.Div,
@@ -25,8 +21,8 @@ export const getScrollBarVirtualDom = (visibleItems: readonly VisibleItem[], tot
       type: VirtualDomElements.Div,
       className: ClassNames.ScrollBarThumb,
       childCount: 0,
-      height: `${sliderHeight}px`,
-      top: `${sliderTop}px`,
+      height: heightString,
+      translate: translateString,
     },
   ]
 }
