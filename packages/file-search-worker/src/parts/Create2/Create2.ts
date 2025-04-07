@@ -35,7 +35,7 @@ export const create = (
     width: 600,
     ...VirtualList.create({
       itemHeight: listItemHeight,
-      headerHeight: 30,
+      headerHeight: 38,
       minimumSliderSize: MinimumSliderSize.minimumSliderSize,
     }),
     inputSource: InputSource.User,
