@@ -1,17 +1,10 @@
 import type { GetPicks } from '../GetPicks/GetPicks.ts'
 import type { SelectPick } from '../SelectPick/SelectPick.ts'
+import * as Modules from '../QuickPickEntriesModules/QuickPickEntriesModules.ts'
 
-const select: Record<number, SelectPick> = Object.create(null)
+const select: readonly SelectPick[] = Modules.selectPicks
 
-const getPick: Record<number, GetPicks> = Object.create(null)
-
-export const registerSelect = (modules: readonly SelectPick[]): void => {
-  Object.assign(select, modules)
-}
-
-export const registerGetPick = (modules: readonly GetPicks[]): void => {
-  Object.assign(getPick, modules)
-}
+const getPick: readonly GetPicks[] = Modules.getPicks
 
 export const getPicks = (id: number): GetPicks => {
   const fn = getPick[id]
