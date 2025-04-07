@@ -2,7 +2,7 @@ import { expect, test } from '@jest/globals'
 import * as GetQuickPickVirtualDom from '../src/parts/GetQuickPickVirtualDom/GetQuickPickVirtualDom.ts'
 
 test('getQuickPickVirtualDom with empty items', () => {
-  const result = GetQuickPickVirtualDom.getQuickPickVirtualDom([])
+  const result = GetQuickPickVirtualDom.getQuickPickVirtualDom([], 0)
   expect(result).toEqual([
     { ariaLabel: 'Quick open', childCount: 2, className: 'Viewlet QuickPick', id: 'QuickPick', type: 4 },
     { childCount: 1, className: 'QuickPickHeader', type: 4 },
@@ -26,16 +26,38 @@ test('getQuickPickVirtualDom with empty items', () => {
     },
     {
       ariaActivedescendant: 'QuickPickItemActive',
-      childCount: 0,
-      className: 'QuickPickItems',
+      childCount: 1,
+      className: 'List ContainContent',
       id: 'QuickPickItems',
       onWheel: 'handleWheel',
       onPointerDown: 'handlePointerDown',
       role: 'listbox',
       type: 4,
     },
+    {
+      type: 4,
+      childCount: 0,
+      className: 'ListItems ContainContent',
+    },
     { childCount: 1, className: 'QuickPickItem QuickPickItemActive QuickPickStatus', type: 4 },
     { childCount: 1, className: 'Label', type: 4 },
     { childCount: 0, text: 'No Results', type: 12 },
   ])
+})
+
+test('getQuickPickVirtualDom with scrollbar', () => {
+  const visibleItems = [
+    {
+      label: 'item 1',
+      description: '',
+      icon: '',
+      fileIcon: '',
+      posInSet: 1,
+      setSize: 15,
+      isActive: true,
+      highlights: [],
+    },
+  ]
+  const result = GetQuickPickVirtualDom.getQuickPickVirtualDom(visibleItems, 15)
+  expect(result).toBeDefined()
 })

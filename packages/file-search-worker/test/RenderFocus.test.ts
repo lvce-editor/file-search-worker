@@ -13,6 +13,7 @@ test('renderFocus', () => {
     height: 300,
     focused: true,
     uid: 1,
+    totalItems: 0,
   }
 
   const result = RenderFocus.renderFocus(viewModel)
@@ -30,6 +31,7 @@ test('renders focus when focused is true', () => {
     height: 300,
     focused: true,
     uid: 1,
+    totalItems: 0,
   }
 
   const result = RenderFocus.renderFocus(viewModel)
@@ -47,6 +49,7 @@ test('renders focus when focused is false', () => {
     height: 300,
     focused: false,
     uid: 1,
+    totalItems: 0,
   }
 
   const result = RenderFocus.renderFocus(viewModel)
@@ -64,6 +67,7 @@ test('handles different uid', () => {
     height: 300,
     focused: true,
     uid: 2,
+    totalItems: 0,
   }
 
   const result = RenderFocus.renderFocus(viewModel)

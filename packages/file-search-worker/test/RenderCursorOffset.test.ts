@@ -13,7 +13,9 @@ test('renders cursor offset', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
+    totalItems: 0,
   }
+
   expect(RenderCursorOffset.renderCursorOffset(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetCursorOffset, 5])
 })
 
@@ -27,7 +29,9 @@ test('renders cursor offset of 0', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
+    totalItems: 0,
   }
+
   expect(RenderCursorOffset.renderCursorOffset(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetCursorOffset, 0])
 })
 
@@ -41,6 +45,8 @@ test('handles different uid', () => {
     newFocusedIndex: 0,
     height: 0,
     focused: false,
+    totalItems: 0,
   }
+
   expect(RenderCursorOffset.renderCursorOffset(state)).toEqual(['Viewlet.send', 2, RenderMethod.SetCursorOffset, 10])
 })

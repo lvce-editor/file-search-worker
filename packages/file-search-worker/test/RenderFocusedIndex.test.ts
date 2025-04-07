@@ -13,6 +13,7 @@ test('renders focused index', () => {
     cursorOffset: 0,
     height: 0,
     focused: false,
+    totalItems: 0,
   }
   expect(RenderFocusedIndex.renderFocusedIndex(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetFocusedIndex, 0, 1])
 })
@@ -27,6 +28,7 @@ test('handles negative focused index', () => {
     cursorOffset: 0,
     height: 0,
     focused: false,
+    totalItems: 0,
   }
   expect(RenderFocusedIndex.renderFocusedIndex(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetFocusedIndex, -1, 0])
 })
@@ -41,6 +43,7 @@ test('handles different uid', () => {
     cursorOffset: 0,
     height: 0,
     focused: false,
+    totalItems: 0,
   }
   expect(RenderFocusedIndex.renderFocusedIndex(state)).toEqual(['Viewlet.send', 2, RenderMethod.SetFocusedIndex, 1, 2])
 })

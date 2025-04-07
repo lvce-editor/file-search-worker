@@ -13,6 +13,7 @@ test('renders height', () => {
     oldFocusedIndex: 0,
     newFocusedIndex: 0,
     focused: false,
+    totalItems: 0,
   }
   expect(RenderHeight.renderHeight(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetItemsHeight, 100])
 })
@@ -27,6 +28,7 @@ test('renders default height when height is 0', () => {
     oldFocusedIndex: 0,
     newFocusedIndex: 0,
     focused: false,
+    totalItems: 0,
   }
   expect(RenderHeight.renderHeight(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetItemsHeight, 20])
 })
@@ -41,6 +43,7 @@ test('handles different uid', () => {
     oldFocusedIndex: 0,
     newFocusedIndex: 0,
     focused: false,
+    totalItems: 0,
   }
   expect(RenderHeight.renderHeight(state)).toEqual(['Viewlet.send', 2, RenderMethod.SetItemsHeight, 200])
 })

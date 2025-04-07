@@ -6,12 +6,15 @@ import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEven
 import * as DomId from '../DomId/DomId.ts'
 import * as GetQuickPickHeaderVirtualDom from '../GetQuickPickHeaderVirtualDom/GetQuickPickHeaderVirtualDom.ts'
 import * as GetQuickPickItemsVirtualDom from '../GetQuickPickItemsVirtualDom/GetQuickPickItemsVirtualDom.ts'
+import * as GetScrollBarVirtualDom from '../GetScrollBarVirtualDom/GetScrollBarVirtualDom.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 
-export const getQuickPickVirtualDom = (visibleItems: readonly VisibleItem[]): readonly VirtualDomNode[] => {
+export const getQuickPickVirtualDom = (visibleItems: readonly VisibleItem[], totalItems: number = 0): readonly VirtualDomNode[] => {
   const quickOpen = QuickPickStrings.quickOpen()
+  const maxVisibleItems = 10
+  const shouldShowScrollbar = totalItems > maxVisibleItems
   return [
     {
       type: VirtualDomElements.Div,
@@ -23,14 +26,20 @@ export const getQuickPickVirtualDom = (visibleItems: readonly VisibleItem[]): re
     ...GetQuickPickHeaderVirtualDom.getQuickPickHeaderVirtualDom(),
     {
       type: VirtualDomElements.Div,
-      className: ClassNames.QuickPickItems,
+      className: MergeClassNames.mergeClassNames(ClassNames.List, ClassNames.ContainContent),
       id: DomId.QuickPickItems,
       role: AriaRoles.ListBox,
       ariaActivedescendant: DomId.QuickPickItemActive,
       onWheel: DomEventListenerFunctions.HandleWheel,
       onPointerDown: DomEventListenerFunctions.HandlePointerDown,
+      childCount: shouldShowScrollbar ? 2 : 1,
+    },
+    {
+      type: VirtualDomElements.Div,
+      className: MergeClassNames.mergeClassNames(ClassNames.ListItems, ClassNames.ContainContent),
       childCount: visibleItems.length,
     },
     ...GetQuickPickItemsVirtualDom.getQuickPickItemsVirtualDom(visibleItems),
+    ...GetScrollBarVirtualDom.getScrollBarVirtualDom(visibleItems, totalItems),
   ]
 }
