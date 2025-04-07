@@ -1,6 +1,6 @@
 import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewModel.ts'
-import * as RenderMethod from '../RenderMethod/RenderMethod.ts'
+import * as InputName from '../InputName/InputName.ts'
 
 export const renderValue = (newState: QuickPickViewModel): readonly any[] => {
-  return ['Viewlet.send', newState.uid, /* method */ RenderMethod.SetValue, /* value */ newState.value]
+  return ['Viewlet.setValueByName', InputName.QuickPickInput, /* value */ newState.value]
 }
