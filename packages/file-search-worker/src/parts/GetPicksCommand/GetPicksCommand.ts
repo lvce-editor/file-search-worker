@@ -50,6 +50,8 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
   }
   // @ts-ignore
   pick.id = item.id
+  // @ts-ignore
+  pick.args = item.args
   return pick
 }
 
