@@ -1,7 +1,10 @@
 import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 
-export const getQuickPickSubProviderId = (prefix: string): number => {
+export const getQuickPickSubProviderId = (id: number, prefix: string): number => {
+  if (id !== QuickPickEntryId.EveryThing) {
+    return id
+  }
   switch (prefix) {
     case QuickPickPrefix.Command:
       return QuickPickEntryId.Commands
