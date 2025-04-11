@@ -19,7 +19,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const id = GetQuickPickProviderId.getQuickPickProviderId(uri)
   const value = GetDefaultValue.getDefaultValue(id)
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
-  const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(prefix)
+  const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(id, prefix)
   SetArgs.setArgs(subId, args)
   const newPicks = await GetPicks.getPicks(subId, value)
   Assert.array(newPicks)
