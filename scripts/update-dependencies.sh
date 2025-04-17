@@ -31,7 +31,7 @@ cd packages/build                                   && updateDependencies && cd 
 cd packages/server                                  && updateDependencies && cd ../.. &&
 cd packages/file-search-worker                      && updateDependencies && cd ../.. &&
 cd packages/e2e                                     && updateDependencies && cd ../.. &&
-cd packages/measure-memory                          && updateDependencies && cd ../.. &&
+cd packages/memory                                  && updateDependencies && cd ../.. &&
 
 echo "Great Success!"
 
