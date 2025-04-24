@@ -24,7 +24,7 @@ import * as SelectIndex from '../SelectIndex/SelectIndex.ts'
 import * as SelectItem from '../SelectItem/SelectItem.ts'
 import * as SetValue from '../SetValue/SetValue.ts'
 import * as VirtualList from '../VirtualList/VirtualList.ts'
-import * as WrapCommand from '../WrapCommand/WrapCommand.ts'
+import * as WrapCommand from '../QuickPickStates/QuickPickStates.ts'
 
 export const commandMap = {
   'QuickPick.addMenuEntries': MenuEntriesState.add,
