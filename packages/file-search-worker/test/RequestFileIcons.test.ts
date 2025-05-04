@@ -3,7 +3,7 @@ import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 
 const mockInvoke = jest.fn()
 
-jest.unstable_mockModule('../src/parts/Rpc/Rpc.ts', () => ({
+jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => ({
   invoke: mockInvoke,
 }))
 
