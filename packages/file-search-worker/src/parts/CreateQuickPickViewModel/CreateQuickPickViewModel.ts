@@ -4,7 +4,7 @@ import * as GetListHeight from '../GetListHeight/GetListHeight.ts'
 import * as GetProtoVisibleQuickPickItems from '../GetProtoVisibleQuickPickItems/GetProtoVisibleQuickPickItems.ts'
 import * as GetScrollBarSize from '../GetScrollBarSize/GetScrollBarSize.ts'
 import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
-import * as ScrollBarFunctions from '../ScrollBarFunctions/ScrollBarFunctions.ts'
+import * as ScrollBarFunctions from '../RpcId/ScrollBarFunctions/ScrollBarFunctions.ts'
 
 export const createQuickPickViewModel = (oldState: QuickPickState, newState: QuickPickState): QuickPickViewModel => {
   const protoVisibleItems = GetProtoVisibleQuickPickItems.getVisible(newState.items, newState.minLineY, newState.maxLineY, newState.icons)
