@@ -1,7 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
-import * as Rpc from '../Rpc/Rpc.ts'
+import * as Rpc from '../ParentRpc/ParentRpc.ts'
 
 // TODO combine Ajax with cache (specify strategy: cacheFirst, networkFirst)
 const getBuiltinPicks = async (): Promise<readonly any[]> => {
