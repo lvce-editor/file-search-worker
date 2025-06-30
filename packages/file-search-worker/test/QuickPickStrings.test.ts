@@ -126,3 +126,23 @@ test('openView returns string', () => {
   expect(typeof result).toBe('string')
   expect(result.length).toBeGreaterThan(0)
 })
+
+test('goToLineColumn returns specific string', () => {
+  expect(QuickPickStrings.goToLineColumn()).toBe('Go to Line / Column')
+})
+
+test('goToSymbolInEditor returns specific string', () => {
+  expect(QuickPickStrings.goToSymbolInEditor()).toBe('Go to Symbol in Editor')
+})
+
+test('goToSymbolInWorkspace returns specific string', () => {
+  expect(QuickPickStrings.goToSymbolInWorkspace()).toBe('Go to Symbol in Editor')
+})
+
+test('searchForText returns specific string', () => {
+  expect(QuickPickStrings.searchForText()).toBe('Search for text')
+})
+
+test('openView returns specific string', () => {
+  expect(QuickPickStrings.openView()).toBe('Open View')
+})
