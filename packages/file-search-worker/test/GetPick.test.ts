@@ -1,28 +1,45 @@
 import { expect, test } from '@jest/globals'
+import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetPick from '../src/parts/GetPick/GetPick.ts'
 
-test.skip('returns pick at valid index', () => {
-  const items = [{ pick: 'item1' }, { pick: 'item2' }, { pick: 'item3' }]
-  // @ts-ignore
-  expect(GetPick.getPick(items, 1)).toBe('item2')
+test('returns pick at valid index', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item3', matches: [], uri: '' },
+  ]
+  const result = GetPick.getPick(items, 1)
+  expect(result).toEqual({ description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' })
 })
 
-test.skip('returns undefined for index out of bounds', () => {
-  const items = [{ pick: 'item1' }]
-  // @ts-ignore
-  expect(GetPick.getPick(items, 5)).toBeUndefined()
+test('returns undefined for index out of bounds', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
+  ]
+  const result = GetPick.getPick(items, 5)
+  expect(result).toBeUndefined()
 })
 
-test.skip('throws error if items is not an array', () => {
+test('throws error if items is not an array', () => {
   expect(() => GetPick.getPick('not an array' as any, 0)).toThrow()
 })
 
-test.skip('throws error if index is not a number', () => {
-  const items = [{ pick: 'item1' }]
-  // @ts-ignore
+test('throws error if index is not a number', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
+  ]
   expect(() => GetPick.getPick(items, 'not a number' as any)).toThrow()
 })
 
-test.skip('handles empty array', () => {
-  expect(GetPick.getPick([], 0)).toBeUndefined()
+test('handles empty array', () => {
+  const result = GetPick.getPick([], 0)
+  expect(result).toBeUndefined()
+})
+
+test('returns undefined for negative index', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
+  ]
+  const result = GetPick.getPick(items, -1)
+  expect(result).toBeUndefined()
 })
