@@ -97,52 +97,22 @@ test('typeTheNameOfACommandToRun', () => {
   expect(result.length).toBeGreaterThan(0)
 })
 
-test('goToLineColumn returns string', () => {
-  const result = QuickPickStrings.goToLineColumn()
-  expect(typeof result).toBe('string')
-  expect(result.length).toBeGreaterThan(0)
-})
-
-test('goToSymbolInEditor returns string', () => {
-  const result = QuickPickStrings.goToSymbolInEditor()
-  expect(typeof result).toBe('string')
-  expect(result.length).toBeGreaterThan(0)
-})
-
-test('goToSymbolInWorkspace returns string', () => {
-  const result = QuickPickStrings.goToSymbolInWorkspace()
-  expect(typeof result).toBe('string')
-  expect(result.length).toBeGreaterThan(0)
-})
-
-test('searchForText returns string', () => {
-  const result = QuickPickStrings.searchForText()
-  expect(typeof result).toBe('string')
-  expect(result.length).toBeGreaterThan(0)
-})
-
-test('openView returns string', () => {
-  const result = QuickPickStrings.openView()
-  expect(typeof result).toBe('string')
-  expect(result.length).toBeGreaterThan(0)
-})
-
-test('goToLineColumn returns string', () => {
+test('goToLineColumn returns specific string', () => {
   expect(QuickPickStrings.goToLineColumn()).toBe('Go to Line / Column')
 })
 
-test('goToSymbolInEditor returns string', () => {
+test('goToSymbolInEditor returns specific string', () => {
   expect(QuickPickStrings.goToSymbolInEditor()).toBe('Go to Symbol in Editor')
 })
 
-test('goToSymbolInWorkspace returns string', () => {
+test('goToSymbolInWorkspace returns specific string', () => {
   expect(QuickPickStrings.goToSymbolInWorkspace()).toBe('Go to Symbol in Editor')
 })
 
-test('searchForText returns string', () => {
+test('searchForText returns specific string', () => {
   expect(QuickPickStrings.searchForText()).toBe('Search for text')
 })
 
-test('openView returns string', () => {
+test('openView returns specific string', () => {
   expect(QuickPickStrings.openView()).toBe('Open View')
 })
