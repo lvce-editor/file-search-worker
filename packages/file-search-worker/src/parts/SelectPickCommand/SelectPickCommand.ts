@@ -1,7 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
-import * as Rpc from '../ParentRpc/ParentRpc.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
+import * as Rpc from '../RendererWorker/RendererWorker.ts'
 
 const shouldHide = (item: any): boolean => {
   if (item.id === 'Viewlet.openWidget' && item.args[0] === 'QuickPick') {

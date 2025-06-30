@@ -1,9 +1,9 @@
 import { expect, test } from '@jest/globals'
 import type { QuickPickViewModel } from '../src/parts/QuickPickViewModel/QuickPickViewModel.ts'
-import * as RenderMethod from '../src/parts/RenderMethod/RenderMethod.ts'
+import * as InputName from '../src/parts/InputName/InputName.ts'
 import * as RenderValue from '../src/parts/RenderValue/RenderValue.ts'
 
-test.skip('renders value', () => {
+test('renders value', () => {
   const state: QuickPickViewModel = {
     uid: 1,
     value: 'test value',
@@ -17,10 +17,10 @@ test.skip('renders value', () => {
     scrollBarTop: 0,
   }
 
-  expect(RenderValue.renderValue(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetValue, 'test value'])
+  expect(RenderValue.renderValue(state)).toEqual(['Viewlet.setValueByName', InputName.QuickPickInput, 'test value'])
 })
 
-test.skip('renders empty value', () => {
+test('renders empty value', () => {
   const state: QuickPickViewModel = {
     uid: 1,
     value: '',
@@ -34,12 +34,12 @@ test.skip('renders empty value', () => {
     scrollBarTop: 0,
   }
 
-  expect(RenderValue.renderValue(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetValue, ''])
+  expect(RenderValue.renderValue(state)).toEqual(['Viewlet.setValueByName', InputName.QuickPickInput, ''])
 })
 
-test.skip('handles different uid', () => {
+test('handles different values', () => {
   const state: QuickPickViewModel = {
-    uid: 2,
+    uid: 1,
     value: 'another value',
     visibleItems: [],
     cursorOffset: 0,
@@ -51,5 +51,22 @@ test.skip('handles different uid', () => {
     scrollBarTop: 0,
   }
 
-  expect(RenderValue.renderValue(state)).toEqual(['Viewlet.send', 2, RenderMethod.SetValue, 'another value'])
+  expect(RenderValue.renderValue(state)).toEqual(['Viewlet.setValueByName', InputName.QuickPickInput, 'another value'])
+})
+
+test('handles special characters in value', () => {
+  const state: QuickPickViewModel = {
+    uid: 1,
+    value: 'test@example.com',
+    visibleItems: [],
+    cursorOffset: 0,
+    oldFocusedIndex: 0,
+    newFocusedIndex: 0,
+    height: 0,
+    focused: false,
+    scrollBarHeight: 0,
+    scrollBarTop: 0,
+  }
+
+  expect(RenderValue.renderValue(state)).toEqual(['Viewlet.setValueByName', InputName.QuickPickInput, 'test@example.com'])
 })

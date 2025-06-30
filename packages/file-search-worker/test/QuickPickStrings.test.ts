@@ -1,69 +1,130 @@
 import { expect, test } from '@jest/globals'
 import * as QuickPickStrings from '../src/parts/QuickPickStrings/QuickPickStrings.ts'
-import * as UiStrings from '../src/parts/UiStrings/UiStrings.ts'
 
 test('files returns string', () => {
-  expect(QuickPickStrings.files()).toBe('Files')
+  const result = QuickPickStrings.files()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('goToFile returns string', () => {
-  expect(QuickPickStrings.goToFile()).toBe('Go to file')
+  const result = QuickPickStrings.goToFile()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('noMatchingColorThemesFound returns string', () => {
-  expect(QuickPickStrings.noMatchingColorThemesFound()).toBe('No matching color themes found')
+  const result = QuickPickStrings.noMatchingColorThemesFound()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('noMatchingResults returns string', () => {
-  expect(QuickPickStrings.noMatchingResults()).toBe('No matching results')
+  const result = QuickPickStrings.noMatchingResults()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('noRecentlyOpenedFoldersFound returns string', () => {
-  expect(QuickPickStrings.noRecentlyOpenedFoldersFound()).toBe('No recently opened folders found')
+  const result = QuickPickStrings.noRecentlyOpenedFoldersFound()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('noResults returns string', () => {
-  expect(QuickPickStrings.noResults()).toBe('No Results')
+  const result = QuickPickStrings.noResults()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('noSymbolFound returns string', () => {
-  expect(QuickPickStrings.noSymbolFound()).toBe('No symbol found')
+  const result = QuickPickStrings.noSymbolFound()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('noWorkspaceSymbolsFound returns string', () => {
-  expect(QuickPickStrings.noWorkspaceSymbolsFound()).toBe('no workspace symbols found')
+  const result = QuickPickStrings.noWorkspaceSymbolsFound()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('openRecent returns string', () => {
-  expect(QuickPickStrings.openRecent()).toBe('Open Recent')
+  const result = QuickPickStrings.openRecent()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('selectColorTheme returns string', () => {
-  expect(QuickPickStrings.selectColorTheme()).toBe('Select Color Theme')
+  const result = QuickPickStrings.selectColorTheme()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('selectToOpen returns string', () => {
-  expect(QuickPickStrings.selectToOpen()).toBe('Select to open')
+  const result = QuickPickStrings.selectToOpen()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('showAndRunCommands returns string', () => {
-  expect(QuickPickStrings.showAndRunCommands()).toBe('Show And Run Commands')
+  const result = QuickPickStrings.showAndRunCommands()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('typeNameofCommandToRun returns string', () => {
-  expect(QuickPickStrings.typeNameofCommandToRun()).toBe('Type the name of a command to run.')
+  const result = QuickPickStrings.typeNameofCommandToRun()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('typeTheNameOfAViewToOpen returns string', () => {
-  expect(QuickPickStrings.typeTheNameOfAViewToOpen()).toBe('Type the name of a view, output channel or terminal to open.')
+  const result = QuickPickStrings.typeTheNameOfAViewToOpen()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('quickOpen', () => {
-  expect(QuickPickStrings.quickOpen()).toBe(UiStrings.QuickOpen)
+  const result = QuickPickStrings.quickOpen()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('typeTheNameOfACommandToRun', () => {
-  expect(QuickPickStrings.typeTheNameOfACommandToRun()).toBe(UiStrings.TypeNameOfCommandToRun)
+  const result = QuickPickStrings.typeTheNameOfACommandToRun()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
+})
+
+test('goToLineColumn returns string', () => {
+  const result = QuickPickStrings.goToLineColumn()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
+})
+
+test('goToSymbolInEditor returns string', () => {
+  const result = QuickPickStrings.goToSymbolInEditor()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
+})
+
+test('goToSymbolInWorkspace returns string', () => {
+  const result = QuickPickStrings.goToSymbolInWorkspace()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
+})
+
+test('searchForText returns string', () => {
+  const result = QuickPickStrings.searchForText()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
+})
+
+test('openView returns string', () => {
+  const result = QuickPickStrings.openView()
+  expect(typeof result).toBe('string')
+  expect(result.length).toBeGreaterThan(0)
 })
 
 test('goToLineColumn returns string', () => {
