@@ -15,7 +15,6 @@ export default [
       '@typescript-eslint/no-unused-vars': 'off',
       'prefer-destructuring': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
-      'jest/no-restricted-jest-methods': 'off',
     },
   },
 ]
