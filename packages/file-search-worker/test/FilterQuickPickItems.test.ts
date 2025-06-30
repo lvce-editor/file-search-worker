@@ -1,44 +1,64 @@
 import { expect, test } from '@jest/globals'
+import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as FilterQuickPickItems from '../src/parts/FilterQuickPickItems/FilterQuickPickItems.ts'
 
-test.skip('returns all items when value is empty', () => {
-  const items = ['/test/file.txt', '/test/other.txt']
-  // @ts-ignore
+test('returns all items when value is empty', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: '/test/file.txt', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: '/test/other.txt', matches: [], uri: '' },
+  ]
   const result = FilterQuickPickItems.filterQuickPickItems(items, '')
   expect(result).toEqual([
-    { pick: '/test/file.txt', matches: [] },
-    { pick: '/test/other.txt', matches: [] },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: '/test/file.txt', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: '/test/other.txt', matches: [], uri: '' },
   ])
 })
 
-test.skip('filters items based on basename match', () => {
-  const items = ['/test/file.txt', '/test/other.txt']
-  // @ts-ignore
+test('filters items based on label match', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file.txt', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'other.txt', matches: [], uri: '' },
+  ]
   const result = FilterQuickPickItems.filterQuickPickItems(items, 'file')
-  expect(result).toEqual([{ pick: '/test/file.txt', matches: expect.any(Array) }])
+  expect(result.length).toBe(1)
+  expect(result[0].label).toBe('file.txt')
   expect(result[0].matches.length).toBeGreaterThan(0)
 })
 
-test.skip('handles no matches', () => {
-  const items = ['/test/file.txt', '/test/other.txt']
-  // @ts-ignore
+test('handles no matches', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: '/test/file.txt', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: '/test/other.txt', matches: [], uri: '' },
+  ]
   const result = FilterQuickPickItems.filterQuickPickItems(items, 'xyz')
   expect(result).toEqual([])
 })
 
-test.skip('handles multiple matches', () => {
-  const items = ['/test/file.txt', '/test/file2.txt']
-  // @ts-ignore
+test('handles multiple matches', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '' },
+  ]
   const result = FilterQuickPickItems.filterQuickPickItems(items, 'file')
-  expect(result).toEqual([
-    { pick: '/test/file.txt', matches: [38, 0, 4] },
-    { pick: '/test/file2.txt', matches: [38, 0, 4] },
-  ])
+  expect(result.length).toBe(2)
+  expect(result[0].label).toBe('file1.txt')
+  expect(result[1].label).toBe('file2.txt')
+  expect(result[0].matches.length).toBeGreaterThan(0)
+  expect(result[1].matches.length).toBeGreaterThan(0)
 })
 
-test.skip('handles empty items array', () => {
-  const items: string[] = []
-  // @ts-ignore
+test('handles empty items array', () => {
+  const items: readonly ProtoVisibleItem[] = []
   const result = FilterQuickPickItems.filterQuickPickItems(items, 'test')
   expect(result).toEqual([])
+})
+
+test('handles case insensitive matching', () => {
+  const items: readonly ProtoVisibleItem[] = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'File.txt', matches: [], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'other.txt', matches: [], uri: '' },
+  ]
+  const result = FilterQuickPickItems.filterQuickPickItems(items, 'file')
+  expect(result.length).toBe(1)
+  expect(result[0].label).toBe('File.txt')
 })
