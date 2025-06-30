@@ -1,6 +1,6 @@
 import type { IconRequest } from '../IconRequest/IconRequest.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
-import * as Rpc from '../ParentRpc/ParentRpc.ts'
+import * as Rpc from '../RendererWorker/RendererWorker.ts'
 
 const requestFileIcon = async (request: IconRequest): Promise<string> => {
   if (!request.name) {

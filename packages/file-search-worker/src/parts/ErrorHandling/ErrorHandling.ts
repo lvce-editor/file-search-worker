@@ -1,4 +1,4 @@
-import * as Rpc from '../ParentRpc/ParentRpc.ts'
+import * as Rpc from '../RendererWorker/RendererWorker.ts'
 
 export const handleError = async (error: any, notify = true, prefix = ''): Promise<void> => {
   console.error(error)
