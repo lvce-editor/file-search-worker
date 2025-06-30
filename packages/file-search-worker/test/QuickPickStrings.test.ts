@@ -65,3 +65,23 @@ test('quickOpen', () => {
 test('typeTheNameOfACommandToRun', () => {
   expect(QuickPickStrings.typeTheNameOfACommandToRun()).toBe(UiStrings.TypeNameOfCommandToRun)
 })
+
+test('goToLineColumn returns string', () => {
+  expect(QuickPickStrings.goToLineColumn()).toBe('Go to Line / Column')
+})
+
+test('goToSymbolInEditor returns string', () => {
+  expect(QuickPickStrings.goToSymbolInEditor()).toBe('Go to Symbol in Editor')
+})
+
+test('goToSymbolInWorkspace returns string', () => {
+  expect(QuickPickStrings.goToSymbolInWorkspace()).toBe('Go to Symbol in Editor')
+})
+
+test('searchForText returns string', () => {
+  expect(QuickPickStrings.searchForText()).toBe('Search for text')
+})
+
+test('openView returns string', () => {
+  expect(QuickPickStrings.openView()).toBe('Open View')
+})
