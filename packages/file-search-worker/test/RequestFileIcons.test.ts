@@ -1,20 +1,18 @@
-import { expect, test, jest, beforeEach } from '@jest/globals'
+import { expect, jest, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
 import * as DirentType from '../src/parts/DirentType/DirentType.ts'
-
-const mockInvoke = jest.fn()
-
-jest.unstable_mockModule('../src/parts/ParentRpc/ParentRpc.ts', () => ({
-  invoke: mockInvoke,
-}))
-
-const RequestFileIcons = await import('../src/parts/RequestFileIcons/RequestFileIcons.ts')
-
-beforeEach(() => {
-  mockInvoke.mockReset()
-})
+import * as RequestFileIcons from '../src/parts/RequestFileIcons/RequestFileIcons.ts'
+import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
+import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('requests file icons', async () => {
-  // @ts-ignore
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   mockInvoke.mockResolvedValueOnce('/icons/file.png').mockResolvedValueOnce('/icons/other.png')
 
   const requests = [
@@ -30,7 +28,13 @@ test('requests file icons', async () => {
 })
 
 test('requests folder icons', async () => {
-  // @ts-ignore
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   mockInvoke.mockResolvedValueOnce('/icons/folder.png').mockResolvedValueOnce('/icons/folder2.png')
 
   const requests = [
@@ -45,12 +49,26 @@ test('requests folder icons', async () => {
 })
 
 test.skip('handles empty requests array', async () => {
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   const result = await RequestFileIcons.requestFileIcons([])
   expect(result).toEqual([])
   expect(mockInvoke).not.toHaveBeenCalled()
 })
 
 test.skip('handles requests with no name', async () => {
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   const requests = [
     { type: DirentType.File, name: '', path: '' },
     { type: DirentType.Directory, name: '', path: '' },
