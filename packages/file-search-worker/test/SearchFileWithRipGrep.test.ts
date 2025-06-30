@@ -1,24 +1,23 @@
-import { expect, test, jest, beforeEach } from '@jest/globals'
-
-const mockInvoke = jest.fn()
-
-jest.unstable_mockModule('../src/parts/SearchProcess/SearchProcess.ts', () => ({
-  invoke: mockInvoke,
-}))
+import { expect, jest, test } from '@jest/globals'
+import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
+import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 const SearchFileWithRipGrep = await import('../src/parts/SearchFileWithRipGrep/SearchFileWithRipGrep.ts')
 
-beforeEach(() => {
-  mockInvoke.mockClear()
-})
-
 test('searches files without prepare', async () => {
-  // @ts-ignore
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   mockInvoke.mockResolvedValue('file1.txt\nfile2.txt\nfile3.txt')
 
   const result = await SearchFileWithRipGrep.searchFile('/test', 'query', false)
   expect(result).toEqual(['file1.txt', 'file2.txt', 'file3.txt'])
-  expect(mockInvoke).toHaveBeenCalledWith('SearchFile.searchFile', {
+  expect(mockInvoke).toHaveBeenCalledWith('SearchProcess.invoke', 'SearchFile.searchFile', {
     ripGrepArgs: ['--files', '--sort-files'],
     searchPath: '/test',
     limit: 9_999_999,
@@ -26,7 +25,13 @@ test('searches files without prepare', async () => {
 })
 
 test.skip('searches files with prepare', async () => {
-  // @ts-ignore
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   mockInvoke.mockResolvedValue('file1.txt\nfile2.txt\nfile3.txt')
 
   const result = await SearchFileWithRipGrep.searchFile('/test', 'file2', true)
@@ -36,7 +41,7 @@ test.skip('searches files with prepare', async () => {
       matches: expect.any(Array),
     },
   ])
-  expect(mockInvoke).toHaveBeenCalledWith('SearchFile.searchFile', {
+  expect(mockInvoke).toHaveBeenCalledWith('SearchProcess.invoke', 'SearchFile.searchFile', {
     ripGrepArgs: ['--files', '--sort-files'],
     searchPath: '/test',
     limit: 9_999_999,
@@ -44,7 +49,13 @@ test.skip('searches files with prepare', async () => {
 })
 
 test('handles empty result', async () => {
-  // @ts-ignore
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   mockInvoke.mockResolvedValue('')
 
   const result = await SearchFileWithRipGrep.searchFile('/test', 'query', false)
@@ -52,7 +63,13 @@ test('handles empty result', async () => {
 })
 
 test('handles error from search process', async () => {
-  // @ts-ignore
+  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockRpc = MockRpc.create({
+    commandMap: {},
+    invoke: mockInvoke,
+  })
+  set(RendererWorker, mockRpc)
+
   mockInvoke.mockRejectedValue(new Error('Search failed'))
 
   await expect(SearchFileWithRipGrep.searchFile('/test', 'query', false)).rejects.toThrow('Search failed')
