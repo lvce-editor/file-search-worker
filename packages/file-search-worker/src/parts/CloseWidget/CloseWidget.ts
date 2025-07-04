@@ -1,5 +1,5 @@
-import * as ParentRpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 export const closeWidget = async (id: number): Promise<void> => {
-  await ParentRpc.invoke('Viewlet.closeWidget', id)
+  await RendererWorker.invoke('Viewlet.closeWidget', id)
 }
