@@ -15,7 +15,7 @@ export const showErrorDialog = async (error: any): Promise<void> => {
     stack,
     name,
   }
-  await RendererWorker.invoke('ErrorHandling.showErrorDialog', errorInfo)
+  await RendererWorker.showErrorDialog(errorInfo)
 }
 
 export const warn = (...args: readonly any[]): void => {
