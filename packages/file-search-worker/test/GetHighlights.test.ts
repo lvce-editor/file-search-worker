@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
+import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as GetHighlights from '../src/parts/GetHighlights/GetHighlights.ts'
-import * as VirtualDomElements from '../src/parts/VirtualDomElements/VirtualDomElements.ts'
 
 test.skip('getHighlights - empty highlights', () => {
   // @ts-ignore

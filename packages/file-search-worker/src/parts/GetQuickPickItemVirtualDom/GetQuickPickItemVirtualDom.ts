@@ -1,4 +1,5 @@
-import type { VirtualDomNode } from '../VirtualDomNode/VirtualDomNode.ts'
+import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
+import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as AriaRoles from '../AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../ClassNames/ClassNames.ts'
@@ -6,7 +7,6 @@ import * as DomId from '../DomId/DomId.ts'
 import * as GetFileIconVirtualDom from '../GetFileIconVirtualDom/GetFileIconVirtualDom.ts'
 import * as GetHighlights from '../GetHighlights/GetHighlights.ts'
 import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
-import * as VirtualDomElements from '../VirtualDomElements/VirtualDomElements.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly VirtualDomNode[] => {

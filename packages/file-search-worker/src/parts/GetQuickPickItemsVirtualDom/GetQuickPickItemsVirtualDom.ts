@@ -1,4 +1,4 @@
-import type { VirtualDomNode } from '../VirtualDomNode/VirtualDomNode.ts'
+import type { VirtualDomNode } from '@lvce-editor/virtual-dom-worker'
 import type { VisibleItem } from '../VisibleItem/VisibleItem.ts'
 import * as GetQuickPickItemVirtualDom from '../GetQuickPickItemVirtualDom/GetQuickPickItemVirtualDom.ts'
 import * as GetQuickPickNoResultsVirtualDom from '../GetQuickPickNoResultsVirtualDom/GetQuickPickNoResultsVirtualDom.ts'

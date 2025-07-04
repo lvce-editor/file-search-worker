@@ -1,9 +1,9 @@
 import { expect, test } from '@jest/globals'
+import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import type { VisibleItem } from '../src/parts/VisibleItem/VisibleItem.ts'
 import * as AriaRoles from '../src/parts/AriaRoles/AriaRoles.ts'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as GetQuickPickItemVirtualDom from '../src/parts/GetQuickPickItemVirtualDom/GetQuickPickItemVirtualDom.ts'
-import * as VirtualDomElements from '../src/parts/VirtualDomElements/VirtualDomElements.ts'
 
 test('creates basic quick pick item virtual dom', () => {
   const visibleItem: VisibleItem = {
