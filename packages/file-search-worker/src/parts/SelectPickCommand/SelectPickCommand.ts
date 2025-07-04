@@ -1,7 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
-import * as Rpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 const shouldHide = (item: any): boolean => {
   if (item.id === 'Viewlet.openWidget' && item.args[0] === 'QuickPick') {
@@ -13,7 +13,7 @@ const shouldHide = (item: any): boolean => {
 const selectPickBuiltin = async (item: any): Promise<any> => {
   const args = item.args || []
   // TODO ids should be all numbers for efficiency -> also directly can call command
-  await Rpc.invoke(item.id, ...args)
+  await RendererWorker.invoke(item.id, ...args)
   if (shouldHide(item)) {
     return {
       command: QuickPickReturnValue.Hide,
@@ -27,7 +27,7 @@ const selectPickBuiltin = async (item: any): Promise<any> => {
 const selectPickExtension = async (item: any): Promise<any> => {
   const id = item.id.slice(4) // TODO lots of string allocation with 'ext.' find a better way to separate builtin commands from extension commands
   try {
-    await Rpc.invoke('ExtensionHost.executeCommand', id)
+    await RendererWorker.invoke('ExtensionHost.executeCommand', id)
   } catch (error) {
     await ErrorHandling.handleError(error, false)
     await ErrorHandling.showErrorDialog(error)

@@ -1,5 +1,5 @@
-import * as Rpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 export const setFocus = async (focusKey: number): Promise<void> => {
-  await Rpc.invoke('Focus.setFocus', focusKey)
+  await RendererWorker.invoke('Focus.setFocus', focusKey)
 }

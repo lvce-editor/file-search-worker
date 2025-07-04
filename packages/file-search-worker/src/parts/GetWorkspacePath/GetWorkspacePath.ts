@@ -1,5 +1,5 @@
-import * as Rpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 export const getWorkspacePath = async (): Promise<string> => {
-  return Rpc.invoke('Workspace.getPath')
+  return RendererWorker.invoke('Workspace.getPath')
 }

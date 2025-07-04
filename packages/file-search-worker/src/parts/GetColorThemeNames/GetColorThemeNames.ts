@@ -1,5 +1,5 @@
-import * as Rpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 export const getColorThemeNames = async (): Promise<readonly string[]> => {
-  return Rpc.invoke(/* Ajax.getJson */ 'ColorTheme.getColorThemeNames')
+  return RendererWorker.invoke(/* Ajax.getJson */ 'ColorTheme.getColorThemeNames')
 }

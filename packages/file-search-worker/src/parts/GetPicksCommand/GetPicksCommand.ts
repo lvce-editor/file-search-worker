@@ -1,7 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
-import * as Rpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 // TODO combine Ajax with cache (specify strategy: cacheFirst, networkFirst)
 const getBuiltinPicks = async (): Promise<readonly any[]> => {
@@ -26,7 +26,7 @@ const prefixIdWithExt = (item: any): any => {
 const getExtensionPicks = async (): Promise<readonly any[]> => {
   try {
     // TODO don't call this every time
-    const extensionPicks = await Rpc.invoke('ExtensionHost.getCommands')
+    const extensionPicks = await RendererWorker.invoke('ExtensionHost.getCommands')
     if (!extensionPicks) {
       return []
     }
