@@ -6,9 +6,7 @@ const requestFileIcon = async (request: IconRequest): Promise<string> => {
   if (!request.name) {
     return ''
   }
-  return request.type === DirentType.File
-    ? RendererWorker.invoke('IconTheme.getFileIcon', { name: request.name })
-    : RendererWorker.invoke('IconTheme.getFolderIcon', { name: request.name })
+  return request.type === DirentType.File ? RendererWorker.getFileIcon({ name: request.name }) : RendererWorker.getFolderIcon({ name: request.name })
 }
 
 export const requestFileIcons = async (requests: readonly IconRequest[]): Promise<readonly string[]> => {
