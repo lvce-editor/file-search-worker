@@ -1,5 +1,5 @@
-import * as Rpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 export const searchFile = async (uri: string): Promise<readonly string[]> => {
-  return Rpc.invoke('ExtensionHost.searchFileWithHtml', uri)
+  return RendererWorker.invoke('ExtensionHost.searchFileWithHtml', uri)
 }

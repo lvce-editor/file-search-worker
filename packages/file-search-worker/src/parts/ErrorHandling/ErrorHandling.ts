@@ -1,4 +1,4 @@
-import * as Rpc from '../RendererWorker/RendererWorker.ts'
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 export const handleError = async (error: any, notify = true, prefix = ''): Promise<void> => {
   console.error(error)
@@ -15,7 +15,7 @@ export const showErrorDialog = async (error: any): Promise<void> => {
     stack,
     name,
   }
-  await Rpc.invoke('ErrorHandling.showErrorDialog', errorInfo)
+  await RendererWorker.invoke('ErrorHandling.showErrorDialog', errorInfo)
 }
 
 export const warn = (...args: readonly any[]): void => {
