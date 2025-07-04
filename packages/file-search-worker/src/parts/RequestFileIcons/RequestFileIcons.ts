@@ -7,8 +7,8 @@ const requestFileIcon = async (request: IconRequest): Promise<string> => {
     return ''
   }
   return request.type === DirentType.File
-    ? Rpc.invoke('IconTheme.getFileIcon', { name: request.name })
-    : Rpc.invoke('IconTheme.getFolderIcon', { name: request.name })
+    ? Rpc.getFileIcon({ name: request.name })
+    : Rpc.getFolderIcon({ name: request.name })
 }
 
 export const requestFileIcons = async (requests: readonly IconRequest[]): Promise<readonly string[]> => {

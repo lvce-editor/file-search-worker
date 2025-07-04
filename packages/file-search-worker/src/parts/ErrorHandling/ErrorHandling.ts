@@ -15,7 +15,7 @@ export const showErrorDialog = async (error: any): Promise<void> => {
     stack,
     name,
   }
-  await Rpc.invoke('ErrorHandling.showErrorDialog', errorInfo)
+  await Rpc.showErrorDialog(errorInfo)
 }
 
 export const warn = (...args: readonly any[]): void => {
