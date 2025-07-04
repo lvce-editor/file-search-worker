@@ -1,7 +1,7 @@
-import { expect, test } from '@jest/globals'
+import { test, expect } from '@jest/globals'
+import { VirtualDomElements } from '@lvce-editor/virtual-dom-worker'
 import * as ClassNames from '../src/parts/ClassNames/ClassNames.ts'
 import * as GetScrollBarVirtualDom from '../src/parts/GetScrollBarVirtualDom/GetScrollBarVirtualDom.ts'
-import * as VirtualDomElements from '../src/parts/VirtualDomElements/VirtualDomElements.ts'
 
 test.skip('getScrollBarVirtualDom with no scrollbar needed', () => {
   const scrollBarHeight = 0
