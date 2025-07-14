@@ -10,10 +10,9 @@ test('setColorTheme should invoke ColorTheme.setColorTheme with the provided id'
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: readonly unknown[]) => {
+    invoke: async (method: string, ...args: readonly unknown[]) => {
       invokedMethod = method
       invokedArgs = args
-      return Promise.resolve()
     },
   })
   set(RendererWorker, mockRpc)
