@@ -10,7 +10,6 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "description": "",
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@types/node": "^22.9.0",
