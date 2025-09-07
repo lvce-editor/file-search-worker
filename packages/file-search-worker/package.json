@@ -1,7 +1,6 @@
 {
   "name": "@lvce-editor/file-search-worker",
   "version": "0.0.0-dev",
-  "description": "",
   "keywords": [
     "text-search"
   ],
