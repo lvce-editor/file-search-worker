@@ -5,8 +5,8 @@ import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnVa
 
 // TODO selectPick should be independent of show/hide
 export const selectPick = async (pick: ProtoVisibleItem): Promise<SelectPickResult> => {
-  const path = `${pick.description}/${pick.label}`
-  await OpenWorkspaceFolder.openWorkspaceFolder(path)
+  const { uri } = pick
+  await OpenWorkspaceFolder.openWorkspaceFolder(uri)
   return {
     command: QuickPickReturnValue.Hide,
   }
