@@ -47,11 +47,11 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
     matches: [],
     direntType: 0,
     uri: '',
+    // @ts-ignore
+    id: item.id,
+    args: item.args,
   }
   // @ts-ignore
-  pick.id = item.id
-  // @ts-ignore
-  pick.args = item.args
   return pick
 }
 

@@ -11,15 +11,14 @@ import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly VirtualDomNode[] => {
   const { posInSet, label, setSize, isActive, description, icon, highlights, fileIcon } = visibleItem
-  const dom: any[] = []
-  dom.push({
+  const dom: any[] = [ {
     type: VirtualDomElements.Div,
     className: ClassNames.QuickPickItem,
     role: AriaRoles.Option,
     ariaPosInSet: posInSet,
     ariaSetSize: setSize,
     childCount: 1,
-  })
+  }]
   const parent = dom[0]
   if (isActive) {
     // @ts-ignore
