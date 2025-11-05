@@ -1,3 +1,5 @@
+import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+
 interface MenuEntriesState {
   menuEntries: readonly any[]
 }
@@ -6,7 +8,12 @@ const state: MenuEntriesState = {
   menuEntries: [],
 }
 
-export const getAll = (): readonly any[] => {
+export const getAll = async (): Promise<readonly any[]> => {
+  try {
+    return await RendererWorker.invoke('Layout.getQuickPickMenuEntries')
+  } catch {
+    // ignore
+  }
   return state.menuEntries
 }
 
