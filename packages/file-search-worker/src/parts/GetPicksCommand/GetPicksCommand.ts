@@ -5,7 +5,7 @@ import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 
 // TODO combine Ajax with cache (specify strategy: cacheFirst, networkFirst)
 const getBuiltinPicks = async (): Promise<readonly any[]> => {
-  const builtinPicks = MenuEntriesState.getAll()
+  const builtinPicks = await MenuEntriesState.getAll()
   return builtinPicks
 }
 
@@ -25,6 +25,7 @@ const prefixIdWithExt = (item: any): any => {
 
 const getExtensionPicks = async (): Promise<readonly any[]> => {
   try {
+    // TODO ask extension host worker directly
     // TODO don't call this every time
     const extensionPicks = await RendererWorker.invoke('ExtensionHost.getCommands')
     if (!extensionPicks) {
