@@ -11,7 +11,8 @@ const state: MenuEntriesState = {
 export const getAll = async (): Promise<readonly any[]> => {
   try {
     // @ts-ignore
-    return await RendererWorker.invoke('Layout.getAllQuickPickMenuEntries')
+    const entries = await RendererWorker.invoke('Layout.getAllQuickPickMenuEntries')
+    return entries || []
   } catch {
     // ignore
   }
