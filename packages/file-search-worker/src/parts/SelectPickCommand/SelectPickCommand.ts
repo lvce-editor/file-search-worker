@@ -2,13 +2,7 @@ import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
-
-const shouldHide = (item: any): boolean => {
-  if (item.id === 'Viewlet.openWidget' && item.args[0] === 'QuickPick') {
-    return false
-  }
-  return true
-}
+import { shouldHide } from '../ShouldHide/ShouldHide.ts'
 
 const selectPickBuiltin = async (item: any): Promise<any> => {
   const args = item.args || []
