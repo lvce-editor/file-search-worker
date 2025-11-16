@@ -4,7 +4,7 @@ import * as SetColorTheme from '../SetColorTheme/SetColorTheme.ts'
 
 export const selectPick = async (pick: ProtoVisibleItem): Promise<any> => {
   const id = pick.label
-  await SetColorTheme.setColorTheme(/* colorThemeId */ id)
+  await SetColorTheme.setColorTheme(id)
   return {
     command: QuickPickReturnValue.Hide,
   }
