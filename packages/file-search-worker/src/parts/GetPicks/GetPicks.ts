@@ -2,10 +2,10 @@ import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
 export interface GetPicks {
-  (value: string): Promise<readonly ProtoVisibleItem[]>
+  (value: string, args: readonly any[]): Promise<readonly ProtoVisibleItem[]>
 }
 
-export const getPicks = (id: number, searchValue: string): Promise<readonly ProtoVisibleItem[]> => {
+export const getPicks = (id: number, searchValue: string, args: readonly any[]): Promise<readonly ProtoVisibleItem[]> => {
   const fn = QuickPickEntries.getPicks(id)
-  return fn(searchValue)
+  return fn(searchValue, args)
 }
