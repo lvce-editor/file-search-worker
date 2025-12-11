@@ -10,21 +10,21 @@ import * as InputEventType from '../InputEventType/InputEventType.ts'
 
 export const getNewValueFunction = (inputType: string): InputHandler => {
   switch (inputType) {
-    case InputEventType.InsertFromPaste:
-    case InputEventType.InsertText:
-      return getNewValueInsertText
     case InputEventType.DeleteContentBackward:
       return getNewValueDeleteContentBackward
     case InputEventType.DeleteContentForward:
       return getNewValueDeleteContentForward
-    case InputEventType.DeleteWordForward:
-      return getNewValueDeleteWordForward
     case InputEventType.DeleteWordBackward:
       return getNewValueDeleteWordBackward
-    case InputEventType.InsertLineBreak:
-      return getNewValueInsertLineBreak
+    case InputEventType.DeleteWordForward:
+      return getNewValueDeleteWordForward
     case InputEventType.InsertCompositionText:
       return getNewValueInsertCompositionText
+    case InputEventType.InsertFromPaste:
+    case InputEventType.InsertText:
+      return getNewValueInsertText
+    case InputEventType.InsertLineBreak:
+      return getNewValueInsertLineBreak
     default:
       throw new Error(`unsupported input type ${inputType}`)
   }

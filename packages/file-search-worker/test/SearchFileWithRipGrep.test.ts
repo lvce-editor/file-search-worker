@@ -18,9 +18,9 @@ test('searches files without prepare', async () => {
   const result = await SearchFileWithRipGrep.searchFile('/test', 'query', false)
   expect(result).toEqual(['file1.txt', 'file2.txt', 'file3.txt'])
   expect(mockInvoke).toHaveBeenCalledWith('SearchProcess.invoke', 'SearchFile.searchFile', {
+    limit: 9_999_999,
     ripGrepArgs: ['--files', '--sort-files'],
     searchPath: '/test',
-    limit: 9_999_999,
   })
 })
 
@@ -37,14 +37,14 @@ test.skip('searches files with prepare', async () => {
   const result = await SearchFileWithRipGrep.searchFile('/test', 'file2', true)
   expect(result).toEqual([
     {
-      pick: 'file2.txt',
       matches: expect.any(Array),
+      pick: 'file2.txt',
     },
   ])
   expect(mockInvoke).toHaveBeenCalledWith('SearchProcess.invoke', 'SearchFile.searchFile', {
+    limit: 9_999_999,
     ripGrepArgs: ['--files', '--sort-files'],
     searchPath: '/test',
-    limit: 9_999_999,
   })
 })
 

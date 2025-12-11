@@ -9,14 +9,14 @@ export const getQuickPickNoResultsVirtualDom = (): readonly VirtualDomNode[] => 
   const noResults = QuickPickStrings.noResults()
   return [
     {
-      type: VirtualDomElements.Div,
-      className: MergeClassNames.mergeClassNames(ClassNames.QuickPickItem, ClassNames.QuickPickItemActive, ClassNames.QuickPickStatus),
       childCount: 1,
+      className: MergeClassNames.mergeClassNames(ClassNames.QuickPickItem, ClassNames.QuickPickItemActive, ClassNames.QuickPickStatus),
+      type: VirtualDomElements.Div,
     },
     {
-      type: VirtualDomElements.Div,
-      className: ClassNames.Label,
       childCount: 1,
+      className: ClassNames.Label,
+      type: VirtualDomElements.Div,
     },
     text(noResults),
   ]

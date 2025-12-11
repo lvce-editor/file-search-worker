@@ -7,9 +7,9 @@ import * as SplitLines from '../SplitLines/SplitLines.ts'
 export const searchFile = async (path: string, value: string, prepare: boolean): Promise<readonly string[]> => {
   const ripGrepArgs = GetFileSearchRipGrepArgs.getFileSearchRipGrepArgs()
   const options = {
+    limit: 9_999_999,
     ripGrepArgs,
     searchPath: path,
-    limit: 9_999_999,
   }
   const stdout = await SearchProcess.invoke('SearchFile.searchFile', options)
   const lines = SplitLines.splitLines(stdout)

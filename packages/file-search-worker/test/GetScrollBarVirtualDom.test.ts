@@ -16,15 +16,15 @@ test.skip('getScrollBarVirtualDom with scrollbar', () => {
   const result = GetScrollBarVirtualDom.getScrollBarVirtualDom(scrollBarHeight, scrollBarTop)
   expect(result.length).toBe(2)
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: ClassNames.QuickPickScrollbar,
     childCount: 1,
+    className: ClassNames.QuickPickScrollbar,
     style: 'height: 100px;',
+    type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({
-    type: VirtualDomElements.Div,
-    className: ClassNames.QuickPickScrollbarSlider,
     childCount: 0,
+    className: ClassNames.QuickPickScrollbarSlider,
     style: expect.stringContaining('height:'),
+    type: VirtualDomElements.Div,
   })
 })

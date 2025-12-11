@@ -7,9 +7,9 @@ import * as SearchFileHtml from '../SearchFileWithHtml/SearchFileWithHtml.ts'
 import * as SearchFileRipGrep from '../SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 
 export const searchModules: Record<string, SearchFileHandler> = {
-  [FileSystemProtocol.Memfs]: SearchFileMemfs.searchFile,
-  [FileSystemProcotol.Fetch]: SearchFileFetch.searchFile,
-  [FileSystemProtocol.Html]: SearchFileHtml.searchFile,
-  [FileSystemProcotol.File]: SearchFileRipGrep.searchFile,
   [FileSystemProcotol.Default]: SearchFileRipGrep.searchFile,
+  [FileSystemProcotol.Fetch]: SearchFileFetch.searchFile,
+  [FileSystemProcotol.File]: SearchFileRipGrep.searchFile,
+  [FileSystemProtocol.Html]: SearchFileHtml.searchFile,
+  [FileSystemProtocol.Memfs]: SearchFileMemfs.searchFile,
 }

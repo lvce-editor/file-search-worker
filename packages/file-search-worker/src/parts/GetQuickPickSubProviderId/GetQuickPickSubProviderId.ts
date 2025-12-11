@@ -8,16 +8,16 @@ export const getQuickPickSubProviderId = (id: number, prefix: string): number =>
   switch (prefix) {
     case QuickPickPrefix.Command:
       return QuickPickEntryId.Commands
-    case QuickPickPrefix.Symbol:
-      return QuickPickEntryId.Symbol
-    case QuickPickPrefix.WorkspaceSymbol:
-      return QuickPickEntryId.WorkspaceSymbol
     case QuickPickPrefix.GoToLine:
       return QuickPickEntryId.GoToLine
-    case QuickPickPrefix.View:
-      return QuickPickEntryId.View
     case QuickPickPrefix.Help:
       return QuickPickEntryId.Help
+    case QuickPickPrefix.Symbol:
+      return QuickPickEntryId.Symbol
+    case QuickPickPrefix.View:
+      return QuickPickEntryId.View
+    case QuickPickPrefix.WorkspaceSymbol:
+      return QuickPickEntryId.WorkspaceSymbol
     default:
       return QuickPickEntryId.File
   }

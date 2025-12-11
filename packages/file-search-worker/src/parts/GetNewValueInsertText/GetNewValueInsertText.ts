@@ -4,15 +4,15 @@ export const getNewValueInsertText = (value: string, selectionStart: number, sel
   if (selectionStart === value.length) {
     const newValue = value + data
     return {
-      newValue,
       cursorOffset: newValue.length,
+      newValue,
     }
   }
   const before = value.slice(0, selectionStart)
   const after = value.slice(selectionEnd)
   const newValue = before + data + after
   return {
-    newValue,
     cursorOffset: selectionStart + data.length,
+    newValue,
   }
 }

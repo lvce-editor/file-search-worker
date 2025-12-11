@@ -31,15 +31,15 @@ test('getQuickPickVirtualDom with empty items', () => {
       childCount: 1,
       className: 'List ContainContent',
       id: 'QuickPickItems',
-      onWheel: 'handleWheel',
       onPointerDown: 'handlePointerDown',
+      onWheel: 'handleWheel',
       role: 'listbox',
       type: 4,
     },
     {
-      type: 4,
       childCount: 0,
       className: 'ListItems ContainContent',
+      type: 4,
     },
     { childCount: 1, className: 'QuickPickItem QuickPickItemActive QuickPickStatus', type: 4 },
     { childCount: 1, className: 'Label', type: 4 },
@@ -50,14 +50,14 @@ test('getQuickPickVirtualDom with empty items', () => {
 test('getQuickPickVirtualDom with scrollbar', () => {
   const visibleItems = [
     {
-      label: 'item 1',
       description: '',
-      icon: '',
       fileIcon: '',
+      highlights: [],
+      icon: '',
+      isActive: true,
+      label: 'item 1',
       posInSet: 1,
       setSize: 15,
-      isActive: true,
-      highlights: [],
     },
   ]
   const scrollBarHeight = 15

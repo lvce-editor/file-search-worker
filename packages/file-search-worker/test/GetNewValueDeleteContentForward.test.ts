@@ -4,31 +4,31 @@ import { getNewValueDeleteContentForward } from '../src/parts/GetNewValueDeleteC
 test('deletes character after cursor', () => {
   const result = getNewValueDeleteContentForward('hello', 0, 0, '')
   expect(result).toEqual({
-    newValue: 'ello',
     cursorOffset: 0,
+    newValue: 'ello',
   })
 })
 
 test('deletes selected text', () => {
   const result = getNewValueDeleteContentForward('hello world', 0, 5, '')
   expect(result).toEqual({
-    newValue: ' world',
     cursorOffset: 0,
+    newValue: ' world',
   })
 })
 
 test('deletes character in middle', () => {
   const result = getNewValueDeleteContentForward('hello world', 5, 5, '')
   expect(result).toEqual({
-    newValue: 'helloworld',
     cursorOffset: 5,
+    newValue: 'helloworld',
   })
 })
 
 test('handles end of string', () => {
   const result = getNewValueDeleteContentForward('hello', 5, 5, '')
   expect(result).toEqual({
-    newValue: 'hello',
     cursorOffset: 5,
+    newValue: 'hello',
   })
 })

@@ -12,9 +12,9 @@ test('returns array of key bindings', () => {
 test('has correct escape key binding', () => {
   const keyBindings = GetKeyBindings.getKeyBindings()
   expect(keyBindings).toContainEqual({
-    key: KeyCode.Escape,
-    command: 'Viewlet.closeWidget',
     args: ['QuickPick'],
+    command: 'Viewlet.closeWidget',
+    key: KeyCode.Escape,
     when: WhenExpression.FocusQuickPickInput,
   })
 })
@@ -22,8 +22,8 @@ test('has correct escape key binding', () => {
 test('has correct up arrow key binding', () => {
   const keyBindings = GetKeyBindings.getKeyBindings()
   expect(keyBindings).toContainEqual({
-    key: KeyCode.UpArrow,
     command: 'QuickPick.focusPrevious',
+    key: KeyCode.UpArrow,
     when: WhenExpression.FocusQuickPickInput,
   })
 })
@@ -31,8 +31,8 @@ test('has correct up arrow key binding', () => {
 test('has correct down arrow key binding', () => {
   const keyBindings = GetKeyBindings.getKeyBindings()
   expect(keyBindings).toContainEqual({
-    key: KeyCode.DownArrow,
     command: 'QuickPick.focusNext',
+    key: KeyCode.DownArrow,
     when: WhenExpression.FocusQuickPickInput,
   })
 })
@@ -40,8 +40,8 @@ test('has correct down arrow key binding', () => {
 test('has correct page up key binding', () => {
   const keyBindings = GetKeyBindings.getKeyBindings()
   expect(keyBindings).toContainEqual({
-    key: KeyCode.PageUp,
     command: 'QuickPick.focusFirst',
+    key: KeyCode.PageUp,
     when: WhenExpression.FocusQuickPickInput,
   })
 })
@@ -49,8 +49,8 @@ test('has correct page up key binding', () => {
 test('has correct page down key binding', () => {
   const keyBindings = GetKeyBindings.getKeyBindings()
   expect(keyBindings).toContainEqual({
-    key: KeyCode.PageDown,
     command: 'QuickPick.focusLast',
+    key: KeyCode.PageDown,
     when: WhenExpression.FocusQuickPickInput,
   })
 })
@@ -58,8 +58,8 @@ test('has correct page down key binding', () => {
 test('has correct enter key binding', () => {
   const keyBindings = GetKeyBindings.getKeyBindings()
   expect(keyBindings).toContainEqual({
-    key: KeyCode.Enter,
     command: 'QuickPick.selectCurrentIndex',
+    key: KeyCode.Enter,
     when: WhenExpression.FocusQuickPickInput,
   })
 })

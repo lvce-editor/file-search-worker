@@ -5,16 +5,16 @@ import * as RenderMethod from '../src/parts/RenderMethod/RenderMethod.ts'
 
 test('renders cursor offset', () => {
   const state: QuickPickViewModel = {
-    uid: 1,
     cursorOffset: 5,
-    visibleItems: [],
-    value: '',
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 0,
     focused: false,
+    height: 0,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 1,
+    value: '',
+    visibleItems: [],
   }
 
   expect(RenderCursorOffset.renderCursorOffset(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetCursorOffset, 5])
@@ -22,16 +22,16 @@ test('renders cursor offset', () => {
 
 test('renders cursor offset of 0', () => {
   const state: QuickPickViewModel = {
-    uid: 1,
     cursorOffset: 0,
-    visibleItems: [],
-    value: '',
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 0,
     focused: false,
+    height: 0,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 1,
+    value: '',
+    visibleItems: [],
   }
 
   expect(RenderCursorOffset.renderCursorOffset(state)).toEqual(['Viewlet.send', 1, RenderMethod.SetCursorOffset, 0])
@@ -39,16 +39,16 @@ test('renders cursor offset of 0', () => {
 
 test('handles different uid', () => {
   const state: QuickPickViewModel = {
-    uid: 2,
     cursorOffset: 10,
-    visibleItems: [],
-    value: '',
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 0,
     focused: false,
+    height: 0,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 2,
+    value: '',
+    visibleItems: [],
   }
 
   expect(RenderCursorOffset.renderCursorOffset(state)).toEqual(['Viewlet.send', 2, RenderMethod.SetCursorOffset, 10])

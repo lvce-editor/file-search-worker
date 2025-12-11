@@ -9,21 +9,21 @@ import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 export const getQuickPickInputVirtualDom = (): VirtualDomNode => {
   const ariaLabel = QuickPickStrings.typeNameofCommandToRun()
   return {
-    type: VirtualDomElements.Input,
-    className: ClassNames.InputBox,
-    spellcheck: false,
+    ariaAutoComplete: 'list',
+    ariaExpanded: true,
+    ariaLabel: ariaLabel,
     autocapitalize: 'off',
-    inputType: 'text',
+    autocomplete: 'off',
     childCount: 0,
-    role: AriaRoles.ComboBox,
+    className: ClassNames.InputBox,
+    inputType: 'text',
     name: InputName.QuickPickInput,
     onBeforeInput: DomEventListenerFunctions.HandleBeforeInput,
     onBlur: DomEventListenerFunctions.HandleBlur,
-    onInput: DomEventListenerFunctions.HandleInput,
     onFocus: DomEventListenerFunctions.HandleFocus,
-    ariaLabel: ariaLabel,
-    ariaAutoComplete: 'list',
-    ariaExpanded: true,
-    autocomplete: 'off',
+    onInput: DomEventListenerFunctions.HandleInput,
+    role: AriaRoles.ComboBox,
+    spellcheck: false,
+    type: VirtualDomElements.Input,
   }
 }

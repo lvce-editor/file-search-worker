@@ -2,8 +2,8 @@ import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
 import * as Assert from '../Assert/Assert.ts'
 
 export const create = ({
-  itemHeight,
   headerHeight = 0,
+  itemHeight,
   minimumSliderSize = 20,
 }: {
   readonly itemHeight: number
@@ -12,19 +12,19 @@ export const create = ({
 }): any => {
   return {
     deltaY: 0,
-    minLineY: 0,
-    maxLineY: 0,
     finalDeltaY: 0,
-    itemHeight,
-    headerHeight,
-    items: [],
-    minimumSliderSize,
     focusedIndex: -1,
+    headerHeight,
+    itemHeight,
+    items: [],
+    maxLineY: 0,
+    minimumSliderSize,
+    minLineY: 0,
+    scrollBarActive: false,
+    scrollBarHeight: 0,
+    touchDifference: 0,
     touchOffsetY: 0,
     touchTimeStamp: 0,
-    touchDifference: 0,
-    scrollBarHeight: 0,
-    scrollBarActive: false,
   }
 }
 
@@ -38,7 +38,7 @@ const getListHeight = (height: number, headerHeight: number): number => {
 export const setDeltaY = (state: QuickPickState, deltaY: number): QuickPickState => {
   Assert.object(state)
   Assert.number(deltaY)
-  const { itemHeight, items, height, headerHeight } = state
+  const { headerHeight, height, itemHeight, items } = state
   const listHeight = getListHeight(height, headerHeight)
   const itemsLength = items.length
   const finalDeltaY = itemsLength * itemHeight - listHeight
@@ -57,8 +57,8 @@ export const setDeltaY = (state: QuickPickState, deltaY: number): QuickPickState
   return {
     ...state,
     deltaY,
-    minLineY,
     maxLineY,
+    minLineY,
   }
 }
 

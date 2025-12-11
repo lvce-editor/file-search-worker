@@ -3,12 +3,12 @@ import * as GetColorThemeNames from '../GetColorThemeNames/GetColorThemeNames.ts
 
 const toProtoVisibleItem = (name: string): ProtoVisibleItem => {
   const pick: ProtoVisibleItem = {
-    label: name,
     description: '',
+    direntType: 0,
     fileIcon: '',
     icon: '',
+    label: name,
     matches: [],
-    direntType: 0,
     uri: '',
   }
   return pick

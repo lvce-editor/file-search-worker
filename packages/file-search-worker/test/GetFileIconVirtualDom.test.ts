@@ -8,11 +8,11 @@ test('creates virtual dom node for file icon', () => {
   const icon = '/path/to/icon.png'
   const result = GetFileIconVirtualDom.getFileIconVirtualDom(icon)
   expect(result).toEqual({
-    type: VirtualDomElements.Img,
-    className: ClassNames.FileIcon,
-    src: icon,
-    role: AriaRoles.None,
     childCount: 0,
+    className: ClassNames.FileIcon,
+    role: AriaRoles.None,
+    src: icon,
+    type: VirtualDomElements.Img,
   })
 })
 
@@ -20,11 +20,11 @@ test('handles empty icon path', () => {
   const icon = ''
   const result = GetFileIconVirtualDom.getFileIconVirtualDom(icon)
   expect(result).toEqual({
-    type: VirtualDomElements.Img,
-    className: ClassNames.FileIcon,
-    src: '',
-    role: AriaRoles.None,
     childCount: 0,
+    className: ClassNames.FileIcon,
+    role: AriaRoles.None,
+    src: '',
+    type: VirtualDomElements.Img,
   })
 })
 

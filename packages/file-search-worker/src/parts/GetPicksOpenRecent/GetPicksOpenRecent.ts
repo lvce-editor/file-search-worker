@@ -11,12 +11,12 @@ const getLabel = (uri: string): string => {
 
 const toProtoVisibleItem = (uri: string): ProtoVisibleItem => {
   return {
-    label: getLabel(uri),
     description: '',
+    direntType: DirentType.Directory,
     fileIcon: '',
     icon: '',
+    label: getLabel(uri),
     matches: [],
-    direntType: DirentType.Directory,
     uri,
   }
 }

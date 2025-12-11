@@ -5,16 +5,16 @@ import * as ClassNames from '../ClassNames/ClassNames.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 const quickPickHighlight: VirtualDomNode = {
-  type: VirtualDomElements.Span,
-  className: ClassNames.QuickPickHighlight,
   childCount: 1,
+  className: ClassNames.QuickPickHighlight,
+  type: VirtualDomElements.Span,
 }
 
 export const getHighlights = (sections: readonly HighlightSection[], label: string): readonly VirtualDomNode[] => {
   const labelDom = {
-    type: VirtualDomElements.Div,
-    className: ClassNames.QuickPickItemLabel,
     childCount: 0,
+    className: ClassNames.QuickPickItemLabel,
+    type: VirtualDomElements.Div,
   }
   const nodes: VirtualDomNode[] = [labelDom]
   if (sections.length === 0) {
