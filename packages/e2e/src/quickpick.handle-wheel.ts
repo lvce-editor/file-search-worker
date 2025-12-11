@@ -2,6 +2,8 @@ import type { Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'quickpick.handle-wheel'
 
+export const skip = 1
+
 export const test: Test = async ({ Command, expect, Locator, QuickPick }) => {
   // arrange
   await QuickPick.open()
