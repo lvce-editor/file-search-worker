@@ -13,6 +13,8 @@ export const getQuickPickProviderId = (prefix: string): number => {
     case QuickPickEntryUri.View:
     case QuickPickEntryUri.WorkspaceSymbol:
       return QuickPickEntryId.EveryThing
+    case QuickPickEntryUri.Custom:
+      return QuickPickEntryId.Custom
     case QuickPickEntryUri.Recent:
       return QuickPickEntryId.Recent
     default:
