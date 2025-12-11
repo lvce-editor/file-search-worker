@@ -12,7 +12,6 @@ import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickP
 import * as GetQuickPickSubProviderId from '../GetQuickPickSubProviderId/GetQuickPickSubProviderId.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
-import * as SetArgs from '../SetArgs/SetArgs.ts'
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
   const { args, fileIconCache, height, itemHeight, uri } = state
@@ -20,7 +19,6 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const value = GetDefaultValue.getDefaultValue(id)
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
   const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(id, prefix)
-  SetArgs.setArgs(subId, args)
   const newPicks = await GetPicks.getPicks(subId, value)
   Assert.array(newPicks)
   const filterValue = GetFilterValue.getFilterValue(id, value)
@@ -34,6 +32,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
 
   return {
     ...state,
+    args,
     cursorOffset: value.length,
     fileIconCache: newFileIconCache,
     finalDeltaY,
