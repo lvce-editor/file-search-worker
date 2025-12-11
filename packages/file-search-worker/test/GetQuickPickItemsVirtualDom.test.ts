@@ -12,22 +12,22 @@ test('getQuickPickItemsVirtualDom - empty items', () => {
 test('getQuickPickItemsVirtualDom - with items', () => {
   const visibleItems: readonly VisibleItem[] = [
     {
-      label: 'item1',
       description: 'desc1',
       fileIcon: 'file1',
+      highlights: [],
       icon: 'icon1',
       isActive: false,
-      highlights: [],
+      label: 'item1',
       posInSet: 1,
       setSize: 2,
     },
     {
-      label: 'item2',
       description: 'desc2',
       fileIcon: 'file2',
+      highlights: [],
       icon: 'icon2',
       isActive: false,
-      highlights: [],
+      label: 'item2',
       posInSet: 2,
       setSize: 2,
     },

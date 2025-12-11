@@ -15,7 +15,7 @@ import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts
 import * as SetArgs from '../SetArgs/SetArgs.ts'
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
-  const { uri, args, fileIconCache, itemHeight, height } = state
+  const { args, fileIconCache, height, itemHeight, uri } = state
   const id = GetQuickPickProviderId.getQuickPickProviderId(uri)
   const value = GetDefaultValue.getDefaultValue(id)
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
@@ -28,25 +28,25 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const minLineY = 0
   const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)
   const sliced = newPicks.slice(minLineY, maxLineY)
-  const { newFileIconCache, icons } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
+  const { icons, newFileIconCache } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
   const listHeight = GetListHeight.getListHeight(items.length, itemHeight, height)
   const finalDeltaY = GetFinalDeltaY.getFinalDeltaY(listHeight, itemHeight, items.length)
 
   return {
     ...state,
-    picks: newPicks,
-    items,
-    focusedIndex: 0,
-    state: QuickPickOpenState.Finished,
-    minLineY,
-    maxLineY,
-    value,
     cursorOffset: value.length,
-    inputSource: InputSource.Script,
-    focused: true,
     fileIconCache: newFileIconCache,
-    icons,
-    providerId: id,
     finalDeltaY,
+    focused: true,
+    focusedIndex: 0,
+    icons,
+    inputSource: InputSource.Script,
+    items,
+    maxLineY,
+    minLineY,
+    picks: newPicks,
+    providerId: id,
+    state: QuickPickOpenState.Finished,
+    value,
   }
 }

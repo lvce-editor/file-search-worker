@@ -4,23 +4,23 @@ import { getNewValueInsertLineBreak } from '../src/parts/GetNewValueInsertLineBr
 test('preserves value and moves cursor to end of selection', () => {
   const result = getNewValueInsertLineBreak('hello world', 0, 5, '')
   expect(result).toEqual({
-    newValue: 'hello world',
     cursorOffset: 5,
+    newValue: 'hello world',
   })
 })
 
 test('handles empty string', () => {
   const result = getNewValueInsertLineBreak('', 0, 0, '')
   expect(result).toEqual({
-    newValue: '',
     cursorOffset: 0,
+    newValue: '',
   })
 })
 
 test('handles cursor at end', () => {
   const result = getNewValueInsertLineBreak('hello', 5, 5, '')
   expect(result).toEqual({
-    newValue: 'hello',
     cursorOffset: 5,
+    newValue: 'hello',
   })
 })

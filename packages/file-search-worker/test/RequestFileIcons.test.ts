@@ -16,8 +16,8 @@ test('requests file icons', async () => {
   mockInvoke.mockResolvedValueOnce('/icons/file.png').mockResolvedValueOnce('/icons/other.png')
 
   const requests = [
-    { type: DirentType.File, name: 'test.txt', path: '' },
-    { type: DirentType.File, name: 'other.txt', path: '' },
+    { name: 'test.txt', path: '', type: DirentType.File },
+    { name: 'other.txt', path: '', type: DirentType.File },
   ]
 
   const result = await RequestFileIcons.requestFileIcons(requests)
@@ -38,8 +38,8 @@ test('requests folder icons', async () => {
   mockInvoke.mockResolvedValueOnce('/icons/folder.png').mockResolvedValueOnce('/icons/folder2.png')
 
   const requests = [
-    { type: DirentType.Directory, name: 'folder1', path: '' },
-    { type: DirentType.Directory, name: 'folder2', path: '' },
+    { name: 'folder1', path: '', type: DirentType.Directory },
+    { name: 'folder2', path: '', type: DirentType.Directory },
   ]
 
   const result = await RequestFileIcons.requestFileIcons(requests)
@@ -70,8 +70,8 @@ test.skip('handles requests with no name', async () => {
   set(RendererWorker, mockRpc)
 
   const requests = [
-    { type: DirentType.File, name: '', path: '' },
-    { type: DirentType.Directory, name: '', path: '' },
+    { name: '', path: '', type: DirentType.File },
+    { name: '', path: '', type: DirentType.Directory },
   ]
 
   const result = await RequestFileIcons.requestFileIcons(requests)

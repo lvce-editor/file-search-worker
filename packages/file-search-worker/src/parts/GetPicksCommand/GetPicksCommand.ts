@@ -41,16 +41,16 @@ const getExtensionPicks = async (): Promise<readonly any[]> => {
 
 const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
   const pick: ProtoVisibleItem = {
-    label: item.label,
+    args: item.args,
     description: '',
+    direntType: 0,
     fileIcon: '',
     icon: '',
-    matches: [],
-    direntType: 0,
-    uri: '',
     // @ts-ignore
     id: item.id,
-    args: item.args,
+    label: item.label,
+    matches: [],
+    uri: '',
   }
   // @ts-ignore
   return pick

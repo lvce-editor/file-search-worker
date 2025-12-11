@@ -7,36 +7,36 @@ import * as GetQuickPickItemVirtualDom from '../src/parts/GetQuickPickItemVirtua
 
 test('creates basic quick pick item virtual dom', () => {
   const visibleItem: VisibleItem = {
+    description: '',
+    fileIcon: '',
+    highlights: [],
+    icon: '',
+    isActive: false,
+    label: 'test-label',
     posInSet: 1,
     setSize: 10,
-    label: 'test-label',
-    isActive: false,
-    highlights: [],
-    description: '',
-    icon: '',
-    fileIcon: '',
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
   expect(dom[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: ClassNames.QuickPickItem,
-    role: AriaRoles.Option,
     ariaPosInSet: 1,
     ariaSetSize: 10,
     childCount: 1,
+    className: ClassNames.QuickPickItem,
+    role: AriaRoles.Option,
+    type: VirtualDomElements.Div,
   })
 })
 
 test('handles active item', () => {
   const visibleItem: VisibleItem = {
+    description: '',
+    fileIcon: '',
+    highlights: [],
+    icon: '',
+    isActive: true,
+    label: 'test-label',
     posInSet: 1,
     setSize: 10,
-    label: 'test-label',
-    isActive: true,
-    highlights: [],
-    description: '',
-    icon: '',
-    fileIcon: '',
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
   expect(dom[0].id).toBe('QuickPickItemActive')
@@ -45,53 +45,51 @@ test('handles active item', () => {
 
 test('adds mask icon when specified', () => {
   const visibleItem: VisibleItem = {
+    description: '',
+    fileIcon: '',
+    highlights: [],
+    icon: 'TestIcon',
+    isActive: false,
+    label: 'test-label',
     posInSet: 1,
     setSize: 10,
-    label: 'test-label',
-    isActive: false,
-    highlights: [],
-    description: '',
-    icon: 'TestIcon',
-    fileIcon: '',
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
   expect(dom[1]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'QuickPickMaskIcon MaskIcon MaskIconTestIcon',
     childCount: 0,
+    className: 'QuickPickMaskIcon MaskIcon MaskIconTestIcon',
+    type: VirtualDomElements.Div,
   })
 })
 
 test('adds description when specified', () => {
   const visibleItem: VisibleItem = {
+    description: 'test-description',
+    fileIcon: '',
+    highlights: [],
+    icon: '',
+    isActive: false,
+    label: 'test-label',
     posInSet: 1,
     setSize: 10,
-    label: 'test-label',
-    isActive: false,
-    highlights: [],
-    description: 'test-description',
-    icon: '',
-    fileIcon: '',
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
   expect(dom[dom.length - 2]).toEqual({
-    type: VirtualDomElements.Div,
-    className: ClassNames.QuickPickItemDescription,
     childCount: 1,
+    className: ClassNames.QuickPickItemDescription,
+    type: VirtualDomElements.Div,
   })
   expect(dom[dom.length - 1]).toEqual({
-    type: 12,
-    text: 'test-description',
     childCount: 0,
+    text: 'test-description',
+    type: 12,
   })
 })
 
 test('adds highlights for matched text', () => {
   const visibleItem: VisibleItem = {
-    posInSet: 1,
-    setSize: 10,
-    label: 'test-label',
-    isActive: false,
+    description: '',
+    fileIcon: '',
     highlights: [
       {
         highlighted: true,
@@ -102,9 +100,11 @@ test('adds highlights for matched text', () => {
         text: '-label',
       },
     ],
-    description: '',
     icon: '',
-    fileIcon: '',
+    isActive: false,
+    label: 'test-label',
+    posInSet: 1,
+    setSize: 10,
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
   const labelContainer = dom.find((node) => node.className === ClassNames.QuickPickItemLabel)

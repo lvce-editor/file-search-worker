@@ -6,14 +6,14 @@ export const getNewValueDeleteContentForward = (value: string, selectionStart: n
     const after = value.slice(selectionEnd + 1)
     const newValue = before + after
     return {
-      newValue,
       cursorOffset: selectionStart,
+      newValue,
     }
   }
   const after = value.slice(selectionEnd)
   const newValue = before + after
   return {
-    newValue,
     cursorOffset: selectionStart,
+    newValue,
   }
 }

@@ -6,8 +6,8 @@ test('getHelpEntries returns command help entries for command provider', () => {
   const result = GetHelpEntries.getHelpEntries(QuickPickPrefix.Command)
   expect(result).toEqual([
     {
-      description: 'Show And Run Commands',
       category: 'global commands',
+      description: 'Show And Run Commands',
     },
   ])
 })
@@ -16,8 +16,8 @@ test('getHelpEntries returns file help entries for none provider', () => {
   const result = GetHelpEntries.getHelpEntries(QuickPickPrefix.None)
   expect(result).toEqual([
     {
-      description: 'Go to file',
       category: 'global commands',
+      description: 'Go to file',
     },
   ])
 })

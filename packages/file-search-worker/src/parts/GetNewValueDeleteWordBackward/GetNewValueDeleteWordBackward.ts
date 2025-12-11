@@ -11,14 +11,14 @@ export const getNewValueDeleteWordBackward = (value: string, selectionStart: num
     const before = value.slice(0, startIndex)
     const newValue = before + after
     return {
-      newValue,
       cursorOffset: before.length,
+      newValue,
     }
   }
   const before = value.slice(0, selectionStart)
   const newValue = before + after
   return {
-    newValue,
     cursorOffset: selectionStart,
+    newValue,
   }
 }

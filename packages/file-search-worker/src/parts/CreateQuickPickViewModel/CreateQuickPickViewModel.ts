@@ -12,22 +12,22 @@ export const createQuickPickViewModel = (oldState: QuickPickState, newState: Qui
   const oldFocusedIndex = oldState.focusedIndex - oldState.minLineY
   const newFocusedIndex = newState.focusedIndex - newState.minLineY
   const itemCount = newState.items.length
-  const { itemHeight, deltaY, finalDeltaY, minimumSliderSize, headerHeight, height } = newState
+  const { deltaY, finalDeltaY, headerHeight, height, itemHeight, minimumSliderSize } = newState
   const listHeight = GetListHeight.getListHeight(itemCount, itemHeight, height)
   const contentHeight = itemCount * itemHeight
   const scrollBarHeight = GetScrollBarSize.getScrollBarSize(listHeight, contentHeight, minimumSliderSize)
   const scrollBarY = ScrollBarFunctions.getScrollBarY(deltaY, finalDeltaY, height - headerHeight, scrollBarHeight)
   const roundedScrollBarY = Math.round(scrollBarY)
   return {
-    visibleItems,
-    value: newState.value,
     cursorOffset: newState.cursorOffset,
     focused: newState.focused,
     height,
-    oldFocusedIndex,
     newFocusedIndex,
-    uid: newState.uid,
+    oldFocusedIndex,
     scrollBarHeight,
     scrollBarTop: roundedScrollBarY,
+    uid: newState.uid,
+    value: newState.value,
+    visibleItems,
   }
 }

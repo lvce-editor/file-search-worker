@@ -13,10 +13,10 @@ export const getVisible = (
     const sections = GetHighlightSections.getHighlightSections(highlights, visibleItem.label)
     return {
       ...visibleItem,
+      highlights: sections,
+      isActive: i === focusedIndex,
       posInSet: minLineY + i + 1,
       setSize,
-      isActive: i === focusedIndex,
-      highlights: sections,
     }
   })
   return visibleItems

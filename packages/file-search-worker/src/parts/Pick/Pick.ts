@@ -2,6 +2,6 @@
 // but then in getVisiblePicks it gets filled
 
 export interface Pick {
-  readonly label: string
   readonly description: string
+  readonly label: string
 }

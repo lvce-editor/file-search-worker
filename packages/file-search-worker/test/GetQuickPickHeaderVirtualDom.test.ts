@@ -9,9 +9,9 @@ test('getQuickPickHeaderVirtualDom', () => {
 
   expect(result).toEqual([
     {
-      type: VirtualDomElements.Div,
-      className: ClassNames.QuickPickHeader,
       childCount: 1,
+      className: ClassNames.QuickPickHeader,
+      type: VirtualDomElements.Div,
     },
     GetQuickPickInputVirtualDom.getQuickPickInputVirtualDom(),
   ])

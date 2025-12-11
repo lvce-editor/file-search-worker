@@ -10,14 +10,14 @@ import * as MergeClassNames from '../MergeClassNames/MergeClassNames.ts'
 import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly VirtualDomNode[] => {
-  const { posInSet, label, setSize, isActive, description, icon, highlights, fileIcon } = visibleItem
+  const { description, fileIcon, highlights, icon, isActive, label, posInSet, setSize } = visibleItem
   const dom: any[] = [ {
-    type: VirtualDomElements.Div,
-    className: ClassNames.QuickPickItem,
-    role: AriaRoles.Option,
     ariaPosInSet: posInSet,
     ariaSetSize: setSize,
     childCount: 1,
+    className: ClassNames.QuickPickItem,
+    role: AriaRoles.Option,
+    type: VirtualDomElements.Div,
   }]
   const parent = dom[0]
   if (isActive) {
@@ -31,9 +31,9 @@ export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly V
   } else if (icon) {
     parent.childCount++
     dom.push({
-      type: VirtualDomElements.Div,
-      className: MergeClassNames.mergeClassNames(ClassNames.QuickPickMaskIcon, ClassNames.MaskIcon, `MaskIcon${icon}`),
       childCount: 0,
+      className: MergeClassNames.mergeClassNames(ClassNames.QuickPickMaskIcon, ClassNames.MaskIcon, `MaskIcon${icon}`),
+      type: VirtualDomElements.Div,
     })
   }
   const highlightDom = GetHighlights.getHighlights(highlights, label)
@@ -42,9 +42,9 @@ export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly V
     parent.childCount++
     dom.push(
       {
-        type: VirtualDomElements.Div,
-        className: ClassNames.QuickPickItemDescription,
         childCount: 1,
+        className: ClassNames.QuickPickItemDescription,
+        type: VirtualDomElements.Div,
       },
       text(description),
     )

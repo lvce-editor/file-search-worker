@@ -19,7 +19,7 @@ export const name = 'quickpick.accessibility'
 
 export const skip = 1
 
-export const test = async ({ QuickPick, Locator, expect }): Promise<void> => {
+export const test = async ({ expect, Locator, QuickPick }): Promise<void> => {
   // act
   await QuickPick.open()
 

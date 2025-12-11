@@ -6,15 +6,15 @@ export const getHelpEntries = (providerId: string): readonly any[] => {
     case QuickPickPrefix.Command:
       return [
         {
-          description: ViewletQuickPickStrings.showAndRunCommands(),
           category: 'global commands',
+          description: ViewletQuickPickStrings.showAndRunCommands(),
         },
       ]
     case QuickPickPrefix.None:
       return [
         {
-          description: ViewletQuickPickStrings.goToFile(),
           category: 'global commands',
+          description: ViewletQuickPickStrings.goToFile(),
         },
       ]
     default:

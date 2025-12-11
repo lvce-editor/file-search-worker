@@ -5,16 +5,16 @@ import * as RenderFocus from '../src/parts/RenderFocus/RenderFocus.ts'
 
 test('renderFocus', () => {
   const viewModel: QuickPickViewModel = {
-    visibleItems: [],
-    value: '',
     cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 300,
     focused: true,
-    uid: 1,
+    height: 300,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 1,
+    value: '',
+    visibleItems: [],
   }
 
   const result = RenderFocus.renderFocus(viewModel)
@@ -24,16 +24,16 @@ test('renderFocus', () => {
 
 test('renders focus when focused is true', () => {
   const viewModel: QuickPickViewModel = {
-    visibleItems: [],
-    value: '',
     cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 300,
     focused: true,
-    uid: 1,
+    height: 300,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 1,
+    value: '',
+    visibleItems: [],
   }
 
   const result = RenderFocus.renderFocus(viewModel)
@@ -43,16 +43,16 @@ test('renders focus when focused is true', () => {
 
 test('renders focus when focused is false', () => {
   const viewModel: QuickPickViewModel = {
-    visibleItems: [],
-    value: '',
     cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 300,
     focused: false,
-    uid: 1,
+    height: 300,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 1,
+    value: '',
+    visibleItems: [],
   }
 
   const result = RenderFocus.renderFocus(viewModel)
@@ -62,16 +62,16 @@ test('renders focus when focused is false', () => {
 
 test('handles different uid', () => {
   const viewModel: QuickPickViewModel = {
-    visibleItems: [],
-    value: '',
     cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 300,
     focused: true,
-    uid: 2,
+    height: 300,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 2,
+    value: '',
+    visibleItems: [],
   }
 
   const result = RenderFocus.renderFocus(viewModel)

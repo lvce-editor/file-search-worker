@@ -11,14 +11,14 @@ export const getNewValueDeleteWordForward = (value: string, selectionStart: numb
     const after = value.slice(startIndex)
     const newValue = before + after
     return {
-      newValue,
       cursorOffset: before.length,
+      newValue,
     }
   }
   const after = value.slice(selectionEnd)
   const newValue = before + after
   return {
-    newValue,
     cursorOffset: selectionStart,
+    newValue,
   }
 }

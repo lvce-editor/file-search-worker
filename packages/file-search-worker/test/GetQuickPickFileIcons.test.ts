@@ -17,8 +17,8 @@ test('getQuickPickFileIcons returns icons and updates cache', async () => {
   setRpc(RendererWorker, mockRpc)
 
   const items = [
-    { direntType: 1, label: 'file1.txt', uri: '/file1.txt', description: '', fileIcon: '', icon: '', matches: [] },
-    { direntType: 1, label: 'file2.txt', uri: '/file2.txt', description: '', fileIcon: '', icon: '', matches: [] },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
   const fileIconCache = { '/file1.txt': 'icon1' }
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)
@@ -39,8 +39,8 @@ test('getQuickPickFileIcons with all icons cached', async () => {
   setRpc(RendererWorker, mockRpc)
 
   const items = [
-    { direntType: 1, label: 'file1.txt', uri: '/file1.txt', description: '', fileIcon: '', icon: '', matches: [] },
-    { direntType: 1, label: 'file2.txt', uri: '/file2.txt', description: '', fileIcon: '', icon: '', matches: [] },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
   const fileIconCache = { '/file1.txt': 'icon1', '/file2.txt': 'icon2' }
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)

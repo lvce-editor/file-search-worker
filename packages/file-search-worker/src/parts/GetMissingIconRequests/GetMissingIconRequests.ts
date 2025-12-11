@@ -11,9 +11,9 @@ export const getMissingIconRequests = (dirents: readonly Dirent[], fileIconCache
     }
     if (!(dirent.path in fileIconCache)) {
       missingRequests.push({
-        type: dirent.type,
         name: dirent.name,
         path: dirent.path,
+        type: dirent.type,
       })
     }
   }

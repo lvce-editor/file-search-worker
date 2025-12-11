@@ -3,36 +3,36 @@ import type { FileIconCache } from '../FileIconCache/FileIconCache.ts'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
 export interface QuickPickState extends List<any> {
-  readonly uid: number
-  readonly state: number
-  readonly picks: readonly ProtoVisibleItem[]
-  readonly recentPicks: readonly any[]
-  readonly recentPickIds: Map<any, any>
-  readonly versionId: number
-  readonly providerId: number
-  readonly warned: any[]
-  readonly maxVisibleItems: number
-  readonly uri: string
-  readonly icons: readonly string[]
+  readonly args: readonly any[]
   readonly cursorOffset: number
-  readonly height: number
-  readonly top: number
-  readonly width: number
+  readonly fileIconCache: FileIconCache
+  readonly focused: boolean
+  readonly focusedIndex: number
   readonly headerHeight: number
+  readonly height: number
+  readonly icons: readonly string[]
+  readonly inputSource: number
   readonly itemHeight: number
   readonly items: readonly ProtoVisibleItem[]
+  readonly maxVisibleItems: number
   readonly minimumSliderSize: number
-  readonly focusedIndex: number
+  readonly picks: readonly ProtoVisibleItem[]
+  readonly platform: number
+  readonly providerId: number
+  readonly recentPickIds: Map<any, any>
+  readonly recentPicks: readonly any[]
+  readonly scrollBarActive: boolean
+  readonly scrollBarHeight: number
+  readonly state: number
+  readonly top: number
+  readonly touchDifference: number
   readonly touchOffsetY: number
   readonly touchTimeStamp: number
-  readonly touchDifference: number
-  readonly scrollBarHeight: number
-  readonly scrollBarActive: boolean
-  readonly platform: number
-  readonly inputSource: number
-  readonly args: readonly any[]
-  readonly focused: boolean
+  readonly uid: number
+  readonly uri: string
   readonly value: string
-  readonly fileIconCache: FileIconCache
+  readonly versionId: number
+  readonly warned: any[]
+  readonly width: number
   readonly workspaceUri: string
 }

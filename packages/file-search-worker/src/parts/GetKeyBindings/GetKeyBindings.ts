@@ -5,34 +5,34 @@ import * as WhenExpression from '../WhenExpression/WhenExpression.ts'
 export const getKeyBindings = (): readonly KeyBinding[] => {
   return [
     {
-      key: KeyCode.Escape,
-      command: 'Viewlet.closeWidget',
       args: ['QuickPick'],
+      command: 'Viewlet.closeWidget',
+      key: KeyCode.Escape,
       when: WhenExpression.FocusQuickPickInput,
     },
     {
-      key: KeyCode.UpArrow,
       command: 'QuickPick.focusPrevious',
+      key: KeyCode.UpArrow,
       when: WhenExpression.FocusQuickPickInput,
     },
     {
-      key: KeyCode.DownArrow,
       command: 'QuickPick.focusNext',
+      key: KeyCode.DownArrow,
       when: WhenExpression.FocusQuickPickInput,
     },
     {
-      key: KeyCode.PageUp,
       command: 'QuickPick.focusFirst',
+      key: KeyCode.PageUp,
       when: WhenExpression.FocusQuickPickInput,
     },
     {
-      key: KeyCode.PageDown,
       command: 'QuickPick.focusLast',
+      key: KeyCode.PageDown,
       when: WhenExpression.FocusQuickPickInput,
     },
     {
-      key: KeyCode.Enter,
       command: 'QuickPick.selectCurrentIndex',
+      key: KeyCode.Enter,
       when: WhenExpression.FocusQuickPickInput,
     },
   ]

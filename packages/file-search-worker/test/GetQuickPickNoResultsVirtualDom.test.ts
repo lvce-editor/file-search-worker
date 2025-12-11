@@ -8,14 +8,14 @@ test('getQuickPickNoResultsVirtualDom', () => {
 
   expect(result.length).toBe(3)
   expect(result[0]).toEqual({
-    type: VirtualDomElements.Div,
-    className: 'QuickPickItem QuickPickItemActive QuickPickStatus',
     childCount: 1,
+    className: 'QuickPickItem QuickPickItemActive QuickPickStatus',
+    type: VirtualDomElements.Div,
   })
   expect(result[1]).toEqual({
-    type: VirtualDomElements.Div,
-    className: ClassNames.Label,
     childCount: 1,
+    className: ClassNames.Label,
+    type: VirtualDomElements.Div,
   })
   expect(result[2].type).toBeDefined()
   expect(typeof result[2].text).toBe('string')

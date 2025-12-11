@@ -15,6 +15,6 @@ export const handleBeforeInput = (
   Assert.number(selectionStart)
   Assert.number(selectionEnd)
   const { value } = state
-  const { newValue, cursorOffset } = BeforeInput.getNewValue(value, inputType, data, selectionStart, selectionEnd)
+  const { cursorOffset, newValue } = BeforeInput.getNewValue(value, inputType, data, selectionStart, selectionEnd)
   return ViewletQuickPickHandleInput.handleInput(state, newValue, cursorOffset, InputSource.User)
 }

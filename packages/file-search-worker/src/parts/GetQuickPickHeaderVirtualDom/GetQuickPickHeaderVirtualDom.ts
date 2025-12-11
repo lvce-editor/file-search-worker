@@ -6,9 +6,9 @@ import * as GetQuickPickInputVirtualDom from '../GetQuickPickInputVirtualDom/Get
 export const getQuickPickHeaderVirtualDom = (): readonly VirtualDomNode[] => {
   return [
     {
-      type: VirtualDomElements.Div,
-      className: ClassNames.QuickPickHeader,
       childCount: 1,
+      className: ClassNames.QuickPickHeader,
+      type: VirtualDomElements.Div,
     },
     GetQuickPickInputVirtualDom.getQuickPickInputVirtualDom(),
   ]

@@ -25,8 +25,8 @@ test('should update cache with new icons for missing requests', () => {
     '/path/to/file1.ts': 'file-icon-1'
   }
   const missingRequests: readonly IconRequest[] = [
-    { type: 1, name: 'file2.ts', path: '/path/to/file2.ts' },
-    { type: 1, name: 'file3.ts', path: '/path/to/file3.ts' }
+    { name: 'file2.ts', path: '/path/to/file2.ts', type: 1 },
+    { name: 'file3.ts', path: '/path/to/file3.ts', type: 1 }
   ]
   const newIcons: readonly string[] = ['new-icon-2', 'new-icon-3']
 
@@ -44,7 +44,7 @@ test('should not modify original cache object', () => {
     '/path/to/file1.ts': 'file-icon-1'
   }
   const missingRequests: readonly IconRequest[] = [
-    { type: 1, name: 'file2.ts', path: '/path/to/file2.ts' }
+    { name: 'file2.ts', path: '/path/to/file2.ts', type: 1 }
   ]
   const newIcons: readonly string[] = ['new-icon-2']
 
@@ -59,8 +59,8 @@ test('should not modify original cache object', () => {
 test('should handle empty cache with new requests', () => {
   const iconCache: FileIconCache = {}
   const missingRequests: readonly IconRequest[] = [
-    { type: 1, name: 'file1.ts', path: '/path/to/file1.ts' },
-    { type: 1, name: 'file2.ts', path: '/path/to/file2.ts' }
+    { name: 'file1.ts', path: '/path/to/file1.ts', type: 1 },
+    { name: 'file2.ts', path: '/path/to/file2.ts', type: 1 }
   ]
   const newIcons: readonly string[] = ['icon-1', 'icon-2']
 
@@ -75,7 +75,7 @@ test('should handle empty cache with new requests', () => {
 test('should handle single request and icon', () => {
   const iconCache: FileIconCache = {}
   const missingRequests: readonly IconRequest[] = [
-    { type: 1, name: 'file.ts', path: '/path/to/file.ts' }
+    { name: 'file.ts', path: '/path/to/file.ts', type: 1 }
   ]
   const newIcons: readonly string[] = ['single-icon']
 

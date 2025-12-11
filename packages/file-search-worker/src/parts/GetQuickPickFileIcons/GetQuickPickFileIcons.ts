@@ -12,9 +12,9 @@ const getPath = (dirent: Dirent): string => {
 
 const toDirent = (pick: ProtoVisibleItem): Dirent => {
   const dirent: Dirent = {
-    type: pick.direntType,
     name: pick.label,
     path: pick.uri,
+    type: pick.direntType,
   }
   return dirent
 }

@@ -5,8 +5,8 @@ import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnVa
 export const selectPick = async (item: any): Promise<SelectPickResult> => {
   const rowIndex = Number.parseInt(item.label)
   const position = {
-    rowIndex,
     columnIndex: 5,
+    rowIndex,
   }
   await Command.execute(/* EditorSetCursor.editorSetCursor */ 'TODO', /* position */ position)
   // TODO put cursor onto that line

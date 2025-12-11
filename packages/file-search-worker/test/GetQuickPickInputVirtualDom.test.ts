@@ -10,21 +10,21 @@ test('getQuickPickInputVirtualDom', () => {
   const result = GetQuickPickInputVirtualDom.getQuickPickInputVirtualDom()
 
   expect(result).toEqual({
-    type: VirtualDomElements.Input,
-    className: ClassNames.InputBox,
-    spellcheck: false,
+    ariaAutoComplete: 'list',
+    ariaExpanded: true,
+    ariaLabel: expect.any(String),
     autocapitalize: 'off',
-    inputType: 'text',
+    autocomplete: 'off',
     childCount: 0,
-    role: AriaRoles.ComboBox,
+    className: ClassNames.InputBox,
+    inputType: 'text',
     name: InputName.QuickPickInput,
     onBeforeInput: DomEventListenerFunctions.HandleBeforeInput,
     onBlur: DomEventListenerFunctions.HandleBlur,
-    onInput: DomEventListenerFunctions.HandleInput,
     onFocus: DomEventListenerFunctions.HandleFocus,
-    ariaLabel: expect.any(String),
-    ariaAutoComplete: 'list',
-    ariaExpanded: true,
-    autocomplete: 'off',
+    onInput: DomEventListenerFunctions.HandleInput,
+    role: AriaRoles.ComboBox,
+    spellcheck: false,
+    type: VirtualDomElements.Input,
   })
 })

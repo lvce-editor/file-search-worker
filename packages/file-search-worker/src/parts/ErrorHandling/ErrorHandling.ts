@@ -12,8 +12,8 @@ export const showErrorDialog = async (error: any): Promise<void> => {
   const errorInfo = {
     code,
     message,
-    stack,
     name,
+    stack,
   }
   await RendererWorker.showErrorDialog(errorInfo)
 }

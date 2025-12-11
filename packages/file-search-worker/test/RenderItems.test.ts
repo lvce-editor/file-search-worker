@@ -4,27 +4,27 @@ import * as RenderItems from '../src/parts/RenderItems/RenderItems.ts'
 
 test('renders items with virtual dom', () => {
   const newState: QuickPickViewModel = {
-    uid: 1,
-    visibleItems: [
-      {
-        label: 'item 1',
-        description: 'desc 1',
-        icon: '',
-        fileIcon: '/test/icon.png',
-        posInSet: 1,
-        setSize: 2,
-        isActive: true,
-        highlights: [],
-      },
-    ],
-    value: '',
     cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 0,
     focused: false,
+    height: 0,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 1,
+    value: '',
+    visibleItems: [
+      {
+        description: 'desc 1',
+        fileIcon: '/test/icon.png',
+        highlights: [],
+        icon: '',
+        isActive: true,
+        label: 'item 1',
+        posInSet: 1,
+        setSize: 2,
+      },
+    ],
   }
   const result = RenderItems.renderItems(newState)
   expect(result[0]).toBe('Viewlet.setDom2')
@@ -33,16 +33,16 @@ test('renders items with virtual dom', () => {
 
 test('renders empty items state', () => {
   const newState: QuickPickViewModel = {
-    uid: 1,
-    visibleItems: [],
-    value: '',
     cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 0,
     focused: false,
+    height: 0,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 0,
     scrollBarTop: 0,
+    uid: 1,
+    value: '',
+    visibleItems: [],
   }
   const result = RenderItems.renderItems(newState)
   expect(result[0]).toBe('Viewlet.setDom2')
@@ -51,27 +51,27 @@ test('renders empty items state', () => {
 
 test('renders items with scroll bar', () => {
   const newState: QuickPickViewModel = {
-    uid: 1,
-    visibleItems: [
-      {
-        label: 'item 1',
-        description: 'desc 1',
-        icon: '',
-        fileIcon: '/test/icon.png',
-        posInSet: 1,
-        setSize: 2,
-        isActive: true,
-        highlights: [],
-      },
-    ],
-    value: '',
     cursorOffset: 0,
-    oldFocusedIndex: 0,
-    newFocusedIndex: 0,
-    height: 0,
     focused: false,
+    height: 0,
+    newFocusedIndex: 0,
+    oldFocusedIndex: 0,
     scrollBarHeight: 100,
     scrollBarTop: 50,
+    uid: 1,
+    value: '',
+    visibleItems: [
+      {
+        description: 'desc 1',
+        fileIcon: '/test/icon.png',
+        highlights: [],
+        icon: '',
+        isActive: true,
+        label: 'item 1',
+        posInSet: 1,
+        setSize: 2,
+      },
+    ],
   }
   const result = RenderItems.renderItems(newState)
   expect(result[0]).toBe('Viewlet.setDom2')

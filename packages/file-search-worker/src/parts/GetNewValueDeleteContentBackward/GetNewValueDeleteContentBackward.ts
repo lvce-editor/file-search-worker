@@ -6,14 +6,14 @@ export const getNewValueDeleteContentBackward = (value: string, selectionStart: 
     const before = value.slice(0, selectionStart - 1)
     const newValue = before + after
     return {
-      newValue,
       cursorOffset: before.length,
+      newValue,
     }
   }
   const before = value.slice(0, selectionStart)
   const newValue = before + after
   return {
-    newValue,
     cursorOffset: selectionStart,
+    newValue,
   }
 }
