@@ -13,9 +13,7 @@ test('returns pick at valid index', () => {
 })
 
 test('returns undefined for index out of bounds', () => {
-  const items: readonly ProtoVisibleItem[] = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
-  ]
+  const items: readonly ProtoVisibleItem[] = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' }]
   const result = GetPick.getPick(items, 5)
   expect(result).toBeUndefined()
 })
@@ -25,9 +23,7 @@ test('throws error if items is not an array', () => {
 })
 
 test('throws error if index is not a number', () => {
-  const items: readonly ProtoVisibleItem[] = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
-  ]
+  const items: readonly ProtoVisibleItem[] = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' }]
   expect(() => GetPick.getPick(items, 'not a number' as any)).toThrow()
 })
 
@@ -37,9 +33,7 @@ test('handles empty array', () => {
 })
 
 test('returns undefined for negative index', () => {
-  const items: readonly ProtoVisibleItem[] = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
-  ]
+  const items: readonly ProtoVisibleItem[] = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' }]
   const result = GetPick.getPick(items, -1)
   expect(result).toBeUndefined()
 })
