@@ -9,6 +9,10 @@ export const selectColorTheme = (): string => {
   return I18NString.i18nString(UiStrings.SelectColorTheme)
 }
 
+export const pressEnterToGoToLine = (): string => {
+  return I18NString.i18nString(UiStrings.PressEnterToGoToLine)
+}
+
 export const typeNameofCommandToRun = (): string => {
   return I18NString.i18nString(UiStrings.TypeNameOfCommandToRun)
 }
