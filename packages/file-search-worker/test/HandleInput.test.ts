@@ -1,13 +1,17 @@
 import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
+import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as HandleInput from '../src/parts/HandleInput/HandleInput.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('returns state unchanged when value is the same', async () => {
-  const state = CreateDefaultState.createDefaultState({ value: 'test' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    value: 'test',
+  }
   const result = await HandleInput.handleInput(state, 'test', 5, InputSource.User)
   expect(result).toBe(state)
 })
@@ -27,7 +31,10 @@ test('calls SetValue.setValue and updates cursorOffset and inputSource', async (
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    value: 'old',
+  }
   const newValue = 'new'
   const cursorOffset = 3
   const inputSource = InputSource.User
@@ -55,7 +62,10 @@ test('uses default inputSource when not provided', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    value: 'old',
+  }
   const newValue = 'new'
   const cursorOffset = 2
 
@@ -81,7 +91,12 @@ test('preserves other state properties from SetValue.setValue result', async () 
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ height: 500, uid: 42, value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    height: 500,
+    uid: 42,
+    value: 'old',
+  }
   const newValue = 'new'
   const cursorOffset = 1
 

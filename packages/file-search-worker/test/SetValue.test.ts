@@ -1,64 +1,56 @@
 import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
+import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SetValue from '../src/parts/SetValue/SetValue.ts'
 
 test('returns same state when value is unchanged', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: () => {
-      throw new Error('unexpected invoke call')
-    },
-  })
-  setRpc(RpcId.RendererWorker, mockRpc)
+  RendererWorker.registerMockRpc({})
 
-  const state = CreateDefaultState.createDefaultState({ value: 'test' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    value: 'test',
+  }
   const result = await SetValue.setValue(state, 'test')
 
   expect(result).toBe(state)
 })
 
 test('updates value and processes picks', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return ['newTheme', 'anotherNewTheme']
-      }
-      if (method === 'QuickPickProvider.provide') {
-        return [
-          {
-            description: '',
-            direntType: 1,
-            fileIcon: '',
-            icon: '',
-            label: 'file1.txt',
-            matches: [],
-            uri: '/file1.txt',
-          },
-          {
-            description: '',
-            direntType: 1,
-            fileIcon: '',
-            icon: '',
-            label: 'file2.txt',
-            matches: [],
-            uri: '/file2.txt',
-          },
-        ]
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => ['newTheme', 'anotherNewTheme'],
+    'QuickPickProvider.provide': () => [
+      {
+        description: '',
+        direntType: 1,
+        fileIcon: '',
+        icon: '',
+        label: 'file1.txt',
+        matches: [],
+        uri: '/file1.txt',
+      },
+      {
+        description: '',
+        direntType: 1,
+        fileIcon: '',
+        icon: '',
+        label: 'file2.txt',
+        matches: [],
+        uri: '/file2.txt',
+      },
+    ],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    providerId: 0,
+    value: 'old',
+  }
   const result = await SetValue.setValue(state, 'new')
 
   expect(result.value).toBe('new')
@@ -69,24 +61,18 @@ test('updates value and processes picks', async () => {
 })
 
 test('sets focusedIndex to -1 when no items', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'QuickPickProvider.provide') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => [],
+    'QuickPickProvider.provide': () => [],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    providerId: 0,
+    value: 'old',
+  }
   const result = await SetValue.setValue(state, 'new')
 
   expect(result.value).toBe('new')
@@ -95,34 +81,29 @@ test('sets focusedIndex to -1 when no items', async () => {
 })
 
 test('updates fileIconCache', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return ['theme1']
-      }
-      if (method === 'QuickPickProvider.provide') {
-        return [
-          {
-            description: '',
-            direntType: 1,
-            fileIcon: '',
-            icon: '',
-            label: 'file1.txt',
-            matches: [],
-            uri: '/file1.txt',
-          },
-        ]
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => ['theme1'],
+    'QuickPickProvider.provide': () => [
+      {
+        description: '',
+        direntType: 1,
+        fileIcon: '',
+        icon: '',
+        label: 'file1.txt',
+        matches: [],
+        uri: '/file1.txt',
+      },
+    ],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ fileIconCache: {}, providerId: 0, value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    fileIconCache: {},
+    providerId: 0,
+    value: 'old',
+  }
   const result = await SetValue.setValue(state, 'new')
 
   expect(result.fileIconCache).toBeDefined()
@@ -130,37 +111,29 @@ test('updates fileIconCache', async () => {
 })
 
 test('calculates finalDeltaY and listHeight', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return Array.from({ length: 10 }, (_, i) => `newTheme${i}`)
-      }
-      if (method === 'QuickPickProvider.provide') {
-        return Array.from({ length: 10 }, (_, i) => ({
-          description: '',
-          direntType: 1,
-          fileIcon: '',
-          icon: '',
-          label: `file${i}.txt`,
-          matches: [],
-          uri: `/file${i}.txt`,
-        }))
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => Array.from({ length: 10 }, (_, i) => `newTheme${i}`),
+    'QuickPickProvider.provide': () =>
+      Array.from({ length: 10 }, (_, i) => ({
+        description: '',
+        direntType: 1,
+        fileIcon: '',
+        icon: '',
+        label: `file${i}.txt`,
+        matches: [],
+        uri: `/file${i}.txt`,
+      })),
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     height: 300,
     itemHeight: 30,
     providerId: 0,
     value: 'old',
-  })
+  }
   const result = await SetValue.setValue(state, 'new')
 
   expect(typeof result.finalDeltaY).toBe('number')
@@ -168,43 +141,37 @@ test('calculates finalDeltaY and listHeight', async () => {
 })
 
 test('filters items based on filterValue', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return ['testTheme', 'otherTheme']
-      }
-      if (method === 'QuickPickProvider.provide') {
-        return [
-          {
-            description: '',
-            direntType: 1,
-            fileIcon: '',
-            icon: '',
-            label: 'test.txt',
-            matches: [],
-            uri: '/test.txt',
-          },
-          {
-            description: '',
-            direntType: 1,
-            fileIcon: '',
-            icon: '',
-            label: 'other.txt',
-            matches: [],
-            uri: '/other.txt',
-          },
-        ]
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => ['testTheme', 'otherTheme'],
+    'QuickPickProvider.provide': () => [
+      {
+        description: '',
+        direntType: 1,
+        fileIcon: '',
+        icon: '',
+        label: 'test.txt',
+        matches: [],
+        uri: '/test.txt',
+      },
+      {
+        description: '',
+        direntType: 1,
+        fileIcon: '',
+        icon: '',
+        label: 'other.txt',
+        matches: [],
+        uri: '/other.txt',
+      },
+    ],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: '' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    providerId: 0,
+    value: '',
+  }
   const result = await SetValue.setValue(state, 'test')
 
   expect(result.value).toBe('test')
@@ -212,24 +179,18 @@ test('filters items based on filterValue', async () => {
 })
 
 test('handles empty string value', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'QuickPickProvider.provide') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => [],
+    'QuickPickProvider.provide': () => [],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    providerId: 0,
+    value: 'old',
+  }
   const result = await SetValue.setValue(state, '')
 
   expect(result.value).toBe('')
@@ -264,13 +225,14 @@ test('preserves other state properties', async () => {
   })
   setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     height: 400,
     providerId: 0,
     uid: 42,
     value: 'old',
     width: 800,
-  })
+  }
   const result = await SetValue.setValue(state, 'new')
 
   expect(result.uid).toBe(42)

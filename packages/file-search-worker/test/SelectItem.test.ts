@@ -1,10 +1,9 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
+import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
 
 test('selectItem returns state when label is not found', async () => {
@@ -19,12 +18,13 @@ test('selectItem returns state when label is not found', async () => {
       uri: '',
     },
   ]
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     items,
     providerId: QuickPickEntryId.Commands,
     uid: 123,
     value: '>',
-  })
+  }
   const result = await selectItem(state, 'nonexistent')
   expect(result).toBe(state)
 })
@@ -32,15 +32,11 @@ test('selectItem returns state when label is not found', async () => {
 test('selectItem calls selectIndex with correct index when label is found', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'Viewlet.closeWidget') {
-        closeWidgetCalled = true
-      }
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Viewlet.closeWidget': () => {
+      closeWidgetCalled = true
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {
@@ -74,12 +70,13 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
       uri: '',
     } as any,
   ]
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     items,
     providerId: QuickPickEntryId.Commands,
     uid: 123,
     value: '>',
-  })
+  }
   const result = await selectItem(state, 'second')
 
   expect(closeWidgetCalled).toBe(true)
@@ -88,12 +85,13 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
 
 test('selectItem handles empty items array', async () => {
   const items: ProtoVisibleItem[] = []
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     items,
     providerId: QuickPickEntryId.Commands,
     uid: 123,
     value: '>',
-  })
+  }
   const result = await selectItem(state, 'test')
   expect(result).toBe(state)
 })
