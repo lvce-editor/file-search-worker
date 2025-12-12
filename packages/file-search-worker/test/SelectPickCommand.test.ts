@@ -49,15 +49,9 @@ test('selectPickBuiltin returns Hide when shouldHide returns true', async () => 
 })
 
 test('selectPickBuiltin handles item without args', async () => {
-  let invokedArgs: readonly unknown[] | undefined
-
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      invokedArgs = args
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'AutoUpdater.checkForUpdates': () => {},
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -72,22 +66,14 @@ test('selectPickBuiltin handles item without args', async () => {
 
   const result = await selectPick(pick)
 
-  expect(invokedArgs).toEqual([])
+  expect(mockRpc.invocations).toEqual([['AutoUpdater.checkForUpdates']])
   expect(result.command).toBe(QuickPickReturnValue.KeepOpen)
 })
 
 test('selectPickExtension calls ExtensionHost.executeCommand with id without ext. prefix', async () => {
-  let invokedMethod: string | undefined
-  let invokedArgs: readonly unknown[] | undefined
-
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      invokedMethod = method
-      invokedArgs = args
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ExtensionHost.executeCommand': () => {},
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -102,30 +88,17 @@ test('selectPickExtension calls ExtensionHost.executeCommand with id without ext
 
   const result = await selectPick(pick)
 
-  expect(invokedMethod).toBe('ExtensionHost.executeCommand')
-  expect(invokedArgs).toEqual(['my-extension-command'])
+  expect(mockRpc.invocations).toEqual([['ExtensionHost.executeCommand', 'my-extension-command']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
 test('selectPickExtension handles errors and shows error dialog', async () => {
-  let showErrorDialogCalled = false
-  let errorInfo: any
-
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      if (method === 'ExtensionHost.executeCommand') {
-        throw new Error('Test error')
-      }
-      if (method === 'RendererWorker.showErrorDialog' || method === 'ErrorHandling.showErrorDialog') {
-        showErrorDialogCalled = true
-        errorInfo = args[0]
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ExtensionHost.executeCommand': () => {
+      throw new Error('Test error')
     },
+    'ErrorHandling.showErrorDialog': () => {},
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -140,7 +113,8 @@ test('selectPickExtension handles errors and shows error dialog', async () => {
 
   const result = await selectPick(pick)
 
-  expect(showErrorDialogCalled).toBe(true)
-  expect(errorInfo).toBeDefined()
+  expect(mockRpc.invocations.length).toBeGreaterThanOrEqual(2)
+  expect(mockRpc.invocations[0]).toEqual(['ExtensionHost.executeCommand', 'failing-command'])
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'ErrorHandling.showErrorDialog')).toBe(true)
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
