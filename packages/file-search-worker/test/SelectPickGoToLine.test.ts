@@ -7,18 +7,10 @@ import * as SelectPickGoToLine from '../src/parts/SelectPickGoToLine/SelectPickG
 test('selectPick with ::value parses column and navigates to position', async () => {
   const editorId = 123
   const lines = ['line 1', 'line 2', 'line 3']
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
-  let handleFocusCalled = false
 
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
-    'Editor.handleFocus': () => {
-      handleFocusCalled = true
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
+    'Editor.handleFocus': () => {},
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
@@ -38,23 +30,20 @@ test('selectPick with ::value parses column and navigates to position', async ()
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(1)
-  expect(capturedColumnIndex).toBe(3)
-  expect(handleFocusCalled).toBe(true)
+  expect(mockRpc.invocations).toEqual([
+    ['GetActiveEditor.getActiveEditorId'],
+    ['Editor.cursorSet', 1, 3],
+    ['Editor.handleFocus'],
+  ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
 test('selectPick with ::value handles column at newline', async () => {
   const editorId = 456
   const lines = ['line 1', 'line 2']
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
 
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
@@ -75,22 +64,20 @@ test('selectPick with ::value handles column at newline', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(1)
-  expect(capturedColumnIndex).toBe(0)
+  expect(mockRpc.invocations).toEqual([
+    ['GetActiveEditor.getActiveEditorId'],
+    ['Editor.cursorSet', 1, 0],
+    ['Editor.handleFocus'],
+  ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
 test('selectPick with ::value handles column 0', async () => {
   const editorId = 789
   const lines = ['line 1']
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
 
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
@@ -111,8 +98,11 @@ test('selectPick with ::value handles column 0', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(0)
-  expect(capturedColumnIndex).toBe(0)
+  expect(mockRpc.invocations).toEqual([
+    ['GetActiveEditor.getActiveEditorId'],
+    ['Editor.cursorSet', 0, 0],
+    ['Editor.handleFocus'],
+  ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
