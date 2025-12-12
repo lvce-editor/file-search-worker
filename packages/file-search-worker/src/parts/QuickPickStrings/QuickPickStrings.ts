@@ -11,8 +11,8 @@ export const selectColorTheme = (): string => {
 
 export const pressEnterToGoToLine = (row: number, column: number): string => {
   return I18NString.i18nString(UiStrings.PressEnterToGoToLine, {
-    PH0: row,
-    PH1: column,
+    PH1: row,
+    PH2: column,
   })
 }
 
