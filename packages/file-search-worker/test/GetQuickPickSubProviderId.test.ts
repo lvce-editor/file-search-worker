@@ -57,3 +57,4 @@ test('returns id when id is Custom regardless of prefix', () => {
   const result = GetQuickPickSubProviderId.getQuickPickSubProviderId(QuickPickEntryId.Custom, QuickPickPrefix.Symbol)
   expect(result).toBe(QuickPickEntryId.Custom)
 })
+
