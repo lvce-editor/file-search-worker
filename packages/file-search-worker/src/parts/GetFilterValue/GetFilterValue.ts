@@ -19,7 +19,7 @@ const getValueGoToLine = (value: string): string => {
   if (value.startsWith('::')) {
     return value.slice(2)
   }
-  return value.slice(2)
+  return value.slice(1)
 }
 
 const getFn = (id: number): Fn => {
@@ -34,7 +34,10 @@ const getFn = (id: number): Fn => {
   }
 }
 
-export const getFilterValue = (id: number, value: string): string => {
+export const getFilterValue = (id: number, subId: number, value: string): string => {
+  if (subId === QuickPickEntryId.GoToLine) {
+    return getValueGoToLine(value)
+  }
   const fn = getFn(id)
   const filterValue = fn(value)
   return filterValue
