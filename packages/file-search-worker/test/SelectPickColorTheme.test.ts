@@ -62,3 +62,4 @@ test('selectPick handles different color theme labels', async () => {
   expect(invokedArgs).toEqual(['light-plus'])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
+

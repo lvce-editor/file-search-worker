@@ -46,3 +46,4 @@ test('returns true for item with no id', () => {
   const result = ShouldHide.shouldHide({})
   expect(result).toBe(true)
 })
+
