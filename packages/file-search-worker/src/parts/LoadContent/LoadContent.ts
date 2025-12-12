@@ -21,7 +21,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(id, prefix)
   const newPicks = await GetPicks.getPicks(subId, value, args)
   Assert.array(newPicks)
-  const filterValue = GetFilterValue.getFilterValue(id, value)
+  const filterValue = GetFilterValue.getFilterValue(id, subId, value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
   const minLineY = 0
   const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)

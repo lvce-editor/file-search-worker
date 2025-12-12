@@ -18,7 +18,7 @@ export const setValue = async (state: QuickPickState, newValue: string): Promise
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(newValue)
   const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(providerId, prefix)
   const newPicks = await GetPicks.getPicks(subId, newValue, args)
-  const filterValue = GetFilterValue.getFilterValue(providerId, newValue)
+  const filterValue = GetFilterValue.getFilterValue(providerId, subId, newValue)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
   const focusedIndex = items.length === 0 ? -1 : 0
   const sliced = items.slice(minLineY, maxLineY)
