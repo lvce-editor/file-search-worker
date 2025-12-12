@@ -5,8 +5,8 @@ import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPi
 import { selectPick } from '../src/parts/SelectPickCommand/SelectPickCommand.ts'
 
 interface CommandItem extends ProtoVisibleItem {
-  readonly id: string
   readonly args?: readonly unknown[]
+  readonly id: string
 }
 
 test('selectPickBuiltin calls RendererWorker.invoke with item id and args', async () => {

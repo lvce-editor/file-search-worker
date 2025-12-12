@@ -7,8 +7,8 @@ import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryI
 import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
 
 interface CommandItem extends ProtoVisibleItem {
-  readonly id: string
   readonly args?: readonly unknown[]
+  readonly id: string
 }
 
 test('selectItem returns state when label is not found', async () => {
@@ -38,10 +38,10 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
   let closeWidgetCalled = false
 
   const mockRpc = RendererWorker.registerMockRpc({
+    'test-command': () => {},
     'Viewlet.closeWidget': () => {
       closeWidgetCalled = true
     },
-    'test-command': () => {},
   })
 
   const items: ProtoVisibleItem[] = [
