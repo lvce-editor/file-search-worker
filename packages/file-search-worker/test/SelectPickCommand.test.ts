@@ -1,23 +1,13 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectPick } from '../src/parts/SelectPickCommand/SelectPickCommand.ts'
 
 test('selectPickBuiltin calls RendererWorker.invoke with item id and args', async () => {
-  let invokedMethod: string | undefined
-  let invokedArgs: readonly unknown[] | undefined
-
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      invokedMethod = method
-      invokedArgs = args
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'AutoUpdater.checkForUpdates': () => {},
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     args: ['arg1', 'arg2'],
@@ -33,17 +23,14 @@ test('selectPickBuiltin calls RendererWorker.invoke with item id and args', asyn
 
   const result = await selectPick(pick)
 
-  expect(invokedMethod).toBe('AutoUpdater.checkForUpdates')
-  expect(invokedArgs).toEqual(['arg1', 'arg2'])
+  expect(mockRpc.invocations).toEqual([['AutoUpdater.checkForUpdates', 'arg1', 'arg2']])
   expect(result.command).toBe(QuickPickReturnValue.KeepOpen)
 })
 
 test('selectPickBuiltin returns Hide when shouldHide returns true', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async () => {},
+  const mockRpc = RendererWorker.registerMockRpc({
+    'test-command': () => {},
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
