@@ -33,4 +33,3 @@ test('selectPick returns Hide command for different pick items', async () => {
 
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
-

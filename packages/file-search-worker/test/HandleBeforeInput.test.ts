@@ -6,7 +6,7 @@ import * as InputEventType from '../src/parts/InputEventType/InputEventType.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 
 test('inserts text and updates state', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -18,10 +18,11 @@ test('inserts text and updates state', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('replaces selected text', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -33,10 +34,11 @@ test('replaces selected text', async () => {
   expect(result.value).toBe('hi world')
   expect(result.cursorOffset).toBe(2)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('deletes character backward', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -48,10 +50,11 @@ test('deletes character backward', async () => {
   expect(result.value).toBe('hell')
   expect(result.cursorOffset).toBe(4)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('deletes character forward', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -63,10 +66,11 @@ test('deletes character forward', async () => {
   expect(result.value).toBe('ello')
   expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('deletes word backward', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -78,10 +82,11 @@ test('deletes word backward', async () => {
   expect(result.value).toBe('hello')
   expect(result.cursorOffset).toBe(5)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('deletes word forward', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -93,10 +98,11 @@ test('deletes word forward', async () => {
   expect(result.value).toBe(' world')
   expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('handles composition text', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -108,10 +114,11 @@ test('handles composition text', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('handles line break', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -123,10 +130,11 @@ test('handles line break', async () => {
   expect(result.value).toBe('hello\nworld')
   expect(result.cursorOffset).toBe(5)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([])
 })
 
 test('handles insert from paste', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -138,10 +146,11 @@ test('handles insert from paste', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('preserves other state properties', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -160,6 +169,7 @@ test('preserves other state properties', async () => {
   expect(result.height).toBe(500)
   expect(result.value).toBe('oldnew')
   expect(result.inputSource).toBe(InputSource.User)
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('throws error for invalid inputType', async () => {
