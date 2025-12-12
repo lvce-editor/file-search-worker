@@ -1,25 +1,16 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetPicksCommand from '../src/parts/GetPicksCommand/GetPicksCommand.ts'
 import * as MenuEntriesState from '../src/parts/MenuEntriesState/MenuEntriesState.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getPicks returns builtin picks', async () => {
   const builtinPicks = [
     { id: 'command1', label: 'Command 1' },
     { id: 'command2', label: 'Command 2' },
   ]
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        return builtinPicks
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -44,19 +35,10 @@ test('getPicks returns extension picks with ext prefix', async () => {
     { id: 'ext.command1', label: 'Extension Command 1' },
     { args: ['arg1'], id: 'ext.command2', label: 'Extension Command 2' },
   ]
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        return []
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        return extensionPicks
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => [],
+    'ExtensionHost.getCommands': () => extensionPicks,
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -79,19 +61,10 @@ test('getPicks returns extension picks with ext prefix', async () => {
 test('getPicks combines builtin and extension picks', async () => {
   const builtinPicks = [{ id: 'builtin1', label: 'Builtin 1' }]
   const extensionPicks = [{ id: 'ext1', label: 'Extension 1' }]
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        return builtinPicks
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        return extensionPicks
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
+    'ExtensionHost.getCommands': () => extensionPicks,
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -102,19 +75,10 @@ test('getPicks combines builtin and extension picks', async () => {
 
 test('getPicks handles missing label in extension picks', async () => {
   const extensionPicks = [{ id: 'command1' }]
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        return []
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        return extensionPicks
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => [],
+    'ExtensionHost.getCommands': () => extensionPicks,
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -124,19 +88,10 @@ test('getPicks handles missing label in extension picks', async () => {
 
 test('getPicks handles missing id in extension picks', async () => {
   const extensionPicks = [{ label: 'Command without id' }]
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        return []
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        return extensionPicks
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => [],
+    'ExtensionHost.getCommands': () => extensionPicks,
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -147,19 +102,12 @@ test('getPicks handles missing id in extension picks', async () => {
 
 test('getPicks handles extension picks error', async () => {
   const builtinPicks = [{ id: 'builtin1', label: 'Builtin 1' }]
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        return builtinPicks
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        throw new Error('Extension host error')
-      }
-      throw new Error(`unexpected method ${method}`)
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
+    'ExtensionHost.getCommands': () => {
+      throw new Error('Extension host error')
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -169,19 +117,10 @@ test('getPicks handles extension picks error', async () => {
 
 test('getPicks handles null extension picks', async () => {
   const builtinPicks = [{ id: 'builtin1', label: 'Builtin 1' }]
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        return builtinPicks
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        return null
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
+    'ExtensionHost.getCommands': () => null,
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -192,19 +131,12 @@ test('getPicks handles null extension picks', async () => {
 test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fails', async () => {
   MenuEntriesState.clear()
   MenuEntriesState.add([{ id: 'state1', label: 'State 1' }])
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Layout.getAllQuickPickMenuEntries') {
-        throw new Error('Layout error')
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        return []
-      }
-      throw new Error(`unexpected method ${method}`)
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Layout.getAllQuickPickMenuEntries': () => {
+      throw new Error('Layout error')
     },
+    'ExtensionHost.getCommands': () => [],
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 

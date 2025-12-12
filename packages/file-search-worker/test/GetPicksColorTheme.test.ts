@@ -1,21 +1,12 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetPicksColorTheme from '../src/parts/GetPicksColorTheme/GetPicksColorTheme.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getPicks returns color theme names as picks', async () => {
   const colorThemeNames = ['dark-plus', 'light-plus', 'monokai']
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return colorThemeNames
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => colorThemeNames,
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksColorTheme.getPicks('')
 
@@ -34,16 +25,9 @@ test('getPicks returns color theme names as picks', async () => {
 })
 
 test('getPicks returns empty array when no color themes', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => [],
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksColorTheme.getPicks('search')
 

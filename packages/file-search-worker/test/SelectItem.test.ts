@@ -2,21 +2,10 @@ import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
-import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
-
-const createMockState = (items: ProtoVisibleItem[]): QuickPickState => {
-  return {
-    ...CreateDefaultState.createDefaultState(),
-    items,
-    providerId: QuickPickEntryId.Commands,
-    uid: 123,
-    value: '>',
-  }
-}
 
 test('selectItem returns state when label is not found', async () => {
   const items: ProtoVisibleItem[] = [
@@ -30,7 +19,12 @@ test('selectItem returns state when label is not found', async () => {
       uri: '',
     },
   ]
-  const state = createMockState(items)
+  const state = CreateDefaultState.createDefaultState({
+    items,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  })
   const result = await selectItem(state, 'nonexistent')
   expect(result).toBe(state)
 })
@@ -80,7 +74,12 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
       uri: '',
     } as any,
   ]
-  const state = createMockState(items)
+  const state = CreateDefaultState.createDefaultState({
+    items,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  })
   const result = await selectItem(state, 'second')
 
   expect(closeWidgetCalled).toBe(true)
@@ -89,7 +88,12 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
 
 test('selectItem handles empty items array', async () => {
   const items: ProtoVisibleItem[] = []
-  const state = createMockState(items)
+  const state = CreateDefaultState.createDefaultState({
+    items,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  })
   const result = await selectItem(state, 'test')
   expect(result).toBe(state)
 })

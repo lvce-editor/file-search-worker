@@ -2,26 +2,20 @@ import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
-import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
 
-const createMockState = (items: ProtoVisibleItem[], minLineY = 0, providerId = QuickPickEntryId.Commands, value = ''): QuickPickState => {
-  return {
-    ...CreateDefaultState.createDefaultState(),
-    items,
-    minLineY,
-    providerId,
-    uid: 123,
-    value,
-  }
-}
-
 test('selectIndex returns state when pick is not found', async () => {
   const items: ProtoVisibleItem[] = []
-  const state = createMockState(items, 0)
+  const state = CreateDefaultState.createDefaultState({
+    items,
+    minLineY: 0,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '',
+  })
   const result = await selectIndex(state, 0)
   expect(result).toBe(state)
 })
@@ -53,7 +47,13 @@ test('selectIndex calls select function and returns state for Hide command', asy
       uri: '',
     } as any,
   ]
-  const state = createMockState(items, 0, QuickPickEntryId.Commands, '>')
+  const state = CreateDefaultState.createDefaultState({
+    items,
+    minLineY: 0,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  })
   const result = await selectIndex(state, 0)
 
   expect(closeWidgetCalled).toBe(true)
@@ -80,7 +80,13 @@ test('selectIndex handles default command case', async () => {
       uri: '',
     } as any,
   ]
-  const state = createMockState(items, 0, QuickPickEntryId.Commands, '>')
+  const state = CreateDefaultState.createDefaultState({
+    items,
+    minLineY: 0,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  })
   const result = await selectIndex(state, 0)
 
   expect(result).toBe(state)
@@ -161,7 +167,13 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       uri: '',
     } as any,
   ]
-  const state = createMockState(items, 5, QuickPickEntryId.Commands, '>')
+  const state = CreateDefaultState.createDefaultState({
+    items,
+    minLineY: 5,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  })
   const result = await selectIndex(state, 0)
 
   expect(closeWidgetCalled).toBe(true)
