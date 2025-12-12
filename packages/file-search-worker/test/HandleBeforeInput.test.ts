@@ -1,26 +1,16 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as HandleBeforeInput from '../src/parts/HandleBeforeInput/HandleBeforeInput.ts'
 import * as InputEventType from '../src/parts/InputEventType/InputEventType.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('inserts text and updates state', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, ' world', 5, 5)
@@ -31,19 +21,11 @@ test('inserts text and updates state', async () => {
 })
 
 test('replaces selected text', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello world' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, 'hi', 0, 5)
