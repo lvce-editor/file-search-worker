@@ -1,13 +1,6 @@
-import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
-
-const getText = async (): Promise<string> => {
-  // TODO
-  const id = await RendererWorker.getActiveEditorId()
-  const lines = await EditorWorker.getLines(id)
-  return lines.join('\n')
-}
+import { getText } from '../GetText/GetText.ts'
 
 const toPick = (column: number): ProtoVisibleItem => {
   return {
@@ -24,7 +17,7 @@ const toPick = (column: number): ProtoVisibleItem => {
 export const getPicks = async (value: string): Promise<readonly ProtoVisibleItem[]> => {
   if (value.startsWith('::')) {
     const text = await getText()
-    const columns = [...Array(text.length)]
+    const columns = [...Array(text.length).fill(0)].map((item, index) => index)
     const picks: readonly ProtoVisibleItem[] = columns.map(toPick)
     return picks
   }
