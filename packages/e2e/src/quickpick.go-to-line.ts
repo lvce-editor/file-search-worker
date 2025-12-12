@@ -15,5 +15,5 @@ export const test: Test = async ({ Editor, FileSystem, Main, QuickPick, Workspac
   await QuickPick.selectItem('2')
 
   // assert
-  await Editor.shouldHaveSelections(new Uint32Array([2, 5, 2, 5]))
+  await Editor.shouldHaveSelections(new Uint32Array([2, 0, 2, 0]))
 }
