@@ -2,9 +2,10 @@ import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
 import { getPosition } from '../GetPosition/GetPosition.ts'
 import { getText } from '../GetText/GetText.ts'
+import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 
 export const getPicks = async (value: string): Promise<readonly ProtoVisibleItem[]> => {
-  if (value === '::') {
+  if (value === QuickPickPrefix.GoToColumn) {
     const text = await getText()
     return [
       {
@@ -18,7 +19,7 @@ export const getPicks = async (value: string): Promise<readonly ProtoVisibleItem
       },
     ]
   }
-  if (value.startsWith('::')) {
+  if (value.startsWith(QuickPickPrefix.GoToColumn)) {
     const columnString = value.slice(2)
     const wantedColumn = Number.parseInt(columnString, 10)
     const text = await getText()
