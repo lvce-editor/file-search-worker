@@ -69,12 +69,12 @@ test('calculates focused indices correctly', () => {
     ...CreateDefaultState.createDefaultState(),
     focusedIndex: 5,
     minLineY: 2,
-  })
+  }
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
     focusedIndex: 8,
     minLineY: 3,
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.oldFocusedIndex).toBe(3)
   expect(viewModel.newFocusedIndex).toBe(5)
@@ -100,7 +100,7 @@ test('calculates scroll bar height when content exceeds list height', () => {
     itemHeight: 30,
     items,
     minimumSliderSize: 20,
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.scrollBarHeight).toBeGreaterThan(0)
 })
@@ -124,13 +124,15 @@ test('calculates scroll bar height as 0 when content fits', () => {
     height: 300,
     itemHeight: 30,
     items,
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.scrollBarHeight).toBe(0)
 })
 
 test('calculates scroll bar top position', () => {
-  const oldState = CreateDefaultState.createDefaultState()
+  const oldState: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+  }
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
     deltaY: 100,
@@ -138,14 +140,16 @@ test('calculates scroll bar top position', () => {
     headerHeight: 38,
     height: 300,
     scrollBarHeight: 50,
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.scrollBarTop).toBeGreaterThanOrEqual(0)
   expect(typeof viewModel.scrollBarTop).toBe('number')
 })
 
 test('rounds scroll bar top position', () => {
-  const oldState = CreateDefaultState.createDefaultState()
+  const oldState: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+  }
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
     deltaY: 50,
@@ -153,13 +157,15 @@ test('rounds scroll bar top position', () => {
     headerHeight: 38,
     height: 300,
     scrollBarHeight: 40,
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(Number.isInteger(viewModel.scrollBarTop)).toBe(true)
 })
 
 test('preserves state properties in view model', () => {
-  const oldState = CreateDefaultState.createDefaultState()
+  const oldState: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+  }
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
     cursorOffset: 5,
@@ -167,7 +173,7 @@ test('preserves state properties in view model', () => {
     height: 400,
     uid: 2,
     value: 'test value',
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.cursorOffset).toBe(5)
   expect(viewModel.focused).toBe(true)
@@ -197,7 +203,7 @@ test('handles visible items with different minLineY and maxLineY', () => {
     items,
     maxLineY: 7,
     minLineY: 3,
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.visibleItems).toHaveLength(4)
   expect(viewModel.newFocusedIndex).toBe(2)
@@ -224,17 +230,19 @@ test('handles focused item in visible range', () => {
     items,
     maxLineY: 5,
     minLineY: 0,
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.visibleItems[4].isActive).toBe(true)
 })
 
 test('handles empty items array', () => {
-  const oldState = CreateDefaultState.createDefaultState()
+  const oldState: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+  }
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
     items: [],
-  })
+  }
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.visibleItems).toEqual([])
   expect(viewModel.scrollBarHeight).toBe(0)

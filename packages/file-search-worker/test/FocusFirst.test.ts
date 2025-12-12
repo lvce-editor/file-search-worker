@@ -1,22 +1,14 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import { focusFirst } from '../src/parts/FocusFirst/FocusFirst.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('focusFirst focuses the first item', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },

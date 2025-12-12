@@ -56,6 +56,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
   expect(closeWidgetCalled).toBe(true)
   expect(closeWidgetId).toBe(123)
   expect(result).toBe(state)
+  expect(mockRpc.invocations).toEqual([['Viewlet.closeWidget', 123]])
 })
 
 test('selectIndex handles default command case', async () => {

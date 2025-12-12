@@ -261,7 +261,7 @@ test('loadContent preserves args', async () => {
     ...CreateDefaultState.createDefaultState(),
     args,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -312,7 +312,7 @@ test('loadContent sets focused to true', async () => {
     args: [null, customItems],
     focused: false,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -338,7 +338,7 @@ test('loadContent sets focusedIndex to 0', async () => {
     args: [null, customItems],
     focusedIndex: 5,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -364,7 +364,7 @@ test('loadContent sets inputSource to Script', async () => {
     args: [null, customItems],
     inputSource: InputSource.User,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -390,7 +390,7 @@ test('loadContent sets state to Finished', async () => {
     args: [null, customItems],
     state: QuickPickOpenState.Default,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -475,7 +475,7 @@ test('loadContent calculates finalDeltaY for long lists', async () => {
     height: 200,
     itemHeight: 30,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -533,7 +533,7 @@ test('loadContent preserves other state properties', async () => {
     uri: QuickPickEntryUri.Custom,
     width: 800,
     workspaceUri: '/workspace',
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -590,7 +590,7 @@ test('loadContent handles Recent URI', async () => {
     ...CreateDefaultState.createDefaultState(),
     args: [],
     uri: QuickPickEntryUri.Recent,
-  })
+  }
 
   const result = await loadContent(state)
 

@@ -1,4 +1,5 @@
 import { expect, test } from '@jest/globals'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
@@ -8,7 +9,7 @@ import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SetValue from '../src/parts/SetValue/SetValue.ts'
 
 test('returns same state when value is unchanged', async () => {
-  RendererWorker.registerMockRpc({})
+  const mockRpc = RendererWorker.registerMockRpc({})
 
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
@@ -17,10 +18,11 @@ test('returns same state when value is unchanged', async () => {
   const result = await SetValue.setValue(state, 'test')
 
   expect(result).toBe(state)
+  expect(mockRpc.invocations).toEqual([])
 })
 
 test('updates value and processes picks', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['newTheme', 'anotherNewTheme'],
     'QuickPickProvider.provide': () => [
       {
@@ -58,6 +60,8 @@ test('updates value and processes picks', async () => {
   expect(result.items.length).toBeGreaterThanOrEqual(0)
   expect(result.focusedIndex).toBe(result.items.length > 0 ? 0 : -1)
   expect(result.picks.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide')).toBe(true)
 })
 
 test('sets focusedIndex to -1 when no items', async () => {
@@ -78,6 +82,8 @@ test('sets focusedIndex to -1 when no items', async () => {
   expect(result.value).toBe('new')
   expect(result.focusedIndex).toBe(-1)
   expect(result.items).toEqual([])
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide')).toBe(true)
 })
 
 test('updates fileIconCache', async () => {
@@ -108,6 +114,9 @@ test('updates fileIconCache', async () => {
 
   expect(result.fileIconCache).toBeDefined()
   expect(result.icons.length).toBeGreaterThanOrEqual(0)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide')).toBe(true)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'IconTheme.getFileIcon')).toBe(true)
 })
 
 test('calculates finalDeltaY and listHeight', async () => {
@@ -138,6 +147,8 @@ test('calculates finalDeltaY and listHeight', async () => {
 
   expect(typeof result.finalDeltaY).toBe('number')
   expect(result.items.length).toBeGreaterThanOrEqual(0)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide')).toBe(true)
 })
 
 test('filters items based on filterValue', async () => {
@@ -176,6 +187,8 @@ test('filters items based on filterValue', async () => {
 
   expect(result.value).toBe('test')
   expect(result.items.length).toBeGreaterThanOrEqual(0)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide')).toBe(true)
 })
 
 test('handles empty string value', async () => {
@@ -195,35 +208,27 @@ test('handles empty string value', async () => {
 
   expect(result.value).toBe('')
   expect(result.focusedIndex).toBe(-1)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide')).toBe(true)
 })
 
 test('preserves other state properties', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return ['theme1']
-      }
-      if (method === 'QuickPickProvider.provide') {
-        return [
-          {
-            description: '',
-            direntType: 1,
-            fileIcon: '',
-            icon: '',
-            label: 'file1.txt',
-            matches: [],
-            uri: '/file1.txt',
-          },
-        ]
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => ['theme1'],
+    'QuickPickProvider.provide': () => [
+      {
+        description: '',
+        direntType: 1,
+        fileIcon: '',
+        icon: '',
+        label: 'file1.txt',
+        matches: [],
+        uri: '/file1.txt',
+      },
+    ],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
@@ -239,4 +244,6 @@ test('preserves other state properties', async () => {
   expect(result.width).toBe(800)
   expect(result.height).toBe(400)
   expect(result.providerId).toBe(0)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide')).toBe(true)
 })
