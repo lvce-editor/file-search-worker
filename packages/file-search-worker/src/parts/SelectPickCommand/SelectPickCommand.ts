@@ -1,7 +1,7 @@
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
-import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
 import { shouldHide } from '../ShouldHide/ShouldHide.ts'
 
 const selectPickBuiltin = async (item: any): Promise<any> => {

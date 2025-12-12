@@ -1,4 +1,4 @@
-import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 export const handleError = async (error: any, notify = true, prefix = ''): Promise<void> => {
   console.error(error)
