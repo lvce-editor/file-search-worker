@@ -2,6 +2,7 @@ import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import { getPosition } from '../GetPosition/GetPosition.ts'
 import { getText } from '../GetText/GetText.ts'
 import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
+import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 const getPicksGoToColumnBase = async (): Promise<readonly ProtoVisibleItem[]> => {
   const text = await getText()
@@ -36,7 +37,7 @@ export const getPicksGoToColumn = async (value: string): Promise<readonly ProtoV
         direntType: 0,
         fileIcon: '',
         icon: '',
-        label: `Press 'Enter' to go to line ${position.row} column ${position.column}`,
+        label: QuickPickStrings.pressEnterToGoToLine(position.row, position.column),
         matches: [],
         uri: '',
       },
