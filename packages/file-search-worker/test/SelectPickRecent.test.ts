@@ -1,23 +1,12 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SelectPickRecent from '../src/parts/SelectPickRecent/SelectPickRecent.ts'
 
 test('selectPick calls Workspace.setPath with the pick uri', async () => {
-  let capturedUri: string | undefined
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'Workspace.setPath') {
-        capturedUri = args[0] as string
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Workspace.setPath': () => {},
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
@@ -31,21 +20,14 @@ test('selectPick calls Workspace.setPath with the pick uri', async () => {
 
   const result = await SelectPickRecent.selectPick(pick)
 
-  expect(capturedUri).toBe('/path/to/workspace')
+  expect(mockRpc.invocations).toEqual([['Workspace.setPath', '/path/to/workspace']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
 test('selectPick returns Hide command after opening workspace folder', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Workspace.setPath') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Workspace.setPath': () => {},
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
@@ -59,22 +41,14 @@ test('selectPick returns Hide command after opening workspace folder', async () 
 
   const result = await SelectPickRecent.selectPick(pick)
 
+  expect(mockRpc.invocations).toEqual([['Workspace.setPath', '/another/path']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
 test('selectPick handles different uri formats', async () => {
-  let capturedUri: string | undefined
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'Workspace.setPath') {
-        capturedUri = args[0] as string
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Workspace.setPath': () => {},
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
@@ -88,6 +62,6 @@ test('selectPick handles different uri formats', async () => {
 
   const result = await SelectPickRecent.selectPick(pick)
 
-  expect(capturedUri).toBe('file:///home/user/project')
+  expect(mockRpc.invocations).toEqual([['Workspace.setPath', 'file:///home/user/project']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })

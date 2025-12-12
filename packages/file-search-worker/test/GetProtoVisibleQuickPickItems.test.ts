@@ -1,4 +1,5 @@
 import { expect, test } from '@jest/globals'
+import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetProtoVisibleQuickPickItems from '../src/parts/GetProtoVisibleQuickPickItems/GetProtoVisibleQuickPickItems.ts'
 
 test('returns empty array when items is empty', () => {
@@ -110,7 +111,7 @@ test('preserves all item properties', () => {
   expect(result[0].icon).toBe('icon1')
   expect(result[0].matches).toEqual([1, 2])
   expect(result[0].uri).toBe('uri1')
-  expect((result[0] as any).extraProp).toBe('extra')
+  expect((result[0] as ProtoVisibleItem & { readonly extraProp: string }).extraProp).toBe('extra')
 })
 
 test('handles empty icons array', () => {

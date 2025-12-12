@@ -1,49 +1,39 @@
 import { test, expect } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
+import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import { getQuickPickFileIcons } from '../src/parts/GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getQuickPickFileIcons returns icons and updates cache', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
   const fileIconCache = { '/file1.txt': 'icon1' }
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)
   expect(icons).toEqual(['icon1', 'icon-for-file2.txt'])
   expect(newFileIconCache).toEqual({ '/file1.txt': 'icon1', '/file2.txt': 'icon-for-file2.txt' })
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'IconTheme.getFileIcon')).toBe(true)
 })
 
 test('getQuickPickFileIcons with all icons cached', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
   const fileIconCache = { '/file1.txt': 'icon1', '/file2.txt': 'icon2' }
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)
   expect(icons).toEqual(['icon1', 'icon2'])
   expect(newFileIconCache).toEqual(fileIconCache)
+  expect(mockRpc.invocations).toEqual([])
 })

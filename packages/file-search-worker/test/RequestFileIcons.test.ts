@@ -1,19 +1,20 @@
-import { expect, jest, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { expect, test } from '@jest/globals'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import * as RequestFileIcons from '../src/parts/RequestFileIcons/RequestFileIcons.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('requests file icons', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: mockInvoke,
+  const mockRpc = RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': (request: { name: string }) => {
+      if (request.name === 'test.txt') {
+        return '/icons/file.png'
+      }
+      if (request.name === 'other.txt') {
+        return '/icons/other.png'
+      }
+      throw new Error(`unexpected file name: ${request.name}`)
+    },
   })
-  set(RpcId.RendererWorker, mockRpc)
-
-  mockInvoke.mockResolvedValueOnce('/icons/file.png').mockResolvedValueOnce('/icons/other.png')
 
   const requests = [
     { name: 'test.txt', path: '', type: DirentType.File },
@@ -22,20 +23,24 @@ test('requests file icons', async () => {
 
   const result = await RequestFileIcons.requestFileIcons(requests)
   expect(result).toEqual(['/icons/file.png', '/icons/other.png'])
-  expect(mockInvoke).toHaveBeenCalledTimes(2)
-  expect(mockInvoke).toHaveBeenCalledWith('IconTheme.getFileIcon', { name: 'test.txt' })
-  expect(mockInvoke).toHaveBeenCalledWith('IconTheme.getFileIcon', { name: 'other.txt' })
+  expect(mockRpc.invocations).toEqual([
+    ['IconTheme.getFileIcon', { name: 'test.txt' }],
+    ['IconTheme.getFileIcon', { name: 'other.txt' }],
+  ])
 })
 
 test('requests folder icons', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: mockInvoke,
+  const mockRpc = RendererWorker.registerMockRpc({
+    'IconTheme.getFolderIcon': (request: { name: string }) => {
+      if (request.name === 'folder1') {
+        return '/icons/folder.png'
+      }
+      if (request.name === 'folder2') {
+        return '/icons/folder2.png'
+      }
+      throw new Error(`unexpected folder name: ${request.name}`)
+    },
   })
-  set(RpcId.RendererWorker, mockRpc)
-
-  mockInvoke.mockResolvedValueOnce('/icons/folder.png').mockResolvedValueOnce('/icons/folder2.png')
 
   const requests = [
     { name: 'folder1', path: '', type: DirentType.Directory },
@@ -44,30 +49,28 @@ test('requests folder icons', async () => {
 
   const result = await RequestFileIcons.requestFileIcons(requests)
   expect(result).toEqual(['/icons/folder.png', '/icons/folder2.png'])
-  expect(mockInvoke).toHaveBeenCalledWith('IconTheme.getFolderIcon', { name: 'folder1' })
-  expect(mockInvoke).toHaveBeenCalledWith('IconTheme.getFolderIcon', { name: 'folder2' })
+  expect(mockRpc.invocations).toEqual([
+    ['IconTheme.getFolderIcon', { name: 'folder1' }],
+    ['IconTheme.getFolderIcon', { name: 'folder2' }],
+  ])
 })
 
-test.skip('handles empty requests array', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: mockInvoke,
+test('handles empty requests array', async () => {
+  const mockRpc = RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => '',
+    'IconTheme.getFolderIcon': () => '',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const result = await RequestFileIcons.requestFileIcons([])
   expect(result).toEqual([])
-  expect(mockInvoke).not.toHaveBeenCalled()
+  expect(mockRpc.invocations).toEqual([])
 })
 
-test.skip('handles requests with no name', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: mockInvoke,
+test('handles requests with no name', async () => {
+  const mockRpc = RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => '',
+    'IconTheme.getFolderIcon': () => '',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const requests = [
     { name: '', path: '', type: DirentType.File },
@@ -76,5 +79,5 @@ test.skip('handles requests with no name', async () => {
 
   const result = await RequestFileIcons.requestFileIcons(requests)
   expect(result).toEqual(['', ''])
-  expect(mockInvoke).not.toHaveBeenCalled()
+  expect(mockRpc.invocations).toEqual([])
 })

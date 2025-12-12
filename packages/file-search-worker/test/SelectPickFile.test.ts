@@ -1,28 +1,18 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectPick } from '../src/parts/SelectPickFile/SelectPickFile.ts'
 
 test('selectPick constructs absolute path and opens uri', async () => {
   let openedUri: string | undefined
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      if (method === 'Workspace.getPath') {
-        return '/workspace/path'
-      }
-      if (method === 'Main.openUri') {
-        openedUri = args[0] as string
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Main.openUri': (uri: string) => {
+      openedUri = uri
     },
+    'Workspace.getPath': () => '/workspace/path',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: 'src/components',
@@ -38,25 +28,18 @@ test('selectPick constructs absolute path and opens uri', async () => {
 
   expect(openedUri).toBe('/workspace/path/src/components/Button.tsx')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath'], ['Main.openUri', '/workspace/path/src/components/Button.tsx']])
 })
 
 test('selectPick handles different file paths', async () => {
   let openedUri: string | undefined
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      if (method === 'Workspace.getPath') {
-        return '/home/user/project'
-      }
-      if (method === 'Main.openUri') {
-        openedUri = args[0] as string
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Main.openUri': (uri: string) => {
+      openedUri = uri
     },
+    'Workspace.getPath': () => '/home/user/project',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: 'packages/utils',
@@ -72,25 +55,18 @@ test('selectPick handles different file paths', async () => {
 
   expect(openedUri).toBe('/home/user/project/packages/utils/helper.ts')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath'], ['Main.openUri', '/home/user/project/packages/utils/helper.ts']])
 })
 
 test('selectPick handles empty description', async () => {
   let openedUri: string | undefined
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      if (method === 'Workspace.getPath') {
-        return '/workspace'
-      }
-      if (method === 'Main.openUri') {
-        openedUri = args[0] as string
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Main.openUri': (uri: string) => {
+      openedUri = uri
     },
+    'Workspace.getPath': () => '/workspace',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -106,4 +82,5 @@ test('selectPick handles empty description', async () => {
 
   expect(openedUri).toBe('/workspace//root-file.ts')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath'], ['Main.openUri', '/workspace//root-file.ts']])
 })

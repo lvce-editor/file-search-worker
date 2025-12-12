@@ -1,31 +1,28 @@
 import { expect, jest, test } from '@jest/globals'
+import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
+import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
 import * as QuickPickEntryUri from '../src/parts/QuickPickEntryUri/QuickPickEntryUri.ts'
 import * as QuickPickOpenState from '../src/parts/QuickPickOpenState/QuickPickOpenState.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('loadContent returns state with loaded content', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -42,25 +39,16 @@ test('loadContent returns state with loaded content', async () => {
 })
 
 test('loadContent handles empty picks', async () => {
-  const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      if (method === 'ExtensionHost.getCommands') {
-        return []
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [],
     uri: QuickPickEntryUri.View,
-  })
+  }
 
   const result = await loadContent(state)
   consoleErrorSpy.mockRestore()
@@ -74,26 +62,21 @@ test('loadContent handles empty picks', async () => {
 })
 
 test('loadContent handles many picks', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = Array.from({ length: 100 }, (_, i) => ({
     label: `file${i}.txt`,
   }))
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     maxVisibleItems: 10,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -103,26 +86,21 @@ test('loadContent handles many picks', async () => {
 })
 
 test('loadContent respects maxVisibleItems', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = Array.from({ length: 50 }, (_, i) => ({
     label: `file${i}.txt`,
   }))
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     maxVisibleItems: 5,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -132,26 +110,21 @@ test('loadContent respects maxVisibleItems', async () => {
 })
 
 test('loadContent handles file icon cache', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
   const existingCache = { '/file1.txt': 'cached-icon' }
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     fileIconCache: existingCache,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -161,23 +134,18 @@ test('loadContent handles file icon cache', async () => {
 })
 
 test('loadContent handles different URIs', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'command1' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -186,25 +154,20 @@ test('loadContent handles different URIs', async () => {
 })
 
 test('loadContent calculates listHeight correctly', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }, { label: 'file3.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     height: 300,
     itemHeight: 30,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -214,23 +177,18 @@ test('loadContent calculates listHeight correctly', async () => {
 })
 
 test('loadContent filters items based on filter value', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }, { label: 'other.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -239,24 +197,19 @@ test('loadContent filters items based on filter value', async () => {
 })
 
 test('loadContent preserves args', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
   const args = ['arg1', customItems]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -264,23 +217,18 @@ test('loadContent preserves args', async () => {
 })
 
 test('loadContent sets cursorOffset to value length', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -288,24 +236,19 @@ test('loadContent sets cursorOffset to value length', async () => {
 })
 
 test('loadContent sets focused to true', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     focused: false,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -313,24 +256,19 @@ test('loadContent sets focused to true', async () => {
 })
 
 test('loadContent sets focusedIndex to 0', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     focusedIndex: 5,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -338,24 +276,19 @@ test('loadContent sets focusedIndex to 0', async () => {
 })
 
 test('loadContent sets inputSource to Script', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     inputSource: InputSource.User,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -363,24 +296,19 @@ test('loadContent sets inputSource to Script', async () => {
 })
 
 test('loadContent sets state to Finished', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     state: QuickPickOpenState.Default,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -388,24 +316,19 @@ test('loadContent sets state to Finished', async () => {
 })
 
 test('loadContent handles picks less than maxVisibleItems', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     maxVisibleItems: 10,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -415,23 +338,18 @@ test('loadContent handles picks less than maxVisibleItems', async () => {
 })
 
 test('loadContent handles single pick', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -442,27 +360,22 @@ test('loadContent handles single pick', async () => {
 })
 
 test('loadContent calculates finalDeltaY for long lists', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = Array.from({ length: 20 }, (_, i) => ({
     label: `file${i}.txt`,
   }))
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     height: 200,
     itemHeight: 30,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -471,25 +384,20 @@ test('loadContent calculates finalDeltaY for long lists', async () => {
 })
 
 test('loadContent calculates finalDeltaY for short lists', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     height: 300,
     itemHeight: 30,
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -497,20 +405,15 @@ test('loadContent calculates finalDeltaY for short lists', async () => {
 })
 
 test('loadContent preserves other state properties', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     height: 400,
     top: 100,
@@ -518,7 +421,7 @@ test('loadContent preserves other state properties', async () => {
     uri: QuickPickEntryUri.Custom,
     width: 800,
     workspaceUri: '/workspace',
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -530,23 +433,18 @@ test('loadContent preserves other state properties', async () => {
 })
 
 test('loadContent handles Custom URI', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'custom1' }]
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
-  })
+  }
 
   const result = await loadContent(state)
 
@@ -556,24 +454,17 @@ test('loadContent handles Custom URI', async () => {
 })
 
 test('loadContent handles Recent URI', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      if (method === 'RecentlyOpened.getRecentlyOpened') {
-        return ['file:///recent1']
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
+    'RecentlyOpened.getRecentlyOpened': () => ['file:///recent1'],
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     args: [],
     uri: QuickPickEntryUri.Recent,
-  })
+  }
 
   const result = await loadContent(state)
 
