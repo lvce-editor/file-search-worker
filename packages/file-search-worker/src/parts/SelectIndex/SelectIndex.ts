@@ -17,7 +17,7 @@ export const selectIndex = async (state: QuickPickState, index: number, button =
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
   const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(providerId, prefix)
   const fn = QuickPickEntries.getSelect(subId)
-  const selectPickResult = await fn(pick)
+  const selectPickResult = await fn(pick, value)
   Assert.object(selectPickResult)
   Assert.string(selectPickResult.command)
   const { command } = selectPickResult
