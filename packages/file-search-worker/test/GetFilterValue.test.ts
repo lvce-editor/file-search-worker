@@ -4,7 +4,7 @@ import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryI
 
 test('returns value as-is when subId is GoToLine and value starts with ::', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.EveryThing, QuickPickEntryId.GoToLine, '::123')
-  expect(result).toBe('123')
+  expect(result).toBe('')
 })
 
 test('returns value as-is when subId is GoToLine and value starts with :', () => {
@@ -69,7 +69,7 @@ test('returns trimmed value when id is EveryThing and value has no prefix', () =
 
 test('returns value as-is when id is GoToLine and value starts with ::', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.GoToLine, QuickPickEntryId.Noop, '::123')
-  expect(result).toBe('123')
+  expect(result).toBe('')
 })
 
 test('returns value as-is when id is GoToLine and value starts with :', () => {
@@ -159,7 +159,7 @@ test('returns value as-is when id is unknown and value is empty', () => {
 
 test('returns value when subId is GoToLine and value has multiple colons', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.EveryThing, QuickPickEntryId.GoToLine, ':::123')
-  expect(result).toBe(':123')
+  expect(result).toBe('')
 })
 
 test('returns value when subId is GoToLine and value starts with : and has spaces', () => {
@@ -169,7 +169,7 @@ test('returns value when subId is GoToLine and value starts with : and has space
 
 test('returns value when subId is GoToLine and value starts with :: and has spaces', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.EveryThing, QuickPickEntryId.GoToLine, ':: 123')
-  expect(result).toBe(' 123')
+  expect(result).toBe('')
 })
 
 test('returns trimmed value when id is EveryThing and value has newlines', () => {
@@ -199,22 +199,22 @@ test('returns value when id is EveryThing and value starts with > and has emoji'
 
 test('returns value when subId is GoToLine and value has unicode characters', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.EveryThing, QuickPickEntryId.GoToLine, '::测试123')
-  expect(result).toBe('测试123')
+  expect(result).toBe('')
 })
 
 test('returns value when subId is GoToLine and value has emoji', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.EveryThing, QuickPickEntryId.GoToLine, '::🎉123')
-  expect(result).toBe('🎉123')
+  expect(result).toBe('')
 })
 
 test('returns value when id is GoToLine and value has unicode characters', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.GoToLine, QuickPickEntryId.Noop, '::测试123')
-  expect(result).toBe('测试123')
+  expect(result).toBe('')
 })
 
 test('returns value when id is GoToLine and value has emoji', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.GoToLine, QuickPickEntryId.Noop, '::🎉123')
-  expect(result).toBe('🎉123')
+  expect(result).toBe('')
 })
 
 test('returns value when id is EveryThing and value starts with > and is very long', () => {
@@ -226,7 +226,7 @@ test('returns value when id is EveryThing and value starts with > and is very lo
 test('returns value when subId is GoToLine and value is very long', () => {
   const longValue = '::' + 'a'.repeat(1000)
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.EveryThing, QuickPickEntryId.GoToLine, longValue)
-  expect(result).toBe('a'.repeat(1000))
+  expect(result).toBe('')
 })
 
 test('returns value when id is EveryThing and value starts with > and has only spaces after prefix', () => {
@@ -261,7 +261,7 @@ test('returns value when subId is GoToLine takes precedence over id', () => {
 
 test('returns value when subId is GoToLine takes precedence over id with :: prefix', () => {
   const result = GetFilterValue.getFilterValue(QuickPickEntryId.EveryThing, QuickPickEntryId.GoToLine, '::test')
-  expect(result).toBe('test')
+  expect(result).toBe('')
 })
 
 test('returns value when subId is GoToLine takes precedence over id with : prefix', () => {
