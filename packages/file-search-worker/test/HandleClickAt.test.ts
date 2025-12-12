@@ -7,20 +7,12 @@ import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryI
 test('handleClickAt calculates correct index from y coordinate', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Viewlet.closeWidget') {
-        closeWidgetCalled = true
-        return
-      }
-      if (method === 'test-command') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'test-command': () => {},
+    'Viewlet.closeWidget': () => {
+      closeWidgetCalled = true
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = {
     ...CreateDefaultState.createDefaultState(),
@@ -80,20 +72,12 @@ test('handleClickAt returns state unchanged when index is out of bounds', async 
 test('handleClickAt handles click at first item', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Viewlet.closeWidget') {
-        closeWidgetCalled = true
-        return
-      }
-      if (method === 'first-command') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'first-command': () => {},
+    'Viewlet.closeWidget': () => {
+      closeWidgetCalled = true
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = {
     ...CreateDefaultState.createDefaultState(),
@@ -127,20 +111,12 @@ test('handleClickAt handles click at first item', async () => {
 test('handleClickAt handles click at second item', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Viewlet.closeWidget') {
-        closeWidgetCalled = true
-        return
-      }
-      if (method === 'second-command') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'second-command': () => {},
+    'Viewlet.closeWidget': () => {
+      closeWidgetCalled = true
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = {
     ...CreateDefaultState.createDefaultState(),
@@ -211,20 +187,12 @@ test('handleClickAt handles click above header', async () => {
 test('handleClickAt ignores x coordinate', async () => {
   let closeWidgetCallCount = 0
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'Viewlet.closeWidget') {
-        closeWidgetCallCount++
-        return
-      }
-      if (method === 'test-command') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'test-command': () => {},
+    'Viewlet.closeWidget': () => {
+      closeWidgetCallCount++
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = {
     ...CreateDefaultState.createDefaultState(),

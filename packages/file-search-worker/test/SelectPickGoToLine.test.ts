@@ -12,7 +12,6 @@ test('selectPick with ::value parses column and navigates to position', async ()
   let handleFocusCalled = false
 
   RendererWorker.registerMockRpc({
-    'GetActiveEditor.getActiveEditorId': () => editorId,
     'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
       capturedRowIndex = rowIndex
       capturedColumnIndex = columnIndex
@@ -20,6 +19,7 @@ test('selectPick with ::value parses column and navigates to position', async ()
     'Editor.handleFocus': () => {
       handleFocusCalled = true
     },
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
   const mockEditorRpc = MockRpc.create({
@@ -51,12 +51,12 @@ test('selectPick with ::value handles column at newline', async () => {
   let capturedColumnIndex: number | undefined
 
   RendererWorker.registerMockRpc({
-    'GetActiveEditor.getActiveEditorId': () => editorId,
     'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
       capturedRowIndex = rowIndex
       capturedColumnIndex = columnIndex
     },
     'Editor.handleFocus': () => {},
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
   const mockEditorRpc = MockRpc.create({
@@ -87,12 +87,12 @@ test('selectPick with ::value handles column 0', async () => {
   let capturedColumnIndex: number | undefined
 
   RendererWorker.registerMockRpc({
-    'GetActiveEditor.getActiveEditorId': () => editorId,
     'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
       capturedRowIndex = rowIndex
       capturedColumnIndex = columnIndex
     },
     'Editor.handleFocus': () => {},
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
   const mockEditorRpc = MockRpc.create({
