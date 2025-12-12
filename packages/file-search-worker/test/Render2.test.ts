@@ -72,4 +72,3 @@ test('render2 handles multiple diff types when states differ', () => {
   expect(updatedOldState).toBe(newState)
   expect(updatedNewState).toBe(newState)
 })
-

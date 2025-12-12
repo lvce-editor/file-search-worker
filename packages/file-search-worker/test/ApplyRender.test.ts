@@ -119,4 +119,3 @@ test('skips Height and RenderFocusedIndex in mixed diff types', () => {
   expect((result[0] as readonly unknown[])[0]).toBe('Viewlet.setValueByName')
   expect((result[1] as readonly unknown[])[0]).toBe('Viewlet.focusElementByName')
 })
-
