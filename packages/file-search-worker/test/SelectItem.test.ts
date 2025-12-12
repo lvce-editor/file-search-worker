@@ -10,7 +10,7 @@ import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
 
 const createMockState = (items: ProtoVisibleItem[]): QuickPickState => {
   return {
-    ...CreateDefaultState.createQuickPickState(),
+    ...CreateDefaultState.createDefaultState(),
     items,
     providerId: QuickPickEntryId.Commands,
     uid: 123,

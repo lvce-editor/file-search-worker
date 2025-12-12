@@ -4,6 +4,15 @@ import { MockRpc } from '@lvce-editor/rpc'
 import * as ErrorHandling from '../src/parts/ErrorHandling/ErrorHandling.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
+class TestError extends Error {
+  code: string
+  constructor(message: string, code: string) {
+    super(message)
+    this.name = 'TestError'
+    this.code = code
+  }
+}
+
 test('handleError logs error to console', async () => {
   const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
   const error = new Error('test error')
@@ -38,9 +47,7 @@ test('showErrorDialog extracts error properties and calls RendererWorker.showErr
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const error = new Error('test error')
-  error.name = 'TestError'
-  ;(error as any).code = 'TEST_CODE'
+  const error = new TestError('test error', 'TEST_CODE')
   error.stack = 'Error: test error\n    at test.js:1:1'
 
   await ErrorHandling.showErrorDialog(error)

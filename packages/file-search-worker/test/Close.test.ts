@@ -20,7 +20,7 @@ test('close calls closeWidget with correct uid', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
-    ...CreateDefaultState.createQuickPickState(),
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 0,
     uid: 123,
   }
@@ -42,7 +42,7 @@ test('close returns the same state object', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
-    ...CreateDefaultState.createQuickPickState(),
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 0,
     uid: 456,
   }

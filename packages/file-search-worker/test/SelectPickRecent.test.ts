@@ -1,6 +1,7 @@
 import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
+import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SelectPickRecent from '../src/parts/SelectPickRecent/SelectPickRecent.ts'
@@ -92,3 +93,23 @@ test('selectPick handles different uri formats', async () => {
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
+const items: readonly ProtoVisibleItem[] = [
+  {
+    description: '',
+    direntType: 1,
+    fileIcon: '',
+    icon: '',
+    label: 'file1.txt',
+    matches: [],
+    uri: '/file1.txt',
+  },
+  {
+    description: '',
+    direntType: 1,
+    fileIcon: '',
+    icon: '',
+    label: 'file2.txt',
+    matches: [],
+    uri: '/file2.txt',
+  },
+]

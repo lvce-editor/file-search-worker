@@ -6,7 +6,7 @@ import * as DiffType from '../src/parts/DiffType/DiffType.ts'
 
 const createState = (focusedIndex: number): QuickPickState => {
   return {
-    ...CreateDefaultState.createQuickPickState(),
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex,
   }
 }

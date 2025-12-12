@@ -20,9 +20,8 @@ test('filters items based on label match', () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'other.txt', matches: [], uri: '' },
   ]
   const result = FilterQuickPickItems.filterQuickPickItems(items, 'file')
-  expect(result.length).toBe(1)
-  expect(result[0].label).toBe('file.txt')
-  expect(result[0].matches.length).toBeGreaterThan(0)
+  const expectedResult = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'file.txt', matches: [38, 0, 4], uri: '' }]
+  expect(result).toEqual(expectedResult)
 })
 
 test('handles no matches', () => {
@@ -40,11 +39,11 @@ test('handles multiple matches', () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '' },
   ]
   const result = FilterQuickPickItems.filterQuickPickItems(items, 'file')
-  expect(result.length).toBe(2)
-  expect(result[0].label).toBe('file1.txt')
-  expect(result[1].label).toBe('file2.txt')
-  expect(result[0].matches.length).toBeGreaterThan(0)
-  expect(result[1].matches.length).toBeGreaterThan(0)
+  const expectedResult = [
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [38, 0, 4], uri: '' },
+    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [38, 0, 4], uri: '' },
+  ]
+  expect(result).toEqual(expectedResult)
 })
 
 test('handles empty items array', () => {
@@ -59,6 +58,6 @@ test('handles case insensitive matching', () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'other.txt', matches: [], uri: '' },
   ]
   const result = FilterQuickPickItems.filterQuickPickItems(items, 'file')
-  expect(result.length).toBe(1)
-  expect(result[0].label).toBe('File.txt')
+  const expectedResult = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'File.txt', matches: [38, 0, 4], uri: '' }]
+  expect(result).toEqual(expectedResult)
 })

@@ -16,7 +16,7 @@ const createState = ({
   focusedIndex: number
 }): QuickPickState => {
   return {
-    ...CreateDefaultState.createQuickPickState(),
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex,
     items,
     maxLineY,

@@ -10,7 +10,7 @@ import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
 
 const createMockState = (items: ProtoVisibleItem[], minLineY = 0, providerId = QuickPickEntryId.Commands, value = ''): QuickPickState => {
   return {
-    ...CreateDefaultState.createQuickPickState(),
+    ...CreateDefaultState.createDefaultState(),
     items,
     minLineY,
     providerId,

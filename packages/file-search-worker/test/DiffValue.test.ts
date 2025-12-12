@@ -7,7 +7,7 @@ import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 
 const createQuickPickState = (value: string, inputSource: number): QuickPickState => {
   return {
-    ...CreateDefaultState.createQuickPickState(),
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 0,
     inputSource,
     value,
