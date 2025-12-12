@@ -23,13 +23,7 @@ test('inserts text and updates state', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.InsertText,
-    ' world',
-    5,
-    5,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, ' world', 5, 5)
 
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
@@ -52,13 +46,7 @@ test('replaces selected text', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello world' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.InsertText,
-    'hi',
-    0,
-    5,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, 'hi', 0, 5)
 
   expect(result.value).toBe('hi world')
   expect(result.cursorOffset).toBe(2)
@@ -81,13 +69,7 @@ test('deletes character backward', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.DeleteContentBackward,
-    '',
-    5,
-    5,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteContentBackward, '', 5, 5)
 
   expect(result.value).toBe('hell')
   expect(result.cursorOffset).toBe(4)
@@ -110,13 +92,7 @@ test('deletes character forward', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.DeleteContentForward,
-    '',
-    0,
-    0,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteContentForward, '', 0, 0)
 
   expect(result.value).toBe('ello')
   expect(result.cursorOffset).toBe(0)
@@ -139,13 +115,7 @@ test('deletes word backward', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello world' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.DeleteWordBackward,
-    '',
-    11,
-    11,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteWordBackward, '', 11, 11)
 
   expect(result.value).toBe('hello')
   expect(result.cursorOffset).toBe(5)
@@ -168,13 +138,7 @@ test('deletes word forward', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello world' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.DeleteWordForward,
-    '',
-    0,
-    0,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteWordForward, '', 0, 0)
 
   expect(result.value).toBe(' world')
   expect(result.cursorOffset).toBe(0)
@@ -197,13 +161,7 @@ test('handles composition text', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.InsertCompositionText,
-    ' world',
-    5,
-    5,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertCompositionText, ' world', 5, 5)
 
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
@@ -226,13 +184,7 @@ test('handles line break', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello\nworld' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.InsertLineBreak,
-    '',
-    5,
-    5,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertLineBreak, '', 5, 5)
 
   expect(result.value).toBe('hello\nworld')
   expect(result.cursorOffset).toBe(0)
@@ -256,13 +208,7 @@ test('handles insert from paste', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createDefaultState({ value: 'hello' })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.InsertFromPaste,
-    ' world',
-    5,
-    5,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertFromPaste, ' world', 5, 5)
 
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
@@ -289,13 +235,7 @@ test('preserves other state properties', async () => {
     uid: 42,
     value: 'old',
   })
-  const result = await HandleBeforeInput.handleBeforeInput(
-    state,
-    InputEventType.InsertText,
-    'new',
-    3,
-    3,
-  )
+  const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, 'new', 3, 3)
 
   expect(result.uid).toBe(42)
   expect(result.height).toBe(500)
@@ -313,26 +253,11 @@ test('throws error for invalid inputType', () => {
 test('throws error for invalid selectionStart', () => {
   const state = CreateDefaultState.createDefaultState({ value: 'test' })
   expect(() => {
-    HandleBeforeInput.handleBeforeInput(
-      state,
-      InputEventType.InsertText,
-      '',
-      'invalid' as unknown as number,
-      0,
-    )
+    HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 'invalid' as unknown as number, 0)
   }).toThrow()
 })
 
 test('throws error for invalid selectionEnd', async () => {
   const state = CreateDefaultState.createDefaultState({ value: 'test' })
-  await expect(
-    HandleBeforeInput.handleBeforeInput(
-      state,
-      InputEventType.InsertText,
-      '',
-      0,
-      'invalid' as unknown as number,
-    ),
-  ).rejects.toThrow()
+  await expect(HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 0, 'invalid' as unknown as number)).rejects.toThrow()
 })
-

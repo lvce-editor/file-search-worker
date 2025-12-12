@@ -33,11 +33,7 @@ test('render2 calls applyRender and returns commands when states differ', () => 
   let capturedNewState: QuickPickState | undefined
   let capturedDiffResult: readonly number[] | undefined
   // @ts-ignore
-  ApplyRender.applyRender = (
-    oldState: QuickPickState,
-    newState: QuickPickState,
-    diffResult: readonly number[],
-  ): readonly unknown[] => {
+  ApplyRender.applyRender = (oldState: QuickPickState, newState: QuickPickState, diffResult: readonly number[]): readonly unknown[] => {
     capturedOldState = oldState
     capturedNewState = newState
     capturedDiffResult = diffResult
@@ -74,4 +70,3 @@ test('render2 updates QuickPickStates when states differ', () => {
   // @ts-ignore
   ApplyRender.applyRender = originalApplyRender
 })
-

@@ -68,10 +68,13 @@ test('handleClickAt returns state unchanged when index is out of bounds', async 
 })
 
 test('handleClickAt handles click at first item', async () => {
+  let closeWidgetCalled = false
+
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string) => {
-      if (method === 'Workspace.setPath') {
+      if (method === 'Viewlet.closeWidget') {
+        closeWidgetCalled = true
         return
       }
       throw new Error(`unexpected method ${method}`)
@@ -86,22 +89,24 @@ test('handleClickAt handles click at first item', async () => {
     items: [
       {
         description: '',
-        direntType: 0,
+        direntType: 1,
         fileIcon: '',
         icon: '',
+        id: 'first-command',
         label: 'first',
         matches: [],
-        uri: '/path/to/first',
-      },
+        uri: '',
+      } as any,
     ],
     minLineY: 0,
-    providerId: 0,
-    value: '',
+    providerId: QuickPickEntryId.Commands,
+    value: '>',
   })
 
   const y = 50 + 38 + 15
   const result = await HandleClickAt.handleClickAt(state, 0, y)
 
+  expect(closeWidgetCalled).toBe(true)
   expect(result).toBe(state)
 })
 
