@@ -22,6 +22,7 @@ test('getPicks returns color theme names as picks', async () => {
   })
   expect(result[1].label).toBe('light-plus')
   expect(result[2].label).toBe('monokai')
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })
 
 test('getPicks returns empty array when no color themes', async () => {
@@ -32,4 +33,5 @@ test('getPicks returns empty array when no color themes', async () => {
   const result = await GetPicksColorTheme.getPicks('search')
 
   expect(result).toEqual([])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
 })

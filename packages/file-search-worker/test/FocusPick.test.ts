@@ -1,23 +1,16 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { focusPick } from '../src/parts/FocusPick/FocusPick.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('focusPick calls ColorTheme.setColorTheme for ColorTheme provider', async () => {
-  let calledMethod: string | undefined
   let calledArgs: any
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, args: any) => {
-      calledMethod = method
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ColorTheme.setColorTheme': (args: any) => {
       calledArgs = args
-      return undefined
     },
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
@@ -31,18 +24,12 @@ test('focusPick calls ColorTheme.setColorTheme for ColorTheme provider', async (
 
   await focusPick(QuickPickEntryId.ColorTheme, pick)
 
-  expect(calledMethod).toBe('ColorTheme.setColorTheme')
   expect(calledArgs).toBe('dark')
+  expect(mockRpc.invocations).toEqual([['ColorTheme.setColorTheme', 'dark']])
 })
 
 test('focusPick does nothing for non-ColorTheme provider', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      throw new Error(`unexpected method ${method}`)
-    },
-  })
-  setRpc(RpcId.RendererWorker, mockRpc)
+  RendererWorker.registerMockRpc({})
 
   const pick = {
     description: '',

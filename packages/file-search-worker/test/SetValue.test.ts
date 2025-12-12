@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals'
-import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
@@ -24,6 +24,8 @@ test('returns same state when value is unchanged', async () => {
 test('updates value and processes picks', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['newTheme', 'anotherNewTheme'],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
     'QuickPickProvider.provide': () => [
       {
         description: '',
@@ -44,8 +46,6 @@ test('updates value and processes picks', async () => {
         uri: '/file2.txt',
       },
     ],
-    'IconTheme.getFileIcon': () => 'icon',
-    'IconTheme.getFolderIcon': () => 'icon',
   })
 
   const state: QuickPickState = {
@@ -65,11 +65,11 @@ test('updates value and processes picks', async () => {
 })
 
 test('sets focusedIndex to -1 when no items', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
-    'QuickPickProvider.provide': () => [],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
+    'QuickPickProvider.provide': () => [],
   })
 
   const state: QuickPickState = {
@@ -87,8 +87,10 @@ test('sets focusedIndex to -1 when no items', async () => {
 })
 
 test('updates fileIconCache', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['theme1'],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
     'QuickPickProvider.provide': () => [
       {
         description: '',
@@ -100,8 +102,6 @@ test('updates fileIconCache', async () => {
         uri: '/file1.txt',
       },
     ],
-    'IconTheme.getFileIcon': () => 'icon',
-    'IconTheme.getFolderIcon': () => 'icon',
   })
 
   const state: QuickPickState = {
@@ -120,8 +120,10 @@ test('updates fileIconCache', async () => {
 })
 
 test('calculates finalDeltaY and listHeight', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => Array.from({ length: 10 }, (_, i) => `newTheme${i}`),
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
     'QuickPickProvider.provide': () =>
       Array.from({ length: 10 }, (_, i) => ({
         description: '',
@@ -132,8 +134,6 @@ test('calculates finalDeltaY and listHeight', async () => {
         matches: [],
         uri: `/file${i}.txt`,
       })),
-    'IconTheme.getFileIcon': () => 'icon',
-    'IconTheme.getFolderIcon': () => 'icon',
   })
 
   const state: QuickPickState = {
@@ -154,6 +154,8 @@ test('calculates finalDeltaY and listHeight', async () => {
 test('filters items based on filterValue', async () => {
   RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['testTheme', 'otherTheme'],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
     'QuickPickProvider.provide': () => [
       {
         description: '',
@@ -174,8 +176,6 @@ test('filters items based on filterValue', async () => {
         uri: '/other.txt',
       },
     ],
-    'IconTheme.getFileIcon': () => 'icon',
-    'IconTheme.getFolderIcon': () => 'icon',
   })
 
   const state: QuickPickState = {
@@ -194,9 +194,9 @@ test('filters items based on filterValue', async () => {
 test('handles empty string value', async () => {
   RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
-    'QuickPickProvider.provide': () => [],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
+    'QuickPickProvider.provide': () => [],
   })
 
   const state: QuickPickState = {
@@ -215,6 +215,8 @@ test('handles empty string value', async () => {
 test('preserves other state properties', async () => {
   RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['theme1'],
+    'IconTheme.getFileIcon': () => 'icon',
+    'IconTheme.getFolderIcon': () => 'icon',
     'QuickPickProvider.provide': () => [
       {
         description: '',
@@ -226,8 +228,6 @@ test('preserves other state properties', async () => {
         uri: '/file1.txt',
       },
     ],
-    'IconTheme.getFileIcon': () => 'icon',
-    'IconTheme.getFolderIcon': () => 'icon',
   })
 
   const state: QuickPickState = {

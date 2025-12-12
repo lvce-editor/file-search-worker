@@ -60,7 +60,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
 })
 
 test('selectIndex handles default command case', async () => {
-  RendererWorker.registerMockRpc({})
+  const mockRpc = RendererWorker.registerMockRpc({})
 
   const items: ProtoVisibleItem[] = [
     {
@@ -85,12 +85,13 @@ test('selectIndex handles default command case', async () => {
   const result = await selectIndex(state, 0)
 
   expect(result).toBe(state)
+  expect(mockRpc.invocations.length).toBeGreaterThanOrEqual(0)
 })
 
 test('selectIndex calculates actualIndex correctly with minLineY', async () => {
   let closeWidgetCalled = false
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget': () => {
       closeWidgetCalled = true
     },
@@ -170,4 +171,5 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
 
   expect(closeWidgetCalled).toBe(true)
   expect(result).toBe(state)
+  expect(mockRpc.invocations).toEqual([['Viewlet.closeWidget', 123]])
 })

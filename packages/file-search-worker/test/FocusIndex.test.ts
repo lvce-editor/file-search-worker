@@ -1,22 +1,14 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import { focusIndex } from '../src/parts/FocusIndex/FocusIndex.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('focusIndex updates focusedIndex when index is within visible range', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -69,16 +61,10 @@ test('focusIndex updates focusedIndex when index is within visible range', async
 })
 
 test('focusIndex scrolls up when index is before minLineY', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -132,16 +118,10 @@ test('focusIndex scrolls up when index is before minLineY', async () => {
 })
 
 test('focusIndex scrolls down when index is at or after maxLineY', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -195,16 +175,10 @@ test('focusIndex scrolls down when index is at or after maxLineY', async () => {
 })
 
 test('focusIndex handles edge case when scrolling up with maxVisibleItems larger than remaining items', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -254,16 +228,10 @@ test('focusIndex handles edge case when scrolling up with maxVisibleItems larger
 })
 
 test('focusIndex handles edge case when scrolling down with maxVisibleItems larger than remaining items', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -313,16 +281,10 @@ test('focusIndex handles edge case when scrolling down with maxVisibleItems larg
 })
 
 test('focusIndex updates fileIconCache', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },

@@ -1,20 +1,12 @@
 import { test, expect } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { getQuickPickFileIcons } from '../src/parts/GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getQuickPickFileIcons returns icons and updates cache', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -27,16 +19,10 @@ test('getQuickPickFileIcons returns icons and updates cache', async () => {
 })
 
 test('getQuickPickFileIcons with all icons cached', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, { name }: { name: string }) => {
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return `icon-for-${name}`
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
+    'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },

@@ -86,11 +86,31 @@ test('adds mask icon when specified', () => {
     setSize: 10,
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
-  expect(dom[1]).toEqual({
-    childCount: 0,
-    className: 'QuickPickMaskIcon MaskIcon MaskIconTestIcon',
-    type: VirtualDomElements.Div,
-  })
+  expect(dom).toEqual([
+    {
+      ariaPosInSet: 1,
+      ariaSetSize: 10,
+      childCount: 2,
+      className: ClassNames.QuickPickItem,
+      role: AriaRoles.Option,
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 0,
+      className: 'QuickPickMaskIcon MaskIcon MaskIconTestIcon',
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 1,
+      className: ClassNames.QuickPickItemLabel,
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 0,
+      text: 'test-label',
+      type: 12,
+    },
+  ])
 })
 
 test('adds description when specified', () => {
@@ -105,16 +125,36 @@ test('adds description when specified', () => {
     setSize: 10,
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
-  expect(dom[dom.length - 2]).toEqual({
-    childCount: 1,
-    className: ClassNames.QuickPickItemDescription,
-    type: VirtualDomElements.Div,
-  })
-  expect(dom[dom.length - 1]).toEqual({
-    childCount: 0,
-    text: 'test-description',
-    type: 12,
-  })
+  expect(dom).toEqual([
+    {
+      ariaPosInSet: 1,
+      ariaSetSize: 10,
+      childCount: 2,
+      className: ClassNames.QuickPickItem,
+      role: AriaRoles.Option,
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 1,
+      className: ClassNames.QuickPickItemLabel,
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 0,
+      text: 'test-label',
+      type: 12,
+    },
+    {
+      childCount: 1,
+      className: ClassNames.QuickPickItemDescription,
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 0,
+      text: 'test-description',
+      type: 12,
+    },
+  ])
 })
 
 test('adds highlights for matched text', () => {
@@ -138,9 +178,34 @@ test('adds highlights for matched text', () => {
     setSize: 10,
   }
   const dom = GetQuickPickItemVirtualDom.getQuickPickItemVirtualDom(visibleItem)
-  const labelContainer = dom.find((node) => node.className === ClassNames.QuickPickItemLabel)
-  expect(labelContainer).toBeDefined()
-
-  const highlightSpan = dom.find((node) => node.className === ClassNames.QuickPickHighlight)
-  expect(highlightSpan).toBeDefined()
+  expect(dom).toEqual([
+    {
+      ariaPosInSet: 1,
+      ariaSetSize: 10,
+      childCount: 1,
+      className: ClassNames.QuickPickItem,
+      role: AriaRoles.Option,
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 2,
+      className: ClassNames.QuickPickItemLabel,
+      type: VirtualDomElements.Div,
+    },
+    {
+      childCount: 1,
+      className: ClassNames.QuickPickHighlight,
+      type: VirtualDomElements.Span,
+    },
+    {
+      childCount: 0,
+      text: 'test',
+      type: 12,
+    },
+    {
+      childCount: 0,
+      text: '-label',
+      type: 12,
+    },
+  ])
 })

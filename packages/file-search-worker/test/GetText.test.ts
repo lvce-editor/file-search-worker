@@ -7,16 +7,9 @@ test('returns joined lines from active editor', async () => {
   const editorId = 123
   const lines = ['line 1', 'line 2', 'line 3']
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -38,16 +31,9 @@ test('handles empty lines array', async () => {
   const editorId = 456
   const lines: string[] = []
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -69,16 +55,9 @@ test('handles single line', async () => {
   const editorId = 789
   const lines = ['single line']
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -100,16 +79,9 @@ test('handles lines with empty strings', async () => {
   const editorId = 101
   const lines = ['line 1', '', 'line 3', '']
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -128,16 +100,11 @@ test('handles lines with empty strings', async () => {
 })
 
 test('handles error from getActiveEditorId', async () => {
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        throw new Error('Failed to get active editor')
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => {
+      throw new Error('Failed to get active editor')
     },
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -153,16 +120,9 @@ test('handles error from getActiveEditorId', async () => {
 test('handles error from getLines', async () => {
   const editorId = 202
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
