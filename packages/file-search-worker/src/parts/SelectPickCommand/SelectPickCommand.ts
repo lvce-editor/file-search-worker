@@ -33,7 +33,7 @@ const selectPickExtension = async (item: any): Promise<any> => {
 
 export const selectPick = async (item: ProtoVisibleItem): Promise<any> => {
   // @ts-ignore
-  const {id} = item
+  const { id } = item
   if (id.startsWith('ext.')) {
     return selectPickExtension(item)
   }

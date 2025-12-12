@@ -5,4 +5,3 @@ export const goToPositionAndFocus = async (rowIndex: number, columnIndex: number
   await setCursor(rowIndex, columnIndex)
   await RendererWorker.invoke('Editor.handleFocus')
 }
-
