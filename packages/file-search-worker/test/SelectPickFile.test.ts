@@ -1,8 +1,6 @@
 import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
-import * as GetWorkspacePath from '../src/parts/GetWorkspacePath/GetWorkspacePath.ts'
-import * as OpenUri from '../src/parts/OpenUri/OpenUri.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
@@ -13,14 +11,15 @@ test('selectPick constructs absolute path and opens uri', async () => {
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: async (method: string) => {
+    invoke: async (method: string, ...args: readonly unknown[]) => {
       if (method === 'Workspace.getPath') {
         return '/workspace/path'
       }
+      if (method === 'Main.openUri') {
+        openedUri = args[0] as string
+        return
+      }
       throw new Error(`unexpected method ${method}`)
-    },
-    openUri: async (uri: string) => {
-      openedUri = uri
     },
   })
   set(RendererWorker, mockRpc)
@@ -46,14 +45,15 @@ test('selectPick handles different file paths', async () => {
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: async (method: string) => {
+    invoke: async (method: string, ...args: readonly unknown[]) => {
       if (method === 'Workspace.getPath') {
         return '/home/user/project'
       }
+      if (method === 'Main.openUri') {
+        openedUri = args[0] as string
+        return
+      }
       throw new Error(`unexpected method ${method}`)
-    },
-    openUri: async (uri: string) => {
-      openedUri = uri
     },
   })
   set(RendererWorker, mockRpc)
@@ -79,14 +79,15 @@ test('selectPick handles empty description', async () => {
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: async (method: string) => {
+    invoke: async (method: string, ...args: readonly unknown[]) => {
       if (method === 'Workspace.getPath') {
         return '/workspace'
       }
+      if (method === 'Main.openUri') {
+        openedUri = args[0] as string
+        return
+      }
       throw new Error(`unexpected method ${method}`)
-    },
-    openUri: async (uri: string) => {
-      openedUri = uri
     },
   })
   set(RendererWorker, mockRpc)

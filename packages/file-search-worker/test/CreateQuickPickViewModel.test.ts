@@ -1,56 +1,10 @@
 import { expect, test } from '@jest/globals'
-import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
+import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as CreateQuickPickViewModel from '../src/parts/CreateQuickPickViewModel/CreateQuickPickViewModel.ts'
 
-const createDefaultState = (overrides: Partial<QuickPickState> = {}): QuickPickState => {
-  return {
-    args: [],
-    cursorOffset: 0,
-    deltaY: 0,
-    fileIconCache: Object.create(null),
-    finalDeltaY: 0,
-    focused: false,
-    focusedIndex: -1,
-    handleOffset: 0,
-    headerHeight: 38,
-    height: 300,
-    icons: [],
-    inputSource: 0,
-    itemHeight: 30,
-    items: [],
-    maxLineY: 0,
-    maxVisibleItems: 10,
-    minLineY: 0,
-    minimumSliderSize: 20,
-    picks: [],
-    platform: 0,
-    providerId: 0,
-    recentPickIds: Object.create(null),
-    recentPicks: [],
-    scrollBarActive: false,
-    scrollBarHeight: 0,
-    scrollBarY: 0,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
-    x: 0,
-    y: 0,
-    ...overrides,
-  }
-}
-
 test('creates view model with empty states', () => {
-  const oldState = createDefaultState()
-  const newState = createDefaultState()
+  const oldState = CreateDefaultState.createQuickPickState()
+  const newState = CreateDefaultState.createQuickPickState()
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   expect(viewModel.cursorOffset).toBe(0)
   expect(viewModel.focused).toBe(false)
@@ -85,8 +39,8 @@ test('creates view model with items', () => {
       uri: 'uri2',
     },
   ]
-  const oldState = createDefaultState({ items })
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState({ items })
+  const newState = CreateDefaultState.createQuickPickState({
     focusedIndex: 0,
     icons: ['icon1', 'icon2'],
     items,
@@ -102,11 +56,11 @@ test('creates view model with items', () => {
 })
 
 test('calculates focused indices correctly', () => {
-  const oldState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState({
     focusedIndex: 5,
     minLineY: 2,
   })
-  const newState = createDefaultState({
+  const newState = CreateDefaultState.createQuickPickState({
     focusedIndex: 8,
     minLineY: 3,
   })
@@ -125,8 +79,8 @@ test('calculates scroll bar height when content exceeds list height', () => {
     matches: [],
     uri: `uri${i}`,
   }))
-  const oldState = createDefaultState({ items })
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState({ items })
+  const newState = CreateDefaultState.createQuickPickState({
     height: 300,
     itemHeight: 30,
     items,
@@ -146,8 +100,8 @@ test('calculates scroll bar height as 0 when content fits', () => {
     matches: [],
     uri: `uri${i}`,
   }))
-  const oldState = createDefaultState({ items })
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState({ items })
+  const newState = CreateDefaultState.createQuickPickState({
     height: 300,
     itemHeight: 30,
     items,
@@ -157,8 +111,8 @@ test('calculates scroll bar height as 0 when content fits', () => {
 })
 
 test('calculates scroll bar top position', () => {
-  const oldState = createDefaultState()
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState()
+  const newState = CreateDefaultState.createQuickPickState({
     deltaY: 100,
     finalDeltaY: 200,
     headerHeight: 38,
@@ -171,8 +125,8 @@ test('calculates scroll bar top position', () => {
 })
 
 test('rounds scroll bar top position', () => {
-  const oldState = createDefaultState()
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState()
+  const newState = CreateDefaultState.createQuickPickState({
     deltaY: 50,
     finalDeltaY: 100,
     headerHeight: 38,
@@ -184,8 +138,8 @@ test('rounds scroll bar top position', () => {
 })
 
 test('preserves state properties in view model', () => {
-  const oldState = createDefaultState()
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState()
+  const newState = CreateDefaultState.createQuickPickState({
     cursorOffset: 5,
     focused: true,
     height: 400,
@@ -210,8 +164,8 @@ test('handles visible items with different minLineY and maxLineY', () => {
     matches: [],
     uri: `uri${i}`,
   }))
-  const oldState = createDefaultState({ items })
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState({ items })
+  const newState = CreateDefaultState.createQuickPickState({
     focusedIndex: 5,
     icons: Array.from({ length: 10 }, (_, i) => `icon${i}`),
     items,
@@ -233,8 +187,8 @@ test('handles focused item in visible range', () => {
     matches: [],
     uri: `uri${i}`,
   }))
-  const oldState = createDefaultState({ items })
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState({ items })
+  const newState = CreateDefaultState.createQuickPickState({
     focusedIndex: 4,
     icons: Array.from({ length: 10 }, (_, i) => `icon${i}`),
     items,
@@ -246,8 +200,8 @@ test('handles focused item in visible range', () => {
 })
 
 test('handles empty items array', () => {
-  const oldState = createDefaultState()
-  const newState = createDefaultState({
+  const oldState = CreateDefaultState.createQuickPickState()
+  const newState = CreateDefaultState.createQuickPickState({
     items: [],
   })
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)

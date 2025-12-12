@@ -9,12 +9,47 @@ import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
 
 const createMockState = (items: ProtoVisibleItem[], minLineY = 0, providerId = QuickPickEntryId.Commands, value = ''): QuickPickState => {
   return {
+    args: [],
+    cursorOffset: 0,
+    deltaY: 0,
+    fileIconCache: Object.create(null),
+    finalDeltaY: 0,
+    focused: false,
+    focusedIndex: -1,
+    handleOffset: 0,
+    headerHeight: 0,
+    height: 0,
+    icons: [],
+    inputSource: 0,
+    itemHeight: 0,
     items,
+    maxLineY: 0,
+    maxVisibleItems: 0,
+    minimumSliderSize: 0,
     minLineY,
+    picks: [],
+    platform: 0,
     providerId,
+    recentPickIds: new Map(),
+    recentPicks: [],
+    scrollBarActive: false,
+    scrollBarHeight: 0,
+    scrollBarY: 0,
+    state: 0,
+    top: 0,
+    touchDifference: 0,
+    touchOffsetY: 0,
+    touchTimeStamp: 0,
     uid: 123,
+    uri: '',
     value,
-  } as QuickPickState
+    versionId: 0,
+    warned: [],
+    width: 0,
+    workspaceUri: '',
+    x: 0,
+    y: 0,
+  }
 }
 
 test('selectIndex returns state when pick is not found', async () => {
@@ -30,10 +65,11 @@ test('selectIndex calls select function and returns state for Hide command', asy
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: async () => {},
-    closeWidget: async (id: number) => {
-      closeWidgetCalled = true
-      closeWidgetId = id
+    invoke: async (method: string, ...args: readonly unknown[]) => {
+      if (method === 'Viewlet.closeWidget') {
+        closeWidgetCalled = true
+        closeWidgetId = args[0] as number
+      }
     },
   })
   set(RendererWorker, mockRpc)
@@ -88,9 +124,10 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: async () => {},
-    closeWidget: async () => {
-      closeWidgetCalled = true
+    invoke: async (method: string) => {
+      if (method === 'Viewlet.closeWidget') {
+        closeWidgetCalled = true
+      }
     },
   })
   set(RendererWorker, mockRpc)
@@ -113,6 +150,46 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       icon: '',
       id: 'test-command',
       label: 'second',
+      matches: [],
+      uri: '',
+    } as any,
+    {
+      description: '',
+      direntType: 1,
+      fileIcon: '',
+      icon: '',
+      id: 'test-command',
+      label: 'third',
+      matches: [],
+      uri: '',
+    } as any,
+    {
+      description: '',
+      direntType: 1,
+      fileIcon: '',
+      icon: '',
+      id: 'test-command',
+      label: 'fourth',
+      matches: [],
+      uri: '',
+    } as any,
+    {
+      description: '',
+      direntType: 1,
+      fileIcon: '',
+      icon: '',
+      id: 'test-command',
+      label: 'fifth',
+      matches: [],
+      uri: '',
+    } as any,
+    {
+      description: '',
+      direntType: 1,
+      fileIcon: '',
+      icon: '',
+      id: 'test-command',
+      label: 'sixth',
       matches: [],
       uri: '',
     } as any,

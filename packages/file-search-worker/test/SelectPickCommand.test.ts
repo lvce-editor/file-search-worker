@@ -25,7 +25,7 @@ test('selectPickBuiltin calls RendererWorker.invoke with item id and args', asyn
     direntType: 1,
     fileIcon: '',
     icon: '',
-    id: 'test-command',
+    id: 'AutoUpdater.checkForUpdates',
     label: 'test',
     matches: [],
     uri: '',
@@ -33,7 +33,7 @@ test('selectPickBuiltin calls RendererWorker.invoke with item id and args', asyn
 
   const result = await selectPick(pick)
 
-  expect(invokedMethod).toBe('test-command')
+  expect(invokedMethod).toBe('AutoUpdater.checkForUpdates')
   expect(invokedArgs).toEqual(['arg1', 'arg2'])
   expect(result.command).toBe(QuickPickReturnValue.KeepOpen)
 })
@@ -77,7 +77,7 @@ test('selectPickBuiltin handles item without args', async () => {
     direntType: 1,
     fileIcon: '',
     icon: '',
-    id: 'test-command',
+    id: 'AutoUpdater.checkForUpdates',
     label: 'test',
     matches: [],
     uri: '',
@@ -122,22 +122,23 @@ test('selectPickExtension calls ExtensionHost.executeCommand with id without ext
 
 test('selectPickExtension handles errors and shows error dialog', async () => {
   let showErrorDialogCalled = false
+  let errorInfo: any
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: async (method: string) => {
+    invoke: async (method: string, ...args: readonly unknown[]) => {
       if (method === 'ExtensionHost.executeCommand') {
         throw new Error('Test error')
+      }
+      if (method === 'RendererWorker.showErrorDialog') {
+        showErrorDialogCalled = true
+        errorInfo = args[0]
+        return
       }
       throw new Error(`unexpected method ${method}`)
     },
   })
   set(RendererWorker, mockRpc)
-
-  const originalShowErrorDialog = RendererWorker.showErrorDialog
-  RendererWorker.showErrorDialog = async () => {
-    showErrorDialogCalled = true
-  }
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -153,7 +154,6 @@ test('selectPickExtension handles errors and shows error dialog', async () => {
   const result = await selectPick(pick)
 
   expect(showErrorDialogCalled).toBe(true)
+  expect(errorInfo).toBeDefined()
   expect(result.command).toBe(QuickPickReturnValue.Hide)
-
-  RendererWorker.showErrorDialog = originalShowErrorDialog
 })

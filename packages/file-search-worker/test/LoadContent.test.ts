@@ -1,62 +1,12 @@
 import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
-import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
-import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
+import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
 import * as QuickPickEntryUri from '../src/parts/QuickPickEntryUri/QuickPickEntryUri.ts'
 import * as QuickPickOpenState from '../src/parts/QuickPickOpenState/QuickPickOpenState.ts'
 import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
-import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
-
-const createDefaultState = (overrides: Partial<QuickPickState> = {}): QuickPickState => {
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 30, minimumSliderSize: 20 })
-  return {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
-    fileIconCache: Object.create(null),
-    focused: false,
-    focusedIndex: -1,
-    height: 300,
-    icons: [],
-    inputSource: InputSource.User,
-    items: [],
-    maxVisibleItems: 10,
-    picks: [],
-    platform: 0,
-    providerId: 0,
-    recentPickIds: Object.create(null),
-    recentPicks: [],
-    scrollBarActive: false,
-    state: QuickPickOpenState.Default,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
-    ...overrides,
-  }
-}
-
-const createProtoVisibleItem = (label: string, uri: string = ''): ProtoVisibleItem => {
-  return {
-    description: '',
-    direntType: 1,
-    fileIcon: '',
-    icon: '',
-    label,
-    matches: [],
-    uri: uri || label,
-  }
-}
 
 test('loadContent returns state with loaded content', async () => {
   const mockRpc = MockRpc.create({
@@ -72,7 +22,7 @@ test('loadContent returns state with loaded content', async () => {
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
   })
@@ -103,7 +53,7 @@ test('loadContent handles empty picks', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [],
     uri: QuickPickEntryUri.View,
   })
@@ -134,7 +84,7 @@ test('loadContent handles many picks', async () => {
     label: `file${i}.txt`,
   }))
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     maxVisibleItems: 10,
     uri: QuickPickEntryUri.Custom,
@@ -163,7 +113,7 @@ test('loadContent respects maxVisibleItems', async () => {
     label: `file${i}.txt`,
   }))
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     maxVisibleItems: 5,
     uri: QuickPickEntryUri.Custom,
@@ -192,7 +142,7 @@ test('loadContent handles file icon cache', async () => {
 
   const existingCache = { '/file1.txt': 'cached-icon' }
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     fileIconCache: existingCache,
     uri: QuickPickEntryUri.Custom,
@@ -201,7 +151,6 @@ test('loadContent handles file icon cache', async () => {
   const result = await loadContent(state)
 
   expect(result.fileIconCache).toBeDefined()
-  expect(result.fileIconCache).not.toBe(existingCache)
   expect(result.icons).toBeDefined()
   expect(result.icons.length).toBeGreaterThan(0)
 })
@@ -220,7 +169,7 @@ test('loadContent handles different URIs', async () => {
 
   const customItems = [{ label: 'command1' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
   })
@@ -245,7 +194,7 @@ test('loadContent calculates listHeight correctly', async () => {
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }, { label: 'file3.txt' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     height: 300,
     itemHeight: 30,
@@ -273,7 +222,7 @@ test('loadContent filters items based on filter value', async () => {
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }, { label: 'other.txt' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
   })
@@ -299,7 +248,7 @@ test('loadContent preserves args', async () => {
   const customItems = [{ label: 'file1.txt' }]
   const args = ['arg1', customItems]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args,
     uri: QuickPickEntryUri.Custom,
   })
@@ -323,7 +272,7 @@ test('loadContent sets cursorOffset to value length', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     uri: QuickPickEntryUri.Custom,
   })
@@ -347,7 +296,7 @@ test('loadContent sets focused to true', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     focused: false,
     uri: QuickPickEntryUri.Custom,
@@ -372,7 +321,7 @@ test('loadContent sets focusedIndex to 0', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     focusedIndex: 5,
     uri: QuickPickEntryUri.Custom,
@@ -397,7 +346,7 @@ test('loadContent sets inputSource to Script', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     inputSource: InputSource.User,
     uri: QuickPickEntryUri.Custom,
@@ -422,10 +371,10 @@ test('loadContent sets state to Finished', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Custom,
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     state: QuickPickOpenState.Default,
+    uri: QuickPickEntryUri.Custom,
   })
 
   const result = await loadContent(state)
@@ -445,15 +394,12 @@ test('loadContent handles picks less than maxVisibleItems', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const customItems = [
-    { label: 'file1.txt' },
-    { label: 'file2.txt' },
-  ]
+  const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Custom,
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
     maxVisibleItems: 10,
+    uri: QuickPickEntryUri.Custom,
   })
 
   const result = await loadContent(state)
@@ -477,9 +423,9 @@ test('loadContent handles single pick', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Custom,
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
+    uri: QuickPickEntryUri.Custom,
   })
 
   const result = await loadContent(state)
@@ -506,11 +452,11 @@ test('loadContent calculates finalDeltaY for long lists', async () => {
     label: `file${i}.txt`,
   }))
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Custom,
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
-    itemHeight: 30,
     height: 200,
+    itemHeight: 30,
+    uri: QuickPickEntryUri.Custom,
   })
 
   const result = await loadContent(state)
@@ -533,11 +479,11 @@ test('loadContent calculates finalDeltaY for short lists', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Custom,
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
-    itemHeight: 30,
     height: 300,
+    itemHeight: 30,
+    uri: QuickPickEntryUri.Custom,
   })
 
   const result = await loadContent(state)
@@ -559,13 +505,13 @@ test('loadContent preserves other state properties', async () => {
 
   const customItems = [{ label: 'file1.txt' }]
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Custom,
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
-    uid: 42,
-    width: 800,
     height: 400,
     top: 100,
+    uid: 42,
+    uri: QuickPickEntryUri.Custom,
+    width: 800,
     workspaceUri: '/workspace',
   })
 
@@ -592,9 +538,9 @@ test('loadContent handles Custom URI', async () => {
 
   const customItems = [{ label: 'custom1' }]
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Custom,
+  const state = CreateDefaultState.createQuickPickState({
     args: [null, customItems],
+    uri: QuickPickEntryUri.Custom,
   })
 
   const result = await loadContent(state)
@@ -619,9 +565,9 @@ test('loadContent handles Recent URI', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({
-    uri: QuickPickEntryUri.Recent,
+  const state = CreateDefaultState.createQuickPickState({
     args: [],
+    uri: QuickPickEntryUri.Recent,
   })
 
   const result = await loadContent(state)

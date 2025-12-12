@@ -1,48 +1,10 @@
 import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
-import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
+import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SetValue from '../src/parts/SetValue/SetValue.ts'
-import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
-
-const createDefaultState = (overrides: Partial<QuickPickState> = {}): QuickPickState => {
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 30, minimumSliderSize: 20 })
-  return {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
-    fileIconCache: Object.create(null),
-    finalDeltaY: 0,
-    focused: false,
-    focusedIndex: -1,
-    height: 300,
-    icons: [],
-    inputSource: 0,
-    items: [],
-    maxVisibleItems: 10,
-    picks: [],
-    platform: 0,
-    providerId: 0,
-    recentPickIds: Object.create(null),
-    recentPicks: [],
-    scrollBarActive: false,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
-    ...overrides,
-  }
-}
 
 test('returns same state when value is unchanged', async () => {
   const mockRpc = MockRpc.create({
@@ -53,7 +15,7 @@ test('returns same state when value is unchanged', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({ value: 'test' })
+  const state = CreateDefaultState.createQuickPickState({ value: 'test' })
   const result = await SetValue.setValue(state, 'test')
 
   expect(result).toBe(state)
@@ -96,7 +58,7 @@ test('updates value and processes picks', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({ providerId: 0, value: 'old' })
+  const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, 'new')
 
   expect(result.value).toBe('new')
@@ -126,7 +88,7 @@ test('sets focusedIndex to -1 when no items', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({ providerId: 0, value: 'old' })
+  const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, 'new')
 
   expect(result.value).toBe('new')
@@ -162,7 +124,7 @@ test('updates fileIconCache', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({ fileIconCache: {}, providerId: 0, value: 'old' })
+  const state = CreateDefaultState.createQuickPickState({ fileIconCache: {}, providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, 'new')
 
   expect(result.fileIconCache).toBeDefined()
@@ -195,7 +157,7 @@ test('calculates finalDeltaY and listHeight', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     height: 300,
     itemHeight: 30,
     providerId: 0,
@@ -244,7 +206,7 @@ test('filters items based on filterValue', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({ providerId: 0, value: '' })
+  const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: '' })
   const result = await SetValue.setValue(state, 'test')
 
   expect(result.value).toBe('test')
@@ -269,7 +231,7 @@ test('handles empty string value', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({ providerId: 0, value: 'old' })
+  const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, '')
 
   expect(result.value).toBe('')
@@ -304,7 +266,7 @@ test('preserves other state properties', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const state = createDefaultState({
+  const state = CreateDefaultState.createQuickPickState({
     height: 400,
     providerId: 0,
     uid: 42,

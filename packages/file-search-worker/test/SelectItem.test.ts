@@ -9,12 +9,47 @@ import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
 
 const createMockState = (items: ProtoVisibleItem[]): QuickPickState => {
   return {
+    args: [],
+    cursorOffset: 0,
+    deltaY: 0,
+    fileIconCache: Object.create(null),
+    finalDeltaY: 0,
+    focused: false,
+    focusedIndex: -1,
+    handleOffset: 0,
+    headerHeight: 0,
+    height: 0,
+    icons: [],
+    inputSource: 0,
+    itemHeight: 0,
     items,
+    maxLineY: 0,
+    maxVisibleItems: 0,
+    minimumSliderSize: 0,
     minLineY: 0,
+    picks: [],
+    platform: 0,
     providerId: QuickPickEntryId.Commands,
+    recentPickIds: new Map(),
+    recentPicks: [],
+    scrollBarActive: false,
+    scrollBarHeight: 0,
+    scrollBarY: 0,
+    state: 0,
+    top: 0,
+    touchDifference: 0,
+    touchOffsetY: 0,
+    touchTimeStamp: 0,
     uid: 123,
+    uri: '',
     value: '>',
-  } as QuickPickState
+    versionId: 0,
+    warned: [],
+    width: 0,
+    workspaceUri: '',
+    x: 0,
+    y: 0,
+  }
 }
 
 test('selectItem returns state when label is not found', async () => {
@@ -39,9 +74,10 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
 
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: async () => {},
-    closeWidget: async () => {
-      closeWidgetCalled = true
+    invoke: async (method: string) => {
+      if (method === 'Viewlet.closeWidget') {
+        closeWidgetCalled = true
+      }
     },
   })
   set(RendererWorker, mockRpc)
