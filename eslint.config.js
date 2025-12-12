@@ -5,11 +5,7 @@ export default [
   ...config,
   ...actions,
   {
-    ignores: [
-      'packages/file-search-worker/src/fileSearchWorkerMain.ts',
-      'packages/file-search-worker/test/GetJson.test.ts',
-      'packages/file-search-worker/test/GetJson.test.ts',
-    ],
+    ignores: ['packages/file-search-worker/src/fileSearchWorkerMain.ts', 'packages/file-search-worker/test/GetJson.test.ts'],
   },
   {
     files: ['**/*.ts'],
