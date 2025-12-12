@@ -20,10 +20,10 @@ test('selectPick calls Workspace.setPath with the pick uri', async () => {
 
   const result = await SelectPickRecent.selectPick(pick)
 
-  expect((mockRpc as any).invocations).toEqual([
+  expect(mockRpc.invocations).toEqual([
     {
-      args: ['/path/to/workspace'],
       method: 'Workspace.setPath',
+      args: ['/path/to/workspace'],
     },
   ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
@@ -48,8 +48,8 @@ test('selectPick returns Hide command after opening workspace folder', async () 
 
   expect(mockRpc.invocations).toEqual([
     {
-      args: ['/another/path'],
       method: 'Workspace.setPath',
+      args: ['/another/path'],
     },
   ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
@@ -74,8 +74,8 @@ test('selectPick handles different uri formats', async () => {
 
   expect(mockRpc.invocations).toEqual([
     {
-      args: ['file:///home/user/project'],
       method: 'Workspace.setPath',
+      args: ['file:///home/user/project'],
     },
   ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
