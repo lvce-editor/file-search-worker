@@ -3,6 +3,7 @@ import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as Close from '../src/parts/Close/Close.ts'
+import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('close calls closeWidget with correct uid', async () => {
@@ -19,6 +20,7 @@ test('close calls closeWidget with correct uid', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
+    ...createDefaultState(),
     args: [],
     cursorOffset: 0,
     deltaY: 0,

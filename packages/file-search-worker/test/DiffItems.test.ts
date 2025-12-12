@@ -1,5 +1,6 @@
 import { expect, test } from '@jest/globals'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
+import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as DiffItems from '../src/parts/DiffItems/DiffItems.ts'
 import * as DiffType from '../src/parts/DiffType/DiffType.ts'
 
@@ -15,46 +16,11 @@ const createState = ({
   focusedIndex: number
 }): QuickPickState => {
   return {
-    args: [],
-    cursorOffset: 0,
-    deltaY: 0,
-    fileIconCache: Object.create(null),
-    finalDeltaY: 0,
-    focused: false,
+    ...CreateDefaultState.createQuickPickState(),
     focusedIndex,
-    handleOffset: 0,
-    headerHeight: 0,
-    height: 0,
-    icons: [],
-    inputSource: 0,
-    itemHeight: 0,
     items,
     maxLineY,
-    maxVisibleItems: 0,
-    minimumSliderSize: 0,
     minLineY,
-    picks: [],
-    platform: 0,
-    providerId: 0,
-    recentPickIds: new Map(),
-    recentPicks: [],
-    scrollBarActive: false,
-    scrollBarHeight: 0,
-    scrollBarY: 0,
-    state: 0,
-    top: 0,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 0,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 0,
-    workspaceUri: '',
-    x: 0,
-    y: 0,
   }
 }
 
