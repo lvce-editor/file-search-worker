@@ -303,24 +303,24 @@ test('preserves other state properties', async () => {
   expect(result.inputSource).toBe(InputSource.User)
 })
 
-test('throws error for invalid inputType', async () => {
+test('throws error for invalid inputType', () => {
   const state = CreateDefaultState.createDefaultState({ value: 'test' })
-  await expect(
-    HandleBeforeInput.handleBeforeInput(state, null as unknown as string, '', 0, 0),
-  ).rejects.toThrow()
+  expect(() => {
+    HandleBeforeInput.handleBeforeInput(state, null as unknown as string, '', 0, 0)
+  }).toThrow()
 })
 
-test('throws error for invalid selectionStart', async () => {
+test('throws error for invalid selectionStart', () => {
   const state = CreateDefaultState.createDefaultState({ value: 'test' })
-  await expect(
+  expect(() => {
     HandleBeforeInput.handleBeforeInput(
       state,
       InputEventType.InsertText,
       '',
       'invalid' as unknown as number,
       0,
-    ),
-  ).rejects.toThrow()
+    )
+  }).toThrow()
 })
 
 test('throws error for invalid selectionEnd', async () => {
