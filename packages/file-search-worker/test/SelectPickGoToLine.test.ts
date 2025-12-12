@@ -3,29 +3,29 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as SelectPickGoToLine from '../src/parts/SelectPickGoToLine/SelectPickGoToLine.ts'
 
-test('selectPick without :: parses row from item.label', async () => {
+test('selectPick with :value parses line and navigates to position', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
 
-  const item = { label: '5' }
-  const value = '5'
+  const item = { label: '1' }
+  const value = ':5'
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([['Editor.cursorSet', 5, 0], ['Editor.handleFocus']])
+  expect(mockRpc.invocations).toEqual([['Editor.cursorSet', 4, 0], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
-test('selectPick without :: handles row 0', async () => {
+test('selectPick with :value handles line 1', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
 
-  const item = { label: '0' }
-  const value = '0'
+  const item = { label: '1' }
+  const value = ':1'
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
@@ -33,17 +33,17 @@ test('selectPick without :: handles row 0', async () => {
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
-test('selectPick without :: handles large row numbers', async () => {
+test('selectPick with :value handles large line numbers', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
 
-  const item = { label: '100' }
-  const value = '100'
+  const item = { label: '1' }
+  const value = ':100'
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([['Editor.cursorSet', 100, 0], ['Editor.handleFocus']])
+  expect(mockRpc.invocations).toEqual([['Editor.cursorSet', 99, 0], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
