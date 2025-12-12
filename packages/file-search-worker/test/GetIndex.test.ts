@@ -81,4 +81,3 @@ test('handles zero header height', () => {
   const result = GetIndex.getIndex(top, headerHeight, itemHeight, y)
   expect(result).toBe(1)
 })
-

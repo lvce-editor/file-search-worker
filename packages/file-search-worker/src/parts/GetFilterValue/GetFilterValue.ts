@@ -16,10 +16,11 @@ const getFilterValueEverything = (value: string): string => {
   return value.slice(prefixLength).trim()
 }
 
+const getValueGoToColumn = (value: string): string => {
+  return value.slice(2)
+}
+
 const getValueGoToLine = (value: string): string => {
-  if (value.startsWith(QuickPickPrefix.GoToColumn)) {
-    return ''
-  }
   return value.slice(1)
 }
 
@@ -27,6 +28,8 @@ const getFn = (id: number): Fn => {
   switch (id) {
     case QuickPickEntryId.EveryThing:
       return getFilterValueEverything
+    case QuickPickEntryId.GoToColumn:
+      return getValueGoToColumn
     case QuickPickEntryId.GoToLine:
       return getValueGoToLine
 
@@ -36,6 +39,9 @@ const getFn = (id: number): Fn => {
 }
 
 export const getFilterValue = (id: number, subId: number, value: string): string => {
+  if (subId === QuickPickEntryId.GoToColumn) {
+    return getValueGoToColumn(value)
+  }
   if (subId === QuickPickEntryId.GoToLine) {
     return getValueGoToLine(value)
   }
