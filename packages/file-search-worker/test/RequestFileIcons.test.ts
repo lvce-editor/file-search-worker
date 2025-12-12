@@ -55,7 +55,7 @@ test('requests folder icons', async () => {
   ])
 })
 
-test.skip('handles empty requests array', async () => {
+test('handles empty requests array', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => '',
     'IconTheme.getFolderIcon': () => '',
@@ -66,7 +66,7 @@ test.skip('handles empty requests array', async () => {
   expect(mockRpc.invocations).toEqual([])
 })
 
-test.skip('handles requests with no name', async () => {
+test('handles requests with no name', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => '',
     'IconTheme.getFolderIcon': () => '',

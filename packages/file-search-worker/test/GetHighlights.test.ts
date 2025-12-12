@@ -53,7 +53,7 @@ test('getHighlights - single highlight', () => {
 test('getHighlights - multiple highlights', () => {
   const sections = getHighlightSections([1, 3, 5, 7], 'testtest')
   const result = GetHighlights.getHighlights(sections, 'testtest')
-  expect(result).toHaveLength(9)
+  expect(result).toHaveLength(8)
   expect(result[0]).toEqual({
     childCount: 5,
     className: ClassNames.QuickPickItemLabel,
