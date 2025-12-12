@@ -4,11 +4,15 @@ import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import * as RequestFileIcons from '../src/parts/RequestFileIcons/RequestFileIcons.ts'
 
 test('requests file icons', async () => {
-  let callCount = 0
   const mockRpc = RendererWorker.registerMockRpc({
-    'IconTheme.getFileIcon': () => {
-      const icons = ['/icons/file.png', '/icons/other.png']
-      return icons[callCount++]
+    'IconTheme.getFileIcon': (request: { name: string }) => {
+      if (request.name === 'test.txt') {
+        return '/icons/file.png'
+      }
+      if (request.name === 'other.txt') {
+        return '/icons/other.png'
+      }
+      throw new Error(`unexpected file name: ${request.name}`)
     },
   })
 
@@ -26,11 +30,15 @@ test('requests file icons', async () => {
 })
 
 test('requests folder icons', async () => {
-  let callCount = 0
   const mockRpc = RendererWorker.registerMockRpc({
-    'IconTheme.getFolderIcon': () => {
-      const icons = ['/icons/folder.png', '/icons/folder2.png']
-      return icons[callCount++]
+    'IconTheme.getFolderIcon': (request: { name: string }) => {
+      if (request.name === 'folder1') {
+        return '/icons/folder.png'
+      }
+      if (request.name === 'folder2') {
+        return '/icons/folder2.png'
+      }
+      throw new Error(`unexpected folder name: ${request.name}`)
     },
   })
 

@@ -29,7 +29,7 @@ test('focusPick calls ColorTheme.setColorTheme for ColorTheme provider', async (
 })
 
 test('focusPick does nothing for non-ColorTheme provider', async () => {
-  RendererWorker.registerMockRpc({})
+  const mockRpc = RendererWorker.registerMockRpc({})
 
   const pick = {
     description: '',
@@ -42,4 +42,5 @@ test('focusPick does nothing for non-ColorTheme provider', async () => {
   }
 
   await focusPick(QuickPickEntryId.File, pick)
+  expect(mockRpc.invocations).toEqual([])
 })

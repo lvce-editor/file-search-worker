@@ -5,7 +5,7 @@ import { focusNext } from '../src/parts/FocusNext/FocusNext.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('focusNext focuses the next item', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
   })
@@ -52,10 +52,11 @@ test('focusNext focuses the next item', async () => {
   const result = await focusNext(state)
 
   expect(result.focusedIndex).toBe(1)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('focusNext cycles to first item when at last', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
   })
@@ -101,4 +102,5 @@ test('focusNext cycles to first item when at last', async () => {
   const result = await focusNext(state)
 
   expect(result.focusedIndex).toBe(0)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })

@@ -11,7 +11,7 @@ const mockSearchHandler = async (path: string, value: string, prepare: boolean, 
 test('getPicks returns file picks from search', async () => {
   SearchFileModule.register({ '': mockSearchHandler })
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '/workspace',
   })
 

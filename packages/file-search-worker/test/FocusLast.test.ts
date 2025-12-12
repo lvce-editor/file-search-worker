@@ -5,7 +5,7 @@ import { focusLast } from '../src/parts/FocusLast/FocusLast.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('focusLast focuses the last item', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
   })
@@ -52,4 +52,5 @@ test('focusLast focuses the last item', async () => {
   const result = await focusLast(state)
 
   expect(result.focusedIndex).toBe(2)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })

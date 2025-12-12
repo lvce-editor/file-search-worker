@@ -3,7 +3,7 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import { getQuickPickFileIcons } from '../src/parts/GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
 
 test('getQuickPickFileIcons returns icons and updates cache', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -16,10 +16,12 @@ test('getQuickPickFileIcons returns icons and updates cache', async () => {
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)
   expect(icons).toEqual(['icon1', 'icon-for-file2.txt'])
   expect(newFileIconCache).toEqual({ '/file1.txt': 'icon1', '/file2.txt': 'icon-for-file2.txt' })
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'IconTheme.getFileIcon')).toBe(true)
 })
 
 test('getQuickPickFileIcons with all icons cached', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -32,4 +34,5 @@ test('getQuickPickFileIcons with all icons cached', async () => {
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)
   expect(icons).toEqual(['icon1', 'icon2'])
   expect(newFileIconCache).toEqual(fileIconCache)
+  expect(mockRpc.invocations).toEqual([])
 })

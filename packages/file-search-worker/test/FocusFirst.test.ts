@@ -5,7 +5,7 @@ import { focusFirst } from '../src/parts/FocusFirst/FocusFirst.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('focusFirst focuses the first item', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
   })
@@ -51,4 +51,5 @@ test('focusFirst focuses the first item', async () => {
   const result = await focusFirst(state)
 
   expect(result.focusedIndex).toBe(0)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
