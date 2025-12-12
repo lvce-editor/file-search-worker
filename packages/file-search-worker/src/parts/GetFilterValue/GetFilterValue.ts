@@ -1,5 +1,6 @@
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
 import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
+import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 
 interface Fn {
   (value: string): string
@@ -16,7 +17,7 @@ const getFilterValueEverything = (value: string): string => {
 }
 
 const getValueGoToColumn = (value: string): string => {
-  return value.slice(2)
+  return value.slice(QuickPickPrefix.GoToColumn.length)
 }
 
 const getValueGoToLine = (value: string): string => {
