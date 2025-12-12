@@ -130,7 +130,7 @@ test('handles line break', async () => {
   expect(result.value).toBe('hello\nworld')
   expect(result.cursorOffset).toBe(5)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([])
 })
 
 test('handles insert from paste', async () => {
