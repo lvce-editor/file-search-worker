@@ -3,7 +3,7 @@ import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as Close from '../src/parts/Close/Close.ts'
-import { createDefaultState } from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
+import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('close calls closeWidget with correct uid', async () => {
@@ -20,47 +20,9 @@ test('close calls closeWidget with correct uid', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
-    ...createDefaultState(),
-    args: [],
-    cursorOffset: 0,
-    deltaY: 0,
-    fileIconCache: {},
-    finalDeltaY: 0,
-    focused: false,
+    ...CreateDefaultState.createQuickPickState(),
     focusedIndex: 0,
-    handleOffset: 0,
-    headerHeight: 0,
-    height: 0,
-    icons: [],
-    inputSource: 0,
-    itemHeight: 0,
-    items: [],
-    maxLineY: 0,
-    maxVisibleItems: 0,
-    minimumSliderSize: 0,
-    minLineY: 0,
-    picks: [],
-    platform: 0,
-    providerId: 0,
-    recentPickIds: new Map(),
-    recentPicks: [],
-    scrollBarActive: false,
-    scrollBarHeight: 0,
-    scrollBarY: 0,
-    state: 0,
-    top: 0,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
     uid: 123,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 0,
-    workspaceUri: '',
-    x: 0,
-    y: 0,
   }
 
   const result = await Close.close(state)
@@ -80,46 +42,9 @@ test('close returns the same state object', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
-    args: [],
-    cursorOffset: 0,
-    deltaY: 0,
-    fileIconCache: {},
-    finalDeltaY: 0,
-    focused: false,
+    ...CreateDefaultState.createQuickPickState(),
     focusedIndex: 0,
-    handleOffset: 0,
-    headerHeight: 0,
-    height: 0,
-    icons: [],
-    inputSource: 0,
-    itemHeight: 0,
-    items: [],
-    maxLineY: 0,
-    maxVisibleItems: 0,
-    minimumSliderSize: 0,
-    minLineY: 0,
-    picks: [],
-    platform: 0,
-    providerId: 0,
-    recentPickIds: new Map(),
-    recentPicks: [],
-    scrollBarActive: false,
-    scrollBarHeight: 0,
-    scrollBarY: 0,
-    state: 0,
-    top: 0,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
     uid: 456,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 0,
-    workspaceUri: '',
-    x: 0,
-    y: 0,
   }
 
   const result = await Close.close(state)
