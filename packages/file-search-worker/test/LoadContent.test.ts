@@ -48,7 +48,6 @@ test('loadContent handles empty picks', async () => {
   }
 
   const result = await loadContent(state)
-  consoleErrorSpy.mockRestore()
 
   expect(result.picks).toEqual([])
   expect(result.items).toEqual([])

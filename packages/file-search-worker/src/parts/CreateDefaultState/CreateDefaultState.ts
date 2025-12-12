@@ -3,7 +3,7 @@ import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
 import * as VirtualList from '../VirtualList/VirtualList.ts'
 
-export const createDefaultState = (): QuickPickState => {
+export const createDefaultState = (partial?: Partial<QuickPickState>): QuickPickState => {
   const virtualList = VirtualList.create({
     headerHeight: 38,
     itemHeight: 30,
@@ -37,5 +37,6 @@ export const createDefaultState = (): QuickPickState => {
     warned: [],
     width: 600,
     workspaceUri: '',
+    ...partial,
   }
 }

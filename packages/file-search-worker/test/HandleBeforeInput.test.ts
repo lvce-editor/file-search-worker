@@ -14,8 +14,8 @@ test('inserts text and updates state', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -37,8 +37,8 @@ test('replaces selected text', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -60,8 +60,8 @@ test('deletes character backward', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -83,8 +83,8 @@ test('deletes character forward', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -106,8 +106,8 @@ test('deletes word backward', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -129,8 +129,8 @@ test('deletes word forward', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -152,8 +152,8 @@ test('handles composition text', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -175,15 +175,15 @@ test('handles line break', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'hello\nworld' })
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'hello\nworld' })
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertLineBreak, '', 5, 5)
 
   expect(result.value).toBe('hello\nworld')
@@ -199,8 +199,8 @@ test('handles insert from paste', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -222,8 +222,8 @@ test('preserves other state properties', async () => {
       if (method === 'ColorTheme.getColorThemeNames') {
         return []
       }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
+      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
+        return 'icon'
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -232,6 +232,7 @@ test('preserves other state properties', async () => {
 
   const state = CreateDefaultState.createDefaultState({
     height: 500,
+    providerId: 0,
     uid: 42,
     value: 'old',
   })
@@ -243,22 +244,22 @@ test('preserves other state properties', async () => {
   expect(result.inputSource).toBe(InputSource.User)
 })
 
-test('throws error for invalid inputType', () => {
-  const state = CreateDefaultState.createDefaultState({ value: 'test' })
-  expect(() => {
-    HandleBeforeInput.handleBeforeInput(state, null as unknown as string, '', 0, 0)
-  }).toThrow()
+test('throws error for invalid inputType', async () => {
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'test' })
+  await expect(
+    HandleBeforeInput.handleBeforeInput(state, null as unknown as string, '', 0, 0),
+  ).rejects.toThrow()
 })
 
 test('throws error for invalid selectionStart', () => {
-  const state = CreateDefaultState.createDefaultState({ value: 'test' })
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'test' })
   expect(() => {
     HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 'invalid' as unknown as number, 0)
   }).toThrow()
 })
 
 test('throws error for invalid selectionEnd', () => {
-  const state = CreateDefaultState.createDefaultState({ value: 'test' })
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'test' })
   expect(() => {
     HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 0, 'invalid' as unknown as number)
   }).toThrow()

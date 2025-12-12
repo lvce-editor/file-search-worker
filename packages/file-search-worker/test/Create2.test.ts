@@ -3,9 +3,10 @@ import * as Create2 from '../src/parts/Create2/Create2.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import * as MinimumSliderSize from '../src/parts/MinimumSliderSize/MinimumSliderSize.ts'
 import * as QuickPickOpenState from '../src/parts/QuickPickOpenState/QuickPickOpenState.ts'
+import * as QuickPickStates from '../src/parts/QuickPickStates/QuickPickStates.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
-test('create does not throw', () => {
+test('create calls QuickPickStates.set with correct state', () => {
   const uid = 123
   const uri = 'file:///test/path'
   const listItemHeight = 40
@@ -17,116 +18,77 @@ test('create does not throw', () => {
   const args = ['arg1', 'arg2']
   const workspaceUri = 'file:///workspace'
 
-  expect(() => {
-    Create2.create(uid, uri, listItemHeight, x, y, width, height, platform, args, workspaceUri)
-  }).not.toThrow()
-})
+  Create2.create(uid, uri, listItemHeight, x, y, width, height, platform, args, workspaceUri)
 
-test('create constructs state with correct properties', () => {
-  const uid = 123
-  const uri = 'file:///test/path'
-  const listItemHeight = 40
-  const platform = 1
-  const args = ['arg1', 'arg2']
-  const workspaceUri = 'file:///workspace'
-
-  const expectedVirtualList = VirtualList.create({
-    headerHeight: 38,
-    itemHeight: listItemHeight,
-    minimumSliderSize: MinimumSliderSize.minimumSliderSize,
-  })
-
-  const expectedState = {
-    cursorOffset: 0,
-    height: 300,
-    icons: [],
-    maxVisibleItems: 10,
-    picks: [],
-    recentPickIds: Object.create(null),
-    recentPicks: [],
-    state: QuickPickOpenState.Default,
-    top: 50,
-    uid,
-    uri,
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri,
-    ...expectedVirtualList,
-    args,
-    fileIconCache: Object.create(null),
-    focused: false,
-    inputSource: InputSource.User,
-    platform,
-    value: '',
-  }
-
-  expect(() => {
-    Create2.create(uid, uri, listItemHeight, 0, 0, 0, 0, platform, args, workspaceUri)
-  }).not.toThrow()
-
-  expect(expectedState.uid).toBe(uid)
-  expect(expectedState.uri).toBe(uri)
-  expect(expectedState.workspaceUri).toBe(workspaceUri)
-  expect(expectedState.args).toBe(args)
-  expect(expectedState.platform).toBe(platform)
-  expect(expectedState.itemHeight).toBe(listItemHeight)
-  expect(expectedState.headerHeight).toBe(38)
-  expect(expectedState.minimumSliderSize).toBe(MinimumSliderSize.minimumSliderSize)
-  expect(expectedState.inputSource).toBe(InputSource.User)
-  expect(expectedState.state).toBe(QuickPickOpenState.Default)
-  expect(expectedState.cursorOffset).toBe(0)
-  expect(expectedState.height).toBe(300)
-  expect(expectedState.width).toBe(600)
-  expect(expectedState.top).toBe(50)
-  expect(expectedState.focused).toBe(false)
-  expect(expectedState.value).toBe('')
-  expect(expectedState.picks).toEqual([])
-  expect(expectedState.recentPicks).toEqual([])
-  expect(expectedState.icons).toEqual([])
-  expect(expectedState.warned).toEqual([])
-  expect(expectedState.versionId).toBe(0)
-  expect(expectedState.maxVisibleItems).toBe(10)
-  expect(expectedState.fileIconCache).toEqual(Object.create(null))
-  expect(expectedState.recentPickIds).toEqual(Object.create(null))
+  const { newState } = QuickPickStates.get(uid)
+  expect(newState).toBeDefined()
+  expect(newState?.uid).toBe(uid)
+  expect(newState?.uri).toBe(uri)
+  expect(newState?.workspaceUri).toBe(workspaceUri)
+  expect(newState?.args).toBe(args)
+  expect(newState?.platform).toBe(platform)
+  expect(newState?.itemHeight).toBe(listItemHeight)
+  expect(newState?.headerHeight).toBe(38)
+  expect(newState?.minimumSliderSize).toBe(MinimumSliderSize.minimumSliderSize)
+  expect(newState?.inputSource).toBe(InputSource.User)
+  expect(newState?.state).toBe(QuickPickOpenState.Default)
+  expect(newState?.cursorOffset).toBe(0)
+  expect(newState?.height).toBe(300)
+  expect(newState?.width).toBe(600)
+  expect(newState?.top).toBe(50)
+  expect(newState?.focused).toBe(false)
+  expect(newState?.value).toBe('')
+  expect(newState?.picks).toEqual([])
+  expect(newState?.recentPicks).toEqual([])
+  expect(newState?.icons).toEqual([])
+  expect(newState?.warned).toEqual([])
+  expect(newState?.versionId).toBe(0)
+  expect(newState?.maxVisibleItems).toBe(10)
+  expect(newState?.fileIconCache).toEqual(Object.create(null))
+  expect(newState?.recentPickIds).toEqual(Object.create(null))
 })
 
 test('create sets virtual list properties correctly', () => {
   const uid = 456
   const listItemHeight = 50
 
-  const expectedVirtualList = VirtualList.create({
-    headerHeight: 38,
-    itemHeight: listItemHeight,
-    minimumSliderSize: MinimumSliderSize.minimumSliderSize,
-  })
+  Create2.create(uid, '', listItemHeight, 0, 0, 0, 0, 0, [], '')
 
-  expect(() => {
-    Create2.create(uid, '', listItemHeight, 0, 0, 0, 0, 0, [], '')
-  }).not.toThrow()
-
-  expect(expectedVirtualList.itemHeight).toBe(listItemHeight)
-  expect(expectedVirtualList.headerHeight).toBe(38)
-  expect(expectedVirtualList.minimumSliderSize).toBe(MinimumSliderSize.minimumSliderSize)
-  expect(expectedVirtualList.deltaY).toBe(0)
-  expect(expectedVirtualList.finalDeltaY).toBe(0)
-  expect(expectedVirtualList.focusedIndex).toBe(-1)
-  expect(expectedVirtualList.items).toEqual([])
-  expect(expectedVirtualList.maxLineY).toBe(0)
-  expect(expectedVirtualList.minLineY).toBe(0)
-  expect(expectedVirtualList.scrollBarActive).toBe(false)
-  expect(expectedVirtualList.scrollBarHeight).toBe(0)
-  expect(expectedVirtualList.touchDifference).toBe(0)
-  expect(expectedVirtualList.touchOffsetY).toBe(0)
-  expect(expectedVirtualList.touchTimeStamp).toBe(0)
+  const { newState } = QuickPickStates.get(uid)
+  expect(newState).toBeDefined()
+  expect(newState?.itemHeight).toBe(listItemHeight)
+  expect(newState?.headerHeight).toBe(38)
+  expect(newState?.minimumSliderSize).toBe(MinimumSliderSize.minimumSliderSize)
+  expect(newState?.deltaY).toBe(0)
+  expect(newState?.finalDeltaY).toBe(0)
+  expect(newState?.focusedIndex).toBe(-1)
+  expect(newState?.items).toEqual([])
+  expect(newState?.maxLineY).toBe(0)
+  expect(newState?.minLineY).toBe(0)
+  expect(newState?.scrollBarActive).toBe(false)
+  expect(newState?.scrollBarHeight).toBe(0)
+  expect(newState?.touchDifference).toBe(0)
+  expect(newState?.touchOffsetY).toBe(0)
+  expect(newState?.touchTimeStamp).toBe(0)
 })
 
-test('create handles different parameters', () => {
+test('create handles different uid values', () => {
   const uid1 = 789
   const uid2 = 790
 
-  expect(() => {
-    Create2.create(uid1, 'uri1', 30, 0, 0, 0, 0, 0, [], 'workspace1')
-    Create2.create(uid2, 'uri2', 30, 0, 0, 0, 0, 0, [], 'workspace2')
-  }).not.toThrow()
+  Create2.create(uid1, 'uri1', 30, 0, 0, 0, 0, 0, [], 'workspace1')
+  Create2.create(uid2, 'uri2', 30, 0, 0, 0, 0, 0, [], 'workspace2')
+
+  const { newState: state1 } = QuickPickStates.get(uid1)
+  const { newState: state2 } = QuickPickStates.get(uid2)
+
+  expect(state1).toBeDefined()
+  expect(state1?.uid).toBe(uid1)
+  expect(state1?.uri).toBe('uri1')
+  expect(state1?.workspaceUri).toBe('workspace1')
+
+  expect(state2).toBeDefined()
+  expect(state2?.uid).toBe(uid2)
+  expect(state2?.uri).toBe('uri2')
+  expect(state2?.workspaceUri).toBe('workspace2')
 })

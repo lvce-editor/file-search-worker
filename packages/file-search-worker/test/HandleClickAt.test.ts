@@ -3,13 +3,17 @@ import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as HandleClickAt from '../src/parts/HandleClickAt/HandleClickAt.ts'
+import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('handleClickAt calculates correct index from y coordinate', async () => {
+  let closeWidgetCalled = false
+
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string) => {
-      if (method === 'Workspace.setPath') {
+      if (method === 'Viewlet.closeWidget') {
+        closeWidgetCalled = true
         return
       }
       throw new Error(`unexpected method ${method}`)
@@ -24,31 +28,34 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
     items: [
       {
         description: '',
-        direntType: 0,
+        direntType: 1,
         fileIcon: '',
         icon: '',
+        id: 'test-command',
         label: 'item1',
         matches: [],
-        uri: '/path/to/item1',
-      },
+        uri: '',
+      } as any,
       {
         description: '',
-        direntType: 0,
+        direntType: 1,
         fileIcon: '',
         icon: '',
+        id: 'test-command-2',
         label: 'item2',
         matches: [],
-        uri: '/path/to/item2',
-      },
+        uri: '',
+      } as any,
     ],
     minLineY: 0,
-    providerId: 0,
-    value: '',
+    providerId: QuickPickEntryId.Commands,
+    value: '>',
   })
 
   const y = 50 + 38 + 15
   const result = await HandleClickAt.handleClickAt(state, 100, y)
 
+  expect(closeWidgetCalled).toBe(true)
   expect(result).toBe(state)
 })
 
@@ -171,13 +178,14 @@ test('handleClickAt handles click above header', async () => {
     items: [
       {
         description: '',
-        direntType: 0,
+        direntType: 1,
         fileIcon: '',
         icon: '',
+        id: 'test-command',
         label: 'item',
         matches: [],
-        uri: '/path/to/item',
-      },
+        uri: '',
+      } as any,
     ],
     minLineY: 0,
   })
@@ -189,10 +197,13 @@ test('handleClickAt handles click above header', async () => {
 })
 
 test('handleClickAt ignores x coordinate', async () => {
+  let closeWidgetCallCount = 0
+
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string) => {
-      if (method === 'Workspace.setPath') {
+      if (method === 'Viewlet.closeWidget') {
+        closeWidgetCallCount++
         return
       }
       throw new Error(`unexpected method ${method}`)
@@ -207,23 +218,25 @@ test('handleClickAt ignores x coordinate', async () => {
     items: [
       {
         description: '',
-        direntType: 0,
+        direntType: 1,
         fileIcon: '',
         icon: '',
+        id: 'test-command',
         label: 'item',
         matches: [],
-        uri: '/path/to/item',
-      },
+        uri: '',
+      } as any,
     ],
     minLineY: 0,
-    providerId: 0,
-    value: '',
+    providerId: QuickPickEntryId.Commands,
+    value: '>',
   })
 
   const y = 50 + 38 + 15
   const result1 = await HandleClickAt.handleClickAt(state, 0, y)
   const result2 = await HandleClickAt.handleClickAt(state, 1000, y)
 
+  expect(closeWidgetCallCount).toBe(2)
   expect(result1).toBe(result2)
 })
 

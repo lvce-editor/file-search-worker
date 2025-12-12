@@ -41,9 +41,9 @@ test('returns state with items and focusedIndex unchanged', async () => {
   const state = CreateDefaultState.createDefaultState({
     focusedIndex: 2,
     items: [
-      { label: 'item1', value: 'value1' },
-      { label: 'item2', value: 'value2' },
-      { label: 'item3', value: 'value3' },
+      { label: 'item1', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' },
+      { label: 'item2', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' },
+      { label: 'item3', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' },
     ],
   })
   const result = await HandleBlur.handleBlur(state)
@@ -59,7 +59,7 @@ test('returns state with complex configuration unchanged', async () => {
     focused: true,
     focusedIndex: 1,
     height: 600,
-    items: [{ label: 'test', value: 'test' }],
+    items: [{ label: 'test', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' }],
     uid: 999,
     value: 'complex state',
     width: 1000,
