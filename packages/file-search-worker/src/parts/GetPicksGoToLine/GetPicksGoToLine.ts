@@ -1,62 +1,31 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
-import * as DirentType from '../DirentType/DirentType.ts'
+import { getPicksGoToLineBase } from '../GetPicksGoToLineBase/GetPicksGoToLineBase.ts'
+import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
+import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const getPicks = async (value: string): Promise<readonly ProtoVisibleItem[]> => {
-  const picks: readonly ProtoVisibleItem[] = [
-    {
-      description: '',
-      direntType: DirentType.None,
-      fileIcon: '',
-      icon: '',
-      label: '1',
-      matches: [],
-      uri: '',
-    },
-    {
-      description: '',
-      direntType: DirentType.None,
-      fileIcon: '',
-      icon: '',
-      label: '2',
-      matches: [],
-      uri: '',
-    },
-    {
-      description: '',
-      direntType: DirentType.None,
-      fileIcon: '',
-      icon: '',
-      label: '3',
-      matches: [],
-      uri: '',
-    },
-    {
-      description: '',
-      direntType: DirentType.None,
-      fileIcon: '',
-      icon: '',
-      label: '4',
-      matches: [],
-      uri: '',
-    },
-    {
-      description: '',
-      direntType: DirentType.None,
-      fileIcon: '',
-      icon: '',
-      label: '5',
-      matches: [],
-      uri: '',
-    },
-    {
-      description: '',
-      direntType: DirentType.None,
-      fileIcon: '',
-      icon: '',
-      label: '6',
-      matches: [],
-      uri: '',
-    },
-  ]
-  return picks
+  if (value === QuickPickPrefix.GoToLine) {
+    return getPicksGoToLineBase()
+  }
+  if (value.startsWith(QuickPickPrefix.GoToLine)) {
+    const lineString = value.slice(QuickPickPrefix.GoToLine.length)
+    const wantedLine = Number.parseInt(lineString, 10)
+    if (Number.isNaN(wantedLine)) {
+      return getPicksGoToLineBase()
+    }
+    const rowIndex = wantedLine - 1
+    const columnIndex = 0
+    return [
+      {
+        description: '',
+        direntType: 0,
+        fileIcon: '',
+        icon: '',
+        label: QuickPickStrings.pressEnterToGoToLine(rowIndex, columnIndex),
+        matches: [],
+        uri: '',
+      },
+    ]
+  }
+  return []
 }
