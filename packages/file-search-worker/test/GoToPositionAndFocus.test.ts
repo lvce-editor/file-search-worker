@@ -3,56 +3,43 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GoToPositionAndFocus from '../src/parts/GoToPositionAndFocus/GoToPositionAndFocus.ts'
 
 test('goToPositionAndFocus calls Editor.cursorSet with correct row and column', async () => {
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
-  let handleFocusCalled = false
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
-    'Editor.handleFocus': () => {
-      handleFocusCalled = true
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
+    'Editor.handleFocus': () => {},
   })
 
   await GoToPositionAndFocus.goToPositionAndFocus(5, 10)
 
-  expect(capturedRowIndex).toBe(5)
-  expect(capturedColumnIndex).toBe(10)
-  expect(handleFocusCalled).toBe(true)
+  expect(mockRpc.invocations).toEqual([
+    ['Editor.cursorSet', 5, 10],
+    ['Editor.handleFocus'],
+  ])
 })
 
 test('goToPositionAndFocus calls Editor.cursorSet before Editor.handleFocus', async () => {
-  const callOrder: string[] = []
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': () => {
-      callOrder.push('cursorSet')
-    },
-    'Editor.handleFocus': () => {
-      callOrder.push('handleFocus')
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
+    'Editor.handleFocus': () => {},
   })
 
   await GoToPositionAndFocus.goToPositionAndFocus(0, 0)
 
-  expect(callOrder).toEqual(['cursorSet', 'handleFocus'])
+  expect(mockRpc.invocations).toEqual([
+    ['Editor.cursorSet', 0, 0],
+    ['Editor.handleFocus'],
+  ])
 })
 
 test('goToPositionAndFocus works with different row and column indices', async () => {
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
 
   await GoToPositionAndFocus.goToPositionAndFocus(42, 100)
 
-  expect(capturedRowIndex).toBe(42)
-  expect(capturedColumnIndex).toBe(100)
+  expect(mockRpc.invocations).toEqual([
+    ['Editor.cursorSet', 42, 100],
+    ['Editor.handleFocus'],
+  ])
 })
-

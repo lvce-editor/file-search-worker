@@ -26,5 +26,9 @@ test('focusLast focuses the last item', async () => {
   const result = await focusLast(state)
 
   expect(result.focusedIndex).toBe(2)
-  expect(mockRpc.invocations.length).toBeGreaterThan(0)
+  expect(mockRpc.invocations).toEqual([
+    ['IconTheme.getFileIcon', { name: 'file1.txt' }],
+    ['IconTheme.getFileIcon', { name: 'file2.txt' }],
+    ['IconTheme.getFileIcon', { name: 'file3.txt' }],
+  ])
 })

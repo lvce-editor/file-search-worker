@@ -5,7 +5,7 @@ import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import { getPicks } from '../src/parts/GetPicksGoToLine/GetPicksGoToLine.ts'
 
 test('returns instruction when value is "::"', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
@@ -31,10 +31,11 @@ test('returns instruction when value is "::"', async () => {
     matches: [],
     uri: '',
   })
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('returns position preview when value starts with "::" and has number', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
@@ -60,10 +61,11 @@ test('returns position preview when value starts with "::" and has number', asyn
     matches: [],
     uri: '',
   })
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('returns position preview for multi-line text', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
@@ -89,6 +91,7 @@ test('returns position preview for multi-line text', async () => {
     matches: [],
     uri: '',
   })
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('returns default picks when value does not start with "::"', async () => {

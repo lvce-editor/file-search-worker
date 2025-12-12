@@ -7,7 +7,7 @@ test('returns joined lines from active editor', async () => {
   const editorId = 123
   const lines = ['line 1', 'line 2', 'line 3']
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
@@ -25,13 +25,14 @@ test('returns joined lines from active editor', async () => {
   const result = await GetText.getText()
 
   expect(result).toBe('line 1\nline 2\nline 3')
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('handles empty lines array', async () => {
   const editorId = 456
   const lines: string[] = []
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
@@ -49,13 +50,14 @@ test('handles empty lines array', async () => {
   const result = await GetText.getText()
 
   expect(result).toBe('')
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('handles single line', async () => {
   const editorId = 789
   const lines = ['single line']
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
@@ -73,13 +75,14 @@ test('handles single line', async () => {
   const result = await GetText.getText()
 
   expect(result).toBe('single line')
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('handles lines with empty strings', async () => {
   const editorId = 101
   const lines = ['line 1', '', 'line 3', '']
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
@@ -97,10 +100,11 @@ test('handles lines with empty strings', async () => {
   const result = await GetText.getText()
 
   expect(result).toBe('line 1\n\nline 3\n')
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('handles error from getActiveEditorId', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => {
       throw new Error('Failed to get active editor')
     },
@@ -115,12 +119,13 @@ test('handles error from getActiveEditorId', async () => {
   EditorWorker.set(mockEditorRpc)
 
   await expect(GetText.getText()).rejects.toThrow('Failed to get active editor')
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
 
 test('handles error from getLines', async () => {
   const editorId = 202
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
@@ -136,4 +141,5 @@ test('handles error from getLines', async () => {
   EditorWorker.set(mockEditorRpc)
 
   await expect(GetText.getText()).rejects.toThrow('Failed to get lines')
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
 })
