@@ -1,5 +1,6 @@
 import { test, expect } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
+import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import { getQuickPickFileIcons } from '../src/parts/GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
 
 test('getQuickPickFileIcons returns icons and updates cache', async () => {
@@ -9,8 +10,8 @@ test('getQuickPickFileIcons returns icons and updates cache', async () => {
   })
 
   const items = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
   const fileIconCache = { '/file1.txt': 'icon1' }
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)
@@ -27,8 +28,8 @@ test('getQuickPickFileIcons with all icons cached', async () => {
   })
 
   const items = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
   const fileIconCache = { '/file1.txt': 'icon1', '/file2.txt': 'icon2' }
   const { icons, newFileIconCache } = await getQuickPickFileIcons(items, fileIconCache)

@@ -4,9 +4,9 @@ import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibl
 import * as GetPicksCommand from '../src/parts/GetPicksCommand/GetPicksCommand.ts'
 import * as MenuEntriesState from '../src/parts/MenuEntriesState/MenuEntriesState.ts'
 
-type CommandItem = ProtoVisibleItem & {
-  readonly id: string
+interface CommandItem extends ProtoVisibleItem {
   readonly args?: readonly unknown[]
+  readonly id: string
 }
 
 test('getPicks returns builtin picks', async () => {
@@ -15,6 +15,7 @@ test('getPicks returns builtin picks', async () => {
     { id: 'command2', label: 'Command 2' },
   ]
   const mockRpc = RendererWorker.registerMockRpc({
+    'ExtensionHost.getCommands': () => [],
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
 
@@ -34,7 +35,7 @@ test('getPicks returns builtin picks', async () => {
   })
   expect((result[1] as CommandItem).id).toBe('command2')
   expect(result[1].label).toBe('Command 2')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
 })
 
 test('getPicks returns extension picks with ext prefix', async () => {

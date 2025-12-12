@@ -6,7 +6,7 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
 
-type CommandItem = ProtoVisibleItem & {
+interface CommandItem extends ProtoVisibleItem {
   readonly id: string
   readonly args?: readonly unknown[]
 }
@@ -34,6 +34,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
       closeWidgetCalled = true
       closeWidgetId = id
     },
+    'test-command': () => {},
   })
 
   const items: ProtoVisibleItem[] = [
@@ -65,7 +66,9 @@ test('selectIndex calls select function and returns state for Hide command', asy
 })
 
 test('selectIndex handles default command case', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({})
+  const mockRpc = RendererWorker.registerMockRpc({
+    'test-command': () => {},
+  })
 
   const items: ProtoVisibleItem[] = [
     {
@@ -100,6 +103,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
     'Viewlet.closeWidget': () => {
       closeWidgetCalled = true
     },
+    'test-command': () => {},
   })
 
   const items: ProtoVisibleItem[] = [

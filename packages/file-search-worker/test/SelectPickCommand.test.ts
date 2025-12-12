@@ -4,7 +4,7 @@ import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibl
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import { selectPick } from '../src/parts/SelectPickCommand/SelectPickCommand.ts'
 
-type CommandItem = ProtoVisibleItem & {
+interface CommandItem extends ProtoVisibleItem {
   readonly id: string
   readonly args?: readonly unknown[]
 }

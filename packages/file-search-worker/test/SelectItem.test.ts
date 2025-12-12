@@ -6,7 +6,7 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
 
-type CommandItem = ProtoVisibleItem & {
+interface CommandItem extends ProtoVisibleItem {
   readonly id: string
   readonly args?: readonly unknown[]
 }
@@ -41,6 +41,7 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
     'Viewlet.closeWidget': () => {
       closeWidgetCalled = true
     },
+    'test-command': () => {},
   })
 
   const items: ProtoVisibleItem[] = [
@@ -86,7 +87,7 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
 
   expect(closeWidgetCalled).toBe(true)
   expect(result).toBe(state)
-  expect(mockRpc.invocations).toEqual([['Viewlet.closeWidget', 123]])
+  expect(mockRpc.invocations).toEqual([['test-command'], ['Viewlet.closeWidget', 123]])
 })
 
 test('selectItem handles empty items array', async () => {
