@@ -28,3 +28,4 @@ test('returns maxHeight when totalHeight equals maxHeight', () => {
   const maxHeight = 100
   expect(GetListHeight.getListHeight(itemsLength, itemHeight, maxHeight)).toBe(maxHeight)
 })
+

@@ -5,13 +5,18 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import * as HandleInput from '../src/parts/HandleInput/HandleInput.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 
-test('returns state unchanged when value is the same', async () => {
+test('updates cursorOffset and inputSource when value is the same', async () => {
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
+    cursorOffset: 0,
+    inputSource: InputSource.Script,
     value: 'test',
   }
   const result = await HandleInput.handleInput(state, 'test', 5, InputSource.User)
-  expect(result).toBe(state)
+  expect(result).not.toBe(state)
+  expect(result.value).toBe('test')
+  expect(result.cursorOffset).toBe(5)
+  expect(result.inputSource).toBe(InputSource.User)
 })
 
 test('calls SetValue.setValue and updates cursorOffset and inputSource', async () => {

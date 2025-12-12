@@ -10,7 +10,11 @@ export const handleInput = async (
   inputSource = InputSource.Script,
 ): Promise<QuickPickState> => {
   if (state.value === newValue) {
-    return state
+    return {
+      ...state,
+      cursorOffset,
+      inputSource,
+    }
   }
   const newState = await SetValue.setValue(state, newValue)
   return {
