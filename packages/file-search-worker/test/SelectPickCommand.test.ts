@@ -68,7 +68,7 @@ test('selectPickBuiltin handles item without args', async () => {
     label: 'test',
     matches: [],
     uri: '',
-  } as any
+  } as CommandItem
 
   const result = await selectPick(pick)
 

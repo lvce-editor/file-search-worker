@@ -123,7 +123,7 @@ test('getPicks handles extension picks error', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect((result[0] as any).id).toBe('builtin1')
+  expect((result[0] as CommandItem).id).toBe('builtin1')
   expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
 })
 
@@ -137,7 +137,7 @@ test('getPicks handles null extension picks', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect((result[0] as any).id).toBe('builtin1')
+  expect((result[0] as CommandItem).id).toBe('builtin1')
   expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
 })
 
@@ -154,7 +154,7 @@ test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fail
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect((result[0] as any).id).toBe('state1')
+  expect((result[0] as CommandItem).id).toBe('state1')
   expect(result[0].label).toBe('State 1')
   expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
 })

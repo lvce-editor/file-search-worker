@@ -46,7 +46,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
       label: 'test',
       matches: [],
       uri: '',
-    },
+    } as CommandItem,
   ]
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
