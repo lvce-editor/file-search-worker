@@ -1,5 +1,5 @@
+import { QuickPickEntryId } from '@lvce-editor/constants'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
-import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 
 interface Fn {
   (value: string): string

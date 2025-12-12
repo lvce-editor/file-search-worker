@@ -1,4 +1,4 @@
-import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
+import { QuickPickEntryId } from '@lvce-editor/constants'
 import * as QuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
 export const getPlaceholderValue = (providerId: number): string => {

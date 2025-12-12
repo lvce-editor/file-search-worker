@@ -1,6 +1,6 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as FocusPickColorTheme from '../FocusPickColorTheme/FocusPickColorTheme.ts'
-import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
+import { QuickPickEntryId } from '@lvce-editor/constants'
 
 interface Fn {
   (pick: ProtoVisibleItem): Promise<void>
