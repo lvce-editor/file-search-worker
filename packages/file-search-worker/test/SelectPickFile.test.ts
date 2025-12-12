@@ -8,10 +8,10 @@ test('selectPick constructs absolute path and opens uri', async () => {
   let openedUri: string | undefined
 
   const mockRpc = RendererWorker.registerMockRpc({
-    'Workspace.getPath': () => '/workspace/path',
     'Main.openUri': (uri: string) => {
       openedUri = uri
     },
+    'Workspace.getPath': () => '/workspace/path',
   })
 
   const pick: ProtoVisibleItem = {
@@ -38,10 +38,10 @@ test('selectPick handles different file paths', async () => {
   let openedUri: string | undefined
 
   const mockRpc = RendererWorker.registerMockRpc({
-    'Workspace.getPath': () => '/home/user/project',
     'Main.openUri': (uri: string) => {
       openedUri = uri
     },
+    'Workspace.getPath': () => '/home/user/project',
   })
 
   const pick: ProtoVisibleItem = {
@@ -67,11 +67,11 @@ test('selectPick handles different file paths', async () => {
 test('selectPick handles empty description', async () => {
   let openedUri: string | undefined
 
-  RendererWorker.registerMockRpc({
-    'Workspace.getPath': () => '/workspace',
+  const mockRpc = RendererWorker.registerMockRpc({
     'Main.openUri': (uri: string) => {
       openedUri = uri
     },
+    'Workspace.getPath': () => '/workspace',
   })
 
   const pick: ProtoVisibleItem = {

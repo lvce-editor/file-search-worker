@@ -94,10 +94,10 @@ test('selectPickExtension calls ExtensionHost.executeCommand with id without ext
 
 test('selectPickExtension handles errors and shows error dialog', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
+    'ErrorHandling.showErrorDialog': () => {},
     'ExtensionHost.executeCommand': () => {
       throw new Error('Test error')
     },
-    'ErrorHandling.showErrorDialog': () => {},
   })
 
   const pick: ProtoVisibleItem = {

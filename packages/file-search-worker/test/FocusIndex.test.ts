@@ -5,7 +5,7 @@ import { focusIndex } from '../src/parts/FocusIndex/FocusIndex.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('focusIndex updates focusedIndex when index is within visible range', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -58,10 +58,11 @@ test('focusIndex updates focusedIndex when index is within visible range', async
   expect(result.minLineY).toBe(0)
   expect(result.maxLineY).toBe(3)
   expect(result.icons.length).toBe(3)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('focusIndex scrolls up when index is before minLineY', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -115,10 +116,11 @@ test('focusIndex scrolls up when index is before minLineY', async () => {
   expect(result.minLineY).toBe(0)
   expect(result.maxLineY).toBe(3)
   expect(result.icons.length).toBe(3)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('focusIndex scrolls down when index is at or after maxLineY', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -172,10 +174,11 @@ test('focusIndex scrolls down when index is at or after maxLineY', async () => {
   expect(result.minLineY).toBe(2)
   expect(result.maxLineY).toBe(5)
   expect(result.icons.length).toBe(3)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('focusIndex handles edge case when scrolling up with maxVisibleItems larger than remaining items', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -225,10 +228,11 @@ test('focusIndex handles edge case when scrolling up with maxVisibleItems larger
   expect(result.focusedIndex).toBe(0)
   expect(result.minLineY).toBe(0)
   expect(result.maxLineY).toBe(1)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('focusIndex handles edge case when scrolling down with maxVisibleItems larger than remaining items', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -278,10 +282,11 @@ test('focusIndex handles edge case when scrolling down with maxVisibleItems larg
   expect(result.focusedIndex).toBe(1)
   expect(result.minLineY).toBe(0)
   expect(result.maxLineY).toBe(2)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('focusIndex updates fileIconCache', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -332,4 +337,5 @@ test('focusIndex updates fileIconCache', async () => {
     '/file1.txt': 'cached-icon',
     '/file2.txt': 'icon-for-file2.txt',
   })
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
