@@ -15,10 +15,20 @@ const getFilterValueEverything = (value: string): string => {
   return value.slice(prefixLength).trim()
 }
 
+const getValueGoToLine = (value: string): string => {
+  if (value.startsWith('::')) {
+    return value.slice(2)
+  }
+  return value.slice(2)
+}
+
 const getFn = (id: number): Fn => {
   switch (id) {
     case QuickPickEntryId.EveryThing:
       return getFilterValueEverything
+    case QuickPickEntryId.GoToLine:
+      return getValueGoToLine
+
     default:
       return noop
   }
