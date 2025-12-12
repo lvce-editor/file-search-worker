@@ -68,6 +68,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
 test('selectIndex handles default command case', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
+    'Viewlet.closeWidget': () => {},
   })
 
   const items: ProtoVisibleItem[] = [
