@@ -1,11 +1,8 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SetValue from '../src/parts/SetValue/SetValue.ts'
 
 test('returns same state when value is unchanged', async () => {
