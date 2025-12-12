@@ -18,7 +18,7 @@ const getFilterValueEverything = (value: string): string => {
 
 const getValueGoToLine = (value: string): string => {
   if (value.startsWith(QuickPickPrefix.GoToColumn)) {
-    return value.slice(2)
+    return ''
   }
   return value.slice(1)
 }
