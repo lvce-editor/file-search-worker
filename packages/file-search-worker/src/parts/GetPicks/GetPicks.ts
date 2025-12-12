@@ -1,7 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickEntries from '../QuickPickEntries/QuickPickEntries.ts'
 
-export interface GetPicks {
+export interface IGetPicks {
   (value: string, args: readonly unknown[]): Promise<readonly ProtoVisibleItem[]>
 }
 
