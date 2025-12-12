@@ -46,6 +46,7 @@ test('selectPickBuiltin returns Hide when shouldHide returns true', async () => 
   const result = await selectPick(pick)
 
   expect(result.command).toBe(QuickPickReturnValue.Hide)
+  expect(mockRpc.invocations).toEqual([['test-command']])
 })
 
 test('selectPickBuiltin handles item without args', async () => {

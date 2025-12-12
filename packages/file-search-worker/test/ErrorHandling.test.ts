@@ -4,10 +4,13 @@ import * as ErrorHandling from '../src/parts/ErrorHandling/ErrorHandling.ts'
 
 class TestError extends Error {
   code: string
-  constructor(message: string, code: string) {
+  constructor(message: string, code: string, stack?: string) {
     super(message)
     this.name = 'TestError'
     this.code = code
+    if (stack !== undefined) {
+      this.stack = stack
+    }
   }
 }
 
