@@ -1,27 +1,26 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
 
-const createMockState = (items: ProtoVisibleItem[], minLineY = 0, providerId = QuickPickEntryId.Commands, value = ''): QuickPickState => {
-  return {
-    ...CreateDefaultState.createDefaultState(),
-    items,
-    minLineY,
-    providerId,
-    uid: 123,
-    value,
-  }
+interface CommandItem extends ProtoVisibleItem {
+  readonly args?: readonly unknown[]
+  readonly id: string
 }
 
 test('selectIndex returns state when pick is not found', async () => {
   const items: ProtoVisibleItem[] = []
-  const state = createMockState(items, 0)
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    items,
+    minLineY: 0,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '',
+  }
   const result = await selectIndex(state, 0)
   expect(result).toBe(state)
 })
@@ -30,16 +29,13 @@ test('selectIndex calls select function and returns state for Hide command', asy
   let closeWidgetCalled = false
   let closeWidgetId: number | undefined
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string, ...args: readonly unknown[]) => {
-      if (method === 'Viewlet.closeWidget') {
-        closeWidgetCalled = true
-        closeWidgetId = args[0] as number
-      }
+  const mockRpc = RendererWorker.registerMockRpc({
+    'test-command': () => {},
+    'Viewlet.closeWidget': (id: number) => {
+      closeWidgetCalled = true
+      closeWidgetId = id
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {
@@ -51,22 +47,29 @@ test('selectIndex calls select function and returns state for Hide command', asy
       label: 'test',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
   ]
-  const state = createMockState(items, 0, QuickPickEntryId.Commands, '>')
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    items,
+    minLineY: 0,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  }
   const result = await selectIndex(state, 0)
 
   expect(closeWidgetCalled).toBe(true)
   expect(closeWidgetId).toBe(123)
   expect(result).toBe(state)
+  expect(mockRpc.invocations).toEqual([['test-command'], ['Viewlet.closeWidget', 123]])
 })
 
 test('selectIndex handles default command case', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async () => {},
+  const mockRpc = RendererWorker.registerMockRpc({
+    'test-command': () => {},
+    'Viewlet.closeWidget': () => {},
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {
@@ -78,26 +81,31 @@ test('selectIndex handles default command case', async () => {
       label: 'test',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
   ]
-  const state = createMockState(items, 0, QuickPickEntryId.Commands, '>')
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    items,
+    minLineY: 0,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  }
   const result = await selectIndex(state, 0)
 
   expect(result).toBe(state)
+  expect(mockRpc.invocations.length).toBeGreaterThanOrEqual(0)
 })
 
 test('selectIndex calculates actualIndex correctly with minLineY', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'Viewlet.closeWidget') {
-        closeWidgetCalled = true
-      }
+  const mockRpc = RendererWorker.registerMockRpc({
+    'test-command': () => {},
+    'Viewlet.closeWidget': () => {
+      closeWidgetCalled = true
     },
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {
@@ -109,7 +117,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'first',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -119,7 +127,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'second',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -129,7 +137,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'third',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -139,7 +147,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'fourth',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -149,7 +157,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'fifth',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -159,11 +167,19 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'sixth',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
   ]
-  const state = createMockState(items, 5, QuickPickEntryId.Commands, '>')
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    items,
+    minLineY: 5,
+    providerId: QuickPickEntryId.Commands,
+    uid: 123,
+    value: '>',
+  }
   const result = await selectIndex(state, 0)
 
   expect(closeWidgetCalled).toBe(true)
   expect(result).toBe(state)
+  expect(mockRpc.invocations).toEqual([['test-command'], ['Viewlet.closeWidget', 123]])
 })

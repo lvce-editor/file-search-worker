@@ -1,33 +1,29 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
+import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as HandleInput from '../src/parts/HandleInput/HandleInput.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('returns state unchanged when value is the same', async () => {
-  const state = CreateDefaultState.createDefaultState({ value: 'test' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    value: 'test',
+  }
   const result = await HandleInput.handleInput(state, 'test', 5, InputSource.User)
   expect(result).toBe(state)
 })
 
 test('calls SetValue.setValue and updates cursorOffset and inputSource', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => [],
+    'GetQuickPickFileIcons.getQuickPickFileIcons': () => ({ icons: [], newFileIconCache: Object.create(null) }),
   })
-  set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    value: 'old',
+  }
   const newValue = 'new'
   const cursorOffset = 3
   const inputSource = InputSource.User
@@ -38,24 +34,19 @@ test('calls SetValue.setValue and updates cursorOffset and inputSource', async (
   expect(result.cursorOffset).toBe(cursorOffset)
   expect(result.inputSource).toBe(inputSource)
   expect(result).not.toBe(state)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('uses default inputSource when not provided', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => [],
+    'GetQuickPickFileIcons.getQuickPickFileIcons': () => ({ icons: [], newFileIconCache: Object.create(null) }),
   })
-  set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    value: 'old',
+  }
   const newValue = 'new'
   const cursorOffset = 2
 
@@ -64,24 +55,21 @@ test('uses default inputSource when not provided', async () => {
   expect(result.value).toBe(newValue)
   expect(result.cursorOffset).toBe(cursorOffset)
   expect(result.inputSource).toBe(InputSource.Script)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })
 
 test('preserves other state properties from SetValue.setValue result', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'GetQuickPickFileIcons.getQuickPickFileIcons') {
-        return { icons: [], newFileIconCache: Object.create(null) }
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': () => [],
+    'GetQuickPickFileIcons.getQuickPickFileIcons': () => ({ icons: [], newFileIconCache: Object.create(null) }),
   })
-  set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ height: 500, uid: 42, value: 'old' })
+  const state: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
+    height: 500,
+    uid: 42,
+    value: 'old',
+  }
   const newValue = 'new'
   const cursorOffset = 1
 
@@ -91,4 +79,5 @@ test('preserves other state properties from SetValue.setValue result', async () 
   expect(result.height).toBe(500)
   expect(result.value).toBe(newValue)
   expect(result.cursorOffset).toBe(cursorOffset)
+  expect(mockRpc.invocations.length).toBeGreaterThan(0)
 })

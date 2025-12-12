@@ -5,16 +5,9 @@ import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import { getPicks } from '../src/parts/GetPicksGoToLine/GetPicksGoToLine.ts'
 
 test('returns instruction when value is "::"', async () => {
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return 1
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => 1,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -41,16 +34,9 @@ test('returns instruction when value is "::"', async () => {
 })
 
 test('returns position preview when value starts with "::" and has number', async () => {
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return 1
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => 1,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -77,16 +63,9 @@ test('returns position preview when value starts with "::" and has number', asyn
 })
 
 test('returns position preview for multi-line text', async () => {
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return 1
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => 1,
   })
-  RendererWorker.set(mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},

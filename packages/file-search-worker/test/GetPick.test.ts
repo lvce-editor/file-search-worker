@@ -19,12 +19,12 @@ test('returns undefined for index out of bounds', () => {
 })
 
 test('throws error if items is not an array', () => {
-  expect(() => GetPick.getPick('not an array' as any, 0)).toThrow()
+  expect(() => GetPick.getPick('not an array' as unknown as readonly ProtoVisibleItem[], 0)).toThrow()
 })
 
 test('throws error if index is not a number', () => {
   const items: readonly ProtoVisibleItem[] = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' }]
-  expect(() => GetPick.getPick(items, 'not a number' as any)).toThrow()
+  expect(() => GetPick.getPick(items, 'not a number' as unknown as number)).toThrow()
 })
 
 test('handles empty array', () => {
