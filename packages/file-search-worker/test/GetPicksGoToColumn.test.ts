@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
 import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicksGoToColumn } from '../src/parts/GetPicksGoToColumn/GetPicksGoToColumn.ts'
 
@@ -8,16 +7,14 @@ test('returns instruction when value is "::"', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (editorId: number) => {
+      if (editorId === 1) {
         return ['line1', 'line2', 'line3']
       }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+      throw new Error(`unexpected editorId ${editorId}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await getPicksGoToColumn('::')
   expect(result).toHaveLength(1)
@@ -31,6 +28,7 @@ test('returns instruction when value is "::"', async () => {
     uri: '',
   })
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', 1]])
 })
 
 test('returns position preview when value starts with "::" and has number', async () => {
@@ -38,16 +36,14 @@ test('returns position preview when value starts with "::" and has number', asyn
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (editorId: number) => {
+      if (editorId === 1) {
         return ['hello', 'world', 'test']
       }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+      throw new Error(`unexpected editorId ${editorId}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await getPicksGoToColumn('::5')
   expect(result).toHaveLength(1)
@@ -61,6 +57,7 @@ test('returns position preview when value starts with "::" and has number', asyn
     uri: '',
   })
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', 1]])
 })
 
 test('returns position preview for multi-line text', async () => {
@@ -68,16 +65,14 @@ test('returns position preview for multi-line text', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (editorId: number) => {
+      if (editorId === 1) {
         return ['first line', 'second line', 'third line']
       }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+      throw new Error(`unexpected editorId ${editorId}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await getPicksGoToColumn('::15')
   expect(result).toHaveLength(1)
@@ -91,6 +86,7 @@ test('returns position preview for multi-line text', async () => {
     uri: '',
   })
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', 1]])
 })
 
 test('returns empty array when value does not start with "::"', async () => {

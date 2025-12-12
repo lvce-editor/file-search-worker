@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
 import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicksGoToColumnBase } from '../src/parts/GetPicksGoToColumnBase/GetPicksGoToColumnBase.ts'
 
@@ -8,16 +7,14 @@ test('returns instruction with text length', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (editorId: number) => {
+      if (editorId === 1) {
         return ['line1', 'line2', 'line3']
       }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+      throw new Error(`unexpected editorId ${editorId}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await getPicksGoToColumnBase()
   expect(result).toHaveLength(1)
@@ -31,6 +28,7 @@ test('returns instruction with text length', async () => {
     uri: '',
   })
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', 1]])
 })
 
 test('handles empty text', async () => {
@@ -38,16 +36,14 @@ test('handles empty text', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (editorId: number) => {
+      if (editorId === 1) {
         return []
       }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+      throw new Error(`unexpected editorId ${editorId}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await getPicksGoToColumnBase()
   expect(result).toHaveLength(1)
@@ -61,6 +57,7 @@ test('handles empty text', async () => {
     uri: '',
   })
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', 1]])
 })
 
 test('handles single line text', async () => {
@@ -68,16 +65,14 @@ test('handles single line text', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (editorId: number) => {
+      if (editorId === 1) {
         return ['hello world']
       }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+      throw new Error(`unexpected editorId ${editorId}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await getPicksGoToColumnBase()
   expect(result).toHaveLength(1)
@@ -91,4 +86,5 @@ test('handles single line text', async () => {
     uri: '',
   })
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', 1]])
 })
