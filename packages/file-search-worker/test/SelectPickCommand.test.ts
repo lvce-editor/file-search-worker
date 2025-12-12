@@ -4,6 +4,11 @@ import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibl
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import { selectPick } from '../src/parts/SelectPickCommand/SelectPickCommand.ts'
 
+type CommandItem = ProtoVisibleItem & {
+  readonly id: string
+  readonly args?: readonly unknown[]
+}
+
 test('selectPickBuiltin calls RendererWorker.invoke with item id and args', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
     'AutoUpdater.checkForUpdates': () => {},
@@ -19,7 +24,7 @@ test('selectPickBuiltin calls RendererWorker.invoke with item id and args', asyn
     label: 'test',
     matches: [],
     uri: '',
-  } as any
+  } as CommandItem
 
   const result = await selectPick(pick)
 
@@ -41,7 +46,7 @@ test('selectPickBuiltin returns Hide when shouldHide returns true', async () => 
     label: 'test',
     matches: [],
     uri: '',
-  } as any
+  } as CommandItem
 
   const result = await selectPick(pick)
 
@@ -85,7 +90,7 @@ test('selectPickExtension calls ExtensionHost.executeCommand with id without ext
     label: 'test',
     matches: [],
     uri: '',
-  } as any
+  } as CommandItem
 
   const result = await selectPick(pick)
 
@@ -110,7 +115,7 @@ test('selectPickExtension handles errors and shows error dialog', async () => {
     label: 'test',
     matches: [],
     uri: '',
-  } as any
+  } as CommandItem
 
   const result = await selectPick(pick)
 

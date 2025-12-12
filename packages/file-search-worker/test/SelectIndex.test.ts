@@ -6,6 +6,11 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
 
+type CommandItem = ProtoVisibleItem & {
+  readonly id: string
+  readonly args?: readonly unknown[]
+}
+
 test('selectIndex returns state when pick is not found', async () => {
   const items: ProtoVisibleItem[] = []
   const state: QuickPickState = {
@@ -41,7 +46,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
       label: 'test',
       matches: [],
       uri: '',
-    } as any,
+    },
   ]
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
@@ -72,7 +77,7 @@ test('selectIndex handles default command case', async () => {
       label: 'test',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
   ]
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
@@ -107,7 +112,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'first',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -117,7 +122,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'second',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -127,7 +132,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'third',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -137,7 +142,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'fourth',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -147,7 +152,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'fifth',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -157,7 +162,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       label: 'sixth',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
   ]
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),

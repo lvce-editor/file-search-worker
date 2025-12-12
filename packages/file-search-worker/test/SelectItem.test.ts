@@ -6,6 +6,11 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
 
+type CommandItem = ProtoVisibleItem & {
+  readonly id: string
+  readonly args?: readonly unknown[]
+}
+
 test('selectItem returns state when label is not found', async () => {
   const items: ProtoVisibleItem[] = [
     {
@@ -48,7 +53,7 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
       label: 'first',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -58,7 +63,7 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
       label: 'second',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
     {
       description: '',
       direntType: 1,
@@ -68,7 +73,7 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
       label: 'third',
       matches: [],
       uri: '',
-    } as any,
+    } as CommandItem,
   ]
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),

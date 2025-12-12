@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
+import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import { focusIndex } from '../src/parts/FocusIndex/FocusIndex.ts'
-import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('focusIndex updates focusedIndex when index is within visible range', async () => {
   const mockRpc = RendererWorker.registerMockRpc({
@@ -17,39 +17,13 @@ test('focusIndex updates focusedIndex when index is within visible range', async
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file4.txt', matches: [], uri: '/file4.txt' },
   ]
 
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 20, minimumSliderSize: 20 })
   const state: QuickPickState = {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
-    fileIconCache: {},
-    focused: false,
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 0,
-    height: 300,
-    icons: [],
-    inputSource: 0,
     items,
     maxLineY: 3,
-    maxVisibleItems: 10,
     minLineY: 0,
-    picks: [],
-    platform: 0,
     providerId: 3,
-    recentPickIds: {},
-    recentPicks: [],
-    scrollBarActive: false,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
   }
 
   const result = await focusIndex(state, 1)
@@ -75,39 +49,14 @@ test('focusIndex scrolls up when index is before minLineY', async () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file5.txt', matches: [], uri: '/file5.txt' },
   ]
 
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 20, minimumSliderSize: 20 })
   const state: QuickPickState = {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
-    fileIconCache: {},
-    focused: false,
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 3,
-    height: 300,
-    icons: [],
-    inputSource: 0,
     items,
     maxLineY: 4,
     maxVisibleItems: 3,
     minLineY: 2,
-    picks: [],
-    platform: 0,
     providerId: 3,
-    recentPickIds: {},
-    recentPicks: [],
-    scrollBarActive: false,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
   }
 
   const result = await focusIndex(state, 0)
@@ -133,39 +82,14 @@ test('focusIndex scrolls down when index is at or after maxLineY', async () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file5.txt', matches: [], uri: '/file5.txt' },
   ]
 
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 20, minimumSliderSize: 20 })
   const state: QuickPickState = {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
-    fileIconCache: {},
-    focused: false,
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 0,
-    height: 300,
-    icons: [],
-    inputSource: 0,
     items,
     maxLineY: 2,
     maxVisibleItems: 3,
     minLineY: 0,
-    picks: [],
-    platform: 0,
     providerId: 3,
-    recentPickIds: {},
-    recentPicks: [],
-    scrollBarActive: false,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
   }
 
   const result = await focusIndex(state, 4)
@@ -188,39 +112,13 @@ test('focusIndex handles edge case when scrolling up with maxVisibleItems larger
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
 
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 20, minimumSliderSize: 20 })
   const state: QuickPickState = {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
-    fileIconCache: {},
-    focused: false,
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 1,
-    height: 300,
-    icons: [],
-    inputSource: 0,
     items,
     maxLineY: 1,
-    maxVisibleItems: 10,
     minLineY: 0,
-    picks: [],
-    platform: 0,
     providerId: 3,
-    recentPickIds: {},
-    recentPicks: [],
-    scrollBarActive: false,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
   }
 
   const result = await focusIndex(state, 0)
@@ -242,39 +140,13 @@ test('focusIndex handles edge case when scrolling down with maxVisibleItems larg
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
 
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 20, minimumSliderSize: 20 })
   const state: QuickPickState = {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
-    fileIconCache: {},
-    focused: false,
+    ...CreateDefaultState.createDefaultState(),
     focusedIndex: 0,
-    height: 300,
-    icons: [],
-    inputSource: 0,
     items,
     maxLineY: 1,
-    maxVisibleItems: 10,
     minLineY: 0,
-    picks: [],
-    platform: 0,
     providerId: 3,
-    recentPickIds: {},
-    recentPicks: [],
-    scrollBarActive: false,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
   }
 
   const result = await focusIndex(state, 1)
@@ -296,39 +168,14 @@ test('focusIndex updates fileIconCache', async () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
 
-  const virtualList = VirtualList.create({ headerHeight: 38, itemHeight: 20, minimumSliderSize: 20 })
   const state: QuickPickState = {
-    ...virtualList,
-    args: [],
-    cursorOffset: 0,
+    ...CreateDefaultState.createDefaultState(),
     fileIconCache: { '/file1.txt': 'cached-icon' },
-    focused: false,
     focusedIndex: 0,
-    height: 300,
-    icons: [],
-    inputSource: 0,
     items,
     maxLineY: 1,
-    maxVisibleItems: 10,
     minLineY: 0,
-    picks: [],
-    platform: 0,
     providerId: 3,
-    recentPickIds: {},
-    recentPicks: [],
-    scrollBarActive: false,
-    state: 0,
-    top: 50,
-    touchDifference: 0,
-    touchOffsetY: 0,
-    touchTimeStamp: 0,
-    uid: 1,
-    uri: '',
-    value: '',
-    versionId: 0,
-    warned: [],
-    width: 600,
-    workspaceUri: '',
   }
 
   const result = await focusIndex(state, 1)

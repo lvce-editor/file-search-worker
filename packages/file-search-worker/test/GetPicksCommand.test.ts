@@ -1,7 +1,13 @@
 import { expect, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
+import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetPicksCommand from '../src/parts/GetPicksCommand/GetPicksCommand.ts'
 import * as MenuEntriesState from '../src/parts/MenuEntriesState/MenuEntriesState.ts'
+
+type CommandItem = ProtoVisibleItem & {
+  readonly id: string
+  readonly args?: readonly unknown[]
+}
 
 test('getPicks returns builtin picks', async () => {
   const builtinPicks = [
@@ -26,7 +32,7 @@ test('getPicks returns builtin picks', async () => {
     matches: [],
     uri: '',
   })
-  expect((result[1] as any).id).toBe('command2')
+  expect((result[1] as CommandItem).id).toBe('command2')
   expect(result[1].label).toBe('Command 2')
   expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries']])
 })
@@ -55,8 +61,8 @@ test('getPicks returns extension picks with ext prefix', async () => {
     matches: [],
     uri: '',
   })
-  expect((result[1] as any).id).toBe('ext.ext.command2')
-  expect((result[1] as any).args).toEqual(['arg1'])
+  expect((result[1] as CommandItem).id).toBe('ext.ext.command2')
+  expect((result[1] as CommandItem).args).toEqual(['arg1'])
   expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
 })
 
@@ -71,8 +77,8 @@ test('getPicks combines builtin and extension picks', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(2)
-  expect((result[0] as any).id).toBe('builtin1')
-  expect((result[1] as any).id).toBe('ext.ext1')
+  expect((result[0] as CommandItem).id).toBe('builtin1')
+  expect((result[1] as CommandItem).id).toBe('ext.ext1')
   expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
 })
 
@@ -100,7 +106,7 @@ test('getPicks handles missing id in extension picks', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect((result[0] as any).id).toBe('ext.undefined')
+  expect((result[0] as CommandItem).id).toBe('ext.undefined')
   expect(result[0].label).toBe('Command without id')
   expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
 })

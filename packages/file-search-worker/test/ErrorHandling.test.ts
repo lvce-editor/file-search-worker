@@ -40,8 +40,7 @@ test('showErrorDialog extracts error properties and calls RendererWorker.showErr
     'ErrorHandling.showErrorDialog': () => {},
   })
 
-  const error = new TestError('test error', 'TEST_CODE')
-  error.stack = 'Error: test error\n    at test.js:1:1'
+  const error = new TestError('test error', 'TEST_CODE', 'Error: test error\n    at test.js:1:1')
 
   await ErrorHandling.showErrorDialog(error)
 

@@ -10,7 +10,7 @@ test('selectPick calls QuickPick.executeCallback with resolveId and pick', async
     'QuickPick.executeCallback': () => {},
   })
 
-  state.args = ['arg1', 'arg2', 'resolve-id-123'] as any
+  state.args = ['arg1', 'arg2', 'resolve-id-123'] as readonly unknown[]
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -33,7 +33,7 @@ test('selectPick handles different resolveIds', async () => {
     'QuickPick.executeCallback': () => {},
   })
 
-  state.args = ['arg1', 'arg2', 'another-resolve-id'] as any
+  state.args = ['arg1', 'arg2', 'another-resolve-id'] as readonly unknown[]
 
   const pick: ProtoVisibleItem = {
     description: '',
