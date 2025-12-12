@@ -96,8 +96,8 @@ test('getPicks combines builtin and extension picks', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(2)
-  expect(result[0].id).toBe('builtin1')
-  expect(result[1].id).toBe('ext.ext1')
+  expect((result[0] as any).id).toBe('builtin1')
+  expect((result[1] as any).id).toBe('ext.ext1')
 })
 
 test('getPicks handles missing label in extension picks', async () => {
@@ -141,7 +141,7 @@ test('getPicks handles missing id in extension picks', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect(result[0].id).toBe('ext.undefined')
+  expect((result[0] as any).id).toBe('ext.undefined')
   expect(result[0].label).toBe('Command without id')
 })
 
@@ -164,7 +164,7 @@ test('getPicks handles extension picks error', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect(result[0].id).toBe('builtin1')
+  expect((result[0] as any).id).toBe('builtin1')
 })
 
 test('getPicks handles null extension picks', async () => {
@@ -186,7 +186,7 @@ test('getPicks handles null extension picks', async () => {
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect(result[0].id).toBe('builtin1')
+  expect((result[0] as any).id).toBe('builtin1')
 })
 
 test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fails', async () => {
@@ -209,6 +209,6 @@ test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fail
   const result = await GetPicksCommand.getPicks()
 
   expect(result).toHaveLength(1)
-  expect(result[0].id).toBe('state1')
+  expect((result[0] as any).id).toBe('state1')
   expect(result[0].label).toBe('State 1')
 })
