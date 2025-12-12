@@ -1,7 +1,7 @@
 import { test, expect, jest } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as ErrorHandling from '../src/parts/ErrorHandling/ErrorHandling.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('handleError logs error to console', async () => {
@@ -36,7 +36,7 @@ test('showErrorDialog extracts error properties and calls RendererWorker.showErr
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const error = new Error('test error')
   error.name = 'TestError'
@@ -67,7 +67,7 @@ test('showErrorDialog handles error without all properties', async () => {
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const error: any = { message: 'simple error' }
 

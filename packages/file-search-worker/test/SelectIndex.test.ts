@@ -1,9 +1,9 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
 
@@ -72,7 +72,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
       }
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {
@@ -99,7 +99,7 @@ test('selectIndex handles default command case', async () => {
     commandMap: {},
     invoke: async () => {},
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {
@@ -130,7 +130,7 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
       }
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {

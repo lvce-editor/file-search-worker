@@ -1,9 +1,9 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectItem } from '../src/parts/SelectItem/SelectItem.ts'
 
@@ -80,7 +80,7 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
       }
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const items: ProtoVisibleItem[] = [
     {

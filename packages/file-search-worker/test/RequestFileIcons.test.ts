@@ -1,8 +1,8 @@
 import { expect, jest, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import * as RequestFileIcons from '../src/parts/RequestFileIcons/RequestFileIcons.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('requests file icons', async () => {
@@ -11,7 +11,7 @@ test('requests file icons', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   mockInvoke.mockResolvedValueOnce('/icons/file.png').mockResolvedValueOnce('/icons/other.png')
 
@@ -33,7 +33,7 @@ test('requests folder icons', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   mockInvoke.mockResolvedValueOnce('/icons/folder.png').mockResolvedValueOnce('/icons/folder2.png')
 
@@ -54,7 +54,7 @@ test.skip('handles empty requests array', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await RequestFileIcons.requestFileIcons([])
   expect(result).toEqual([])
@@ -67,7 +67,7 @@ test.skip('handles requests with no name', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const requests = [
     { name: '', path: '', type: DirentType.File },

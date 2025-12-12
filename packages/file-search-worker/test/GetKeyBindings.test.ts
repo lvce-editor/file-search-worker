@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals'
+import { WhenExpression } from '@lvce-editor/constants'
 import * as GetKeyBindings from '../src/parts/GetKeyBindings/GetKeyBindings.ts'
 import * as KeyCode from '../src/parts/KeyCode/KeyCode.ts'
-import * as WhenExpression from '../src/parts/WhenExpression/WhenExpression.ts'
 
 test('returns array of key bindings', () => {
   const keyBindings = GetKeyBindings.getKeyBindings()

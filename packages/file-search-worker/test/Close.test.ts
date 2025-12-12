@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as Close from '../src/parts/Close/Close.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('close calls closeWidget with correct uid', async () => {
@@ -16,7 +16,7 @@ test('close calls closeWidget with correct uid', async () => {
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
     args: [],
@@ -75,7 +75,7 @@ test('close returns the same state object', async () => {
       // no-op
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const state: QuickPickState = {
     args: [],

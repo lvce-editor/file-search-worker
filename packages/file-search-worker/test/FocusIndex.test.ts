@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import { focusIndex } from '../src/parts/FocusIndex/FocusIndex.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
@@ -16,7 +16,7 @@ test('focusIndex updates focusedIndex when index is within visible range', async
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -78,7 +78,7 @@ test('focusIndex scrolls up when index is before minLineY', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -141,7 +141,7 @@ test('focusIndex scrolls down when index is at or after maxLineY', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -204,7 +204,7 @@ test('focusIndex handles edge case when scrolling up with maxVisibleItems larger
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -263,7 +263,7 @@ test('focusIndex handles edge case when scrolling down with maxVisibleItems larg
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -322,7 +322,7 @@ test('focusIndex updates fileIconCache', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },

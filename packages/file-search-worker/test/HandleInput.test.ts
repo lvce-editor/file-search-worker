@@ -1,9 +1,9 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as HandleInput from '../src/parts/HandleInput/HandleInput.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('returns state unchanged when value is the same', async () => {
@@ -25,7 +25,7 @@ test('calls SetValue.setValue and updates cursorOffset and inputSource', async (
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ value: 'old' })
   const newValue = 'new'
@@ -53,7 +53,7 @@ test('uses default inputSource when not provided', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ value: 'old' })
   const newValue = 'new'
@@ -79,7 +79,7 @@ test('preserves other state properties from SetValue.setValue result', async () 
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ height: 500, uid: 42, value: 'old' })
   const newValue = 'new'

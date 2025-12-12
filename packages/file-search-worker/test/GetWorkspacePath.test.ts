@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import { getWorkspacePath } from '../src/parts/GetWorkspacePath/GetWorkspacePath.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getWorkspacePath should invoke Workspace.getPath and return the path', async () => {
@@ -16,7 +16,7 @@ test('getWorkspacePath should invoke Workspace.getPath and return the path', asy
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await getWorkspacePath()
   expect(result).toBe(mockWorkspacePath)
@@ -34,7 +34,7 @@ test('getWorkspacePath should handle different workspace paths', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await getWorkspacePath()
   expect(result).toBe(mockWorkspacePath)

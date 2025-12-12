@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import { focusPick } from '../src/parts/FocusPick/FocusPick.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('focusPick calls ColorTheme.setColorTheme for ColorTheme provider', async () => {
@@ -17,7 +17,7 @@ test('focusPick calls ColorTheme.setColorTheme for ColorTheme provider', async (
       return undefined
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
@@ -42,7 +42,7 @@ test('focusPick does nothing for non-ColorTheme provider', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',

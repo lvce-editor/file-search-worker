@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as GetPicksCommand from '../src/parts/GetPicksCommand/GetPicksCommand.ts'
 import * as MenuEntriesState from '../src/parts/MenuEntriesState/MenuEntriesState.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getPicks returns builtin picks', async () => {
@@ -19,7 +19,7 @@ test('getPicks returns builtin picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -56,7 +56,7 @@ test('getPicks returns extension picks with ext prefix', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -91,7 +91,7 @@ test('getPicks combines builtin and extension picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -114,7 +114,7 @@ test('getPicks handles missing label in extension picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -136,7 +136,7 @@ test('getPicks handles missing id in extension picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -159,7 +159,7 @@ test('getPicks handles extension picks error', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -181,7 +181,7 @@ test('getPicks handles null extension picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 
@@ -204,7 +204,7 @@ test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fail
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
 

@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SelectPickRecent from '../src/parts/SelectPickRecent/SelectPickRecent.ts'
 
@@ -17,7 +17,7 @@ test('selectPick calls Workspace.setPath with the pick uri', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
@@ -45,7 +45,7 @@ test('selectPick returns Hide command after opening workspace folder', async () 
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
@@ -74,7 +74,7 @@ test('selectPick handles different uri formats', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const pick = {
     description: '',
