@@ -1,6 +1,6 @@
 import { expect, test } from '@jest/globals'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import * as RendererWorker from '../src/parts/RendererWorker/RendererWorker.ts'
 import * as SelectPickRecent from '../src/parts/SelectPickRecent/SelectPickRecent.ts'
 
 test('selectPick calls Workspace.setPath with the pick uri', async () => {
@@ -22,8 +22,8 @@ test('selectPick calls Workspace.setPath with the pick uri', async () => {
 
   expect((mockRpc as any).invocations).toEqual([
     {
-      method: 'Workspace.setPath',
       args: ['/path/to/workspace'],
+      method: 'Workspace.setPath',
     },
   ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
@@ -46,10 +46,10 @@ test('selectPick returns Hide command after opening workspace folder', async () 
 
   const result = await SelectPickRecent.selectPick(pick)
 
-  expect((mockRpc as any).invocations).toEqual([
+  expect(mockRpc.invocations).toEqual([
     {
-      method: 'Workspace.setPath',
       args: ['/another/path'],
+      method: 'Workspace.setPath',
     },
   ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
@@ -72,10 +72,10 @@ test('selectPick handles different uri formats', async () => {
 
   const result = await SelectPickRecent.selectPick(pick)
 
-  expect((mockRpc as any).invocations).toEqual([
+  expect(mockRpc.invocations).toEqual([
     {
-      method: 'Workspace.setPath',
       args: ['file:///home/user/project'],
+      method: 'Workspace.setPath',
     },
   ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
