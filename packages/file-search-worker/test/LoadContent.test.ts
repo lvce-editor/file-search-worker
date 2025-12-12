@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals'
+import { expect, jest, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
@@ -42,11 +42,15 @@ test('loadContent returns state with loaded content', async () => {
 })
 
 test('loadContent handles empty picks', async () => {
+  const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: (method: string) => {
       if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
         return 'icon'
+      }
+      if (method === 'ExtensionHost.getCommands') {
+        return []
       }
       throw new Error(`unexpected method ${method}`)
     },
@@ -59,6 +63,7 @@ test('loadContent handles empty picks', async () => {
   })
 
   const result = await loadContent(state)
+  consoleErrorSpy.mockRestore()
 
   expect(result.picks).toEqual([])
   expect(result.items).toEqual([])

@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals'
+import { expect, jest, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as GetPicksCommand from '../src/parts/GetPicksCommand/GetPicksCommand.ts'
@@ -6,6 +6,7 @@ import * as MenuEntriesState from '../src/parts/MenuEntriesState/MenuEntriesStat
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getPicks returns builtin picks', async () => {
+  const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
   const builtinPicks = [
     { id: 'command1', label: 'Command 1' },
     { id: 'command2', label: 'Command 2' },
@@ -16,12 +17,16 @@ test('getPicks returns builtin picks', async () => {
       if (method === 'Layout.getAllQuickPickMenuEntries') {
         return builtinPicks
       }
+      if (method === 'ExtensionHost.getCommands') {
+        return []
+      }
       throw new Error(`unexpected method ${method}`)
     },
   })
   set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
+  consoleErrorSpy.mockRestore()
 
   expect(result).toHaveLength(2)
   expect(result[0]).toEqual({
@@ -101,6 +106,7 @@ test('getPicks combines builtin and extension picks', async () => {
 })
 
 test('getPicks handles missing label in extension picks', async () => {
+  const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
   const extensionPicks = [{ id: 'command1' }]
   const mockRpc = MockRpc.create({
     commandMap: {},
@@ -117,12 +123,14 @@ test('getPicks handles missing label in extension picks', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
+  consoleWarnSpy.mockRestore()
 
   expect(result).toHaveLength(1)
   expect(result[0].label).toBe('command1')
 })
 
 test('getPicks handles missing id in extension picks', async () => {
+  const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
   const extensionPicks = [{ label: 'Command without id' }]
   const mockRpc = MockRpc.create({
     commandMap: {},
@@ -139,6 +147,7 @@ test('getPicks handles missing id in extension picks', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
+  consoleWarnSpy.mockRestore()
 
   expect(result).toHaveLength(1)
   expect((result[0] as any).id).toBe('ext.undefined')
@@ -146,6 +155,7 @@ test('getPicks handles missing id in extension picks', async () => {
 })
 
 test('getPicks handles extension picks error', async () => {
+  const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
   const builtinPicks = [{ id: 'builtin1', label: 'Builtin 1' }]
   const mockRpc = MockRpc.create({
     commandMap: {},
@@ -162,6 +172,7 @@ test('getPicks handles extension picks error', async () => {
   set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksCommand.getPicks()
+  consoleErrorSpy.mockRestore()
 
   expect(result).toHaveLength(1)
   expect((result[0] as any).id).toBe('builtin1')
