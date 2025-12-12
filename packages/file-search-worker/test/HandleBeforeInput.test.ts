@@ -257,7 +257,9 @@ test('throws error for invalid selectionStart', () => {
   }).toThrow()
 })
 
-test('throws error for invalid selectionEnd', async () => {
+test('throws error for invalid selectionEnd', () => {
   const state = CreateDefaultState.createDefaultState({ value: 'test' })
-  await expect(HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 0, 'invalid' as unknown as number)).rejects.toThrow()
+  expect(() => {
+    HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 0, 'invalid' as unknown as number)
+  }).toThrow()
 })
