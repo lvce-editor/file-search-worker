@@ -16,6 +16,9 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
         closeWidgetCalled = true
         return
       }
+      if (method === 'test-command') {
+        return
+      }
       throw new Error(`unexpected method ${method}`)
     },
   })
@@ -86,6 +89,9 @@ test('handleClickAt handles click at first item', async () => {
         closeWidgetCalled = true
         return
       }
+      if (method === 'first-command') {
+        return
+      }
       throw new Error(`unexpected method ${method}`)
     },
   })
@@ -128,6 +134,9 @@ test('handleClickAt handles click at second item', async () => {
     invoke: (method: string) => {
       if (method === 'Viewlet.closeWidget') {
         closeWidgetCalled = true
+        return
+      }
+      if (method === 'second-command') {
         return
       }
       throw new Error(`unexpected method ${method}`)
@@ -209,6 +218,9 @@ test('handleClickAt ignores x coordinate', async () => {
     invoke: (method: string) => {
       if (method === 'Viewlet.closeWidget') {
         closeWidgetCallCount++
+        return
+      }
+      if (method === 'test-command') {
         return
       }
       throw new Error(`unexpected method ${method}`)

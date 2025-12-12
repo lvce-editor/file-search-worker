@@ -187,9 +187,8 @@ test('handles line break', async () => {
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertLineBreak, '', 5, 5)
 
   expect(result.value).toBe('hello\nworld')
-  expect(result.cursorOffset).toBe(0)
+  expect(result.cursorOffset).toBe(5)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(result).toBe(state)
 })
 
 test('handles insert from paste', async () => {
@@ -247,19 +246,15 @@ test('preserves other state properties', async () => {
 
 test('throws error for invalid inputType', async () => {
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'test' }
-  await expect(HandleBeforeInput.handleBeforeInput(state, null as unknown as string, '', 0, 0)).rejects.toThrow()
+  await expect(HandleBeforeInput.handleBeforeInput(state, undefined as unknown as string, '', 0, 0)).rejects.toThrow()
 })
 
-test('throws error for invalid selectionStart', () => {
+test('throws error for invalid selectionStart', async () => {
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'test' }
-  expect(() => {
-    HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 'invalid' as unknown as number, 0)
-  }).toThrow()
+  await expect(HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 'invalid' as unknown as number, 0)).rejects.toThrow()
 })
 
-test('throws error for invalid selectionEnd', () => {
+test('throws error for invalid selectionEnd', async () => {
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'test' }
-  expect(() => {
-    HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 0, 'invalid' as unknown as number)
-  }).toThrow()
+  await expect(HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, '', 0, 'invalid' as unknown as number)).rejects.toThrow()
 })

@@ -1,9 +1,7 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SelectPickGoToLine from '../src/parts/SelectPickGoToLine/SelectPickGoToLine.ts'
 
 test('selectPick with ::value parses column and navigates to position', async () => {
@@ -13,26 +11,16 @@ test('selectPick with ::value parses column and navigates to position', async ()
   let capturedColumnIndex: number | undefined
   let handleFocusCalled = false
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      if (method === 'Editor.cursorSet') {
-        capturedRowIndex = args[0] as number
-        capturedColumnIndex = args[1] as number
-        return
-      }
-      if (method === 'Editor.handleFocus') {
-        handleFocusCalled = true
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
+    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
+      capturedRowIndex = rowIndex
+      capturedColumnIndex = columnIndex
+    },
+    'Editor.handleFocus': () => {
+      handleFocusCalled = true
     },
   })
-  RendererWorker.set(mockRendererRpc)
-  setRpc(RpcId.RendererWorker, mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -62,25 +50,14 @@ test('selectPick with ::value handles column at newline', async () => {
   let capturedRowIndex: number | undefined
   let capturedColumnIndex: number | undefined
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      if (method === 'Editor.cursorSet') {
-        capturedRowIndex = args[0] as number
-        capturedColumnIndex = args[1] as number
-        return
-      }
-      if (method === 'Editor.handleFocus') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
+    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
+      capturedRowIndex = rowIndex
+      capturedColumnIndex = columnIndex
     },
+    'Editor.handleFocus': () => {},
   })
-  RendererWorker.set(mockRendererRpc)
-  setRpc(RpcId.RendererWorker, mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -109,25 +86,14 @@ test('selectPick with ::value handles column 0', async () => {
   let capturedRowIndex: number | undefined
   let capturedColumnIndex: number | undefined
 
-  const mockRendererRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'GetActiveEditor.getActiveEditorId') {
-        return editorId
-      }
-      if (method === 'Editor.cursorSet') {
-        capturedRowIndex = args[0] as number
-        capturedColumnIndex = args[1] as number
-        return
-      }
-      if (method === 'Editor.handleFocus') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'GetActiveEditor.getActiveEditorId': () => editorId,
+    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
+      capturedRowIndex = rowIndex
+      capturedColumnIndex = columnIndex
     },
+    'Editor.handleFocus': () => {},
   })
-  RendererWorker.set(mockRendererRpc)
-  setRpc(RpcId.RendererWorker, mockRendererRpc)
 
   const mockEditorRpc = MockRpc.create({
     commandMap: {},
@@ -155,22 +121,15 @@ test('selectPick without :: parses row from item.label', async () => {
   let capturedColumnIndex: number | undefined
   let handleFocusCalled = false
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'Editor.cursorSet') {
-        capturedRowIndex = args[0] as number
-        capturedColumnIndex = args[1] as number
-        return
-      }
-      if (method === 'Editor.handleFocus') {
-        handleFocusCalled = true
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
+      capturedRowIndex = rowIndex
+      capturedColumnIndex = columnIndex
+    },
+    'Editor.handleFocus': () => {
+      handleFocusCalled = true
     },
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const item = { label: '5' }
   const value = '5'
@@ -187,21 +146,13 @@ test('selectPick without :: handles row 0', async () => {
   let capturedRowIndex: number | undefined
   let capturedColumnIndex: number | undefined
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'Editor.cursorSet') {
-        capturedRowIndex = args[0] as number
-        capturedColumnIndex = args[1] as number
-        return
-      }
-      if (method === 'Editor.handleFocus') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
+      capturedRowIndex = rowIndex
+      capturedColumnIndex = columnIndex
     },
+    'Editor.handleFocus': () => {},
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const item = { label: '0' }
   const value = '0'
@@ -217,21 +168,13 @@ test('selectPick without :: handles large row numbers', async () => {
   let capturedRowIndex: number | undefined
   let capturedColumnIndex: number | undefined
 
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, ...args: unknown[]) => {
-      if (method === 'Editor.cursorSet') {
-        capturedRowIndex = args[0] as number
-        capturedColumnIndex = args[1] as number
-        return
-      }
-      if (method === 'Editor.handleFocus') {
-        return
-      }
-      throw new Error(`unexpected method ${method}`)
+  RendererWorker.registerMockRpc({
+    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
+      capturedRowIndex = rowIndex
+      capturedColumnIndex = columnIndex
     },
+    'Editor.handleFocus': () => {},
   })
-  setRpc(RpcId.RendererWorker, mockRpc)
 
   const item = { label: '100' }
   const value = '100'
