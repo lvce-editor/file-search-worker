@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectPick } from '../src/parts/SelectPickColorTheme/SelectPickColorTheme.ts'
 
@@ -17,7 +17,7 @@ test('selectPick calls setColorTheme with pick label and returns Hide command', 
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -45,7 +45,7 @@ test('selectPick handles different color theme labels', async () => {
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',

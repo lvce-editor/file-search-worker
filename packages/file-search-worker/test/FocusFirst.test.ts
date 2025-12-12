@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import { focusFirst } from '../src/parts/FocusFirst/FocusFirst.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
@@ -16,7 +16,7 @@ test('focusFirst focuses the first item', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },

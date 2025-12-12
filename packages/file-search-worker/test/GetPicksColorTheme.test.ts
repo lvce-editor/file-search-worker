@@ -1,7 +1,7 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as GetPicksColorTheme from '../src/parts/GetPicksColorTheme/GetPicksColorTheme.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getPicks returns color theme names as picks', async () => {
@@ -15,7 +15,7 @@ test('getPicks returns color theme names as picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksColorTheme.getPicks('')
 
@@ -43,7 +43,7 @@ test('getPicks returns empty array when no color themes', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksColorTheme.getPicks('search')
 

@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import * as GetPicksFile from '../src/parts/GetPicksFile/GetPicksFile.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SearchFileModule from '../src/parts/SearchFileModule/SearchFileModule.ts'
 
@@ -22,7 +22,7 @@ test('getPicks returns file picks from search', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksFile.getPicks('file')
 
@@ -52,7 +52,7 @@ test('getPicks returns empty array when no workspace', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksFile.getPicks('file')
 
@@ -69,7 +69,7 @@ test('getPicks returns empty array when workspace is empty string', async () => 
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksFile.getPicks('file')
 
@@ -92,7 +92,7 @@ test('getPicks handles files in root directory', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksFile.getPicks('root')
 
@@ -117,7 +117,7 @@ test('getPicks handles empty search results', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const result = await GetPicksFile.getPicks('nonexistent')
 

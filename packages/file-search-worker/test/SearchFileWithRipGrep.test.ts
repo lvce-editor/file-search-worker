@@ -1,6 +1,6 @@
 import { expect, jest, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 const SearchFileWithRipGrep = await import('../src/parts/SearchFileWithRipGrep/SearchFileWithRipGrep.ts')
@@ -11,7 +11,7 @@ test('searches files without prepare', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   mockInvoke.mockResolvedValue('file1.txt\nfile2.txt\nfile3.txt')
 
@@ -30,7 +30,7 @@ test.skip('searches files with prepare', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   mockInvoke.mockResolvedValue('file1.txt\nfile2.txt\nfile3.txt')
 
@@ -54,7 +54,7 @@ test('handles empty result', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   mockInvoke.mockResolvedValue('')
 
@@ -68,7 +68,7 @@ test('handles error from search process', async () => {
     commandMap: {},
     invoke: mockInvoke,
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   mockInvoke.mockRejectedValue(new Error('Search failed'))
 

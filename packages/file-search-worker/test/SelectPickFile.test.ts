@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectPick } from '../src/parts/SelectPickFile/SelectPickFile.ts'
 
@@ -22,7 +22,7 @@ test('selectPick constructs absolute path and opens uri', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: 'src/components',
@@ -56,7 +56,7 @@ test('selectPick handles different file paths', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: 'packages/utils',
@@ -90,7 +90,7 @@ test('selectPick handles empty description', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',

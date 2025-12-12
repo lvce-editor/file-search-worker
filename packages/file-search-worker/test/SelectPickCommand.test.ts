@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectPick } from '../src/parts/SelectPickCommand/SelectPickCommand.ts'
 
@@ -17,7 +17,7 @@ test('selectPickBuiltin calls RendererWorker.invoke with item id and args', asyn
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     args: ['arg1', 'arg2'],
@@ -43,7 +43,7 @@ test('selectPickBuiltin returns Hide when shouldHide returns true', async () => 
     commandMap: {},
     invoke: async () => {},
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -70,7 +70,7 @@ test('selectPickBuiltin handles item without args', async () => {
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -100,7 +100,7 @@ test('selectPickExtension calls ExtensionHost.executeCommand with id without ext
       invokedArgs = args
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',
@@ -138,7 +138,7 @@ test('selectPickExtension handles errors and shows error dialog', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  set(RendererWorker, mockRpc)
+  set(RpcId.RendererWorker, mockRpc)
 
   const pick: ProtoVisibleItem = {
     description: '',

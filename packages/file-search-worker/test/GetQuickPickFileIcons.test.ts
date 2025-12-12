@@ -1,7 +1,7 @@
 import { test, expect } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import { getQuickPickFileIcons } from '../src/parts/GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('getQuickPickFileIcons returns icons and updates cache', async () => {
@@ -14,7 +14,7 @@ test('getQuickPickFileIcons returns icons and updates cache', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
@@ -36,7 +36,7 @@ test('getQuickPickFileIcons with all icons cached', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const items = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },

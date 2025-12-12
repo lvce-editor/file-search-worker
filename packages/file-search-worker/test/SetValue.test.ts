@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SetValue from '../src/parts/SetValue/SetValue.ts'
 
@@ -13,7 +13,7 @@ test('returns same state when value is unchanged', async () => {
       throw new Error('unexpected invoke call')
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ value: 'test' })
   const result = await SetValue.setValue(state, 'test')
@@ -56,7 +56,7 @@ test('updates value and processes picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, 'new')
@@ -84,7 +84,7 @@ test('sets focusedIndex to -1 when no items', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, 'new')
@@ -120,7 +120,7 @@ test('updates fileIconCache', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ fileIconCache: {}, providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, 'new')
@@ -153,7 +153,7 @@ test('calculates finalDeltaY and listHeight', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({
     height: 300,
@@ -202,7 +202,7 @@ test('filters items based on filterValue', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: '' })
   const result = await SetValue.setValue(state, 'test')
@@ -227,7 +227,7 @@ test('handles empty string value', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({ providerId: 0, value: 'old' })
   const result = await SetValue.setValue(state, '')
@@ -262,7 +262,7 @@ test('preserves other state properties', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({
     height: 400,

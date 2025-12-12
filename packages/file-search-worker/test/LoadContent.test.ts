@@ -1,11 +1,11 @@
 import { expect, test } from '@jest/globals'
+import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
 import * as QuickPickEntryUri from '../src/parts/QuickPickEntryUri/QuickPickEntryUri.ts'
 import * as QuickPickOpenState from '../src/parts/QuickPickOpenState/QuickPickOpenState.ts'
-import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('loadContent returns state with loaded content', async () => {
@@ -18,7 +18,7 @@ test('loadContent returns state with loaded content', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
@@ -51,7 +51,7 @@ test('loadContent handles empty picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({
     args: [],
@@ -78,7 +78,7 @@ test('loadContent handles many picks', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = Array.from({ length: 100 }, (_, i) => ({
     label: `file${i}.txt`,
@@ -107,7 +107,7 @@ test('loadContent respects maxVisibleItems', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = Array.from({ length: 50 }, (_, i) => ({
     label: `file${i}.txt`,
@@ -136,7 +136,7 @@ test('loadContent handles file icon cache', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
@@ -165,7 +165,7 @@ test('loadContent handles different URIs', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'command1' }]
 
@@ -190,7 +190,7 @@ test('loadContent calculates listHeight correctly', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }, { label: 'file3.txt' }]
 
@@ -218,7 +218,7 @@ test('loadContent filters items based on filter value', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }, { label: 'other.txt' }]
 
@@ -243,7 +243,7 @@ test('loadContent preserves args', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
   const args = ['arg1', customItems]
@@ -268,7 +268,7 @@ test('loadContent sets cursorOffset to value length', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -292,7 +292,7 @@ test('loadContent sets focused to true', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -317,7 +317,7 @@ test('loadContent sets focusedIndex to 0', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -342,7 +342,7 @@ test('loadContent sets inputSource to Script', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -367,7 +367,7 @@ test('loadContent sets state to Finished', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -392,7 +392,7 @@ test('loadContent handles picks less than maxVisibleItems', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }, { label: 'file2.txt' }]
 
@@ -419,7 +419,7 @@ test('loadContent handles single pick', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -446,7 +446,7 @@ test('loadContent calculates finalDeltaY for long lists', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = Array.from({ length: 20 }, (_, i) => ({
     label: `file${i}.txt`,
@@ -475,7 +475,7 @@ test('loadContent calculates finalDeltaY for short lists', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -501,7 +501,7 @@ test('loadContent preserves other state properties', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'file1.txt' }]
 
@@ -534,7 +534,7 @@ test('loadContent handles Custom URI', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const customItems = [{ label: 'custom1' }]
 
@@ -563,7 +563,7 @@ test('loadContent handles Recent URI', async () => {
       throw new Error(`unexpected method ${method}`)
     },
   })
-  setRpc(RendererWorker, mockRpc)
+  setRpc(RpcId.RendererWorker, mockRpc)
 
   const state = CreateDefaultState.createQuickPickState({
     args: [],
