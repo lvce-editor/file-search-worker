@@ -1,7 +1,7 @@
 import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
 import * as ViewletQuickPickStrings from '../QuickPickStrings/QuickPickStrings.ts'
 
-export const getHelpEntries = (providerId: string): readonly any[] => {
+export const getHelpEntries = (providerId: string): readonly unknown[] => {
   switch (providerId) {
     case QuickPickPrefix.Command:
       return [

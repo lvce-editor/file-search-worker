@@ -1,3 +1,3 @@
 export const state = {
-  args: [] as readonly any[],
+  args: [] as readonly unknown[],
 }

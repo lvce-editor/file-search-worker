@@ -11,7 +11,7 @@ import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly VirtualDomNode[] => {
   const { description, fileIcon, highlights, icon, isActive, label, posInSet, setSize } = visibleItem
-  const dom: any[] = [
+  const dom: unknown[] = [
     {
       ariaPosInSet: posInSet,
       ariaSetSize: setSize,

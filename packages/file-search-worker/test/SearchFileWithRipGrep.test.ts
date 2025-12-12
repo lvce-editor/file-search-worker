@@ -6,7 +6,7 @@ import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 const SearchFileWithRipGrep = await import('../src/parts/SearchFileWithRipGrep/SearchFileWithRipGrep.ts')
 
 test('searches files without prepare', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,
@@ -25,7 +25,7 @@ test('searches files without prepare', async () => {
 })
 
 test.skip('searches files with prepare', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,
@@ -49,7 +49,7 @@ test.skip('searches files with prepare', async () => {
 })
 
 test('handles empty result', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,
@@ -63,7 +63,7 @@ test('handles empty result', async () => {
 })
 
 test('handles error from search process', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,

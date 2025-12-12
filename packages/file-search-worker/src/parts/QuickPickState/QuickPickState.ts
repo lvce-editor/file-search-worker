@@ -3,7 +3,7 @@ import type { FileIconCache } from '../FileIconCache/FileIconCache.ts'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
 export interface QuickPickState extends List<any> {
-  readonly args: readonly any[]
+  readonly args: readonly unknown[]
   readonly cursorOffset: number
   readonly fileIconCache: FileIconCache
   readonly focused: boolean
@@ -20,7 +20,7 @@ export interface QuickPickState extends List<any> {
   readonly platform: number
   readonly providerId: number
   readonly recentPickIds: Map<any, any>
-  readonly recentPicks: readonly any[]
+  readonly recentPicks: readonly unknown[]
   readonly scrollBarActive: boolean
   readonly scrollBarHeight: number
   readonly state: number
@@ -32,7 +32,7 @@ export interface QuickPickState extends List<any> {
   readonly uri: string
   readonly value: string
   readonly versionId: number
-  readonly warned: any[]
+  readonly warned: unknown[]
   readonly width: number
   readonly workspaceUri: string
 }

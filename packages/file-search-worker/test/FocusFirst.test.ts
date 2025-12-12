@@ -60,4 +60,3 @@ test('focusFirst focuses the first item', async () => {
 
   expect(result.focusedIndex).toBe(0)
 })
-

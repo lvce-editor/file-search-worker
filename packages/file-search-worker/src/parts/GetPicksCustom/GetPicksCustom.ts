@@ -13,8 +13,8 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
   }
 }
 
-export const getPicks = async (searchValue: string, args: readonly any[]): Promise<readonly ProtoVisibleItem[]> => {
-  const items = args[1] || []
+export const getPicks = async (searchValue: string, args: readonly unknown[]): Promise<readonly ProtoVisibleItem[]> => {
+  const items = (args[1] as readonly unknown[]) || []
   const mapped = items.map(toProtoVisibleItem)
   return mapped
 }

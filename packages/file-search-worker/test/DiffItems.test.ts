@@ -1,4 +1,5 @@
 import { expect, test } from '@jest/globals'
+import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as DiffItems from '../src/parts/DiffItems/DiffItems.ts'
@@ -10,7 +11,7 @@ const createState = ({
   maxLineY,
   minLineY,
 }: {
-  items: readonly any[]
+  items: readonly ProtoVisibleItem[]
   minLineY: number
   maxLineY: number
   focusedIndex: number

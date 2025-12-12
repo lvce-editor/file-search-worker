@@ -10,7 +10,7 @@ test('selectPick calls Workspace.setPath with the pick uri', async () => {
   let capturedUri: string | undefined
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: any[]) => {
+    invoke: (method: string, ...args: unknown[]) => {
       if (method === 'Workspace.setPath') {
         capturedUri = args[0]
         return
@@ -67,9 +67,9 @@ test('selectPick handles different uri formats', async () => {
   let capturedUri: string | undefined
   const mockRpc = MockRpc.create({
     commandMap: {},
-    invoke: (method: string, ...args: any[]) => {
+    invoke: (method: string, ...args: unknown[]) => {
       if (method === 'Workspace.setPath') {
-        capturedUri = args[0]
+        capturedUri = args[0] as string
         return
       }
       throw new Error(`unexpected method ${method}`)
@@ -92,24 +92,3 @@ test('selectPick handles different uri formats', async () => {
   expect(capturedUri).toBe('file:///home/user/project')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
-
-const items: readonly ProtoVisibleItem[] = [
-  {
-    description: '',
-    direntType: 1,
-    fileIcon: '',
-    icon: '',
-    label: 'file1.txt',
-    matches: [],
-    uri: '/file1.txt',
-  },
-  {
-    description: '',
-    direntType: 1,
-    fileIcon: '',
-    icon: '',
-    label: 'file2.txt',
-    matches: [],
-    uri: '/file2.txt',
-  },
-]

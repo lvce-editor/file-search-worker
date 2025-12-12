@@ -6,7 +6,7 @@ import * as RequestFileIcons from '../src/parts/RequestFileIcons/RequestFileIcon
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('requests file icons', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,
@@ -28,7 +28,7 @@ test('requests file icons', async () => {
 })
 
 test('requests folder icons', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,
@@ -49,7 +49,7 @@ test('requests folder icons', async () => {
 })
 
 test.skip('handles empty requests array', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,
@@ -62,7 +62,7 @@ test.skip('handles empty requests array', async () => {
 })
 
 test.skip('handles requests with no name', async () => {
-  const mockInvoke = jest.fn<(method: string, ...params: any[]) => Promise<any>>()
+  const mockInvoke = jest.fn<(method: string, ...params: unknown[]) => Promise<unknown>>()
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: mockInvoke,

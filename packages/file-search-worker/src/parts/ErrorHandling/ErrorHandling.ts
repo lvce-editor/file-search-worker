@@ -18,6 +18,6 @@ export const showErrorDialog = async (error: any): Promise<void> => {
   await RendererWorker.showErrorDialog(errorInfo)
 }
 
-export const warn = (...args: readonly any[]): void => {
+export const warn = (...args: readonly unknown[]): void => {
   console.warn(...args)
 }

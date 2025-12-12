@@ -3,7 +3,7 @@ import * as GetPicksCustom from '../src/parts/GetPicksCustom/GetPicksCustom.ts'
 
 test('getPicks returns custom items from args', async () => {
   const customItems = [{ label: 'Custom Item 1' }, { label: 'Custom Item 2' }, { label: 'Custom Item 3' }]
-  const args: readonly any[] = ['search', customItems]
+  const args: readonly unknown[] = ['search', customItems]
 
   const result = await GetPicksCustom.getPicks('search', args)
 
@@ -22,7 +22,7 @@ test('getPicks returns custom items from args', async () => {
 })
 
 test('getPicks returns empty array when args[1] is missing', async () => {
-  const args: readonly any[] = ['search']
+  const args: readonly unknown[] = ['search']
 
   const result = await GetPicksCustom.getPicks('search', args)
 
@@ -30,7 +30,7 @@ test('getPicks returns empty array when args[1] is missing', async () => {
 })
 
 test('getPicks returns empty array when args[1] is empty', async () => {
-  const args: readonly any[] = ['search', []]
+  const args: readonly unknown[] = ['search', []]
 
   const result = await GetPicksCustom.getPicks('search', args)
 
@@ -39,7 +39,7 @@ test('getPicks returns empty array when args[1] is empty', async () => {
 
 test('getPicks handles items without label', async () => {
   const customItems = [{ label: 'Item 1' }, {}, { label: 'Item 3' }]
-  const args: readonly any[] = ['search', customItems]
+  const args: readonly unknown[] = ['search', customItems]
 
   const result = await GetPicksCustom.getPicks('search', args)
 
@@ -48,4 +48,3 @@ test('getPicks handles items without label', async () => {
   expect(result[1].label).toBeUndefined()
   expect(result[2].label).toBe('Item 3')
 })
-
