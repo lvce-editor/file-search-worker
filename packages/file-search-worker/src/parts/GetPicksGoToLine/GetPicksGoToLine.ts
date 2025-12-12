@@ -15,6 +15,20 @@ const toPick = (column: number): ProtoVisibleItem => {
 }
 
 export const getPicks = async (value: string): Promise<readonly ProtoVisibleItem[]> => {
+  if (value === '::') {
+    const text = await getText()
+    return [
+      {
+        description: '',
+        direntType: 0,
+        fileIcon: '',
+        icon: '',
+        label: `Type a character position to go to (from 1 to ${text.length})`,
+        matches: [],
+        uri: '',
+      },
+    ]
+  }
   if (value.startsWith('::')) {
     const text = await getText()
     const columns = [...Array(text.length).fill(0)].map((item, index) => index)
