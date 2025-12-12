@@ -1,32 +1,32 @@
 import type { DomEventListener } from '../DomEventListener/DomEventListener.ts'
-import * as DomEventListenersFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
+import * as DomEventListenerFunctions from '../DomEventListenerFunctions/DomEventListenerFunctions.ts'
 
 export const renderEventListeners = (): readonly DomEventListener[] => {
   return [
     {
-      name: DomEventListenersFunctions.HandlePointerDown,
+      name: DomEventListenerFunctions.HandlePointerDown,
       params: ['handleClickAt', 'event.clientX', 'event.clientY'],
       preventDefault: true,
     },
     {
-      name: DomEventListenersFunctions.HandleWheel,
+      name: DomEventListenerFunctions.HandleWheel,
       params: ['handleWheel', 'event.deltaMode', 'event.deltaY'],
       passive: true,
     },
     {
-      name: DomEventListenersFunctions.HandleBlur,
+      name: DomEventListenerFunctions.HandleBlur,
       params: ['handleBlur'],
     },
     {
-      name: DomEventListenersFunctions.HandleBeforeInput,
+      name: DomEventListenerFunctions.HandleBeforeInput,
       params: ['handleBeforeInput'],
     },
     {
-      name: DomEventListenersFunctions.HandleInput,
+      name: DomEventListenerFunctions.HandleInput,
       params: ['handleInput', 'event.target.value'],
     },
     {
-      name: DomEventListenersFunctions.HandleFocus,
+      name: DomEventListenerFunctions.HandleFocus,
       params: ['handleFocus'],
     },
   ]

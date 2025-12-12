@@ -130,7 +130,7 @@ test('selectPickExtension handles errors and shows error dialog', async () => {
       if (method === 'ExtensionHost.executeCommand') {
         throw new Error('Test error')
       }
-      if (method === 'RendererWorker.showErrorDialog') {
+      if (method === 'RendererWorker.showErrorDialog' || method === 'ErrorHandling.showErrorDialog') {
         showErrorDialogCalled = true
         errorInfo = args[0]
         return

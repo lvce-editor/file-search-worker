@@ -64,9 +64,7 @@ test('updates value and processes picks', async () => {
   expect(result.value).toBe('new')
   expect(result.inputSource).toBe(InputSource.Script)
   expect(result.items.length).toBeGreaterThanOrEqual(0)
-  if (result.items.length > 0) {
-    expect(result.focusedIndex).toBe(0)
-  }
+  expect(result.focusedIndex).toBe(result.items.length > 0 ? 0 : -1)
   expect(result.picks.length).toBeGreaterThan(0)
 })
 
