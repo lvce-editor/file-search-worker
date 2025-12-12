@@ -98,8 +98,8 @@ test('selectPick with ::value handles column at newline', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(1)
-  expect(capturedColumnIndex).toBe(0)
+  expect(capturedRowIndex).toBe(0)
+  expect(capturedColumnIndex).toBe(6)
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 

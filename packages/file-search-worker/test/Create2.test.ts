@@ -4,7 +4,6 @@ import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import * as MinimumSliderSize from '../src/parts/MinimumSliderSize/MinimumSliderSize.ts'
 import * as QuickPickOpenState from '../src/parts/QuickPickOpenState/QuickPickOpenState.ts'
 import * as QuickPickStates from '../src/parts/QuickPickStates/QuickPickStates.ts'
-import * as VirtualList from '../src/parts/VirtualList/VirtualList.ts'
 
 test('create calls QuickPickStates.set with correct state', () => {
   const uid = 123

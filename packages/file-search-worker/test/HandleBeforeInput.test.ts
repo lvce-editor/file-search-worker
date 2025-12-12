@@ -22,7 +22,7 @@ test('inserts text and updates state', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'hello' })
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'hello' })
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, ' world', 5, 5)
 
   expect(result.value).toBe('hello world')
@@ -45,7 +45,7 @@ test('replaces selected text', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'hello world' })
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'hello world' })
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertText, 'hi', 0, 5)
 
   expect(result.value).toBe('hi world')
@@ -68,7 +68,7 @@ test('deletes character backward', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'hello' })
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'hello' })
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteContentBackward, '', 5, 5)
 
   expect(result.value).toBe('hell')
@@ -91,7 +91,7 @@ test('deletes character forward', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({ value: 'hello' })
+  const state = CreateDefaultState.createDefaultState({ providerId: 0, value: 'hello' })
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteContentForward, '', 0, 0)
 
   expect(result.value).toBe('ello')
