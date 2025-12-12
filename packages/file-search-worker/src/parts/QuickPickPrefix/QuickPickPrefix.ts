@@ -11,3 +11,5 @@ export const View = 'view '
 export const None = ''
 
 export const Help = '?'
+
+export const GoToColumn = '::'

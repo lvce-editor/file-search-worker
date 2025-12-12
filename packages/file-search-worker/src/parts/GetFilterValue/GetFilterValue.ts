@@ -1,5 +1,10 @@
 import { QuickPickEntryId } from '@lvce-editor/constants'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
+<<<<<<< HEAD
+=======
+import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
+import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
+>>>>>>> origin/main
 
 interface Fn {
   (value: string): string
@@ -16,7 +21,7 @@ const getFilterValueEverything = (value: string): string => {
 }
 
 const getValueGoToLine = (value: string): string => {
-  if (value.startsWith('::')) {
+  if (value.startsWith(QuickPickPrefix.GoToColumn)) {
     return value.slice(2)
   }
   return value.slice(1)

@@ -1,4 +1,4 @@
-import type { GetPicks } from '../GetPicks/GetPicks.ts'
+import type { IGetPicks } from '../GetPicks/GetPicks.ts'
 import type { SelectPick } from '../SelectPick/SelectPick.ts'
 import * as GetPicksColorTheme from '../GetPicksColorTheme/GetPicksColorTheme.ts'
 import * as GetPicksCommand from '../GetPicksCommand/GetPicksCommand.ts'
@@ -34,7 +34,7 @@ export const selectPicks: readonly SelectPick[] = [
   SelectPickWorkspaceSymbol.selectPick,
 ]
 
-export const getPicks: readonly GetPicks[] = [
+export const getPicks: readonly IGetPicks[] = [
   GetPicksColorTheme.getPicks,
   GetPicksCommand.getPicks,
   GetPicksCustom.getPicks,
