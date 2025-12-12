@@ -1,7 +1,6 @@
 import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
-import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import * as SelectPickRecent from '../src/parts/SelectPickRecent/SelectPickRecent.ts'
@@ -12,7 +11,7 @@ test('selectPick calls Workspace.setPath with the pick uri', async () => {
     commandMap: {},
     invoke: (method: string, ...args: unknown[]) => {
       if (method === 'Workspace.setPath') {
-        capturedUri = args[0]
+        capturedUri = args[0] as string
         return
       }
       throw new Error(`unexpected method ${method}`)
