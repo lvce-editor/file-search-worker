@@ -7,7 +7,6 @@ import * as FocusIndex from '../FocusIndex/FocusIndex.ts'
 import * as FocusLast from '../FocusLast/FocusLast.ts'
 import * as FocusNext from '../FocusNext/FocusNext.ts'
 import * as FocusPrevious from '../FocusPrevious/FocusPrevious.ts'
-import * as GetCommandIds from '../GetCommandIds/GetCommandIds.ts'
 import * as GetKeyBindings from '../GetKeyBindings/GetKeyBindings.ts'
 import * as HandleBeforeInput from '../HandleBeforeInput/HandleBeforeInput.ts'
 import * as HandleBlur from '../HandleBlur/HandleBlur.ts'
@@ -19,6 +18,7 @@ import { initialize } from '../Initialize/Initialize.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 import * as WrapCommand from '../QuickPickStates/QuickPickStates.ts'
+import { getCommandIds } from '../QuickPickStates/QuickPickStates.ts'
 import * as Render2 from '../Render2/Render2.ts'
 import * as RenderEventListeners from '../RenderEventListeners/RenderEventListeners.ts'
 import * as SelectCurrentIndex from '../SelectCurrentIndex/SelectCurrentIndex.ts'
@@ -38,7 +38,7 @@ export const commandMap = {
   'QuickPick.focusLast': WrapCommand.wrapCommand(FocusLast.focusLast),
   'QuickPick.focusNext': WrapCommand.wrapCommand(FocusNext.focusNext),
   'QuickPick.focusPrevious': WrapCommand.wrapCommand(FocusPrevious.focusPrevious),
-  'QuickPick.getCommandIds': GetCommandIds.getCommandIds,
+  'QuickPick.getCommandIds': getCommandIds,
   'QuickPick.getKeyBindings': GetKeyBindings.getKeyBindings,
   'QuickPick.handleBeforeInput': WrapCommand.wrapCommand(HandleBeforeInput.handleBeforeInput),
   'QuickPick.handleBlur': WrapCommand.wrapCommand(HandleBlur.handleBlur),
