@@ -1,14 +1,8 @@
-import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { SelectPickResult } from '../SelectPickRresult/SelectPickResult.ts'
 import { getPosition } from '../GetPosition/GetPosition.ts'
 import { getText } from '../GetText/GetText.ts'
+import { goToPositionAndFocus } from '../GoToPositionAndFocus/GoToPositionAndFocus.ts'
 import * as QuickPickReturnValue from '../QuickPickReturnValue/QuickPickReturnValue.ts'
-import { setCursor } from '../SetCursor/SetCursor.ts'
-
-const goToPositionAndFocus = async (rowIndex: number, columnIndex: number): Promise<void> => {
-  await setCursor(rowIndex, columnIndex)
-  await RendererWorker.invoke('Editor.handleFocus')
-}
 
 export const selectPick = async (item: any, value: string): Promise<SelectPickResult> => {
   if (value.startsWith('::')) {
