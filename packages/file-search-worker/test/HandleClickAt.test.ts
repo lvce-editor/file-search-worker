@@ -24,7 +24,6 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
   const state = CreateDefaultState.createDefaultState({
     headerHeight: 38,
     itemHeight: 30,
-    top: 50,
     items: [
       {
         description: '',
@@ -49,6 +48,7 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
     ],
     minLineY: 0,
     providerId: QuickPickEntryId.Commands,
+    top: 50,
     value: '>',
   })
 
@@ -63,9 +63,9 @@ test('handleClickAt returns state unchanged when index is out of bounds', async 
   const state = CreateDefaultState.createDefaultState({
     headerHeight: 38,
     itemHeight: 30,
-    top: 50,
     items: [],
     minLineY: 0,
+    top: 50,
   })
 
   const y = 50 + 38 + 1000
@@ -92,7 +92,6 @@ test('handleClickAt handles click at first item', async () => {
   const state = CreateDefaultState.createDefaultState({
     headerHeight: 38,
     itemHeight: 30,
-    top: 50,
     items: [
       {
         description: '',
@@ -107,6 +106,7 @@ test('handleClickAt handles click at first item', async () => {
     ],
     minLineY: 0,
     providerId: QuickPickEntryId.Commands,
+    top: 50,
     value: '>',
   })
 
@@ -135,7 +135,6 @@ test('handleClickAt handles click at second item', async () => {
   const state = CreateDefaultState.createDefaultState({
     headerHeight: 38,
     itemHeight: 30,
-    top: 50,
     items: [
       {
         description: '',
@@ -160,6 +159,7 @@ test('handleClickAt handles click at second item', async () => {
     ],
     minLineY: 0,
     providerId: QuickPickEntryId.Commands,
+    top: 50,
     value: '>',
   })
 
@@ -174,7 +174,6 @@ test('handleClickAt handles click above header', async () => {
   const state = CreateDefaultState.createDefaultState({
     headerHeight: 38,
     itemHeight: 30,
-    top: 50,
     items: [
       {
         description: '',
@@ -188,6 +187,7 @@ test('handleClickAt handles click above header', async () => {
       } as any,
     ],
     minLineY: 0,
+    top: 50,
   })
 
   const y = 50 + 10
@@ -214,7 +214,6 @@ test('handleClickAt ignores x coordinate', async () => {
   const state = CreateDefaultState.createDefaultState({
     headerHeight: 38,
     itemHeight: 30,
-    top: 50,
     items: [
       {
         description: '',
@@ -229,6 +228,7 @@ test('handleClickAt ignores x coordinate', async () => {
     ],
     minLineY: 0,
     providerId: QuickPickEntryId.Commands,
+    top: 50,
     value: '>',
   })
 
@@ -239,4 +239,3 @@ test('handleClickAt ignores x coordinate', async () => {
   expect(closeWidgetCallCount).toBe(2)
   expect(result1).toBe(result2)
 })
-

@@ -3,7 +3,7 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import * as HandleBlur from '../src/parts/HandleBlur/HandleBlur.ts'
 
 test('returns state unchanged', async () => {
-  const state = CreateDefaultState.createDefaultState({ value: 'test', uid: 1 })
+  const state = CreateDefaultState.createDefaultState({ uid: 1, value: 'test' })
   const result = await HandleBlur.handleBlur(state)
   expect(result).toBe(state)
 })
@@ -41,9 +41,9 @@ test('returns state with items and focusedIndex unchanged', async () => {
   const state = CreateDefaultState.createDefaultState({
     focusedIndex: 2,
     items: [
-      { label: 'item1', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' },
-      { label: 'item2', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' },
-      { label: 'item3', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' },
+      { description: '', direntType: 0, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
+      { description: '', direntType: 0, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
+      { description: '', direntType: 0, fileIcon: '', icon: '', label: 'item3', matches: [], uri: '' },
     ],
   })
   const result = await HandleBlur.handleBlur(state)
@@ -59,7 +59,7 @@ test('returns state with complex configuration unchanged', async () => {
     focused: true,
     focusedIndex: 1,
     height: 600,
-    items: [{ label: 'test', description: '', direntType: 0, fileIcon: '', icon: '', matches: [], uri: '' }],
+    items: [{ description: '', direntType: 0, fileIcon: '', icon: '', label: 'test', matches: [], uri: '' }],
     uid: 999,
     value: 'complex state',
     width: 1000,

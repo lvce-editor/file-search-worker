@@ -94,12 +94,12 @@ test('selectPick with ::value handles column at newline', async () => {
   EditorWorker.set(mockEditorRpc)
 
   const item = { label: '1' }
-  const value = '::6'
+  const value = '::7'
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(0)
-  expect(capturedColumnIndex).toBe(6)
+  expect(capturedRowIndex).toBe(1)
+  expect(capturedColumnIndex).toBe(0)
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -242,4 +242,3 @@ test('selectPick without :: handles large row numbers', async () => {
   expect(capturedColumnIndex).toBe(0)
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
-

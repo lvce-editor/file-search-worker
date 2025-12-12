@@ -8,9 +8,9 @@ import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 test('updates cursorOffset and inputSource when value is the same', async () => {
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
-    value: 'test',
     cursorOffset: 0,
     inputSource: InputSource.Script,
+    value: 'test',
   }
   const result = await HandleInput.handleInput(state, 'test', 5, InputSource.User)
   expect(result).not.toBe(state)

@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals'
 import { RpcId } from '@lvce-editor/constants'
 import { MockRpc } from '@lvce-editor/rpc'
-import * as SetCursor from '../src/parts/SetCursor/SetCursor.ts'
 import { set as setRpc } from '../src/parts/RpcRegistry/RpcRegistry.ts'
+import * as SetCursor from '../src/parts/SetCursor/SetCursor.ts'
 
 test('setCursor calls Editor.cursorSet with correct row and column', async () => {
   let capturedRowIndex: number | undefined

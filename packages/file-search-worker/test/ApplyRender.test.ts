@@ -38,8 +38,8 @@ test('skips both Height and RenderFocusedIndex', () => {
 test('calls renderer for RenderItems', () => {
   const oldState = CreateDefaultState.createDefaultState()
   const newState = CreateDefaultState.createDefaultState({
-    value: 'test',
     uid: 1,
+    value: 'test',
   })
   const diffResult: readonly number[] = [DiffType.RenderItems]
   const result = ApplyRender.applyRender(oldState, newState, diffResult)
@@ -51,8 +51,8 @@ test('calls renderer for RenderItems', () => {
 test('calls renderer for RenderValue', () => {
   const oldState = CreateDefaultState.createDefaultState()
   const newState = CreateDefaultState.createDefaultState({
-    value: 'test-value',
     uid: 1,
+    value: 'test-value',
   })
   const diffResult: readonly number[] = [DiffType.RenderValue]
   const result = ApplyRender.applyRender(oldState, newState, diffResult)
@@ -90,9 +90,9 @@ test('calls renderer for RenderCursorOffset', () => {
 test('handles multiple diff types', () => {
   const oldState = CreateDefaultState.createDefaultState()
   const newState = CreateDefaultState.createDefaultState({
-    value: 'test',
     focused: true,
     uid: 1,
+    value: 'test',
   })
   const diffResult: readonly number[] = [DiffType.RenderValue, DiffType.RenderFocus]
   const result = ApplyRender.applyRender(oldState, newState, diffResult)
@@ -104,8 +104,8 @@ test('handles multiple diff types', () => {
 test('skips Height and RenderFocusedIndex in mixed diff types', () => {
   const oldState = CreateDefaultState.createDefaultState()
   const newState = CreateDefaultState.createDefaultState({
-    value: 'test',
     uid: 1,
+    value: 'test',
   })
   const diffResult: readonly number[] = [DiffType.Height, DiffType.RenderValue, DiffType.RenderFocusedIndex, DiffType.RenderFocus]
   const result = ApplyRender.applyRender(oldState, newState, diffResult)
