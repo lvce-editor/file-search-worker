@@ -15,7 +15,7 @@ export const test: Test = async ({ Editor, expect, FileSystem, Locator, Main, Qu
   await expect(label).toHaveText(`Press 'Enter' to go to line 0 column 2`)
 
   // act
-  await QuickPick.selectItem('2')
+  await QuickPick.selectIndex(0)
 
   // assert
   await Editor.shouldHaveSelections(new Uint32Array([0, 2, 0, 2]))
