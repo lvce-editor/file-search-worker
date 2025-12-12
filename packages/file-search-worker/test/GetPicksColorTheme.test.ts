@@ -49,3 +49,4 @@ test('getPicks returns empty array when no color themes', async () => {
 
   expect(result).toEqual([])
 })
+

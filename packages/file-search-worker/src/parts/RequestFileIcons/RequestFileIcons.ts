@@ -1,6 +1,6 @@
 import type { IconRequest } from '../IconRequest/IconRequest.ts'
 import * as DirentType from '../DirentType/DirentType.ts'
-import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 const requestFileIcon = async (request: IconRequest): Promise<string> => {
   if (!request.name) {

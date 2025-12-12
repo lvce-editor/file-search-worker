@@ -48,3 +48,4 @@ test('getPicks handles items without label', async () => {
   expect(result[1].label).toBeUndefined()
   expect(result[2].label).toBe('Item 3')
 })
+

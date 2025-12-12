@@ -1,6 +1,6 @@
 import { WebWorkerRpcClient } from '@lvce-editor/rpc'
 import * as CommandMap from '../CommandMap/CommandMap.ts'
-import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as SearchFileModule from '../SearchFileModule/SearchFileModule.ts'
 import * as SearchModules from '../SearchModules/SearchModules.ts'
 

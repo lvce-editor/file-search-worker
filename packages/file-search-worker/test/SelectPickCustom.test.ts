@@ -67,3 +67,4 @@ test('selectPick handles different resolveIds', async () => {
   expect(invokedArgs).toEqual(['another-resolve-id', pick])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
+

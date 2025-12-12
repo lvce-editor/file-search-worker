@@ -91,3 +91,4 @@ test('selectPick handles different uri formats', async () => {
   expect(capturedUri).toBe('file:///home/user/project')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
+

@@ -10,3 +10,4 @@ test('getPicks returns readonly array', async () => {
   const result = await getPicks()
   expect(result).toHaveLength(0)
 })
+

@@ -1,7 +1,7 @@
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
-import * as RendererWorker from '../RendererWorker/RendererWorker.ts'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 // TODO combine Ajax with cache (specify strategy: cacheFirst, networkFirst)
 const getBuiltinPicks = async (): Promise<readonly any[]> => {
