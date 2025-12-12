@@ -1,7 +1,6 @@
 import { expect, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
-
-const SearchFileWithRipGrep = await import('../src/parts/SearchFileWithRipGrep/SearchFileWithRipGrep.ts')
+import * as SearchFileWithRipGrep from '../src/parts/SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 
 test('searches files without prepare', async () => {
   const mockRpc = RendererWorker.registerMockRpc({

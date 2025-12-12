@@ -28,10 +28,7 @@ test('selectPick constructs absolute path and opens uri', async () => {
 
   expect(openedUri).toBe('/workspace/path/src/components/Button.tsx')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
-  expect(mockRpc.invocations).toEqual([
-    ['Workspace.getPath'],
-    ['Main.openUri', '/workspace/path/src/components/Button.tsx'],
-  ])
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath'], ['Main.openUri', '/workspace/path/src/components/Button.tsx']])
 })
 
 test('selectPick handles different file paths', async () => {
@@ -58,10 +55,7 @@ test('selectPick handles different file paths', async () => {
 
   expect(openedUri).toBe('/home/user/project/packages/utils/helper.ts')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
-  expect(mockRpc.invocations).toEqual([
-    ['Workspace.getPath'],
-    ['Main.openUri', '/home/user/project/packages/utils/helper.ts'],
-  ])
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath'], ['Main.openUri', '/home/user/project/packages/utils/helper.ts']])
 })
 
 test('selectPick handles empty description', async () => {
@@ -88,8 +82,5 @@ test('selectPick handles empty description', async () => {
 
   expect(openedUri).toBe('/workspace//root-file.ts')
   expect(result.command).toBe(QuickPickReturnValue.Hide)
-  expect(mockRpc.invocations).toEqual([
-    ['Workspace.getPath'],
-    ['Main.openUri', '/workspace//root-file.ts'],
-  ])
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath'], ['Main.openUri', '/workspace//root-file.ts']])
 })

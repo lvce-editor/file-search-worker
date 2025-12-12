@@ -46,26 +46,29 @@ test('getPicks returns file picks from search', async () => {
       uri: '/workspace/subdir/file3.js',
     },
   ])
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath']])
 })
 
 test('getPicks returns empty array when no workspace', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => null,
   })
 
   const result = await GetPicksFile.getPicks('file')
 
   expect(result).toEqual([])
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath']])
 })
 
 test('getPicks returns empty array when workspace is empty string', async () => {
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '',
   })
 
   const result = await GetPicksFile.getPicks('file')
 
   expect(result).toEqual([])
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath']])
 })
 
 const mockSearchHandlerRoot = async (path: string, value: string, prepare: boolean, assetDir: string): Promise<readonly string[]> => {
@@ -75,7 +78,7 @@ const mockSearchHandlerRoot = async (path: string, value: string, prepare: boole
 test('getPicks handles files in root directory', async () => {
   SearchFileModule.register({ '': mockSearchHandlerRoot })
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '/workspace',
   })
 
@@ -84,6 +87,7 @@ test('getPicks handles files in root directory', async () => {
   expect(result).toHaveLength(1)
   expect(result[0].label).toBe('root.txt')
   expect(result[0].description).toBe('/workspace')
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath']])
 })
 
 const mockSearchHandlerEmpty = async (path: string, value: string, prepare: boolean, assetDir: string): Promise<readonly string[]> => {
@@ -93,11 +97,12 @@ const mockSearchHandlerEmpty = async (path: string, value: string, prepare: bool
 test('getPicks handles empty search results', async () => {
   SearchFileModule.register({ '': mockSearchHandlerEmpty })
 
-  RendererWorker.registerMockRpc({
+  const mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '/workspace',
   })
 
   const result = await GetPicksFile.getPicks('nonexistent')
 
   expect(result).toEqual([])
+  expect(mockRpc.invocations).toEqual([['Workspace.getPath']])
 })

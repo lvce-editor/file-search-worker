@@ -61,13 +61,7 @@ test('updates value and processes picks', async () => {
   expect(result.focusedIndex).toBe(result.items.length > 0 ? 0 : -1)
   expect(result.picks.length).toBeGreaterThan(0)
   expect(mockRpc.invocations.length).toBeGreaterThan(0)
-  expect(
-    mockRpc.invocations.some(
-      (inv) =>
-        inv[0] === 'QuickPickProvider.provide' ||
-        inv[0] === 'ColorTheme.getColorThemeNames',
-    ),
-  ).toBe(true)
+  expect(mockRpc.invocations.some((inv) => inv[0] === 'QuickPickProvider.provide' || inv[0] === 'ColorTheme.getColorThemeNames')).toBe(true)
 })
 
 test('sets focusedIndex to -1 when no items', async () => {
