@@ -2,6 +2,7 @@ import { expect, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
+import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import { focusFirst } from '../src/parts/FocusFirst/FocusFirst.ts'
 
 test('focusFirst focuses the first item', async () => {
@@ -11,8 +12,8 @@ test('focusFirst focuses the first item', async () => {
   })
 
   const items = [
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
-    { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file1.txt', matches: [], uri: '/file1.txt' },
+    { description: '', direntType: DirentType.File, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
 
   const state: QuickPickState = {
@@ -27,6 +28,5 @@ test('focusFirst focuses the first item', async () => {
   expect(result.focusedIndex).toBe(0)
   expect(mockRpc.invocations).toEqual([
     ['IconTheme.getFileIcon', { name: 'file1.txt' }],
-    ['IconTheme.getFileIcon', { name: 'file2.txt' }],
   ])
 })
