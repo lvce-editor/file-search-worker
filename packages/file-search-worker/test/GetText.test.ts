@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
 import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetText from '../src/parts/GetText/GetText.ts'
 
@@ -11,21 +10,20 @@ test('returns joined lines from active editor', async () => {
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         return lines
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await GetText.getText()
 
   expect(result).toBe('line 1\nline 2\nline 3')
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
 })
 
 test('handles empty lines array', async () => {
@@ -36,21 +34,20 @@ test('handles empty lines array', async () => {
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         return lines
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await GetText.getText()
 
   expect(result).toBe('')
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
 })
 
 test('handles single line', async () => {
@@ -61,21 +58,20 @@ test('handles single line', async () => {
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         return lines
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await GetText.getText()
 
   expect(result).toBe('single line')
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
 })
 
 test('handles lines with empty strings', async () => {
@@ -86,21 +82,20 @@ test('handles lines with empty strings', async () => {
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         return lines
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await GetText.getText()
 
   expect(result).toBe('line 1\n\nline 3\n')
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
 })
 
 test('handles error from getActiveEditorId', async () => {
@@ -110,16 +105,11 @@ test('handles error from getActiveEditorId', async () => {
     },
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: () => {
-      throw new Error('should not be called')
-    },
-  })
-  EditorWorker.set(mockEditorRpc)
+  const mockEditorRpc = EditorWorker.registerMockRpc({})
 
   await expect(GetText.getText()).rejects.toThrow('Failed to get active editor')
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([])
 })
 
 test('handles error from getLines', async () => {
@@ -129,17 +119,16 @@ test('handles error from getLines', async () => {
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         throw new Error('Failed to get lines')
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   await expect(GetText.getText()).rejects.toThrow('Failed to get lines')
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
 })

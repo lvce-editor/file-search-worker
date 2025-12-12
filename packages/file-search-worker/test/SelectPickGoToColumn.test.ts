@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
 import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import * as SelectPickGoToColumn from '../src/parts/SelectPickGoToColumn/SelectPickGoToColumn.ts'
@@ -14,16 +13,14 @@ test('selectPickGoToColumn with ::value parses column and navigates to position'
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         return lines
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const item = { label: '1' }
   const value = '::10'
@@ -31,6 +28,7 @@ test('selectPickGoToColumn with ::value parses column and navigates to position'
   const result = await SelectPickGoToColumn.selectPickGoToColumn(item, value)
 
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId'], ['Editor.cursorSet', 1, 3], ['Editor.handleFocus']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -44,16 +42,14 @@ test('selectPickGoToColumn with ::value handles column at newline', async () => 
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         return lines
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const item = { label: '1' }
   const value = '::7'
@@ -61,6 +57,7 @@ test('selectPickGoToColumn with ::value handles column at newline', async () => 
   const result = await SelectPickGoToColumn.selectPickGoToColumn(item, value)
 
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId'], ['Editor.cursorSet', 1, 0], ['Editor.handleFocus']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -74,16 +71,14 @@ test('selectPickGoToColumn with ::value handles column 0', async () => {
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, id: number) => {
-      if (method === 'Editor.getLines2' && id === editorId) {
+  const mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (id: number) => {
+      if (id === editorId) {
         return lines
       }
-      throw new Error(`unexpected method ${method}`)
+      throw new Error(`unexpected editorId ${id}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const item = { label: '1' }
   const value = '::0'
@@ -91,5 +86,6 @@ test('selectPickGoToColumn with ::value handles column 0', async () => {
   const result = await SelectPickGoToColumn.selectPickGoToColumn(item, value)
 
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId'], ['Editor.cursorSet', 0, 0], ['Editor.handleFocus']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', editorId]])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
