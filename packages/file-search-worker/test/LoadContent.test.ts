@@ -420,27 +420,17 @@ test('loadContent sets state to Finished', async () => {
   })
   setRpc(RendererWorker, mockRpc)
 
-  const picks: readonly ProtoVisibleItem[] = [createProtoVisibleItem('file1.txt')]
+  const customItems = [{ label: 'file1.txt' }]
 
   const state = createDefaultState({
-    args: [],
+    uri: QuickPickEntryUri.Custom,
+    args: [null, customItems],
     state: QuickPickOpenState.Default,
-    uri: QuickPickEntryUri.File,
   })
 
-  const originalGetPicks = (await import('../src/parts/QuickPickEntries/QuickPickEntries.ts')).getPicks
-  const mockGetPicks = () => {
-    return async () => picks
-  }
-  ;(await import('../src/parts/QuickPickEntries/QuickPickEntries.ts')).getPicks = mockGetPicks as any
+  const result = await loadContent(state)
 
-  try {
-    const result = await loadContent(state)
-
-    expect(result.state).toBe(QuickPickOpenState.Finished)
-  } finally {
-    ;(await import('../src/parts/QuickPickEntries/QuickPickEntries.ts')).getPicks = originalGetPicks
-  }
+  expect(result.state).toBe(QuickPickOpenState.Finished)
 })
 
 test('loadContent handles picks less than maxVisibleItems', async () => {
@@ -621,8 +611,8 @@ test('loadContent handles Recent URI', async () => {
       if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
         return 'icon'
       }
-      if (method === 'Workspace.getRecentlyOpened') {
-        return [{ uri: '/recent1', label: 'recent1' }]
+      if (method === 'RecentlyOpened.getRecentlyOpened') {
+        return ['file:///recent1']
       }
       throw new Error(`unexpected method ${method}`)
     },

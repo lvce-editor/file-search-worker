@@ -2,7 +2,6 @@ import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
-import * as CloseWidget from '../src/parts/CloseWidget/CloseWidget.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
@@ -38,14 +37,12 @@ test('selectItem returns state when label is not found', async () => {
 test('selectItem calls selectIndex with correct index when label is found', async () => {
   let closeWidgetCalled = false
 
-  const originalCloseWidget = CloseWidget.closeWidget
-  CloseWidget.closeWidget = async () => {
-    closeWidgetCalled = true
-  }
-
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: async () => {},
+    closeWidget: async () => {
+      closeWidgetCalled = true
+    },
   })
   set(RendererWorker, mockRpc)
 
@@ -86,8 +83,6 @@ test('selectItem calls selectIndex with correct index when label is found', asyn
 
   expect(closeWidgetCalled).toBe(true)
   expect(result).toBe(state)
-
-  CloseWidget.closeWidget = originalCloseWidget
 })
 
 test('selectItem handles empty items array', async () => {

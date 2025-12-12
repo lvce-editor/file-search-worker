@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as GetProtoVisibleQuickPickItems from '../src/parts/GetProtoVisibleQuickPickItems/GetProtoVisibleQuickPickItems.ts'
 
 test('returns empty array when items is empty', () => {

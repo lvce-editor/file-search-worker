@@ -2,9 +2,7 @@ import { expect, test } from '@jest/globals'
 import { MockRpc } from '@lvce-editor/rpc'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
-import * as CloseWidget from '../src/parts/CloseWidget/CloseWidget.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
 import { RendererWorker } from '../src/parts/RpcId/RpcId.ts'
 import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 import { selectIndex } from '../src/parts/SelectIndex/SelectIndex.ts'
@@ -30,15 +28,13 @@ test('selectIndex calls select function and returns state for Hide command', asy
   let closeWidgetCalled = false
   let closeWidgetId: number | undefined
 
-  const originalCloseWidget = CloseWidget.closeWidget
-  CloseWidget.closeWidget = async (id: number) => {
-    closeWidgetCalled = true
-    closeWidgetId = id
-  }
-
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: async () => {},
+    closeWidget: async (id: number) => {
+      closeWidgetCalled = true
+      closeWidgetId = id
+    },
   })
   set(RendererWorker, mockRpc)
 
@@ -60,8 +56,6 @@ test('selectIndex calls select function and returns state for Hide command', asy
   expect(closeWidgetCalled).toBe(true)
   expect(closeWidgetId).toBe(123)
   expect(result).toBe(state)
-
-  CloseWidget.closeWidget = originalCloseWidget
 })
 
 test('selectIndex handles default command case', async () => {
@@ -92,14 +86,12 @@ test('selectIndex handles default command case', async () => {
 test('selectIndex calculates actualIndex correctly with minLineY', async () => {
   let closeWidgetCalled = false
 
-  const originalCloseWidget = CloseWidget.closeWidget
-  CloseWidget.closeWidget = async () => {
-    closeWidgetCalled = true
-  }
-
   const mockRpc = MockRpc.create({
     commandMap: {},
     invoke: async () => {},
+    closeWidget: async () => {
+      closeWidgetCalled = true
+    },
   })
   set(RendererWorker, mockRpc)
 
@@ -130,6 +122,4 @@ test('selectIndex calculates actualIndex correctly with minLineY', async () => {
 
   expect(closeWidgetCalled).toBe(true)
   expect(result).toBe(state)
-
-  CloseWidget.closeWidget = originalCloseWidget
 })
