@@ -30,11 +30,7 @@ test('selectPick with ::value parses column and navigates to position', async ()
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([
-    ['GetActiveEditor.getActiveEditorId'],
-    ['Editor.cursorSet', 1, 3],
-    ['Editor.handleFocus'],
-  ])
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId'], ['Editor.cursorSet', 1, 3], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -64,11 +60,7 @@ test('selectPick with ::value handles column at newline', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([
-    ['GetActiveEditor.getActiveEditorId'],
-    ['Editor.cursorSet', 1, 0],
-    ['Editor.handleFocus'],
-  ])
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId'], ['Editor.cursorSet', 1, 0], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -98,11 +90,7 @@ test('selectPick with ::value handles column 0', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([
-    ['GetActiveEditor.getActiveEditorId'],
-    ['Editor.cursorSet', 0, 0],
-    ['Editor.handleFocus'],
-  ])
+  expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId'], ['Editor.cursorSet', 0, 0], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -117,10 +105,7 @@ test('selectPick without :: parses row from item.label', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([
-    ['Editor.cursorSet', 5, 0],
-    ['Editor.handleFocus'],
-  ])
+  expect(mockRpc.invocations).toEqual([['Editor.cursorSet', 5, 0], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -135,10 +120,7 @@ test('selectPick without :: handles row 0', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([
-    ['Editor.cursorSet', 0, 0],
-    ['Editor.handleFocus'],
-  ])
+  expect(mockRpc.invocations).toEqual([['Editor.cursorSet', 0, 0], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
@@ -153,9 +135,6 @@ test('selectPick without :: handles large row numbers', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(mockRpc.invocations).toEqual([
-    ['Editor.cursorSet', 100, 0],
-    ['Editor.handleFocus'],
-  ])
+  expect(mockRpc.invocations).toEqual([['Editor.cursorSet', 100, 0], ['Editor.handleFocus']])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })

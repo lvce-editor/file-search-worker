@@ -26,7 +26,5 @@ test('focusFirst focuses the first item', async () => {
   const result = await focusFirst(state)
 
   expect(result.focusedIndex).toBe(0)
-  expect(mockRpc.invocations).toEqual([
-    ['IconTheme.getFileIcon', { name: 'file1.txt' }],
-  ])
+  expect(mockRpc.invocations).toEqual([['IconTheme.getFileIcon', { name: 'file1.txt' }]])
 })
