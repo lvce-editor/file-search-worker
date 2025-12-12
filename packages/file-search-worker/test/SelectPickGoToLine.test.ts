@@ -107,18 +107,9 @@ test('selectPick with ::value handles column 0', async () => {
 })
 
 test('selectPick without :: parses row from item.label', async () => {
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
-  let handleFocusCalled = false
-
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
-    'Editor.handleFocus': () => {
-      handleFocusCalled = true
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
+    'Editor.handleFocus': () => {},
   })
 
   const item = { label: '5' }
@@ -126,21 +117,16 @@ test('selectPick without :: parses row from item.label', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(5)
-  expect(capturedColumnIndex).toBe(0)
-  expect(handleFocusCalled).toBe(true)
+  expect(mockRpc.invocations).toEqual([
+    ['Editor.cursorSet', 5, 0],
+    ['Editor.handleFocus'],
+  ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
 test('selectPick without :: handles row 0', async () => {
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
-
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
 
@@ -149,20 +135,16 @@ test('selectPick without :: handles row 0', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(0)
-  expect(capturedColumnIndex).toBe(0)
+  expect(mockRpc.invocations).toEqual([
+    ['Editor.cursorSet', 0, 0],
+    ['Editor.handleFocus'],
+  ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
 
 test('selectPick without :: handles large row numbers', async () => {
-  let capturedRowIndex: number | undefined
-  let capturedColumnIndex: number | undefined
-
-  RendererWorker.registerMockRpc({
-    'Editor.cursorSet': (rowIndex: number, columnIndex: number) => {
-      capturedRowIndex = rowIndex
-      capturedColumnIndex = columnIndex
-    },
+  const mockRpc = RendererWorker.registerMockRpc({
+    'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
 
@@ -171,7 +153,9 @@ test('selectPick without :: handles large row numbers', async () => {
 
   const result = await SelectPickGoToLine.selectPick(item, value)
 
-  expect(capturedRowIndex).toBe(100)
-  expect(capturedColumnIndex).toBe(0)
+  expect(mockRpc.invocations).toEqual([
+    ['Editor.cursorSet', 100, 0],
+    ['Editor.handleFocus'],
+  ])
   expect(result.command).toBe(QuickPickReturnValue.Hide)
 })
