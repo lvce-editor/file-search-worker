@@ -4,10 +4,8 @@ import { getPosition } from '../GetPosition/GetPosition.ts'
 import { getText } from '../GetText/GetText.ts'
 
 export const getPicks = async (value: string): Promise<readonly ProtoVisibleItem[]> => {
-  console.log({ value })
   if (value === '::') {
     const text = await getText()
-    console.log({ text })
     return [
       {
         description: '',
