@@ -6,6 +6,7 @@ export interface IGetPicks {
 }
 
 export const getPicks = (id: number, searchValue: string, args: readonly unknown[]): Promise<readonly ProtoVisibleItem[]> => {
+  console.log({ id, searchValue })
   const fn = QuickPickEntries.getPicks(id)
   return fn(searchValue, args)
 }
