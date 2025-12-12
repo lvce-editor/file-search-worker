@@ -36,19 +36,11 @@ test('replaces selected text', async () => {
 })
 
 test('deletes character backward', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteContentBackward, '', 5, 5)
@@ -59,19 +51,11 @@ test('deletes character backward', async () => {
 })
 
 test('deletes character forward', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteContentForward, '', 0, 0)
@@ -82,19 +66,11 @@ test('deletes character forward', async () => {
 })
 
 test('deletes word backward', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello world' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteWordBackward, '', 11, 11)
@@ -105,19 +81,11 @@ test('deletes word backward', async () => {
 })
 
 test('deletes word forward', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello world' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.DeleteWordForward, '', 0, 0)
@@ -128,19 +96,11 @@ test('deletes word forward', async () => {
 })
 
 test('handles composition text', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertCompositionText, ' world', 5, 5)
@@ -151,19 +111,11 @@ test('handles composition text', async () => {
 })
 
 test('handles line break', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), providerId: 0, value: 'hello\nworld' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertLineBreak, '', 5, 5)
@@ -174,19 +126,11 @@ test('handles line break', async () => {
 })
 
 test('handles insert from paste', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = { ...CreateDefaultState.createDefaultState(), value: 'hello' }
   const result = await HandleBeforeInput.handleBeforeInput(state, InputEventType.InsertFromPaste, ' world', 5, 5)
@@ -197,19 +141,11 @@ test('handles insert from paste', async () => {
 })
 
 test('preserves other state properties', async () => {
-  const mockRpc = MockRpc.create({
-    commandMap: {},
-    invoke: async (method: string) => {
-      if (method === 'ColorTheme.getColorThemeNames') {
-        return []
-      }
-      if (method === 'IconTheme.getFileIcon' || method === 'IconTheme.getFolderIcon') {
-        return 'icon'
-      }
-      throw new Error(`unexpected method ${method}`)
-    },
+  RendererWorker.registerMockRpc({
+    'ColorTheme.getColorThemeNames': async () => [],
+    'IconTheme.getFileIcon': async () => 'icon',
+    'IconTheme.getFolderIcon': async () => 'icon',
   })
-  set(RpcId.RendererWorker, mockRpc)
 
   const state = {
     ...CreateDefaultState.createDefaultState(),

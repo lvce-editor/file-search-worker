@@ -1,10 +1,8 @@
 import { expect, test } from '@jest/globals'
-import { RpcId } from '@lvce-editor/constants'
-import { MockRpc } from '@lvce-editor/rpc'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as HandleClickAt from '../src/parts/HandleClickAt/HandleClickAt.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
-import { set } from '../src/parts/RpcRegistry/RpcRegistry.ts'
 
 test('handleClickAt calculates correct index from y coordinate', async () => {
   let closeWidgetCalled = false
