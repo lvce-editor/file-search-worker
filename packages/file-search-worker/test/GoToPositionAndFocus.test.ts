@@ -79,3 +79,4 @@ test('goToPositionAndFocus works with different row and column indices', async (
   expect(capturedRowIndex).toBe(42)
   expect(capturedColumnIndex).toBe(100)
 })
+

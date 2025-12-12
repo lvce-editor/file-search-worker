@@ -21,7 +21,8 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state = {
+    ...CreateDefaultState.createDefaultState(),
     headerHeight: 38,
     itemHeight: 30,
     items: [
@@ -50,7 +51,7 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
     providerId: QuickPickEntryId.Commands,
     top: 50,
     value: '>',
-  })
+  }
 
   const y = 50 + 38 + 15
   const result = await HandleClickAt.handleClickAt(state, 100, y)
@@ -60,13 +61,14 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
 })
 
 test('handleClickAt returns state unchanged when index is out of bounds', async () => {
-  const state = CreateDefaultState.createDefaultState({
+  const state = {
+    ...CreateDefaultState.createDefaultState(),
     headerHeight: 38,
     itemHeight: 30,
     items: [],
     minLineY: 0,
     top: 50,
-  })
+  }
 
   const y = 50 + 38 + 1000
   const result = await HandleClickAt.handleClickAt(state, 200, y)
@@ -89,7 +91,8 @@ test('handleClickAt handles click at first item', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state = {
+    ...CreateDefaultState.createDefaultState(),
     headerHeight: 38,
     itemHeight: 30,
     items: [
@@ -108,7 +111,7 @@ test('handleClickAt handles click at first item', async () => {
     providerId: QuickPickEntryId.Commands,
     top: 50,
     value: '>',
-  })
+  }
 
   const y = 50 + 38 + 15
   const result = await HandleClickAt.handleClickAt(state, 0, y)
@@ -132,7 +135,8 @@ test('handleClickAt handles click at second item', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state = {
+    ...CreateDefaultState.createDefaultState(),
     headerHeight: 38,
     itemHeight: 30,
     items: [
@@ -161,7 +165,7 @@ test('handleClickAt handles click at second item', async () => {
     providerId: QuickPickEntryId.Commands,
     top: 50,
     value: '>',
-  })
+  }
 
   const y = 50 + 38 + 30 + 15
   const result = await HandleClickAt.handleClickAt(state, 0, y)
@@ -171,7 +175,8 @@ test('handleClickAt handles click at second item', async () => {
 })
 
 test('handleClickAt handles click above header', async () => {
-  const state = CreateDefaultState.createDefaultState({
+  const state = {
+    ...CreateDefaultState.createDefaultState(),
     headerHeight: 38,
     itemHeight: 30,
     items: [
@@ -188,7 +193,7 @@ test('handleClickAt handles click above header', async () => {
     ],
     minLineY: 0,
     top: 50,
-  })
+  }
 
   const y = 50 + 10
   const result = await HandleClickAt.handleClickAt(state, 0, y)
@@ -211,7 +216,8 @@ test('handleClickAt ignores x coordinate', async () => {
   })
   set(RpcId.RendererWorker, mockRpc)
 
-  const state = CreateDefaultState.createDefaultState({
+  const state = {
+    ...CreateDefaultState.createDefaultState(),
     headerHeight: 38,
     itemHeight: 30,
     items: [
@@ -230,7 +236,7 @@ test('handleClickAt ignores x coordinate', async () => {
     providerId: QuickPickEntryId.Commands,
     top: 50,
     value: '>',
-  })
+  }
 
   const y = 50 + 38 + 15
   const result1 = await HandleClickAt.handleClickAt(state, 0, y)

@@ -23,11 +23,12 @@ test('focusPrevious focuses the previous item', async () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file3.txt', matches: [], uri: '/file3.txt' },
   ]
 
-  const state = createDefaultState({
+  const state = {
+    ...createDefaultState(),
     focusedIndex: 2,
     items,
     providerId: 3,
-  })
+  }
 
   const result = await focusPrevious(state)
 
@@ -51,11 +52,12 @@ test('focusPrevious cycles to last item when at first', async () => {
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'file2.txt', matches: [], uri: '/file2.txt' },
   ]
 
-  const state = createDefaultState({
+  const state = {
+    ...createDefaultState(),
     focusedIndex: 0,
     items,
     providerId: 3,
-  })
+  }
 
   const result = await focusPrevious(state)
 

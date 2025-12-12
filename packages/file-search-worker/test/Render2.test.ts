@@ -37,10 +37,11 @@ test('render2 calls applyRender and returns commands when states differ', () => 
 test('render2 updates QuickPickStates and returns commands when states differ', () => {
   const uid = 3
   const oldState = createState(0)
-  const newState = CreateDefaultState.createDefaultState({
+  const newState = {
+    ...CreateDefaultState.createDefaultState(),
     focused: true,
     uid: 3,
-  })
+  }
   QuickPickStates.set(uid, oldState, newState)
   const diffResult: readonly number[] = [DiffType.RenderFocus]
   const result = Render2.render2(uid, diffResult)
@@ -55,11 +56,12 @@ test('render2 updates QuickPickStates and returns commands when states differ', 
 test('render2 handles multiple diff types when states differ', () => {
   const uid = 4
   const oldState = createState(0)
-  const newState = CreateDefaultState.createDefaultState({
+  const newState = {
+    ...CreateDefaultState.createDefaultState(),
     focused: true,
     uid: 4,
     value: 'test-value',
-  })
+  }
   QuickPickStates.set(uid, oldState, newState)
   const diffResult: readonly number[] = [DiffType.RenderValue, DiffType.RenderFocus]
   const result = Render2.render2(uid, diffResult)
@@ -70,3 +72,4 @@ test('render2 handles multiple diff types when states differ', () => {
   expect(updatedOldState).toBe(newState)
   expect(updatedNewState).toBe(newState)
 })
+

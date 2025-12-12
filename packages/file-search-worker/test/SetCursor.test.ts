@@ -91,3 +91,4 @@ test('setCursor handles large indices', async () => {
   expect(capturedRowIndex).toBe(1000)
   expect(capturedColumnIndex).toBe(5000)
 })
+
