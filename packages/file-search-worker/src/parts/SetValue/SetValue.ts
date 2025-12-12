@@ -20,6 +20,7 @@ export const setValue = async (state: QuickPickState, newValue: string): Promise
   const newPicks = await GetPicks.getPicks(subId, newValue, args)
   const filterValue = GetFilterValue.getFilterValue(providerId, subId, newValue)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
+  console.log({ filterValue, items, newPicks })
   const focusedIndex = items.length === 0 ? -1 : 0
   const sliced = items.slice(minLineY, maxLineY)
   const { icons, newFileIconCache } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)

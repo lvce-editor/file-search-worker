@@ -16,11 +16,11 @@ const getFilterValueEverything = (value: string): string => {
 }
 
 const getValueGoToColumn = (value: string): string => {
-  return value.slice(2)
+  return ''
 }
 
 const getValueGoToLine = (value: string): string => {
-  return value.slice(1)
+  return ''
 }
 
 const getFn = (id: number): Fn => {
