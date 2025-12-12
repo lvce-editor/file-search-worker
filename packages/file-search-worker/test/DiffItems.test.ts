@@ -25,8 +25,28 @@ const createState = ({
   }
 }
 
-const items1 = [{ label: 'item1' }]
-const items2 = [{ label: 'item2' }]
+const items1: readonly ProtoVisibleItem[] = [
+  {
+    description: '',
+    direntType: 1,
+    fileIcon: '',
+    icon: '',
+    label: 'item1',
+    matches: [],
+    uri: '/item1',
+  },
+]
+const items2: readonly ProtoVisibleItem[] = [
+  {
+    description: '',
+    direntType: 1,
+    fileIcon: '',
+    icon: '',
+    label: 'item2',
+    matches: [],
+    uri: '/item2',
+  },
+]
 
 test('diffType is RenderItems', () => {
   expect(DiffItems.diffType).toBe(DiffType.RenderItems)

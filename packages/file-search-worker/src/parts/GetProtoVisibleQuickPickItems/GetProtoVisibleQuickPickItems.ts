@@ -4,7 +4,7 @@ export const getVisible = (items: readonly unknown[], minLineY: number, maxLineY
   const range = items.slice(minLineY, maxLineY)
   const protoVisibleItems = range.map((item, index) => {
     return {
-      ...item,
+      ...(item as ProtoVisibleItem),
       fileIcon: icons[index],
     }
   })

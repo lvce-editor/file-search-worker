@@ -135,7 +135,7 @@ test('handles single item', () => {
 })
 
 test('handles large range', () => {
-  const items: readonly any[] = Array.from({ length: 100 }, (_, i) => ({
+  const items: readonly unknown[] = Array.from({ length: 100 }, (_, i) => ({
     description: '',
     direntType: 1,
     fileIcon: '',
