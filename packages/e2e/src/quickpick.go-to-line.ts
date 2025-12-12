@@ -4,11 +4,7 @@ export const name = 'quickpick.go-to-line'
 
 export const skip = 1
 
-<<<<<<< HEAD
-export const test: Test = async ({ FileSystem, QuickPick, Workspace }) => {
-=======
-export const test: Test = async ({ Editor, expect, FileSystem, Locator, Main, QuickPick, SideBar, Workspace }) => {
->>>>>>> origin/main
+export const test: Test = async ({ FileSystem, Main, QuickPick, Workspace }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir()
   await FileSystem.writeFile(`${tmpDir}/a.txt`, 'abc')
