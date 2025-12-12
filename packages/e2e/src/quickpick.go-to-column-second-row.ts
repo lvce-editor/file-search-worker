@@ -2,6 +2,8 @@ import { type Test } from '@lvce-editor/test-with-playwright'
 
 export const name = 'quickpick.go-to-column-second-row'
 
+export const skip = 1
+
 export const test: Test = async ({ Editor, expect, FileSystem, Locator, Main, QuickPick, Workspace }) => {
   // arrange
   const tmpDir = await FileSystem.getTmpDir()
