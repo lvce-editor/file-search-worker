@@ -2,14 +2,14 @@ import { expect, test } from '@jest/globals'
 import * as GetProtoVisibleQuickPickItems from '../src/parts/GetProtoVisibleQuickPickItems/GetProtoVisibleQuickPickItems.ts'
 
 test('returns empty array when items is empty', () => {
-  const items: readonly any[] = []
+  const items: readonly unknown[] = []
   const icons: readonly string[] = []
   const result = GetProtoVisibleQuickPickItems.getVisible(items, 0, 0, icons)
   expect(result).toEqual([])
 })
 
 test('slices items correctly with matching icons', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item3', matches: [], uri: '' },
@@ -25,7 +25,7 @@ test('slices items correctly with matching icons', () => {
 })
 
 test('handles minLineY at start', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
   ]
@@ -39,7 +39,7 @@ test('handles minLineY at start', () => {
 })
 
 test('handles maxLineY at end', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item3', matches: [], uri: '' },
@@ -52,7 +52,7 @@ test('handles maxLineY at end', () => {
 })
 
 test('handles minLineY equals maxLineY', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
   ]
@@ -62,7 +62,7 @@ test('handles minLineY equals maxLineY', () => {
 })
 
 test('handles icons array shorter than slice', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item3', matches: [], uri: '' },
@@ -76,7 +76,7 @@ test('handles icons array shorter than slice', () => {
 })
 
 test('handles icons array longer than slice', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
   ]
@@ -88,7 +88,7 @@ test('handles icons array longer than slice', () => {
 })
 
 test('preserves all item properties', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     {
       description: 'desc1',
       direntType: 2,
@@ -114,7 +114,7 @@ test('preserves all item properties', () => {
 })
 
 test('handles empty icons array', () => {
-  const items: readonly any[] = [
+  const items: readonly unknown[] = [
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' },
     { description: '', direntType: 1, fileIcon: '', icon: '', label: 'item2', matches: [], uri: '' },
   ]
@@ -126,7 +126,7 @@ test('handles empty icons array', () => {
 })
 
 test('handles single item', () => {
-  const items: readonly any[] = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' }]
+  const items: readonly unknown[] = [{ description: '', direntType: 1, fileIcon: '', icon: '', label: 'item1', matches: [], uri: '' }]
   const icons: readonly string[] = ['icon1']
   const result = GetProtoVisibleQuickPickItems.getVisible(items, 0, 1, icons)
   expect(result).toHaveLength(1)
@@ -135,7 +135,7 @@ test('handles single item', () => {
 })
 
 test('handles large range', () => {
-  const items: readonly any[] = Array.from({ length: 100 }, (_, i) => ({
+  const items: readonly unknown[] = Array.from({ length: 100 }, (_, i) => ({
     description: '',
     direntType: 1,
     fileIcon: '',

@@ -26,20 +26,35 @@ test('getPicks returns file picks from search', async () => {
 
   const result = await GetPicksFile.getPicks('file')
 
-  expect(result).toHaveLength(3)
-  expect(result[0]).toEqual({
-    description: '/workspace',
-    direntType: DirentType.File,
-    fileIcon: '',
-    icon: '',
-    label: 'file1.txt',
-    matches: [],
-    uri: '/workspace/file1.txt',
-  })
-  expect(result[1].label).toBe('file2.ts')
-  expect(result[1].uri).toBe('/workspace/file2.ts')
-  expect(result[2].label).toBe('file3.js')
-  expect(result[2].description).toBe('/workspace/subdir')
+  expect(result).toEqual([
+    {
+      description: '/workspace',
+      direntType: DirentType.File,
+      fileIcon: '',
+      icon: '',
+      label: 'file1.txt',
+      matches: [],
+      uri: '/workspace/file1.txt',
+    },
+    {
+      description: '/workspace',
+      direntType: DirentType.File,
+      fileIcon: '',
+      icon: '',
+      label: 'file2.ts',
+      matches: [],
+      uri: '/workspace/file2.ts',
+    },
+    {
+      description: '/workspace/subdir',
+      direntType: DirentType.File,
+      fileIcon: '',
+      icon: '',
+      label: 'file3.js',
+      matches: [],
+      uri: '/workspace/subdir/file3.js',
+    },
+  ])
 })
 
 test('getPicks returns empty array when no workspace', async () => {

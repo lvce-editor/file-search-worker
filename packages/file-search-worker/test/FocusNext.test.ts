@@ -116,4 +116,3 @@ test('focusNext cycles to first item when at last', async () => {
 
   expect(result.focusedIndex).toBe(0)
 })
-

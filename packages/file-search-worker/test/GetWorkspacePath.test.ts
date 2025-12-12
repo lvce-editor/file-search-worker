@@ -39,4 +39,3 @@ test('getWorkspacePath should handle different workspace paths', async () => {
   const result = await getWorkspacePath()
   expect(result).toBe(mockWorkspacePath)
 })
-

@@ -61,4 +61,3 @@ test('focusLast focuses the last item', async () => {
 
   expect(result.focusedIndex).toBe(2)
 })
-

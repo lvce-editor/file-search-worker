@@ -1,14 +1,14 @@
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 
 interface MenuEntriesState {
-  menuEntries: readonly any[]
+  menuEntries: readonly unknown[]
 }
 
 const state: MenuEntriesState = {
   menuEntries: [],
 }
 
-export const getAll = async (): Promise<readonly any[]> => {
+export const getAll = async (): Promise<readonly unknown[]> => {
   try {
     // @ts-ignore
     const entries = await RendererWorker.invoke('Layout.getAllQuickPickMenuEntries')
@@ -19,7 +19,7 @@ export const getAll = async (): Promise<readonly any[]> => {
   return state.menuEntries
 }
 
-export const add = (menuEntries: readonly any[]): void => {
+export const add = (menuEntries: readonly unknown[]): void => {
   state.menuEntries = [...state.menuEntries, ...menuEntries]
 }
 

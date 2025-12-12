@@ -4,7 +4,7 @@ import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 
 // TODO combine Ajax with cache (specify strategy: cacheFirst, networkFirst)
-const getBuiltinPicks = async (): Promise<readonly any[]> => {
+const getBuiltinPicks = async (): Promise<readonly unknown[]> => {
   const builtinPicks = await MenuEntriesState.getAll()
   return builtinPicks
 }
@@ -23,7 +23,7 @@ const prefixIdWithExt = (item: any): any => {
   }
 }
 
-const getExtensionPicks = async (): Promise<readonly any[]> => {
+const getExtensionPicks = async (): Promise<readonly unknown[]> => {
   try {
     // TODO ask extension host worker directly
     // TODO don't call this every time

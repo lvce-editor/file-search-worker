@@ -3,7 +3,7 @@ import * as CreateQuickPickViewModel from '../CreateQuickPickViewModel/CreateQui
 import * as DiffType from '../DiffType/DiffType.ts'
 import * as GetRenderer from '../GetRenderer/GetRenderer.ts'
 
-export const applyRender = (oldState: QuickPickState, newState: QuickPickState, diffResult: readonly number[]): readonly any[] => {
+export const applyRender = (oldState: QuickPickState, newState: QuickPickState, diffResult: readonly number[]): readonly unknown[] => {
   const commands = []
   const viewModel = CreateQuickPickViewModel.createQuickPickViewModel(oldState, newState)
   for (const item of diffResult) {

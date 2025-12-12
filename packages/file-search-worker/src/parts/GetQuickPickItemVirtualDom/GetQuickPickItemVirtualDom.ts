@@ -11,7 +11,7 @@ import { text } from '../VirtualDomHelpers/VirtualDomHelpers.ts'
 
 export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly VirtualDomNode[] => {
   const { description, fileIcon, highlights, icon, isActive, label, posInSet, setSize } = visibleItem
-  const dom: any[] = [
+  const dom: VirtualDomNode[] = [
     {
       ariaPosInSet: posInSet,
       ariaSetSize: setSize,
@@ -21,9 +21,8 @@ export const getQuickPickItemVirtualDom = (visibleItem: VisibleItem): readonly V
       type: VirtualDomElements.Div,
     },
   ]
-  const parent = dom[0]
+  const parent = dom[0] as VirtualDomNode & { id?: string; className: string; childCount: number }
   if (isActive) {
-    // @ts-ignore
     parent.id = DomId.QuickPickItemActive
     parent.className += ' ' + ClassNames.QuickPickItemActive
   }
