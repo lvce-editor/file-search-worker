@@ -17,7 +17,7 @@ test('create calls QuickPickStates.set with correct state', () => {
   const args = ['arg1', 'arg2']
   const workspaceUri = 'file:///workspace'
 
-  Create2.create(uid, uri, listItemHeight, x, y, width, height, platform, args, workspaceUri)
+  Create2.create(uid, uri, listItemHeight, x, y, width, height, platform, args, workspaceUri, '')
 
   const { newState } = QuickPickStates.get(uid)
   expect(newState).toBeDefined()
@@ -51,7 +51,7 @@ test('create sets virtual list properties correctly', () => {
   const uid = 456
   const listItemHeight = 50
 
-  Create2.create(uid, '', listItemHeight, 0, 0, 0, 0, 0, [], '')
+  Create2.create(uid, '', listItemHeight, 0, 0, 0, 0, 0, [], '', '')
 
   const { newState } = QuickPickStates.get(uid)
   expect(newState).toBeDefined()
@@ -75,8 +75,8 @@ test('create handles different uid values', () => {
   const uid1 = 789
   const uid2 = 790
 
-  Create2.create(uid1, 'uri1', 30, 0, 0, 0, 0, 0, [], 'workspace1')
-  Create2.create(uid2, 'uri2', 30, 0, 0, 0, 0, 0, [], 'workspace2')
+  Create2.create(uid1, 'uri1', 30, 0, 0, 0, 0, 0, [], 'workspace1', '')
+  Create2.create(uid2, 'uri2', 30, 0, 0, 0, 0, 0, [], 'workspace2', '')
 
   const { newState: state1 } = QuickPickStates.get(uid1)
   const { newState: state2 } = QuickPickStates.get(uid2)
