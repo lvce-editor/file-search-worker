@@ -16,6 +16,7 @@ export const create = (
   platform: number,
   args: any,
   workspaceUri: string,
+  assetDir: string,
 ): void => {
   const state: QuickPickState = {
     cursorOffset: 0,
@@ -44,6 +45,7 @@ export const create = (
     inputSource: InputSource.User,
     platform,
     value: '',
+    assetDir,
   }
   QuickPickStates.set(uid, state, state)
 }

@@ -12,6 +12,7 @@ export const createDefaultState = (): QuickPickState => {
   return {
     ...virtualList,
     args: [],
+    assetDir: '',
     cursorOffset: 0,
     fileIconCache: Object.create(null),
     focused: false,
