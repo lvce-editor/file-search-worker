@@ -20,7 +20,7 @@ test('getPicks returns builtin picks', async () => {
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
   consoleErrorSpy.mockRestore()
 
   expect(result).toHaveLength(2)
@@ -50,7 +50,7 @@ test('getPicks returns extension picks with ext prefix', async () => {
     'Layout.getAllQuickPickMenuEntries': () => [],
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
 
   expect(result).toHaveLength(2)
   expect(result[0]).toEqual({
@@ -77,7 +77,7 @@ test('getPicks combines builtin and extension picks', async () => {
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
 
   expect(result).toHaveLength(2)
   expect((result[0] as CommandItem).id).toBe('builtin1')
@@ -93,7 +93,7 @@ test('getPicks handles missing label in extension picks', async () => {
     'Layout.getAllQuickPickMenuEntries': () => [],
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
   consoleWarnSpy.mockRestore()
 
   expect(result).toHaveLength(1)
@@ -109,7 +109,7 @@ test('getPicks handles missing id in extension picks', async () => {
     'Layout.getAllQuickPickMenuEntries': () => [],
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
   consoleWarnSpy.mockRestore()
 
   expect(result).toHaveLength(1)
@@ -128,7 +128,7 @@ test('getPicks handles extension picks error', async () => {
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
   consoleErrorSpy.mockRestore()
 
   expect(result).toHaveLength(1)
@@ -143,7 +143,7 @@ test('getPicks handles null extension picks', async () => {
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
 
   expect(result).toHaveLength(1)
   expect((result[0] as CommandItem).id).toBe('builtin1')
@@ -160,7 +160,7 @@ test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fail
     },
   })
 
-  const result = await GetPicksCommand.getPicks()
+  const result = await GetPicksCommand.getPicks('', 0)
 
   expect(result).toHaveLength(1)
   expect((result[0] as CommandItem).id).toBe('state1')
