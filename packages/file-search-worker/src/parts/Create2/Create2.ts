@@ -40,12 +40,12 @@ export const create = (
       minimumSliderSize: MinimumSliderSize.minimumSliderSize,
     }),
     args,
+    assetDir,
     fileIconCache: Object.create(null),
     focused: false,
     inputSource: InputSource.User,
     platform,
     value: '',
-    assetDir,
   }
   QuickPickStates.set(uid, state, state)
 }
