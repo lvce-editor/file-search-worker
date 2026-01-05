@@ -16,6 +16,7 @@ export const create = (
   platform: number,
   args: any,
   workspaceUri: string,
+  assetDir: string,
 ): void => {
   const state: QuickPickState = {
     cursorOffset: 0,
@@ -39,6 +40,7 @@ export const create = (
       minimumSliderSize: MinimumSliderSize.minimumSliderSize,
     }),
     args,
+    assetDir,
     fileIconCache: Object.create(null),
     focused: false,
     inputSource: InputSource.User,
