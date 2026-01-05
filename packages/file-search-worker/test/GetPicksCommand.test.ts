@@ -37,7 +37,7 @@ test('getPicks returns builtin picks', async () => {
   })
   expect((result[1] as CommandItem).id).toBe('command2')
   expect(result[1].label).toBe('Command 2')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
 
 test('getPicks returns extension picks with ext prefix', async () => {
@@ -66,7 +66,7 @@ test('getPicks returns extension picks with ext prefix', async () => {
   })
   expect((result[1] as CommandItem).id).toBe('ext.ext.command2')
   expect((result[1] as CommandItem).args).toEqual(['arg1'])
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
 
 test('getPicks combines builtin and extension picks', async () => {
@@ -82,7 +82,7 @@ test('getPicks combines builtin and extension picks', async () => {
   expect(result).toHaveLength(2)
   expect((result[0] as CommandItem).id).toBe('builtin1')
   expect((result[1] as CommandItem).id).toBe('ext.ext1')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
 
 test('getPicks handles missing label in extension picks', async () => {
@@ -98,7 +98,7 @@ test('getPicks handles missing label in extension picks', async () => {
 
   expect(result).toHaveLength(1)
   expect(result[0].label).toBe('command1')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
 
 test('getPicks handles missing id in extension picks', async () => {
@@ -115,7 +115,7 @@ test('getPicks handles missing id in extension picks', async () => {
   expect(result).toHaveLength(1)
   expect((result[0] as CommandItem).id).toBe('ext.undefined')
   expect(result[0].label).toBe('Command without id')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
 
 test('getPicks handles extension picks error', async () => {
@@ -133,7 +133,7 @@ test('getPicks handles extension picks error', async () => {
 
   expect(result).toHaveLength(1)
   expect((result[0] as CommandItem).id).toBe('builtin1')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
 
 test('getPicks handles null extension picks', async () => {
@@ -147,7 +147,7 @@ test('getPicks handles null extension picks', async () => {
 
   expect(result).toHaveLength(1)
   expect((result[0] as CommandItem).id).toBe('builtin1')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
 
 test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fails', async () => {
@@ -165,5 +165,5 @@ test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fail
   expect(result).toHaveLength(1)
   expect((result[0] as CommandItem).id).toBe('state1')
   expect(result[0].label).toBe('State 1')
-  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands']])
+  expect(mockRpc.invocations).toEqual([['Layout.getAllQuickPickMenuEntries'], ['ExtensionHost.getCommands', '', 0]])
 })
