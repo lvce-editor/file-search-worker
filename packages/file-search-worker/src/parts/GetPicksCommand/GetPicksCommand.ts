@@ -57,7 +57,7 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
   return pick
 }
 
-export const getPicks = async (assetDir: string, platform: number): Promise<readonly ProtoVisibleItem[]> => {
+export const getPicks = async (value: string, args: any, assetDir: string, platform: number): Promise<readonly ProtoVisibleItem[]> => {
   // TODO get picks in parallel
   const builtinPicks = await getBuiltinPicks()
   const extensionPicks = await getExtensionPicks(assetDir, platform)
