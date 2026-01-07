@@ -39,7 +39,6 @@ export const selectPicks: readonly SelectPick[] = [
 
 export const getPicks: readonly IGetPicks[] = [
   GetPicksColorTheme.getPicks,
-  // @ts-ignore TODO
   GetPicksCommand.getPicks,
   GetPicksCustom.getPicks,
   GetPicksFile.getPicks,
