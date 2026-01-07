@@ -1,5 +1,6 @@
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
+import * as Assert from '../Assert/Assert.ts'
 import * as ErrorHandling from '../ErrorHandling/ErrorHandling.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
 
@@ -25,6 +26,9 @@ const prefixIdWithExt = (item: any): any => {
 
 const getExtensionPicks = async (assetDir: string, platform: number): Promise<readonly unknown[]> => {
   try {
+    // TODO
+    // Assert.string(assetDir)
+    // Assert.number(platform)
     // TODO ask extension management worker directly
     // TODO don't call this every time, cache the results
     const extensionPicks = await RendererWorker.invoke('ExtensionHost.getCommands', assetDir, platform)
@@ -57,7 +61,10 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
   return pick
 }
 
-export const getPicks = async (value: string, args: any, assetDir: string, platform: number): Promise<readonly ProtoVisibleItem[]> => {
+export const getPicks = async (value: string, args: any): Promise<readonly ProtoVisibleItem[]> => {
+  args ||= []
+  const platform = args.at(-1)
+  const assetDir = args.at(-2)
   // TODO get picks in parallel
   const builtinPicks = await getBuiltinPicks()
   const extensionPicks = await getExtensionPicks(assetDir, platform)
