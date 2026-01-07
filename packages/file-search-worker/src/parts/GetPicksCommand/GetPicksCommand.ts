@@ -63,7 +63,7 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
 
 export const getPicks = async (value: string, args: any): Promise<readonly ProtoVisibleItem[]> => {
   if (!args || !Array.isArray(args)) {
-    args = []
+    args = ['', 0]
   }
   const platform = args.at(-1)
   const assetDir = args.at(-2)
