@@ -62,7 +62,9 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
 }
 
 export const getPicks = async (value: string, args: any): Promise<readonly ProtoVisibleItem[]> => {
-  args ||= []
+  if (!args || !Array.isArray(args)) {
+    args = []
+  }
   const platform = args.at(-1)
   const assetDir = args.at(-2)
   // TODO get picks in parallel
