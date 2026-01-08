@@ -1,4 +1,5 @@
 import type { QuickPickState } from '../QuickPickState/QuickPickState.ts'
+import * as Assert from '../Assert/Assert.ts'
 import * as FilterQuickPickItems from '../FilterQuickPickItems/FilterQuickPickItems.ts'
 import * as GetFilterValue from '../GetFilterValue/GetFilterValue.ts'
 import * as GetFinalDeltaY from '../GetFinalDeltaY/GetFinalDeltaY.ts'
