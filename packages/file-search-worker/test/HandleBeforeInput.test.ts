@@ -18,7 +18,7 @@ test('inserts text and updates state', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('replaces selected text', async () => {
@@ -114,7 +114,7 @@ test('handles composition text', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('handles line break', async () => {
@@ -146,7 +146,7 @@ test('handles insert from paste', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('preserves other state properties', async () => {
@@ -169,7 +169,7 @@ test('preserves other state properties', async () => {
   expect(result.height).toBe(500)
   expect(result.value).toBe('oldnew')
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('throws error for invalid inputType', async () => {
