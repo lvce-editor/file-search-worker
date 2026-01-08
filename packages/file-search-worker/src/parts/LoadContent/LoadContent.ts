@@ -20,7 +20,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const value = GetDefaultValue.getDefaultValue(id)
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
   const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(id, prefix)
-  const newPicks = await GetPicks.getPicks(subId, value, [...args, assetDir, platform])
+  const newPicks = await GetPicks.getPicks(subId, value, args, { assetDir, platform })
   Assert.array(newPicks)
   const filterValue = GetFilterValue.getFilterValue(id, subId, value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
