@@ -34,7 +34,7 @@ test('replaces selected text', async () => {
   expect(result.value).toBe('hi world')
   expect(result.cursorOffset).toBe(2)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('deletes character backward', async () => {
@@ -50,7 +50,7 @@ test('deletes character backward', async () => {
   expect(result.value).toBe('hell')
   expect(result.cursorOffset).toBe(4)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('deletes character forward', async () => {
@@ -66,7 +66,7 @@ test('deletes character forward', async () => {
   expect(result.value).toBe('ello')
   expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('deletes word backward', async () => {
@@ -82,7 +82,7 @@ test('deletes word backward', async () => {
   expect(result.value).toBe('hello')
   expect(result.cursorOffset).toBe(5)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('deletes word forward', async () => {
@@ -98,7 +98,7 @@ test('deletes word forward', async () => {
   expect(result.value).toBe(' world')
   expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', undefined, undefined]])
 })
 
 test('handles composition text', async () => {
