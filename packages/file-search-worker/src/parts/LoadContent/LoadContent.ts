@@ -14,13 +14,12 @@ import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
-  // @ts-ignore
   const { args, assetDir, fileIconCache, height, itemHeight, platform, uri } = state
   const id = GetQuickPickProviderId.getQuickPickProviderId(uri)
   const value = GetDefaultValue.getDefaultValue(id)
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
   const subId = GetQuickPickSubProviderId.getQuickPickSubProviderId(id, prefix)
-  const newPicks = await GetPicks.getPicks(subId, value, [...args, assetDir, platform])
+  const newPicks = await GetPicks.getPicks(subId, value, args, { assetDir, platform })
   Assert.array(newPicks)
   const filterValue = GetFilterValue.getFilterValue(id, subId, value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)

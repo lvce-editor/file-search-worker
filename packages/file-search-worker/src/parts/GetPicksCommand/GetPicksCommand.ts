@@ -60,12 +60,7 @@ const toProtoVisibleItem = (item: any): ProtoVisibleItem => {
   return pick
 }
 
-export const getPicks = async (value: string, args: any): Promise<readonly ProtoVisibleItem[]> => {
-  if (!args || !Array.isArray(args)) {
-    args = ['', 0]
-  }
-  const platform = args.at(-1)
-  const assetDir = args.at(-2)
+export const getPicks = async (value: string, args: any, { assetDir = '', platform = 0 } = {}): Promise<readonly ProtoVisibleItem[]> => {
   // TODO get picks in parallel
   const builtinPicks = await getBuiltinPicks()
   const extensionPicks = await getExtensionPicks(assetDir, platform)
