@@ -14,7 +14,6 @@ import * as InputSource from '../InputSource/InputSource.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
-  // @ts-ignore
   const { args, assetDir, fileIconCache, height, itemHeight, platform, uri } = state
   const id = GetQuickPickProviderId.getQuickPickProviderId(uri)
   const value = GetDefaultValue.getDefaultValue(id)
