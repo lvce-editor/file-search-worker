@@ -11,6 +11,7 @@ export const createDefaultState = (): QuickPickState => {
   })
   return {
     ...virtualList,
+    allowEmptyResult: false,
     args: [],
     assetDir: '',
     cursorOffset: 0,
