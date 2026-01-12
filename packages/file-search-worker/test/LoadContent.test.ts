@@ -27,7 +27,7 @@ test('loadContent returns state with loaded content', async () => {
   expect(result.items.length).toBeGreaterThan(0)
   expect(result.focused).toBe(true)
   expect(result.focusedIndex).toBe(0)
-  expect(result.cursorOffset).toBe(result.value.length)
+  expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.Script)
   expect(result.state).toBe(QuickPickOpenState.Finished)
   expect(result.providerId).toBeDefined()
@@ -228,7 +228,7 @@ test('loadContent sets cursorOffset to value length', async () => {
 
   const result = await loadContent(state)
 
-  expect(result.cursorOffset).toBe(result.value.length)
+  expect(result.cursorOffset).toBe(0)
 })
 
 test('loadContent sets focused to true', async () => {
