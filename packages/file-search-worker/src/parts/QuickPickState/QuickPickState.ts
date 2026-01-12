@@ -18,6 +18,7 @@ export interface QuickPickState extends List<any> {
   readonly maxVisibleItems: number
   readonly minimumSliderSize: number
   readonly picks: readonly ProtoVisibleItem[]
+  readonly placeholder: string
   readonly platform: number
   readonly providerId: number
   readonly recentPickIds: Map<any, any>
