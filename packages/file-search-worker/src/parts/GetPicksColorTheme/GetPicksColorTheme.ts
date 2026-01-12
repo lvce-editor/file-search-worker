@@ -14,8 +14,8 @@ const toProtoVisibleItem = (name: string): ProtoVisibleItem => {
   return pick
 }
 
-export const getPicks = async (searchValue: string): Promise<readonly ProtoVisibleItem[]> => {
-  const colorThemeNames = await GetColorThemeNames.getColorThemeNames()
+export const getPicks = async (searchValue: string, args?: any, { assetDir = '', platform = 0 } = {}): Promise<readonly ProtoVisibleItem[]> => {
+  const colorThemeNames = await GetColorThemeNames.getColorThemeNames(assetDir, platform)
   const picks = colorThemeNames.map(toProtoVisibleItem)
   return picks
 }

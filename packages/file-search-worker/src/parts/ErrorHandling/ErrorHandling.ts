@@ -5,10 +5,10 @@ export const handleError = async (error: any, notify = true, prefix = ''): Promi
 }
 
 export const showErrorDialog = async (error: any): Promise<void> => {
-  const code = error.code
-  const message = error.message
-  const stack = error.stack
-  const name = error.name
+  const { code } = error
+  const { message } = error
+  const { stack } = error
+  const { name } = error
   const errorInfo = {
     code,
     message,

@@ -8,6 +8,8 @@ export const getQuickPickSubProviderId = (id: number, prefix: string): number =>
   switch (prefix) {
     case QuickPickPrefix.Command:
       return QuickPickEntryId.Commands
+    case QuickPickPrefix.GoToColumn:
+      return QuickPickEntryId.GoToColumn
     case QuickPickPrefix.GoToLine:
       return QuickPickEntryId.GoToLine
     case QuickPickPrefix.Help:

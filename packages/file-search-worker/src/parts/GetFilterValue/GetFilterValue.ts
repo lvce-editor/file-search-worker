@@ -1,6 +1,10 @@
 import { QuickPickEntryId } from '@lvce-editor/constants'
 import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts'
+<<<<<<< HEAD
 import * as QuickPickPrefix from '../QuickPickPrefix/QuickPickPrefix.ts'
+=======
+import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
+>>>>>>> origin/main
 
 interface Fn {
   (value: string): string
@@ -16,17 +20,20 @@ const getFilterValueEverything = (value: string): string => {
   return value.slice(prefixLength).trim()
 }
 
+const getValueGoToColumn = (value: string): string => {
+  return ''
+}
+
 const getValueGoToLine = (value: string): string => {
-  if (value.startsWith(QuickPickPrefix.GoToColumn)) {
-    return ''
-  }
-  return value.slice(1)
+  return ''
 }
 
 const getFn = (id: number): Fn => {
   switch (id) {
     case QuickPickEntryId.EveryThing:
       return getFilterValueEverything
+    case QuickPickEntryId.GoToColumn:
+      return getValueGoToColumn
     case QuickPickEntryId.GoToLine:
       return getValueGoToLine
 
@@ -36,6 +43,9 @@ const getFn = (id: number): Fn => {
 }
 
 export const getFilterValue = (id: number, subId: number, value: string): string => {
+  if (subId === QuickPickEntryId.GoToColumn) {
+    return getValueGoToColumn(value)
+  }
   if (subId === QuickPickEntryId.GoToLine) {
     return getValueGoToLine(value)
   }

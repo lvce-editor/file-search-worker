@@ -39,7 +39,7 @@ test('calls SetValue.setValue and updates cursorOffset and inputSource', async (
   expect(result.cursorOffset).toBe(cursorOffset)
   expect(result.inputSource).toBe(inputSource)
   expect(result).not.toBe(state)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('uses default inputSource when not provided', async () => {
@@ -60,7 +60,7 @@ test('uses default inputSource when not provided', async () => {
   expect(result.value).toBe(newValue)
   expect(result.cursorOffset).toBe(cursorOffset)
   expect(result.inputSource).toBe(InputSource.Script)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('preserves other state properties from SetValue.setValue result', async () => {
@@ -84,5 +84,5 @@ test('preserves other state properties from SetValue.setValue result', async () 
   expect(result.height).toBe(500)
   expect(result.value).toBe(newValue)
   expect(result.cursorOffset).toBe(cursorOffset)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })

@@ -10,6 +10,9 @@ export const getQuickPickPrefix = (value: string): string => {
   if (value.startsWith(QuickPickPrefix.WorkspaceSymbol)) {
     return QuickPickPrefix.WorkspaceSymbol
   }
+  if (value.startsWith(QuickPickPrefix.GoToColumn)) {
+    return QuickPickPrefix.GoToColumn
+  }
   if (value.startsWith(QuickPickPrefix.GoToLine)) {
     return QuickPickPrefix.GoToLine
   }

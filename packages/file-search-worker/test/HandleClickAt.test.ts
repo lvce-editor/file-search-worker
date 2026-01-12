@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals'
+import { expect, jest, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as HandleClickAt from '../src/parts/HandleClickAt/HandleClickAt.ts'
@@ -54,6 +54,7 @@ test('handleClickAt calculates correct index from y coordinate', async () => {
 })
 
 test('handleClickAt returns state unchanged when index is out of bounds', async () => {
+  const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
   const state = {
     ...CreateDefaultState.createDefaultState(),
     headerHeight: 38,
@@ -67,6 +68,7 @@ test('handleClickAt returns state unchanged when index is out of bounds', async 
   const result = await HandleClickAt.handleClickAt(state, 200, y)
 
   expect(result).toBe(state)
+  consoleWarnSpy.mockRestore()
 })
 
 test('handleClickAt handles click at first item', async () => {

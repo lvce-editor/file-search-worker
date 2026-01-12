@@ -18,7 +18,7 @@ test('inserts text and updates state', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('replaces selected text', async () => {
@@ -34,7 +34,7 @@ test('replaces selected text', async () => {
   expect(result.value).toBe('hi world')
   expect(result.cursorOffset).toBe(2)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('deletes character backward', async () => {
@@ -50,7 +50,7 @@ test('deletes character backward', async () => {
   expect(result.value).toBe('hell')
   expect(result.cursorOffset).toBe(4)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('deletes character forward', async () => {
@@ -66,7 +66,7 @@ test('deletes character forward', async () => {
   expect(result.value).toBe('ello')
   expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('deletes word backward', async () => {
@@ -82,7 +82,7 @@ test('deletes word backward', async () => {
   expect(result.value).toBe('hello')
   expect(result.cursorOffset).toBe(5)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('deletes word forward', async () => {
@@ -98,7 +98,7 @@ test('deletes word forward', async () => {
   expect(result.value).toBe(' world')
   expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('handles composition text', async () => {
@@ -114,7 +114,7 @@ test('handles composition text', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('handles line break', async () => {
@@ -146,7 +146,7 @@ test('handles insert from paste', async () => {
   expect(result.value).toBe('hello world')
   expect(result.cursorOffset).toBe(11)
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('preserves other state properties', async () => {
@@ -169,7 +169,7 @@ test('preserves other state properties', async () => {
   expect(result.height).toBe(500)
   expect(result.value).toBe('oldnew')
   expect(result.inputSource).toBe(InputSource.User)
-  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames']])
+  expect(mockRpc.invocations).toEqual([['ColorTheme.getColorThemeNames', '', 0]])
 })
 
 test('throws error for invalid inputType', async () => {
