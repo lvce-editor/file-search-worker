@@ -44,6 +44,7 @@ export const create = (
     fileIconCache: Object.create(null),
     focused: false,
     inputSource: InputSource.User,
+    placeholder: '',
     platform,
     value: '',
   }

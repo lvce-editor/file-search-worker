@@ -44,6 +44,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     maxLineY,
     minLineY,
     picks: newPicks,
+    placeholder: '',
     providerId: id,
     state: QuickPickOpenState.Finished,
     value,
