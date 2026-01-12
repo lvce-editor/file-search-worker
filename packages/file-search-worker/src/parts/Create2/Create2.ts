@@ -19,6 +19,7 @@ export const create = (
   assetDir: string,
 ): void => {
   const state: QuickPickState = {
+    allowEmptyResult: false,
     cursorOffset: 0,
     height: 300,
     icons: [],
