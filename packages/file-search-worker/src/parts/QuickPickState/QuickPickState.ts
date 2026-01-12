@@ -3,6 +3,7 @@ import type { FileIconCache } from '../FileIconCache/FileIconCache.ts'
 import type { ProtoVisibleItem } from '../ProtoVisibleItem/ProtoVisibleItem.ts'
 
 export interface QuickPickState extends List<any> {
+  readonly allowEmptyResult: boolean
   readonly args: readonly unknown[]
   readonly assetDir: string
   readonly cursorOffset: number
