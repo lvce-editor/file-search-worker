@@ -18,6 +18,7 @@ import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
 import { initialize } from '../Initialize/Initialize.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
 import * as MenuEntriesState from '../MenuEntriesState/MenuEntriesState.ts'
+import { executeCallback } from '../QuickPickCallbacks/QuickPickCallbacks.ts'
 import * as WrapCommand from '../QuickPickStates/QuickPickStates.ts'
 import { getCommandIds } from '../QuickPickStates/QuickPickStates.ts'
 import * as Render2 from '../Render2/Render2.ts'
@@ -35,6 +36,7 @@ export const commandMap = {
   'QuickPick.create2': Create2.create,
   'QuickPick.diff2': Diff2.diff2,
   'QuickPick.dispose': Dispose.dispose,
+  'QuickPick.executeCallback': executeCallback,
   'QuickPick.focusFirst': WrapCommand.wrapCommand(FocusFirst.focusFirst),
   'QuickPick.focusIndex': WrapCommand.wrapCommand(FocusIndex.focusIndex),
   'QuickPick.focusLast': WrapCommand.wrapCommand(FocusLast.focusLast),
