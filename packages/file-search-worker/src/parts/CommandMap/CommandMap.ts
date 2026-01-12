@@ -13,6 +13,7 @@ import * as HandleBlur from '../HandleBlur/HandleBlur.ts'
 import * as HandleClickAt from '../HandleClickAt/HandleClickAt.ts'
 import * as HandleFocus from '../HandleFocus/HandleFocus.ts'
 import * as HandleInput from '../HandleInput/HandleInput.ts'
+import { handleMessagePort } from '../HandleMessagePort/HandleMessagePort.ts'
 import * as HandleWheel from '../HandleWheel/HandleWheel.ts'
 import { initialize } from '../Initialize/Initialize.ts'
 import * as LoadContent from '../LoadContent/LoadContent.ts'
@@ -46,6 +47,7 @@ export const commandMap = {
   'QuickPick.handleClickAt': WrapCommand.wrapCommand(HandleClickAt.handleClickAt),
   'QuickPick.handleFocus': WrapCommand.wrapCommand(HandleFocus.handleFocus),
   'QuickPick.handleInput': WrapCommand.wrapCommand(HandleInput.handleInput),
+  'QuickPick.handleMessagePort': handleMessagePort,
   'QuickPick.handleWheel': WrapCommand.wrapCommand(HandleWheel.handleWheel),
   'QuickPick.initialize': initialize,
   'QuickPick.loadContent': WrapCommand.wrapCommand(LoadContent.loadContent),
