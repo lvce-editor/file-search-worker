@@ -3,5 +3,5 @@ import * as GetFileSearchRipGrepArgs from '../src/parts/GetFileSearchRipGrepArgs
 
 test('getFileSearchRipGrepArgs', () => {
   const args = GetFileSearchRipGrepArgs.getFileSearchRipGrepArgs()
-  expect(args).toEqual(['--files', '--sort-files', '--hidden'])
+  expect(args).toEqual(['--files', '--sort-files', '--hidden', '--glob', '!.git'])
 })
