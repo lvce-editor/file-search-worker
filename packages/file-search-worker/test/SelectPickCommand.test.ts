@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals'
+import { expect, jest, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPickReturnValue.ts'
@@ -99,6 +99,8 @@ test('selectPickExtension calls ExtensionHost.executeCommand with id without ext
 })
 
 test('selectPickExtension handles errors and shows error dialog', async () => {
+  const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+
   const mockRpc = RendererWorker.registerMockRpc({
     'ErrorHandling.showErrorDialog': () => {},
     'ExtensionHost.executeCommand': () => {
@@ -123,4 +125,6 @@ test('selectPickExtension handles errors and shows error dialog', async () => {
   expect(mockRpc.invocations[0]).toEqual(['ExtensionHost.executeCommand', 'failing-command'])
   expect(mockRpc.invocations.some((inv) => inv[0] === 'ErrorHandling.showErrorDialog')).toBe(true)
   expect(result.command).toBe(QuickPickReturnValue.Hide)
+
+  consoleErrorSpy.mockRestore()
 })
