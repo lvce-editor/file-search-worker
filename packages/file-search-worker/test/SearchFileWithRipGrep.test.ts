@@ -15,7 +15,7 @@ test('searches files without prepare', async () => {
       'SearchFile.searchFile',
       {
         limit: 9_999_999,
-        ripGrepArgs: ['--files', '--sort-files', '--hidden'],
+        ripGrepArgs: ['--files', '--sort-files', '--hidden', '--glob', '!.git'],
         searchPath: '/test',
       },
     ],
@@ -40,7 +40,7 @@ test.skip('searches files with prepare', async () => {
       'SearchFile.searchFile',
       {
         limit: 9_999_999,
-        ripGrepArgs: ['--files', '--sort-files', '--hidden'],
+        ripGrepArgs: ['--files', '--sort-files', '--hidden', '--glob', '!.git'],
         searchPath: '/test',
       },
     ],
@@ -60,7 +60,7 @@ test('handles empty result', async () => {
       'SearchFile.searchFile',
       {
         limit: 9_999_999,
-        ripGrepArgs: ['--files', '--sort-files', '--hidden'],
+        ripGrepArgs: ['--files', '--sort-files', '--hidden', '--glob', '!.git'],
         searchPath: '/test',
       },
     ],
@@ -81,7 +81,7 @@ test('handles error from search process', async () => {
       'SearchFile.searchFile',
       {
         limit: 9_999_999,
-        ripGrepArgs: ['--files', '--sort-files', '--hidden'],
+        ripGrepArgs: ['--files', '--sort-files', '--hidden', '--glob', '!.git'],
         searchPath: '/test',
       },
     ],
