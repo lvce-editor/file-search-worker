@@ -1,5 +1,3 @@
-import * as Id from '../Id/Id.ts'
-
 const callbacks: Record<number, any> = Object.create(null)
 
 interface CallbackResult {
@@ -7,8 +5,7 @@ interface CallbackResult {
   readonly promise: Promise<void>
 }
 
-export const registerCallback = (): CallbackResult => {
-  const id = Id.create()
+export const registerCallback = (id: number): CallbackResult => {
   const { promise, resolve } = Promise.withResolvers<void>()
   callbacks[id] = resolve
   return {
