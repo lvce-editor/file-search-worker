@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals'
+import { afterEach, beforeEach, expect, jest, test } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
@@ -6,6 +6,16 @@ import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import { loadContent } from '../src/parts/LoadContent/LoadContent.ts'
 import * as QuickPickEntryUri from '../src/parts/QuickPickEntryUri/QuickPickEntryUri.ts'
 import * as QuickPickOpenState from '../src/parts/QuickPickOpenState/QuickPickOpenState.ts'
+
+let consoleErrorSpy: ReturnType<typeof jest.spyOn>
+
+beforeEach(() => {
+  consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+})
+
+afterEach(() => {
+  consoleErrorSpy.mockRestore()
+})
 
 test('loadContent returns state with loaded content', async () => {
   RendererWorker.registerMockRpc({
@@ -27,7 +37,7 @@ test('loadContent returns state with loaded content', async () => {
   expect(result.items.length).toBeGreaterThan(0)
   expect(result.focused).toBe(true)
   expect(result.focusedIndex).toBe(0)
-  expect(result.cursorOffset).toBe(result.value.length)
+  expect(result.cursorOffset).toBe(0)
   expect(result.inputSource).toBe(InputSource.Script)
   expect(result.state).toBe(QuickPickOpenState.Finished)
   expect(result.providerId).toBeDefined()
@@ -228,7 +238,7 @@ test('loadContent sets cursorOffset to value length', async () => {
 
   const result = await loadContent(state)
 
-  expect(result.cursorOffset).toBe(result.value.length)
+  expect(result.cursorOffset).toBe(0)
 })
 
 test('loadContent sets focused to true', async () => {

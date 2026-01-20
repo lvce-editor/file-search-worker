@@ -1,5 +1,15 @@
-import { expect, test } from '@jest/globals'
+import { beforeEach, afterEach, expect, test, jest } from '@jest/globals'
 import { RendererWorker } from '@lvce-editor/rpc-registry'
+
+let consoleWarnSpy: ReturnType<typeof jest.spyOn>
+
+beforeEach(() => {
+  consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+})
+
+afterEach(() => {
+  consoleWarnSpy.mockRestore()
+})
 import type { ProtoVisibleItem } from '../src/parts/ProtoVisibleItem/ProtoVisibleItem.ts'
 import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'

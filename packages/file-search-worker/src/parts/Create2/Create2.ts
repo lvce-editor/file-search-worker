@@ -19,6 +19,7 @@ export const create = (
   assetDir: string,
 ): void => {
   const state: QuickPickState = {
+    allowEmptyResult: false,
     cursorOffset: 0,
     height: 300,
     icons: [],
@@ -44,6 +45,7 @@ export const create = (
     fileIconCache: Object.create(null),
     focused: false,
     inputSource: InputSource.User,
+    placeholder: '',
     platform,
     value: '',
   }

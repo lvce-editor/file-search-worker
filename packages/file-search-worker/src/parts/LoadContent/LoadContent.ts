@@ -11,7 +11,35 @@ import * as GetQuickPickPrefix from '../GetQuickPickPrefix/GetQuickPickPrefix.ts
 import * as GetQuickPickProviderId from '../GetQuickPickProviderId/GetQuickPickProviderId.ts'
 import * as GetQuickPickSubProviderId from '../GetQuickPickSubProviderId/GetQuickPickSubProviderId.ts'
 import * as InputSource from '../InputSource/InputSource.ts'
+import * as QuickPickEntryId from '../QuickPickEntryId/QuickPickEntryId.ts'
 import * as QuickPickOpenState from '../QuickPickOpenState/QuickPickOpenState.ts'
+
+interface ParsedArgs {
+  readonly ignoreFocusOut: boolean
+  readonly initialValue: string
+}
+
+const parseArgs = (subId: number, args: readonly unknown[]): ParsedArgs => {
+  if (subId !== QuickPickEntryId.Custom) {
+    return {
+      ignoreFocusOut: false,
+      initialValue: '',
+    }
+  }
+  const last = args.at(-1)
+  if (!last || typeof last !== 'object') {
+    return {
+      ignoreFocusOut: false,
+      initialValue: '',
+    }
+  }
+  return {
+    // @ts-ignore
+    ignoreFocusOut: Boolean(last.ignoreFocusOut),
+    // @ts-ignore
+    initialValue: String(last.initialValue),
+  }
+}
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
   const { args, assetDir, fileIconCache, height, itemHeight, platform, uri } = state
@@ -29,7 +57,8 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const { icons, newFileIconCache } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
   const listHeight = GetListHeight.getListHeight(items.length, itemHeight, height)
   const finalDeltaY = GetFinalDeltaY.getFinalDeltaY(listHeight, itemHeight, items.length)
-
+  const parsedArgs = parseArgs(subId, args)
+  const finalValue = parsedArgs.initialValue || value
   return {
     ...state,
     args,
@@ -44,8 +73,9 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     maxLineY,
     minLineY,
     picks: newPicks,
+    placeholder: '',
     providerId: id,
     state: QuickPickOpenState.Finished,
-    value,
+    value: finalValue,
   }
 }
