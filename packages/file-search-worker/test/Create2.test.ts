@@ -42,7 +42,7 @@ test('create calls QuickPickStates.set with correct state', () => {
   expect(newState?.icons).toEqual([])
   expect(newState?.warned).toEqual([])
   expect(newState?.versionId).toBe(0)
-  expect(newState?.maxVisibleItems).toBe(10)
+  expect(newState?.maxVisibleItems).toBe(12)
   expect(newState?.fileIconCache).toEqual(Object.create(null))
   expect(newState?.recentPickIds).toEqual(Object.create(null))
 })
