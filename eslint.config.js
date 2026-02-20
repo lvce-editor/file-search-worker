@@ -16,4 +16,9 @@ export default [
       '@typescript-eslint/no-deprecated': 'off',
     },
   },
+  {
+    rules: {
+      '@cspell/spellchecker': 'off',
+    },
+  },
 ]
