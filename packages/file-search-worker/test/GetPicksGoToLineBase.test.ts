@@ -4,7 +4,7 @@ import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicksGoToLineBase } from '../src/parts/GetPicksGoToLineBase/GetPicksGoToLineBase.ts'
 
 test('returns instruction with line count', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
@@ -34,7 +34,7 @@ test('returns instruction with line count', async () => {
 })
 
 test('handles empty text', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
@@ -64,7 +64,7 @@ test('handles empty text', async () => {
 })
 
 test('handles single line text', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 

@@ -6,7 +6,7 @@ import * as InputEventType from '../src/parts/InputEventType/InputEventType.ts'
 import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 
 test('inserts text and updates state', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -22,7 +22,7 @@ test('inserts text and updates state', async () => {
 })
 
 test('replaces selected text', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -38,7 +38,7 @@ test('replaces selected text', async () => {
 })
 
 test('deletes character backward', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -54,7 +54,7 @@ test('deletes character backward', async () => {
 })
 
 test('deletes character forward', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -70,7 +70,7 @@ test('deletes character forward', async () => {
 })
 
 test('deletes word backward', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -86,7 +86,7 @@ test('deletes word backward', async () => {
 })
 
 test('deletes word forward', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -102,7 +102,7 @@ test('deletes word forward', async () => {
 })
 
 test('handles composition text', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -118,7 +118,7 @@ test('handles composition text', async () => {
 })
 
 test('handles line break', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -134,7 +134,7 @@ test('handles line break', async () => {
 })
 
 test('handles insert from paste', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',
@@ -150,7 +150,7 @@ test('handles insert from paste', async () => {
 })
 
 test('preserves other state properties', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': async () => [],
     'IconTheme.getFileIcon': async () => 'icon',
     'IconTheme.getFolderIcon': async () => 'icon',

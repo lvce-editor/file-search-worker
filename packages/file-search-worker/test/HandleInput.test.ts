@@ -20,7 +20,7 @@ test('updates cursorOffset and inputSource when value is the same', async () => 
 })
 
 test('calls SetValue.setValue and updates cursorOffset and inputSource', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
     'GetQuickPickFileIcons.getQuickPickFileIcons': () => ({ icons: [], newFileIconCache: Object.create(null) }),
   })
@@ -43,7 +43,7 @@ test('calls SetValue.setValue and updates cursorOffset and inputSource', async (
 })
 
 test('uses default inputSource when not provided', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
     'GetQuickPickFileIcons.getQuickPickFileIcons': () => ({ icons: [], newFileIconCache: Object.create(null) }),
   })
@@ -64,7 +64,7 @@ test('uses default inputSource when not provided', async () => {
 })
 
 test('preserves other state properties from SetValue.setValue result', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
     'GetQuickPickFileIcons.getQuickPickFileIcons': () => ({ icons: [], newFileIconCache: Object.create(null) }),
   })

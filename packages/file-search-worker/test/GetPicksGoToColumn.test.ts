@@ -3,11 +3,11 @@ import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicksGoToColumn } from '../src/parts/GetPicksGoToColumn/GetPicksGoToColumn.ts'
 
 test('returns instruction when value is "::"', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (editorId: number) => {
       if (editorId === 1) {
         return ['line1', 'line2', 'line3']
@@ -32,11 +32,11 @@ test('returns instruction when value is "::"', async () => {
 })
 
 test('returns position preview when value starts with "::" and has number', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (editorId: number) => {
       if (editorId === 1) {
         return ['hello', 'world', 'test']
@@ -61,11 +61,11 @@ test('returns position preview when value starts with "::" and has number', asyn
 })
 
 test('returns position preview for multi-line text', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (editorId: number) => {
       if (editorId === 1) {
         return ['first line', 'second line', 'third line']

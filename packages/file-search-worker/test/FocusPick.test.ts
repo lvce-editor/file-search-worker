@@ -4,7 +4,7 @@ import { focusPick } from '../src/parts/FocusPick/FocusPick.ts'
 import * as QuickPickEntryId from '../src/parts/QuickPickEntryId/QuickPickEntryId.ts'
 
 test('focusPick calls ColorTheme.setColorTheme for ColorTheme provider', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.setColorTheme': (args: any) => {},
   })
 
@@ -24,7 +24,7 @@ test('focusPick calls ColorTheme.setColorTheme for ColorTheme provider', async (
 })
 
 test('focusPick does nothing for non-ColorTheme provider', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({})
+  using mockRpc = RendererWorker.registerMockRpc({})
 
   const pick = {
     description: '',

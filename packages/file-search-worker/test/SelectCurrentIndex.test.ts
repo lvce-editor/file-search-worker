@@ -30,7 +30,7 @@ test('selectCurrentIndex calls selectIndex with focusedIndex', async () => {
   let closeWidgetCalled = false
   let closeWidgetId: number | undefined
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
     'Viewlet.closeWidget': (id: number) => {
       closeWidgetCalled = true
@@ -70,7 +70,7 @@ test('selectCurrentIndex calls selectIndex with focusedIndex', async () => {
 test('selectCurrentIndex uses focusedIndex correctly with minLineY', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
     'Viewlet.closeWidget': () => {
       closeWidgetCalled = true
@@ -136,7 +136,7 @@ test('selectCurrentIndex uses focusedIndex correctly with minLineY', async () =>
 })
 
 test('selectCurrentIndex handles different focusedIndex values', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
     'Viewlet.closeWidget': () => {},
   })

@@ -7,13 +7,13 @@ test('selectPickGoToColumn with ::value parses column and navigates to position'
   const editorId = 123
   const lines = ['line 1', 'line 2', 'line 3']
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (id: number) => {
       if (id === editorId) {
         return lines
@@ -36,13 +36,13 @@ test('selectPickGoToColumn with ::value handles column at newline', async () => 
   const editorId = 456
   const lines = ['line 1', 'line 2']
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (id: number) => {
       if (id === editorId) {
         return lines
@@ -65,13 +65,13 @@ test('selectPickGoToColumn with ::value handles column 0', async () => {
   const editorId = 789
   const lines = ['line 1']
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
     'GetActiveEditor.getActiveEditorId': () => editorId,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (id: number) => {
       if (id === editorId) {
         return lines

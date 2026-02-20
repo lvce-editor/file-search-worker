@@ -10,7 +10,7 @@ interface CommandItem extends ProtoVisibleItem {
 }
 
 test('selectPickBuiltin calls RendererWorker.invoke with item id and args', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'AutoUpdater.checkForUpdates': () => {},
   })
 
@@ -33,7 +33,7 @@ test('selectPickBuiltin calls RendererWorker.invoke with item id and args', asyn
 })
 
 test('selectPickBuiltin returns Hide when shouldHide returns true', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
   })
 
@@ -55,7 +55,7 @@ test('selectPickBuiltin returns Hide when shouldHide returns true', async () => 
 })
 
 test('selectPickBuiltin handles item without args', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'AutoUpdater.checkForUpdates': () => {},
   })
 
@@ -77,7 +77,7 @@ test('selectPickBuiltin handles item without args', async () => {
 })
 
 test('selectPickExtension calls ExtensionHost.executeCommand with id without ext. prefix', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.executeCommand': () => {},
   })
 
@@ -101,7 +101,7 @@ test('selectPickExtension calls ExtensionHost.executeCommand with id without ext
 test('selectPickExtension handles errors and shows error dialog', async () => {
   const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ErrorHandling.showErrorDialog': () => {},
     'ExtensionHost.executeCommand': () => {
       throw new Error('Test error')

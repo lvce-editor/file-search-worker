@@ -11,7 +11,7 @@ const mockSearchHandler = async (path: string, value: string, prepare: boolean, 
 test('getPicks returns file picks from search', async () => {
   SearchFileModule.register({ '': mockSearchHandler })
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '/workspace',
   })
 
@@ -50,7 +50,7 @@ test('getPicks returns file picks from search', async () => {
 })
 
 test('getPicks returns empty array when no workspace', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => null,
   })
 
@@ -61,7 +61,7 @@ test('getPicks returns empty array when no workspace', async () => {
 })
 
 test('getPicks returns empty array when workspace is empty string', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '',
   })
 
@@ -78,7 +78,7 @@ const mockSearchHandlerRoot = async (path: string, value: string, prepare: boole
 test('getPicks handles files in root directory', async () => {
   SearchFileModule.register({ '': mockSearchHandlerRoot })
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '/workspace',
   })
 
@@ -97,7 +97,7 @@ const mockSearchHandlerEmpty = async (path: string, value: string, prepare: bool
 test('getPicks handles empty search results', async () => {
   SearchFileModule.register({ '': mockSearchHandlerEmpty })
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => '/workspace',
   })
 
