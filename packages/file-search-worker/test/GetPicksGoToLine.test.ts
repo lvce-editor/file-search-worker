@@ -1,5 +1,4 @@
 import { expect, test } from '@jest/globals'
-import { createMockRpc } from '@lvce-editor/rpc'
 import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicks } from '../src/parts/GetPicksGoToLine/GetPicksGoToLine.ts'
 
@@ -8,17 +7,14 @@ test('returns instruction when value is ":"', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = createMockRpc({
-    commandMap: {
-      'Editor.getLines2': (editorId: number) => {
-        if (editorId === 1) {
-          return ['line1', 'line2', 'line3']
-        }
-        throw new Error(`unexpected editorId ${editorId}`)
-      },
+  using mockEditorRpc = EditorWorker.registerMockRpc({
+    'Editor.getLines2': (editorId: number) => {
+      if (editorId === 1) {
+        return ['line1', 'line2', 'line3']
+      }
+      throw new Error(`unexpected editorId ${editorId}`)
     },
   })
-  EditorWorker.set(mockEditorRpc)
 
   const result = await getPicks(':')
   expect(result).toHaveLength(1)
@@ -32,6 +28,7 @@ test('returns instruction when value is ":"', async () => {
     uri: '',
   })
   expect(mockRpc.invocations).toEqual([['GetActiveEditor.getActiveEditorId']])
+  expect(mockEditorRpc.invocations).toEqual([['Editor.getLines2', 1]])
 })
 
 test('returns position preview when value starts with ":" and has number', async () => {
