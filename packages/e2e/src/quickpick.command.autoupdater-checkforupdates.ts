@@ -1,0 +1,17 @@
+import type { Test } from '@lvce-editor/test-with-playwright'
+
+export const name = 'quickpick.command.autoupdater-checkforupdates'
+
+export const test: Test = async ({ expect, FileSystem, Locator, QuickPick, Workspace }) => {
+  // arrange
+  const tmpDir = await FileSystem.getTmpDir()
+  await Workspace.setPath(tmpDir)
+  await QuickPick.executeCommand('>Updater: Check for Updates')
+
+  // act
+  await QuickPick.selectIndex(0)
+
+  // assert
+  const quickPick = Locator('.QuickPick')
+  await expect(quickPick).toBeHidden()
+}

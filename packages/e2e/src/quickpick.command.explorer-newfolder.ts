@@ -1,0 +1,17 @@
+import type { Test } from '@lvce-editor/test-with-playwright'
+
+export const name = 'quickpick.command.explorer-newfolder'
+
+export const test: Test = async ({ expect, FileSystem, Locator, QuickPick, Workspace }) => {
+  // arrange
+  const tmpDir = await FileSystem.getTmpDir()
+  await Workspace.setPath(tmpDir)
+  await QuickPick.executeCommand('>Explorer: New Folder')
+
+  // act
+  await QuickPick.selectIndex(0)
+
+  // assert
+  const quickPick = Locator('.QuickPick')
+  await expect(quickPick).toBeHidden()
+}
