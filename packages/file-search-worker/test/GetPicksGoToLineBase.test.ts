@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals'
-import { MockRpc } from '@lvce-editor/rpc'
+import { createMockRpc } from '@lvce-editor/rpc'
 import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicksGoToLineBase } from '../src/parts/GetPicksGoToLineBase/GetPicksGoToLineBase.ts'
 
@@ -8,13 +8,14 @@ test('returns instruction with line count', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
-        return ['line1', 'line2', 'line3']
-      }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+  const mockEditorRpc = createMockRpc({
+    commandMap: {
+      'Editor.getLines2': (editorId: number) => {
+        if (editorId === 1) {
+          return ['line1', 'line2', 'line3']
+        }
+        throw new Error(`unexpected editorId ${editorId}`)
+      },
     },
   })
   EditorWorker.set(mockEditorRpc)
@@ -38,13 +39,14 @@ test('handles empty text', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
-        return []
-      }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+  const mockEditorRpc = createMockRpc({
+    commandMap: {
+      'Editor.getLines2': (editorId: number) => {
+        if (editorId === 1) {
+          return []
+        }
+        throw new Error(`unexpected editorId ${editorId}`)
+      },
     },
   })
   EditorWorker.set(mockEditorRpc)
@@ -68,13 +70,14 @@ test('handles single line text', async () => {
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = MockRpc.create({
-    commandMap: {},
-    invoke: (method: string, editorId: number) => {
-      if (method === 'Editor.getLines2' && editorId === 1) {
-        return ['hello world']
-      }
-      throw new Error(`unexpected method ${method} with editorId ${editorId}`)
+  const mockEditorRpc = createMockRpc({
+    commandMap: {
+      'Editor.getLines2': (editorId: number) => {
+        if (editorId === 1) {
+          return ['hello world']
+        }
+        throw new Error(`unexpected editorId ${editorId}`)
+      },
     },
   })
   EditorWorker.set(mockEditorRpc)
