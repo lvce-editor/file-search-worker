@@ -5,7 +5,7 @@ import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPi
 import { selectPick } from '../src/parts/SelectPickColorTheme/SelectPickColorTheme.ts'
 
 test('selectPick calls setColorTheme with pick label and returns Hide command', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.setColorTheme': () => {},
   })
 
@@ -26,7 +26,7 @@ test('selectPick calls setColorTheme with pick label and returns Hide command', 
 })
 
 test('selectPick handles different color theme labels', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.setColorTheme': () => {},
   })
 

@@ -3,11 +3,11 @@ import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicksGoToColumnBase } from '../src/parts/GetPicksGoToColumnBase/GetPicksGoToColumnBase.ts'
 
 test('returns instruction with text length', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (editorId: number) => {
       if (editorId === 1) {
         return ['line1', 'line2', 'line3']
@@ -32,11 +32,11 @@ test('returns instruction with text length', async () => {
 })
 
 test('handles empty text', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (editorId: number) => {
       if (editorId === 1) {
         return []
@@ -61,11 +61,11 @@ test('handles empty text', async () => {
 })
 
 test('handles single line text', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 
-  const mockEditorRpc = EditorWorker.registerMockRpc({
+  using mockEditorRpc = EditorWorker.registerMockRpc({
     'Editor.getLines2': (editorId: number) => {
       if (editorId === 1) {
         return ['hello world']

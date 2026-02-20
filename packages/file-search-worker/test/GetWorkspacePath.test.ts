@@ -5,7 +5,7 @@ import { getWorkspacePath } from '../src/parts/GetWorkspacePath/GetWorkspacePath
 test('getWorkspacePath should invoke Workspace.getPath and return the path', async () => {
   const mockWorkspacePath = '/test/workspace'
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => mockWorkspacePath,
   })
 
@@ -17,7 +17,7 @@ test('getWorkspacePath should invoke Workspace.getPath and return the path', asy
 test('getWorkspacePath should handle different workspace paths', async () => {
   const mockWorkspacePath = '/another/workspace/path'
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.getPath': () => mockWorkspacePath,
   })
 

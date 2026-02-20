@@ -4,7 +4,7 @@ import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPi
 import * as SelectPickRecent from '../src/parts/SelectPickRecent/SelectPickRecent.ts'
 
 test('selectPick calls Workspace.setPath with the pick uri', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.setPath': () => {},
   })
 
@@ -25,7 +25,7 @@ test('selectPick calls Workspace.setPath with the pick uri', async () => {
 })
 
 test('selectPick returns Hide command after opening workspace folder', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.setPath': () => {},
   })
 
@@ -46,7 +46,7 @@ test('selectPick returns Hide command after opening workspace folder', async () 
 })
 
 test('selectPick handles different uri formats', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Workspace.setPath': () => {},
   })
 

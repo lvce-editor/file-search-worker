@@ -6,7 +6,7 @@ import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPi
 import { selectPick } from '../src/parts/SelectPickCustom/SelectPickCustom.ts'
 
 test('selectPick calls QuickPick.executeCallback with resolveId and pick', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'QuickPick.executeCallback': () => {},
   })
 
@@ -29,7 +29,7 @@ test('selectPick calls QuickPick.executeCallback with resolveId and pick', async
 })
 
 test('selectPick handles different resolveIds', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'QuickPick.executeCallback': () => {},
   })
 

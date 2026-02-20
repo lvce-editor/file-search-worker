@@ -5,7 +5,7 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import { focusNext } from '../src/parts/FocusNext/FocusNext.ts'
 
 test('focusNext focuses the next item', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
   })
@@ -30,7 +30,7 @@ test('focusNext focuses the next item', async () => {
 })
 
 test('focusNext cycles to first item when at last', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
   })

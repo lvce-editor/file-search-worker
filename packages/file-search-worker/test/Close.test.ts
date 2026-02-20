@@ -5,7 +5,7 @@ import * as Close from '../src/parts/Close/Close.ts'
 import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 
 test('close calls closeWidget with correct uid', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget': () => {},
   })
 
@@ -22,7 +22,7 @@ test('close calls closeWidget with correct uid', async () => {
 })
 
 test('close returns the same state object', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Viewlet.closeWidget': () => {},
   })
 

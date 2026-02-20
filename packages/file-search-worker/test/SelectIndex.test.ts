@@ -39,7 +39,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
   let closeWidgetCalled = false
   let closeWidgetId: number | undefined
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
     'Viewlet.closeWidget': (id: number) => {
       closeWidgetCalled = true
@@ -76,7 +76,7 @@ test('selectIndex calls select function and returns state for Hide command', asy
 })
 
 test('selectIndex handles default command case', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
     'Viewlet.closeWidget': () => {},
   })
@@ -110,7 +110,7 @@ test('selectIndex handles default command case', async () => {
 test('selectIndex calculates actualIndex correctly with minLineY', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
     'Viewlet.closeWidget': () => {
       closeWidgetCalled = true

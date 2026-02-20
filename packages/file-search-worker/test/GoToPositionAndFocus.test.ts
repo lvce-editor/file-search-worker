@@ -3,7 +3,7 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GoToPositionAndFocus from '../src/parts/GoToPositionAndFocus/GoToPositionAndFocus.ts'
 
 test('goToPositionAndFocus calls Editor.cursorSet with correct row and column', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
@@ -14,7 +14,7 @@ test('goToPositionAndFocus calls Editor.cursorSet with correct row and column', 
 })
 
 test('goToPositionAndFocus calls Editor.cursorSet before Editor.handleFocus', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
@@ -25,7 +25,7 @@ test('goToPositionAndFocus calls Editor.cursorSet before Editor.handleFocus', as
 })
 
 test('goToPositionAndFocus works with different row and column indices', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })

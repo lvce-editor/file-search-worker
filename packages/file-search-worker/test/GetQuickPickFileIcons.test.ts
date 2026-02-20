@@ -4,7 +4,7 @@ import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import { getQuickPickFileIcons } from '../src/parts/GetQuickPickFileIcons/GetQuickPickFileIcons.ts'
 
 test('getQuickPickFileIcons returns icons and updates cache', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
@@ -22,7 +22,7 @@ test('getQuickPickFileIcons returns icons and updates cache', async () => {
 })
 
 test('getQuickPickFileIcons with all icons cached', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': ({ name }: { name: string }) => `icon-for-${name}`,
     'IconTheme.getFolderIcon': ({ name }: { name: string }) => `icon-for-${name}`,
   })
