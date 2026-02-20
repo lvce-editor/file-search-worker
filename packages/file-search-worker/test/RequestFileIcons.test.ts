@@ -4,7 +4,7 @@ import * as DirentType from '../src/parts/DirentType/DirentType.ts'
 import * as RequestFileIcons from '../src/parts/RequestFileIcons/RequestFileIcons.ts'
 
 test('requests file icons', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': (request: { name: string }) => {
       if (request.name === 'test.txt') {
         return '/icons/file.png'
@@ -30,7 +30,7 @@ test('requests file icons', async () => {
 })
 
 test('requests folder icons', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFolderIcon': (request: { name: string }) => {
       if (request.name === 'folder1') {
         return '/icons/folder.png'
@@ -56,7 +56,7 @@ test('requests folder icons', async () => {
 })
 
 test('handles empty requests array', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => '',
     'IconTheme.getFolderIcon': () => '',
   })
@@ -67,7 +67,7 @@ test('handles empty requests array', async () => {
 })
 
 test('handles requests with no name', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'IconTheme.getFileIcon': () => '',
     'IconTheme.getFolderIcon': () => '',
   })

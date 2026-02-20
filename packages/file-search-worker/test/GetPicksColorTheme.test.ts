@@ -4,7 +4,7 @@ import * as GetPicksColorTheme from '../src/parts/GetPicksColorTheme/GetPicksCol
 
 test('getPicks returns color theme names as picks', async () => {
   const colorThemeNames = ['dark-plus', 'light-plus', 'monokai']
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => colorThemeNames,
   })
 
@@ -26,7 +26,7 @@ test('getPicks returns color theme names as picks', async () => {
 })
 
 test('getPicks returns empty array when no color themes', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
   })
 

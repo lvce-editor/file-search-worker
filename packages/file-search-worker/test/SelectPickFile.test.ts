@@ -7,7 +7,7 @@ import { selectPick } from '../src/parts/SelectPickFile/SelectPickFile.ts'
 test('selectPick constructs absolute path and opens uri', async () => {
   let openedUri: string | undefined
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Main.openUri': (uri: string) => {
       openedUri = uri
     },
@@ -34,7 +34,7 @@ test('selectPick constructs absolute path and opens uri', async () => {
 test('selectPick handles different file paths', async () => {
   let openedUri: string | undefined
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Main.openUri': (uri: string) => {
       openedUri = uri
     },
@@ -61,7 +61,7 @@ test('selectPick handles different file paths', async () => {
 test('selectPick handles empty description', async () => {
   let openedUri: string | undefined
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Main.openUri': (uri: string) => {
       openedUri = uri
     },

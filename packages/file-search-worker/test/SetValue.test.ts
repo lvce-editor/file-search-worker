@@ -6,7 +6,7 @@ import * as InputSource from '../src/parts/InputSource/InputSource.ts'
 import * as SetValue from '../src/parts/SetValue/SetValue.ts'
 
 test('returns same state when value is unchanged', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({})
+  using mockRpc = RendererWorker.registerMockRpc({})
 
   const state: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
@@ -19,7 +19,7 @@ test('returns same state when value is unchanged', async () => {
 })
 
 test('updates value and processes picks', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['newTheme', 'anotherNewTheme'],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
@@ -62,7 +62,7 @@ test('updates value and processes picks', async () => {
 })
 
 test('sets focusedIndex to -1 when no items', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
@@ -84,7 +84,7 @@ test('sets focusedIndex to -1 when no items', async () => {
 })
 
 test('updates fileIconCache', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['theme1'],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
@@ -116,7 +116,7 @@ test('updates fileIconCache', async () => {
 })
 
 test('calculates finalDeltaY and listHeight', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => Array.from({ length: 10 }, (_, i) => `newTheme${i}`),
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
@@ -148,7 +148,7 @@ test('calculates finalDeltaY and listHeight', async () => {
 })
 
 test('filters items based on filterValue', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['testTheme', 'otherTheme'],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
@@ -188,7 +188,7 @@ test('filters items based on filterValue', async () => {
 })
 
 test('handles empty string value', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => [],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
@@ -209,7 +209,7 @@ test('handles empty string value', async () => {
 })
 
 test('preserves other state properties', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ColorTheme.getColorThemeNames': () => ['theme1'],
     'IconTheme.getFileIcon': () => 'icon',
     'IconTheme.getFolderIcon': () => 'icon',
