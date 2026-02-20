@@ -15,7 +15,7 @@ test('getPicks returns builtin picks', async () => {
     { id: 'command1', label: 'Command 1' },
     { id: 'command2', label: 'Command 2' },
   ]
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => [],
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
@@ -45,7 +45,7 @@ test('getPicks returns extension picks with ext prefix', async () => {
     { id: 'ext.command1', label: 'Extension Command 1' },
     { args: ['arg1'], id: 'ext.command2', label: 'Extension Command 2' },
   ]
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => extensionPicks,
     'Layout.getAllQuickPickMenuEntries': () => [],
   })
@@ -72,7 +72,7 @@ test('getPicks returns extension picks with ext prefix', async () => {
 test('getPicks combines builtin and extension picks', async () => {
   const builtinPicks = [{ id: 'builtin1', label: 'Builtin 1' }]
   const extensionPicks = [{ id: 'ext1', label: 'Extension 1' }]
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => extensionPicks,
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
@@ -88,7 +88,7 @@ test('getPicks combines builtin and extension picks', async () => {
 test('getPicks handles missing label in extension picks', async () => {
   const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
   const extensionPicks = [{ id: 'command1' }]
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => extensionPicks,
     'Layout.getAllQuickPickMenuEntries': () => [],
   })
@@ -104,7 +104,7 @@ test('getPicks handles missing label in extension picks', async () => {
 test('getPicks handles missing id in extension picks', async () => {
   const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
   const extensionPicks = [{ label: 'Command without id' }]
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => extensionPicks,
     'Layout.getAllQuickPickMenuEntries': () => [],
   })
@@ -121,7 +121,7 @@ test('getPicks handles missing id in extension picks', async () => {
 test('getPicks handles extension picks error', async () => {
   const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
   const builtinPicks = [{ id: 'builtin1', label: 'Builtin 1' }]
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => {
       throw new Error('Extension host error')
     },
@@ -138,7 +138,7 @@ test('getPicks handles extension picks error', async () => {
 
 test('getPicks handles null extension picks', async () => {
   const builtinPicks = [{ id: 'builtin1', label: 'Builtin 1' }]
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => null,
     'Layout.getAllQuickPickMenuEntries': () => builtinPicks,
   })
@@ -153,7 +153,7 @@ test('getPicks handles null extension picks', async () => {
 test('getPicks uses MenuEntriesState when Layout.getAllQuickPickMenuEntries fails', async () => {
   MenuEntriesState.clear()
   MenuEntriesState.add([{ id: 'state1', label: 'State 1' }])
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ExtensionHost.getCommands': () => [],
     'Layout.getAllQuickPickMenuEntries': () => {
       throw new Error('Layout error')

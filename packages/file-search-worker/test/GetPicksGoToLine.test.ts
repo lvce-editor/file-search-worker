@@ -4,7 +4,7 @@ import { EditorWorker, RendererWorker } from '@lvce-editor/rpc-registry'
 import { getPicks } from '../src/parts/GetPicksGoToLine/GetPicksGoToLine.ts'
 
 test('returns instruction when value is ":"', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'GetActiveEditor.getActiveEditorId': () => 1,
   })
 

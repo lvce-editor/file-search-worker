@@ -36,7 +36,7 @@ test('handleError logs error with prefix', async () => {
 })
 
 test('showErrorDialog extracts error properties and calls RendererWorker.showErrorDialog', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ErrorHandling.showErrorDialog': () => {},
   })
 
@@ -58,7 +58,7 @@ test('showErrorDialog extracts error properties and calls RendererWorker.showErr
 })
 
 test('showErrorDialog handles error without all properties', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'ErrorHandling.showErrorDialog': () => {},
   })
 

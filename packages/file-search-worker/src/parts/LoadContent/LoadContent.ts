@@ -42,7 +42,7 @@ const parseArgs = (subId: number, args: readonly unknown[]): ParsedArgs => {
 }
 
 export const loadContent = async (state: QuickPickState): Promise<QuickPickState> => {
-  const { args, assetDir, fileIconCache, height, itemHeight, platform, uri } = state
+  const { args, assetDir, fileIconCache, height, itemHeight, maxVisibleItems, platform, uri } = state
   const id = GetQuickPickProviderId.getQuickPickProviderId(uri)
   const value = GetDefaultValue.getDefaultValue(id)
   const prefix = GetQuickPickPrefix.getQuickPickPrefix(value)
@@ -52,7 +52,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
   const filterValue = GetFilterValue.getFilterValue(id, subId, value)
   const items = FilterQuickPickItems.filterQuickPickItems(newPicks, filterValue)
   const minLineY = 0
-  const maxLineY = Math.min(minLineY + state.maxVisibleItems, newPicks.length)
+  const maxLineY = Math.min(minLineY + maxVisibleItems, newPicks.length)
   const sliced = newPicks.slice(minLineY, maxLineY)
   const { icons, newFileIconCache } = await GetQuickPickFileIcons.getQuickPickFileIcons(sliced, fileIconCache)
   const listHeight = GetListHeight.getListHeight(items.length, itemHeight, height)
