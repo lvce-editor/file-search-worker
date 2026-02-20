@@ -37,7 +37,7 @@ test('selectItem returns state when label is not found', async () => {
 test('selectItem calls selectIndex with correct index when label is found', async () => {
   let closeWidgetCalled = false
 
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'test-command': () => {},
     'Viewlet.closeWidget': () => {
       closeWidgetCalled = true

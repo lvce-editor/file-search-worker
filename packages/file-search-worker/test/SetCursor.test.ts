@@ -3,7 +3,7 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as SetCursor from '../src/parts/SetCursor/SetCursor.ts'
 
 test('setCursor calls Editor.cursorSet with correct row and column', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
   })
 
@@ -13,7 +13,7 @@ test('setCursor calls Editor.cursorSet with correct row and column', async () =>
 })
 
 test('setCursor works with zero indices', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
   })
 
@@ -23,7 +23,7 @@ test('setCursor works with zero indices', async () => {
 })
 
 test('setCursor works with different row and column indices', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
   })
 
@@ -33,7 +33,7 @@ test('setCursor works with different row and column indices', async () => {
 })
 
 test('setCursor handles large indices', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
   })
 

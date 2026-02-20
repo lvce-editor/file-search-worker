@@ -5,7 +5,7 @@ import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefau
 import * as HandleFocus from '../src/parts/HandleFocus/HandleFocus.ts'
 
 test('returns state unchanged', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus': () => {},
   })
 
@@ -16,7 +16,7 @@ test('returns state unchanged', async () => {
 })
 
 test('returns state with different properties unchanged', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus': () => {},
   })
 
@@ -37,7 +37,7 @@ test('returns state with different properties unchanged', async () => {
 })
 
 test('returns state with focused property unchanged', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus': () => {},
   })
 
@@ -49,7 +49,7 @@ test('returns state with focused property unchanged', async () => {
 })
 
 test('returns state with focused false unchanged', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus': () => {},
   })
 
@@ -61,7 +61,7 @@ test('returns state with focused false unchanged', async () => {
 })
 
 test('returns state with items and focusedIndex unchanged', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus': () => {},
   })
 
@@ -83,7 +83,7 @@ test('returns state with items and focusedIndex unchanged', async () => {
 })
 
 test('returns state with complex configuration unchanged', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus': () => {},
   })
 
@@ -112,7 +112,7 @@ test('returns state with complex configuration unchanged', async () => {
 })
 
 test('calls setFocus with FocusQuickPickInput', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Focus.setFocus': () => {},
   })
 

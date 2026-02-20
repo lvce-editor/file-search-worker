@@ -3,7 +3,7 @@ import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as SearchFileWithRipGrep from '../src/parts/SearchFileWithRipGrep/SearchFileWithRipGrep.ts'
 
 test('searches files without prepare', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'SearchProcess.invoke': () => 'file1.txt\nfile2.txt\nfile3.txt',
   })
 
@@ -23,7 +23,7 @@ test('searches files without prepare', async () => {
 })
 
 test.skip('searches files with prepare', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'SearchProcess.invoke': () => 'file1.txt\nfile2.txt\nfile3.txt',
   })
 
@@ -48,7 +48,7 @@ test.skip('searches files with prepare', async () => {
 })
 
 test('handles empty result', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'SearchProcess.invoke': () => '',
   })
 
@@ -68,7 +68,7 @@ test('handles empty result', async () => {
 })
 
 test('handles error from search process', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'SearchProcess.invoke': () => {
       throw new Error('Search failed')
     },

@@ -4,7 +4,7 @@ import * as QuickPickReturnValue from '../src/parts/QuickPickReturnValue/QuickPi
 import * as SelectPickGoToLine from '../src/parts/SelectPickGoToLine/SelectPickGoToLine.ts'
 
 test('selectPick with :value parses line and navigates to position', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
@@ -19,7 +19,7 @@ test('selectPick with :value parses line and navigates to position', async () =>
 })
 
 test('selectPick with :value handles line 1', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
@@ -34,7 +34,7 @@ test('selectPick with :value handles line 1', async () => {
 })
 
 test('selectPick with :value handles large line numbers', async () => {
-  const mockRpc = RendererWorker.registerMockRpc({
+  using mockRpc = RendererWorker.registerMockRpc({
     'Editor.cursorSet': () => {},
     'Editor.handleFocus': () => {},
   })
