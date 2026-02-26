@@ -4,7 +4,7 @@ import type { QuickPickViewModel } from '../QuickPickViewModel/QuickPickViewMode
 import { renderItems } from '../RenderItems/RenderItems.ts'
 
 export const renderIncremental = (newState: QuickPickViewModel): readonly unknown[] => {
-  const oldDom = renderItems(newState)[1] as any
+  const oldDom = renderItems(newState)[1] as any // TODO
   const newDom = renderItems(newState)[1] as any
   const patches = diffTree(oldDom, newDom)
   return [ViewletCommand.SetPatches, newState.uid, patches]
