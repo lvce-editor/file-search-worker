@@ -1,79 +1,63 @@
 import { expect, test } from '@jest/globals'
-import type { QuickPickViewModel } from '../src/parts/QuickPickViewModel/QuickPickViewModel.ts'
+import type { QuickPickState } from '../src/parts/QuickPickState/QuickPickState.ts'
+import * as CreateDefaultState from '../src/parts/CreateDefaultState/CreateDefaultState.ts'
 import * as RenderItems from '../src/parts/RenderItems/RenderItems.ts'
 
 test('renders items with virtual dom', () => {
-  const newState: QuickPickViewModel = {
-    cursorOffset: 0,
-    focused: false,
-    height: 0,
-    newFocusedIndex: 0,
-    oldFocusedIndex: 0,
-    scrollBarHeight: 0,
-    scrollBarTop: 0,
+  const newState: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     uid: 1,
-    value: '',
-    visibleItems: [
+    icons: ['/test/icon.png'],
+    items: [
       {
         description: 'desc 1',
+        direntType: 0,
         fileIcon: '/test/icon.png',
-        highlights: [],
         icon: '',
-        isActive: true,
         label: 'item 1',
-        posInSet: 1,
-        setSize: 2,
+        matches: [],
+        uri: 'uri1',
       },
     ],
+    minLineY: 0,
+    maxLineY: 1,
+    focusedIndex: 0,
   }
-  const result = RenderItems.renderItems(newState)
+  const result = RenderItems.renderItems(newState, newState)
   expect(result[0]).toBe('Viewlet.setDom2')
   expect(result[1]).toBeDefined()
 })
 
 test('renders empty items state', () => {
-  const newState: QuickPickViewModel = {
-    cursorOffset: 0,
-    focused: false,
-    height: 0,
-    newFocusedIndex: 0,
-    oldFocusedIndex: 0,
-    scrollBarHeight: 0,
-    scrollBarTop: 0,
+  const newState: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     uid: 1,
-    value: '',
-    visibleItems: [],
   }
-  const result = RenderItems.renderItems(newState)
+  const result = RenderItems.renderItems(newState, newState)
   expect(result[0]).toBe('Viewlet.setDom2')
   expect(result[1]).toBeDefined()
 })
 
 test('renders items with scroll bar', () => {
-  const newState: QuickPickViewModel = {
-    cursorOffset: 0,
-    focused: false,
-    height: 0,
-    newFocusedIndex: 0,
-    oldFocusedIndex: 0,
-    scrollBarHeight: 100,
-    scrollBarTop: 50,
+  const items = Array.from({ length: 20 }, (_, i) => ({
+    description: '',
+    direntType: 0,
+    fileIcon: '',
+    icon: '',
+    label: `item ${i}`,
+    matches: [],
+    uri: `uri${i}`,
+  }))
+  const newState: QuickPickState = {
+    ...CreateDefaultState.createDefaultState(),
     uid: 1,
-    value: '',
-    visibleItems: [
-      {
-        description: 'desc 1',
-        fileIcon: '/test/icon.png',
-        highlights: [],
-        icon: '',
-        isActive: true,
-        label: 'item 1',
-        posInSet: 1,
-        setSize: 2,
-      },
-    ],
+    items,
+    icons: Array.from({ length: 20 }, () => '/test/icon.png'),
+    minLineY: 0,
+    maxLineY: 10,
+    focusedIndex: 0,
   }
-  const result = RenderItems.renderItems(newState)
+  const result = RenderItems.renderItems(newState, newState)
   expect(result[0]).toBe('Viewlet.setDom2')
   expect(result[1]).toBeDefined()
 })
