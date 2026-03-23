@@ -6,7 +6,7 @@ import * as GetScrollBarSize from '../GetScrollBarSize/GetScrollBarSize.ts'
 import * as GetVisibleQuickPickItems from '../GetVisibleQuickPickItems/GetVisibleQuickPickItems.ts'
 import * as ScrollBarFunctions from '../ScrollBarFunctions/ScrollBarFunctions.ts'
 
-export const createQuickPickViewModel = (oldState: QuickPickState, newState: QuickPickState): QuickPickViewModel => {
+export const createQuickPickViewModel = (newState: QuickPickState): QuickPickViewModel => {
   const {
     cursorOffset,
     deltaY,
@@ -26,7 +26,6 @@ export const createQuickPickViewModel = (oldState: QuickPickState, newState: Qui
   } = newState
   const protoVisibleItems = GetProtoVisibleQuickPickItems.getVisible(items, minLineY, maxLineY, icons)
   const visibleItems = GetVisibleQuickPickItems.getVisible(items.length, protoVisibleItems, minLineY, focusedIndex)
-  const oldFocusedIndex = oldState.focusedIndex - oldState.minLineY
   const newFocusedIndex = focusedIndex - minLineY
   const itemCount = items.length
   const listHeight = GetListHeight.getListHeight(itemCount, itemHeight, height)
@@ -39,7 +38,6 @@ export const createQuickPickViewModel = (oldState: QuickPickState, newState: Qui
     focused,
     height,
     newFocusedIndex,
-    oldFocusedIndex,
     scrollBarHeight,
     scrollBarTop: roundedScrollBarY,
     uid,
