@@ -10,5 +10,3 @@ cd file-search-worker-worker &&
 npm ci &&
 npm test
 ```
-
-<!--  -->
