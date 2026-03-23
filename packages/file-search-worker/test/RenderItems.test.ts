@@ -6,7 +6,7 @@ import * as RenderItems from '../src/parts/RenderItems/RenderItems.ts'
 test('renders items with virtual dom', () => {
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
-    uid: 1,
+    focusedIndex: 0,
     icons: ['/test/icon.png'],
     items: [
       {
@@ -19,9 +19,9 @@ test('renders items with virtual dom', () => {
         uri: 'uri1',
       },
     ],
-    minLineY: 0,
     maxLineY: 1,
-    focusedIndex: 0,
+    minLineY: 0,
+    uid: 1,
   }
   const result = RenderItems.renderItems(newState, newState)
   expect(result[0]).toBe('Viewlet.setDom2')
@@ -50,12 +50,12 @@ test('renders items with scroll bar', () => {
   }))
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
-    uid: 1,
-    items,
-    icons: Array.from({ length: 20 }, () => '/test/icon.png'),
-    minLineY: 0,
-    maxLineY: 10,
     focusedIndex: 0,
+    icons: Array.from({length: 20}).fill('/test/icon.png'),
+    items,
+    maxLineY: 10,
+    minLineY: 0,
+    uid: 1,
   }
   const result = RenderItems.renderItems(newState, newState)
   expect(result[0]).toBe('Viewlet.setDom2')
