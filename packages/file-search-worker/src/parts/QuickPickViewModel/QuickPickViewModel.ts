@@ -5,7 +5,6 @@ export interface QuickPickViewModel {
   readonly focused: boolean
   readonly height: number
   readonly newFocusedIndex: number
-  readonly oldFocusedIndex: number
   readonly scrollBarHeight: number
   readonly scrollBarTop: number
   readonly uid: number
