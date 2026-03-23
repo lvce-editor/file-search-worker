@@ -68,7 +68,7 @@ export const loadContent = async (state: QuickPickState): Promise<QuickPickState
     focused: true,
     focusedIndex: 0,
     icons,
-    initial:false,
+    initial: false,
     inputSource: InputSource.Script,
     items,
     maxLineY,
