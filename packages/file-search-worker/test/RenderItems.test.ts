@@ -51,7 +51,7 @@ test('renders items with scroll bar', () => {
   const newState: QuickPickState = {
     ...CreateDefaultState.createDefaultState(),
     focusedIndex: 0,
-    icons: Array.from({length: 20}).fill('/test/icon.png'),
+    icons: Array.from({ length: 20 }).fill('/test/icon.png') as any,
     items,
     maxLineY: 10,
     minLineY: 0,
