@@ -1,4 +1,3 @@
-import * as CommandMap from '../CommandMap/CommandMap.ts'
 import { initializeEditorWorker } from '../InitializeEditorWorker/InitializeEditorWorker.ts'
 import { initializeRendererWorker } from '../InitializeRendererWorker/InitializeRendererWorker.ts'
 import * as SearchFileModule from '../SearchFileModule/SearchFileModule.ts'
