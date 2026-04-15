@@ -41,7 +41,5 @@ test('searchFile uses the registered handler for protocol paths', async () => {
 })
 
 test('searchFile throws for unknown protocols', async () => {
-  await expect(SearchFile.searchFile('unknown:///test', 'file', false, '')).rejects.toThrow(
-    'No search handler registered for protocol: unknown',
-  )
+  await expect(SearchFile.searchFile('unknown:///test', 'file', false, '')).rejects.toThrow('No search handler registered for protocol: unknown')
 })
