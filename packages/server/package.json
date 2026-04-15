@@ -1,14 +1,17 @@
 {
-  "name": "@lvce-editor/text-search-worker-server",
+  "name": "@lvce-editor/file-search-worker-server",
   "version": "0.0.0-dev",
+  "description": "Thin bridge that injects the file-search worker URL into the renderer bundle.",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "postinstall": "node src/postinstall.js",
-    "dev": "node ./node_modules/@lvce-editor/server/bin/server.js --test-path=../e2e"
+    "postinstall": "node src/postinstall.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "file-search",
+    "bridge"
+  ],
+  "author": "Lvce Editor",
   "license": "MIT",
   "dependencies": {
     "@lvce-editor/server": "^0.79.2"

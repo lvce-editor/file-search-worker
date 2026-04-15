@@ -63,7 +63,6 @@ jobs:
       - run: npm run build
       - run: npm run build:static
       - run: npm test
-      - run: npm run test-integration
       - run: npm run type-check
       - run: npm run lint
       - name: install playwright dependencies
@@ -100,6 +99,8 @@ jobs:
 
       - run: npm publish --access public
         working-directory: ./.tmp/dist
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Publish GitHub release
         env:

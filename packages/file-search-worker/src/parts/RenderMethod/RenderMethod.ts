@@ -1,5 +1,0 @@
-export const SetCursorOffset = 'setCursorOffset'
-export const SetFocusedIndex = 'setFocusedIndex'
-export const SetItemsHeight = 'setItemsHeight'
-export const SetValue = 'setValue'
-export const SetItemsDom = 'setItemsDom'

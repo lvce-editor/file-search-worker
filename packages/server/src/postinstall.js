@@ -28,6 +28,8 @@ const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'r
 
 const content = await readFile(rendererWorkerMainPath, 'utf-8')
 const remoteUrl = getRemoteUrl(fileSearchWorkerPath)
+
+// The renderer bundle still resolves the worker URL from this injected constant.
 if (!content.includes('// const fileSearchWorkerUrl = ')) {
   const occurrence = `const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\``
   const replacement = `// const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\`
