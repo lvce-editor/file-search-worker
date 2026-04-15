@@ -6,6 +6,12 @@ export const register = (modules: Record<string, SearchFileHandler>): void => {
   Object.assign(state, modules)
 }
 
+export const clear = (): void => {
+  for (const key of Object.keys(state)) {
+    delete state[key]
+  }
+}
+
 export const getFn = (protocol: string): SearchFileHandler => {
   return state[protocol]
 }

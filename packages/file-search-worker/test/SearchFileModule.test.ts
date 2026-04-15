@@ -1,6 +1,10 @@
-import { test, expect } from '@jest/globals'
+import { beforeEach, expect, test } from '@jest/globals'
 import type { SearchFileHandler } from '../src/parts/SearchFileHandler/SearchFileHandler.ts'
-import { register, getFn } from '../src/parts/SearchFileModule/SearchFileModule.ts'
+import { clear, getFn, register } from '../src/parts/SearchFileModule/SearchFileModule.ts'
+
+beforeEach(() => {
+  clear()
+})
 
 const mockHandler: SearchFileHandler = async (path, value, prepare, assetDir) => {
   return []
