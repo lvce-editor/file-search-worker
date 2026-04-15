@@ -65,6 +65,12 @@ jobs:
       - run: npm test
       - run: npm run type-check
       - run: npm run lint
+      - name: install playwright dependencies
+        working-directory: ./packages/e2e
+        run: npx playwright install chromium
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: 0
       - name: measure
         working-directory: ./packages/build
         run: npm run measure
@@ -93,6 +99,8 @@ jobs:
 
       - run: npm publish --access public
         working-directory: ./.tmp/dist
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Publish GitHub release
         env:
