@@ -1,9 +1,9 @@
 import { PlainMessagePortRpc } from '@lvce-editor/rpc'
-import * as CommandMapRef from '../CommandMapRef/CommandMapRef.ts'
+import * as CommandMap from '../CommandMap/CommandMap.ts'
 
 export const handleMessagePort = async (port: MessagePort): Promise<void> => {
   await PlainMessagePortRpc.create({
-    commandMap: CommandMapRef.commandMapRef,
+    commandMap: CommandMap.commandMap,
     isMessagePortOpen: true,
     messagePort: port,
   })
