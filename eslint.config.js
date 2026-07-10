@@ -20,6 +20,8 @@ export default [
     rules: {
       '@cspell/spellchecker': 'off',
       '@typescript-eslint/only-throw-error': 'off',
+      'github-actions/action-versions': 'off',
+      'github-actions/no-e2e-in-release': 'off',
     },
   },
 ]
