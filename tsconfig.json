@@ -9,9 +9,6 @@
       "path": "./packages/build"
     },
     {
-      "path": "./packages/e2e"
-    },
-    {
       "path": "./packages/server"
     }
   ]
