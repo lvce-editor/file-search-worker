@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "project": ["*.js", "scripts/*.js"]
+    },
+    "packages/build": {
+      "entry": ["src/computeNodeModulesCacheKey.js"],
+      "project": ["src/**/*.js", "src/**/*.ts"],
+      "ignoreDependencies": ["esbuild"]
+    },
+    "packages/file-search-worker": {
+      "entry": ["src/fileSearchWorkerMain.ts", "test/**/*.test.ts"],
+      "project": ["src/**/*.ts", "test/**/*.ts"]
+    },
+    "packages/server": {
+      "project": ["src/**/*.js"],
+      "ignoreDependencies": ["@lvce-editor/server"]
+    }
+  }
+}
