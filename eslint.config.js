@@ -1,9 +1,9 @@
-import config from '@lvce-editor/eslint-config'
-import actions from '@lvce-editor/eslint-plugin-github-actions'
+import { defineConfig } from 'eslint/config'
+import config, { recommendedActions } from '@lvce-editor/eslint-config'
 
-export default [
+export default defineConfig([
   ...config,
-  ...actions,
+  ...recommendedActions,
   {
     ignores: ['packages/file-search-worker/test/GetJson.test.ts'],
   },
@@ -24,4 +24,4 @@ export default [
       'github-actions/no-e2e-in-release': 'off',
     },
   },
-]
+])
