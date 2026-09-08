@@ -1,4 +1,5 @@
 import { beforeEach, expect, test } from '@jest/globals'
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as SearchFile from '../src/parts/SearchFile/SearchFile.ts'
 import * as SearchFileModule from '../src/parts/SearchFileModule/SearchFileModule.ts'
 
@@ -40,6 +41,17 @@ test('searchFile uses the registered handler for protocol paths', async () => {
   expect(items).toEqual(expected)
 })
 
-test('searchFile throws for unknown protocols', async () => {
-  await expect(SearchFile.searchFile('unknown:///test', 'file', false, '')).rejects.toThrow('No search handler registered for protocol: unknown')
+test('searchFile delegates unregistered protocols to the workspace extension', async () => {
+  using renderer = RendererWorker.registerMockRpc({ 'ExtensionHost.searchFileWithProvider': () => ['file.txt'] })
+  await expect(SearchFile.searchFile('remote-ssh://host/work', 'file', false, '')).resolves.toEqual(['file.txt'])
+  expect(renderer.invocations).toEqual([['ExtensionHost.searchFileWithProvider', 'remote-ssh://host/work', 'file', false]])
+})
+
+test('searchFile propagates provider failures', async () => {
+  using _renderer = RendererWorker.registerMockRpc({
+    'ExtensionHost.searchFileWithProvider': () => {
+      throw new Error('No workspace provider')
+    },
+  })
+  await expect(SearchFile.searchFile('unknown:///work', '', false, '')).rejects.toThrow('No workspace provider')
 })

@@ -1,3 +1,4 @@
+import { RendererWorker } from '@lvce-editor/rpc-registry'
 import * as GetProtocol from '../GetProtocol/GetProtocol.ts'
 import * as SearchFileModule from '../SearchFileModule/SearchFileModule.ts'
 
@@ -5,7 +6,7 @@ export const searchFile = async (path: string, value: string, prepare: boolean, 
   const protocol = GetProtocol.getProtocol(path)
   const fn = SearchFileModule.getFn(protocol)
   if (!fn) {
-    throw new Error(`No search handler registered for protocol: ${protocol}`)
+    return RendererWorker.invoke('ExtensionHost.searchFileWithProvider', path, value, prepare)
   }
   const result = await fn(path, value, prepare, assetDir)
   return result
