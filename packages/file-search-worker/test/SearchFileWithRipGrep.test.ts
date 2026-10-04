@@ -82,3 +82,29 @@ test('handles error from search process', async () => {
     ],
   ])
 })
+
+test('returns a cache hit without parsing or returning file paths', async () => {
+  using mockRpc = RendererWorker.registerMockRpc({
+    'SearchProcess.invoke': () => ({ hash: 'a'.repeat(64), matchesCache: true, results: '' }),
+  })
+
+  await expect(SearchFileWithRipGrep.searchFile('/test', 'query', false, '', 'a'.repeat(64))).resolves.toEqual({
+    hash: 'a'.repeat(64),
+    matchesCache: true,
+    results: [],
+  })
+  expect(mockRpc.invocations[0][2]).toMatchObject({ ifNonMatch: 'a'.repeat(64), limit: 9_999_999 })
+})
+
+test('parses changed results and returns their cache hash', async () => {
+  using mockRpc = RendererWorker.registerMockRpc({
+    'SearchProcess.invoke': () => ({ hash: 'b'.repeat(64), matchesCache: false, results: 'file1.txt\nfile2.txt' }),
+  })
+
+  await expect(SearchFileWithRipGrep.searchFile('/test', 'query', false, '', 'a'.repeat(64))).resolves.toEqual({
+    hash: 'b'.repeat(64),
+    matchesCache: false,
+    results: ['file1.txt', 'file2.txt'],
+  })
+  expect(mockRpc.invocations).toHaveLength(1)
+})
