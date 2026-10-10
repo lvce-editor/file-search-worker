@@ -14,6 +14,7 @@
   "author": "Lvce Editor",
   "license": "MIT",
   "dependencies": {
-    "@lvce-editor/server": "^0.121.22"
+    "@lvce-editor/server": "^0.121.22",
+    "@lvce-editor/static-server": "^0.121.22"
   }
 }
