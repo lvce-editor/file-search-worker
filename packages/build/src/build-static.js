@@ -1,37 +1,32 @@
+import { cp, readFile, readdir, writeFile } from 'node:fs/promises'
+import { createRequire } from 'node:module'
 import { join } from 'node:path'
-import { pathToFileURL } from 'node:url'
 import { root } from './root.js'
-import { cp, readFile, writeFile } from 'node:fs/promises'
 
-const sharedProcessPath = join(root, 'node_modules', '@lvce-editor', 'shared-process', 'index.js')
-
-const sharedProcessUrl = pathToFileURL(sharedProcessPath).toString()
-
-const sharedProcess = await import(sharedProcessUrl)
+const require = createRequire(join(root, 'packages', 'server', 'package.json'))
+const { exportStatic } = require('@lvce-editor/shared-process')
 
 process.env.PATH_PREFIX = '/file-search-worker'
-const { commitHash } = await sharedProcess.exportStatic({
-  root,
-  extensionPath: '',
-})
+const { commitHash } = await exportStatic({ root, extensionPath: '' })
+const workerDist = join(root, 'dist', commitHash, 'packages', 'file-search-worker', 'dist')
+await cp(join(root, '.tmp', 'dist', 'dist'), workerDist, { recursive: true })
 
-const rendererWorkerPath = join(root, 'dist', commitHash, 'packages', 'renderer-worker', 'dist', 'rendererWorkerMain.js')
-
-export const getRemoteUrl = (path) => {
-  const url = pathToFileURL(path).toString().slice(8)
-  return `/remote/${url}`
+const rendererDist = join(root, 'dist', commitHash, 'packages', 'renderer-worker', 'dist')
+let found = false
+for (const file of await readdir(rendererDist)) {
+  if (!file.endsWith('.js')) {
+    continue
+  }
+  const path = join(rendererDist, file)
+  const content = await readFile(path, 'utf8')
+  if (!content.includes('const fileSearchWorkerUrl = ')) {
+    continue
+  }
+  const replacement = 'const fileSearchWorkerUrl = `${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js`;'
+  await writeFile(path, content.replace(/^const fileSearchWorkerUrl = .*$/m, replacement))
+  found = true
 }
-
-const content = await readFile(rendererWorkerPath, 'utf8')
-const workerPath = join(root, '.tmp/dist/dist/fileSearchWorkerMain.js')
-const remoteUrl = getRemoteUrl(workerPath)
-
-if (content.includes('// const fileSearchWorkerUrl = ')) {
-  const occurrence = `// const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\`
-  const fileSearchWorkerUrl = \`${remoteUrl}\``
-  const replacement = `const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\``
-  const newContent = content.replace(occurrence, replacement)
-  await writeFile(rendererWorkerPath, newContent)
+if (!found) {
+  throw new Error('File search worker URL not found in exported renderer chunks')
 }
-
 await cp(join(root, 'dist'), join(root, '.tmp', 'static'), { recursive: true })
