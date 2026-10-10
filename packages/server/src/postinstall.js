@@ -1,4 +1,4 @@
-import { access, readdir, readFile, writeFile } from 'node:fs/promises'
+import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -11,11 +11,9 @@ export const getRemoteUrl = (path) => {
   return `/remote/${url}`
 }
 
-const nodeModulesPath = join(root, 'node_modules')
-
 const fileSearchWorkerPath = join(root, '.tmp', 'dist', 'dist', 'fileSearchWorkerMain.js')
-
-const serverStaticPath = join(nodeModulesPath, '@lvce-editor', 'static-server', 'static')
+const staticServerPackagePath = fileURLToPath(new URL('.', import.meta.resolve('@lvce-editor/static-server/package.json')))
+const serverStaticPath = join(staticServerPackagePath, 'static')
 
 const RE_COMMIT_HASH = /^[a-z\d]+$/
 const isCommitHash = (dirent) => {
@@ -24,23 +22,21 @@ const isCommitHash = (dirent) => {
 
 const dirents = await readdir(serverStaticPath)
 const commitHash = dirents.find(isCommitHash) || ''
-const rendererWorkerMainPath = join(serverStaticPath, commitHash, 'packages', 'renderer-worker', 'dist', 'rendererWorkerMain.js')
-
-try {
-  await access(rendererWorkerMainPath)
-} catch {
-  process.exit(0)
-}
-
-const content = await readFile(rendererWorkerMainPath, 'utf-8')
+const rendererWorkerDistPath = join(serverStaticPath, commitHash, 'packages', 'renderer-worker', 'dist')
 const remoteUrl = getRemoteUrl(fileSearchWorkerPath)
-
-// The renderer bundle still resolves the worker URL from this injected constant.
-if (!content.includes('// const fileSearchWorkerUrl = ')) {
-  const occurrence = `const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\``
-  const replacement = `// const fileSearchWorkerUrl = \`\${assetDir}/packages/file-search-worker/dist/fileSearchWorkerMain.js\`
-  const fileSearchWorkerUrl = \`${remoteUrl}\``
-
-  const newContent = content.replace(occurrence, replacement)
-  await writeFile(rendererWorkerMainPath, newContent)
+let found = false
+for (const file of await readdir(rendererWorkerDistPath)) {
+  if (!file.endsWith('.js')) {
+    continue
+  }
+  const path = join(rendererWorkerDistPath, file)
+  const content = await readFile(path, 'utf8')
+  if (!content.includes('const fileSearchWorkerUrl = ')) {
+    continue
+  }
+  await writeFile(path, content.replace(/^const fileSearchWorkerUrl = .*$/m, `const fileSearchWorkerUrl = ${JSON.stringify(remoteUrl)};`))
+  found = true
+}
+if (!found) {
+  throw new Error('File search worker URL not found in renderer chunks')
 }
