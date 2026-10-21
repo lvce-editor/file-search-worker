@@ -41,6 +41,28 @@ test('searchFile uses the registered handler for protocol paths', async () => {
   expect(items).toEqual(expected)
 })
 
+test('searchFile supports conditional caching for array based handlers', async () => {
+  const expected = ['html:///test/file-1.ts', 'html:///test/file-2.ts']
+  SearchFileModule.register({
+    html: async () => expected,
+  })
+
+  const initial = await SearchFile.searchFile('html:///test', '', true, '', null)
+
+  expect(initial).toMatchObject({
+    matchesCache: false,
+    results: expected,
+  })
+  if (!('hash' in initial)) {
+    throw new Error('Expected a cache response')
+  }
+  await expect(SearchFile.searchFile('html:///test', '', true, '', initial.hash)).resolves.toEqual({
+    hash: initial.hash,
+    matchesCache: true,
+    results: [],
+  })
+})
+
 test('searchFile delegates unregistered protocols to the workspace extension', async () => {
   using renderer = RendererWorker.registerMockRpc({ 'ExtensionHost.searchFileWithProvider': () => ['file.txt'] })
   await expect(SearchFile.searchFile('remote-ssh://host/work', 'file', false, '')).resolves.toEqual(['file.txt'])
