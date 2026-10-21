@@ -53,7 +53,7 @@ test('searchFile supports conditional caching for array based handlers', async (
     matchesCache: false,
     results: expected,
   })
-  if (Array.isArray(initial)) {
+  if (!('hash' in initial)) {
     throw new Error('Expected a cache response')
   }
   await expect(SearchFile.searchFile('html:///test', '', true, '', initial.hash)).resolves.toEqual({
