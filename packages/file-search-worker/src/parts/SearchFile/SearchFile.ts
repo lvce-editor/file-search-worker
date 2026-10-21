@@ -12,10 +12,10 @@ export const searchFile = async (
   const protocol = GetProtocol.getProtocol(path)
   const fn = SearchFileModule.getFn(protocol)
   let response: readonly string[] | { readonly hash: string; readonly matchesCache: boolean; readonly results: readonly string[] }
-  if (!fn) {
-    response = await RendererWorker.invoke('ExtensionHost.searchFileWithProvider', path, value, prepare)
-  } else {
+  if (fn) {
     response = await fn(path, value, prepare, assetDir, ifNonMatch)
+  } else {
+    response = await RendererWorker.invoke('ExtensionHost.searchFileWithProvider', path, value, prepare)
   }
   if (!Array.isArray(response) || ifNonMatch === undefined) {
     return response
